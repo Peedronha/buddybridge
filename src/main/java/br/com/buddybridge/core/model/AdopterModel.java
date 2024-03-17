@@ -26,6 +26,6 @@ public class AdopterModel {
     private String phoneNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "animalModel_id", referencedColumnName = "id")
+    @JoinColumn(name = "animal_id", referencedColumnName = "id")
     private AnimalModel animalAdopted;
 }

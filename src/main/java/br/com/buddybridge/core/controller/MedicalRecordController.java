@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("employee")
+@RequestMapping("medicalRecord")
 public class MedicalRecordController {
     
     private MedicalRecordService medicalRecordService;

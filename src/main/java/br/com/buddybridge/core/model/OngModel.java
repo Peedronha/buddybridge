@@ -27,9 +27,9 @@ public class OngModel {
 
     private String password;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "ong", cascade = CascadeType.ALL)
     private List<AnimalModel> animalList;
 
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "ong")
     private EmployeeModel volunteer;
 }

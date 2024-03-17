@@ -34,6 +34,10 @@ public class AnimalModel {
     @PrimaryKeyJoinColumn
     private List<MedicalRecordModel> medicalReportList;
 
-    @OneToOne(mappedBy = "adopter")
+    @ManyToOne
+    @JoinColumn(name = "ong_id")
+    private OngModel ong;
+
+    @OneToOne(mappedBy = "animalAdopted")
     private AdopterModel adopter;
 }

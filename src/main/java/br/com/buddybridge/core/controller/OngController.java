@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("employee")
+@RequestMapping("ong")
 public class OngController {
     
     private OngService ongService;

@@ -28,4 +28,8 @@ public class EmployeeModel {
     private String phoneNumber;
 
     private String role;
+
+    @OneToOne
+    @JoinColumn(name = "ong_id")
+    private OngModel ong; // Corrigido para 'ong'
 }
