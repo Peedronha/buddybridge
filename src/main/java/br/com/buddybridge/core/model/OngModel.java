@@ -30,6 +30,10 @@ public class OngModel {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "ong", cascade = CascadeType.ALL)
     private List<AnimalModel> animalList;
 
-    @OneToOne(mappedBy = "ong")
-    private EmployeeModel volunteer;
+    @OneToMany(mappedBy = "ong")
+    private List<EmployeeModel> volunteer;
+
+    public OngModel(long l, String savePets, String s, String bestPaws, Date date) {
+
+    }
 }

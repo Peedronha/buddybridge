@@ -28,4 +28,5 @@ public class AdopterModel {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "animal_id", referencedColumnName = "id")
     private AnimalModel animalAdopted;
+
 }

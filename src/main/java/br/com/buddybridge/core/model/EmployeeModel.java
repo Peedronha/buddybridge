@@ -29,7 +29,7 @@ public class EmployeeModel {
 
     private String role;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "ong_id")
     private OngModel ong; // Corrigido para 'ong'
 }
