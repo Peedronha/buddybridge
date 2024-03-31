@@ -1,10 +1,10 @@
-import { User } from './../model/user.model';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AccountService } from '../shared/account.service';
 import { passwordMatchValidator } from '../shared/password-match.directive';
+import { User } from '../model/user.model';
 
 @Component({
   selector: 'app-register',
