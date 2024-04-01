@@ -15,6 +15,7 @@ import { TopMenuOpenComponent } from './open/component/top-menu-open/top-menu-op
 import { InsitucionalComponent } from './open/insitucional/insitucional.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppLayoutModule } from './layout/app.layout.module';
+import {RecoveryComponent} from "./open/account/recovery/recovery.component";
 import { CommonModule } from '@angular/common';
 import { DividerModule } from 'primeng/divider';
 import { ChartModule } from 'primeng/chart';
@@ -27,6 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import {InputOtpModule} from "primeng/inputotp";
 
 
 @NgModule({
@@ -35,6 +37,7 @@ import { MessageService } from 'primeng/api';
     TopMenuOpenComponent,
       LoginComponent,
       RegisterComponent,
+      RecoveryComponent,
       HomeComponent,
       InsitucionalComponent,
     MenuRestrictComponent,
@@ -60,6 +63,7 @@ import { MessageService } from 'primeng/api';
     ReactiveFormsModule,
     HttpClientModule,
     ToastModule,
+    InputOtpModule,
   ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy },

@@ -8,6 +8,7 @@ import { HomeComponent } from './open/home/home.component';
 import { LoginComponent } from './open/account/login/login.component';
 import { RegisterComponent } from './open/account/register/register.component';
 import { InsitucionalComponent } from './open/insitucional/insitucional.component';
+import {RecoveryComponent} from "./open/account/recovery/recovery.component";
 const routes: Routes = [
   {
     path: '',
@@ -27,6 +28,7 @@ const routes: Routes = [
       { path: 'institucional', title: 'BuddyBridge - Institucional', component: InsitucionalComponent },
       { path: 'register', title: 'BuddyBridge - Criar Conta', component: RegisterComponent },
       { path: 'login', title: 'BuddyBridge - Login', component: LoginComponent },
+      { path: 'recovery', title: 'BuddyBridge - Recovery', component: RecoveryComponent },
     ]
   },
   { path: '', redirectTo: 'home', pathMatch: 'full'},
