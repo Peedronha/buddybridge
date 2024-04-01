@@ -9,6 +9,10 @@
         <module name="core" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="buddybridge" target="17" />
+      <module name="buddybridge-backend" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
