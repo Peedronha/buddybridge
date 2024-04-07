@@ -1,10 +1,11 @@
 package br.com.buddybridge.core.security.component;
 
-import br.pucbr.pancake.usuario.model.Autenticacao;
+import br.com.buddybridge.core.usuario.model.Autenticacao;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

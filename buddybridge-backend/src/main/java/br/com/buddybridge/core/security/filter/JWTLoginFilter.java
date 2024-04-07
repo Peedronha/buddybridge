@@ -1,8 +1,9 @@
 package br.com.buddybridge.core.security.filter;
 
-import br.pucbr.pancake.security.component.CustomUser;
-import br.pucbr.pancake.security.component.TokenAuthenticationService;
-import br.pucbr.pancake.usuario.model.Autenticacao;
+
+import br.com.buddybridge.core.security.component.CustomUser;
+import br.com.buddybridge.core.security.component.TokenAuthenticationService;
+import br.com.buddybridge.core.usuario.model.Autenticacao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

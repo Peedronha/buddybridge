@@ -1,8 +1,9 @@
 package br.com.buddybridge.core.usuario.controller;
 
-import br.pucbr.pancake.usuario.entity.Usuario;
-import br.pucbr.pancake.usuario.service.UsuarioService;
-import br.pucbr.pancake.util.ExampleExeption;
+
+import br.com.buddybridge.core.usuario.entity.Usuario;
+import br.com.buddybridge.core.usuario.service.UsuarioService;
+import br.com.buddybridge.core.util.ExampleExeption;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;

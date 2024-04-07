@@ -1,7 +1,7 @@
 package br.com.buddybridge.core.security.component;
 
-import br.pucbr.pancake.security.filter.JWTAuthenticationFilter;
-import br.pucbr.pancake.security.filter.JWTLoginFilter;
+import br.com.buddybridge.core.security.filter.JWTAuthenticationFilter;
+import br.com.buddybridge.core.security.filter.JWTLoginFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,10 +29,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").permitAll()
                 //.antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/swagger-ui/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/public/pancake/autenticacao").permitAll()
+                .antMatchers(HttpMethod.POST, "/public/buddybridge/autenticacao").permitAll()
                 .anyRequest().authenticated().and()
                 // filtra requisições de login
-                .addFilterBefore(new JWTLoginFilter("/public/pancake/autenticacao", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JWTLoginFilter("/public/buddybridge/autenticacao", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 // filtra outras requisições para verificar a presença do JWT no header
                 .addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 

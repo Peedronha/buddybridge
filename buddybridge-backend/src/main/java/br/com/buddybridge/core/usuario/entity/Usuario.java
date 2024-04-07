@@ -1,7 +1,9 @@
 package br.com.buddybridge.core.usuario.entity;
 
+import br.com.buddybridge.core.endereco.entity.Endereco;
+import br.com.buddybridge.core.voluntario.entity.Voluntario;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -10,20 +12,37 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
+    @Column(name = "idusuario")
     private Long idUsuario;
 
-    @NotNull(message = "O nome é uma informação obrigatória")
     @Column(name = "nome_usuario", nullable = false, length = 255)
     private String nomeUsuario;
 
-    @NotNull(message = "O e-mail é uma informação obrigatória")
     @Column(name = "email_usuario", nullable = false, length = 255, unique = true)
     private String emailUsuario;
 
-    @NotNull(message = "A senha é uma informação obrigatória")
     @Column(name = "senha_usuario", nullable = false, length = 255, unique = true)
     private String senhaUsuario;
+
+    @Column(name = "admin_usuario")
+    private Boolean adminUsuario;
+
+    @Column(name = "confirmacao_email_usuario")
+    private Boolean confirmacaoEmailUsuario;
+
+    @Column(name = "token_usuario", nullable = false, length = 45, unique = true)
+    private String tokenUsuario;
+
+    @Column(name = "telefone_usuario", nullable = false, length = 45, unique = true)
+    private String telefoneUsuario;
+
+    @ManyToOne
+    @JoinColumn(name="endereco_idendereco", referencedColumnName="idendereco")
+    private Endereco enderecoIdendereco;
+
+    @ManyToOne
+    @JoinColumn(name="voluntario_idvoluntario", referencedColumnName="idvoluntario")
+    private Voluntario voluntarioIdvoluntario;
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -55,6 +74,54 @@ public class Usuario {
 
     public void setSenhaUsuario(String senhaUsuario) {
         this.senhaUsuario = senhaUsuario;
+    }
+
+    public Boolean getAdminUsuario() {
+        return adminUsuario;
+    }
+
+    public void setAdminUsuario(Boolean adminUsuario) {
+        this.adminUsuario = adminUsuario;
+    }
+
+    public Boolean getConfirmacaoEmailUsuario() {
+        return confirmacaoEmailUsuario;
+    }
+
+    public void setConfirmacaoEmailUsuario(Boolean confirmacaoEmailUsuario) {
+        this.confirmacaoEmailUsuario = confirmacaoEmailUsuario;
+    }
+
+    public String getTokenUsuario() {
+        return tokenUsuario;
+    }
+
+    public void setTokenUsuario(String tokenUsuario) {
+        this.tokenUsuario = tokenUsuario;
+    }
+
+    public String getTelefoneUsuario() {
+        return telefoneUsuario;
+    }
+
+    public void setTelefoneUsuario(String telefoneUsuario) {
+        this.telefoneUsuario = telefoneUsuario;
+    }
+
+    public Endereco getEnderecoIdendereco() {
+        return enderecoIdendereco;
+    }
+
+    public void setEnderecoIdendereco(Endereco enderecoIdendereco) {
+        this.enderecoIdendereco = enderecoIdendereco;
+    }
+
+    public Voluntario getVoluntarioIdvoluntario() {
+        return voluntarioIdvoluntario;
+    }
+
+    public void setVoluntarioIdvoluntario(Voluntario voluntarioIdvoluntario) {
+        this.voluntarioIdvoluntario = voluntarioIdvoluntario;
     }
 
     @Override
