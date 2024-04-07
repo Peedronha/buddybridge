@@ -26,18 +26,26 @@ public class UsuarioService {
     @Transactional(value = Transactional.TxType.REQUIRES_NEW)
     public void salvar(Usuario usuario) throws ExampleExeption, SystemException {
         try {
-            utx.begin();
+            System.out.println("entrei?");
+            //utx.begin();
             if(usuario.getNomeUsuario() == null && usuario.getNomeUsuario().equals("")){
+                System.out.println("erro");
                 throw new ExampleExeption("O nome é uma informação obrigatória. ", "ERRO001");
             }
+            usuario.setAdminUsuario(false);
+            usuario.setConfirmacaoEmailUsuario(true);
+            usuario.setTokenUsuario("123456");
+            usuario.setOngUsuario(false);
             String senhaHash = this.bCryptPasswordEncoder().encode(usuario.getSenhaUsuario());
             usuario.setSenhaUsuario(senhaHash);
             System.out.println(senhaHash);
+            System.out.println(usuario.toString());
             usuarioRepository.save(usuario);
-            utx.commit();
+            //utx.commit();
         } catch (Exception e) {
-            //return e.getMessage()
-            utx.rollback();
+            System.out.println("erro: "+e.getMessage());
+            //utx.rollback();
+            //return e.getMessage();
         }
     }
 

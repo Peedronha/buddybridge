@@ -3,7 +3,7 @@ import { Router, RouterModule, Routes } from '@angular/router';
 import { TopMenuOpenComponent } from './open/component/top-menu-open/top-menu-open.component';
 import { MenuRestrictComponent } from './restrict/component/menu-restrict/menu-restrict.component';
 import { DashboardComponent } from './restrict/dashboard/dashboard.component';
-import { authGuard } from './open/account/shared/auth.guard';
+import { AuthGuard } from './open/account/shared/auth.guard';
 import { HomeComponent } from './open/home/home.component';
 import { LoginComponent } from './open/account/login/login.component';
 import { RegisterComponent } from './open/account/register/register.component';
@@ -16,7 +16,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       { path: 'dashboard', title: 'BuddyBridge - DashBoard', component: DashboardComponent }
     ],
-    canActivate: [authGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: '',

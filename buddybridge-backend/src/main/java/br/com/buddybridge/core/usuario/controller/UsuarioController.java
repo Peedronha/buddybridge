@@ -29,8 +29,9 @@ public class UsuarioController {
 
     @PostMapping("/salvar")
     public ResponseEntity<?> salvar(@RequestBody Usuario usuario) throws ExampleExeption, SystemException {
-        System.out.println("este metodo foi chamado");
+        System.out.println("este metodo foi chamado" + usuario.toString());
         usuarioService.salvar(usuario);
+        System.out.println("foi?");
         return new ResponseEntity<>(usuario, HttpStatus.CREATED);
     }
 

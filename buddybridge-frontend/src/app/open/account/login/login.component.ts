@@ -1,15 +1,44 @@
-import { Component } from '@angular/core';
+import { AccountService } from './../shared/account.service';
+import { Component, OnInit } from '@angular/core';
 import { LayoutService } from '../../../layout/service/app.layout.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Login } from '../model/login.model';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
-  valCheck: string[] = ['remember'];
+export class LoginComponent  implements OnInit {
 
-    password!: string;
+  hide: any;
+  email: any;
+  invalid: any;
 
-    constructor(public layoutService: LayoutService) { }
+  loginForm = new FormGroup({
+    login: new FormControl('',Validators.required),
+    senha: new FormControl('',Validators.required),
+  });
+
+  constructor(private accountService: AccountService, private router: Router, public layoutService: LayoutService) { }
+
+  ngOnInit(): void {
+  }
+
+  async onSubmit() {
+    try {
+      let autenticacao = new Login();
+      autenticacao.login = this.loginForm.get('login')?.value + '';
+      autenticacao.senha = this.loginForm.get('senha')?.value + '';
+
+      const result = await this.accountService.login(autenticacao);
+      console.log(`Login Efetuado: ${result}`);
+      // navego para a rota vazia novamente
+      this.router.navigate(['']);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 }

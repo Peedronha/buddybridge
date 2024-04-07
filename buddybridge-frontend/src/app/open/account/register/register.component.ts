@@ -45,17 +45,30 @@ export class RegisterComponent {
   }
 
   submitDetails() {
-    const postData = { ...this.registerForm.value };
-    delete postData.confirmPassword;
-    this.accountService.registerUser(postData as User).subscribe(
+
+    let usuario = new User();
+    usuario.idUsuario = undefined;
+    usuario.nomeUsuario = this.registerForm.get('fullName')?.value + '';
+    usuario.emailUsuario = this.registerForm.get('email')?.value + '';
+    usuario.senhaUsuario = this.registerForm.get('password')?.value + '';
+    usuario.adminUsuario = false;
+    usuario.confirmacaoEmailUsuario = false;
+    usuario.ongUsuario = false;
+    usuario.tokenUsuario = false;
+    usuario.telefoneUsuario = false;
+    usuario.enderecoIdendereco = undefined;
+    usuario.voluntarioIdvoluntario = undefined;
+
+    this.accountService.salvar(usuario).subscribe(
       response => {
         console.log(response);
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Regritado com sucesso' });
         this.router.navigate(['login'])
       },
       error => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Erro ao realizar o cadastro' });
       }
     )
   }
+
 }

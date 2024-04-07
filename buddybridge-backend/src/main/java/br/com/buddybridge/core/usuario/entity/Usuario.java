@@ -30,6 +30,9 @@ public class Usuario {
     @Column(name = "confirmacao_email_usuario")
     private Boolean confirmacaoEmailUsuario;
 
+    @Column(name = "ong_usuario")
+    private Boolean ongUsuario;
+
     @Column(name = "token_usuario", nullable = false, length = 45, unique = true)
     private String tokenUsuario;
 
@@ -124,6 +127,14 @@ public class Usuario {
         this.voluntarioIdvoluntario = voluntarioIdvoluntario;
     }
 
+    public Boolean getOngUsuario() {
+        return ongUsuario;
+    }
+
+    public void setOngUsuario(Boolean ongUsuario) {
+        this.ongUsuario = ongUsuario;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -144,6 +155,13 @@ public class Usuario {
                 ", nomeUsuario='" + nomeUsuario + '\'' +
                 ", emailUsuario='" + emailUsuario + '\'' +
                 ", senhaUsuario='" + senhaUsuario + '\'' +
+                ", adminUsuario=" + adminUsuario +
+                ", confirmacaoEmailUsuario=" + confirmacaoEmailUsuario +
+                ", ongUsuario=" + ongUsuario +
+                ", tokenUsuario='" + tokenUsuario + '\'' +
+                ", telefoneUsuario='" + telefoneUsuario + '\'' +
+                ", enderecoIdendereco=" + enderecoIdendereco +
+                ", voluntarioIdvoluntario=" + voluntarioIdvoluntario +
                 '}';
     }
 }
