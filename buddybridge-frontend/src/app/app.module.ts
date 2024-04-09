@@ -29,6 +29,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import {InputOtpModule} from "primeng/inputotp";
+import {RegisterVolunteerComponent} from "./open/account/volunteer/register-volunteer/register-volunteer.component";
+import {ListVolunteerComponent} from "./open/account/volunteer/list-volunteer/list-volunteer.component";
+import {TableModule} from "primeng/table";
+import {SplitButtonModule} from "primeng/splitbutton";
+import {DialogModule} from "primeng/dialog";
+import {CheckboxModule} from "primeng/checkbox";
 
 
 @NgModule({
@@ -40,6 +46,8 @@ import {InputOtpModule} from "primeng/inputotp";
       RecoveryComponent,
       HomeComponent,
       InsitucionalComponent,
+      RegisterVolunteerComponent,
+      ListVolunteerComponent,
     MenuRestrictComponent,
       DashboardComponent,
       InsitucionalComponent
@@ -64,6 +72,10 @@ import {InputOtpModule} from "primeng/inputotp";
     HttpClientModule,
     ToastModule,
     InputOtpModule,
+    TableModule,
+    SplitButtonModule,
+    DialogModule,
+    CheckboxModule,
   ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy },
