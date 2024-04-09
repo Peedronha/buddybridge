@@ -1,0 +1,81 @@
+<div class="surface-ground flex align-items-center justify-content-center overflow-hidden">
+  <div class="flex flex-column align-items-center justify-content-center">
+    <br/>
+    <div style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 70%);">
+      <form [formGroup]="registerForm" (ngSubmit)="submitDetails()">
+        <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+          <div class="text-center mb-5">
+            <div class="text-900 text-3xl font-medium mb-3">CADASTRAR VOLUNTÁRIO</div>
+          </div>
+          <div>
+            <div *ngIf="!showPj" class="field">
+              <label  for="cpf_voluntario">CPF Voluntário</label>
+              <input type="text" pInputText  formControlName="cpf_voluntario" class="w-full" name="cpf_voluntario" placeholder="Digite o CPF do voluntário"/>
+              <small *ngIf="registerForm.get('cpf_voluntario')?.invalid && (registerForm.get('cpf_voluntario')?.dirty || registerForm.get('cpf_voluntario')?.touched)" class="block p-error">
+                <div *ngIf="registerForm.get('cpf_voluntario')?.errors?.['required']">O CPF do voluntário é uma informação obrigatória.</div>
+              </small>
+            </div>
+            <div *ngIf="showPj" class="field">
+              <label for="cnpj_coluntario">CNPJ Voluntário</label>
+              <input type="text" pInputText formControlName="cnpj_voluntario" class="w-full" name="cnpj_coluntario" placeholder="Digite o CNPJ do coluntário"/>
+              <small *ngIf="registerForm.get('cnpj_coluntario')?.invalid && (registerForm.get('cnpj_coluntario')?.dirty || registerForm.get('cnpj_coluntario')?.touched)" class="block p-error">
+                <div *ngIf="registerForm.get('cnpj_coluntario')?.errors?.['required']">O CNPJ do coluntário é uma informação obrigatória.</div>
+              </small>
+            </div>
+            <div  class="field checkbox-field">
+              <label for="pj">
+              <p-checkbox formControlName="pf_pj_voluntario" value="Pessoa Juridica"
+                          [(ngModel)]="showPj" (click)="updateState()" inputId="pj"></p-checkbox>
+              Pessoa Juridica
+              </label>
+            </div>
+            <div class="field">
+              <label for="fullName">Nome Completo</label>
+              <input type="text" pInputText formControlName="fullName" class="w-full" name="fullName" placeholder="Digite seu nome"/>
+              <small *ngIf="registerForm.get('fullName')?.invalid && (registerForm.get('fullName')?.dirty || registerForm.get('fullName')?.touched)" class="block p-error">
+                <div *ngIf="registerForm.get('fullName')?.errors?.['required']">O nome é uma informação obrigatória.</div>
+                <div *ngIf="registerForm.get('fullName')?.errors?.['pattern']">O nome não deve conter caracteres especiais</div>
+              </small>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="text" pInputText formControlName="email" class="w-full" name="email" placeholder="Digite seu email" />
+              <small *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="block p-error">
+                <div *ngIf="registerForm.get('email')?.errors?.['required']">O email é uma informação obrigatória.</div>
+                <div *ngIf="registerForm.get('email')?.errors?.['email']">Email invalido</div>
+              </small>
+            </div>
+<!--            <div class="field">-->
+<!--              <label for="password">Senha</label>-->
+<!--              <input type="password" pInputText formControlName="password" class="w-full" name="password" placeholder="Digite sua senha"/>-->
+<!--              <small *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="block p-error">-->
+<!--                <div *ngIf="registerForm.get('password')?.errors?.['required']">A senha é uma informação obrigatória.</div>-->
+<!--              </small>-->
+<!--            </div>-->
+            <div class="field">
+              <label for="cargo_voluntario">Cargo Voluntário</label>
+              <input type="text" pInputText  formControlName="cargo_voluntario" class="w-full" name="cargo_voluntario" placeholder="Digite o cargo do voluntário"/>
+              <small *ngIf="registerForm.get('cargo_voluntario')?.invalid && (registerForm.get('cargo_voluntario')?.dirty || registerForm.get('cargo_voluntario')?.touched)" class="block p-error">
+                <div *ngIf="registerForm.get('cargo_voluntario')?.errors?.['required']">O cargo do voluntário é uma informação obrigatória.</div>
+              </small>
+            </div>
+            <div class="field">
+              <label for="descricao_atividades_voluntario">Descrição das atividades de voluntariado</label>
+              <textarea pInputTextarea formControlName="descricao_atividades_voluntario" class="w-full" name="descricao_atividades_voluntario" placeholder="Digite a descrição das atividades do voluntário"></textarea>
+            </div>
+<!--            <div class="field">-->
+<!--              <label for="pf_pj_voluntario">PF PJ Voluntário</label>-->
+<!--              <input type="text" pInputText formControlName="pf_pj_voluntario" class="w-full" name="pf_pj_voluntario" placeholder="Digite se o voluntário é PF ou PJ"/>-->
+<!--              <small *ngIf="registerForm.get('pf_pj_voluntario')?.invalid && (registerForm.get('pf_pj_voluntario')?.dirty || registerForm.get('pf_pj_voluntario')?.touched)" class="block p-error">-->
+<!--                <div *ngIf="registerForm.get('pf_pj_voluntario')?.errors?.['required']">Informação obrigatória.</div>-->
+<!--              </small>-->
+<!--            </div>-->
+            <p-button label="Cadastrar" styleClass="w-full" [disabled]="registerForm.invalid" type="submit"></p-button>
+            <div class="mt-2">Já tem uma conta? <a routerLink="/login">Login</a></div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <br/>
+  </div>
+</div>
