@@ -35,6 +35,7 @@ import {TableModule} from "primeng/table";
 import {SplitButtonModule} from "primeng/splitbutton";
 import {DialogModule} from "primeng/dialog";
 import {CheckboxModule} from "primeng/checkbox";
+import {InputTextareaModule} from "primeng/inputtextarea";
 
 
 @NgModule({
@@ -76,6 +77,7 @@ import {CheckboxModule} from "primeng/checkbox";
     SplitButtonModule,
     DialogModule,
     CheckboxModule,
+    InputTextareaModule,
   ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy },

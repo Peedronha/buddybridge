@@ -1,0 +1,9 @@
+.detail {
+  display: flex;
+  justify-content: space-between; /* Aligns items with space between them */
+  align-items: center; /* Aligns items vertically centered */
+}
+
+.actions {
+  display: flex; /* Use flexbox for the icons container */
+}

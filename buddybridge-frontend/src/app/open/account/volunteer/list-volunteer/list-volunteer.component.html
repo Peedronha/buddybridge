@@ -45,7 +45,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-volunteer>
-    <tr (click)="updateState(volunteer.idvoluntario)">
+    <tr>
       <td>{{ volunteer.fullName }}</td>
       <td>{{ volunteer.cargo_voluntario }}</td>
       <td>{{ volunteer.email }}</td>
@@ -62,26 +62,37 @@
   </ng-template>
 </p-table>
 
-<p-dialog [ngModel]="_specificVolunter" header="Volunteer Details" [(visible)]="showHidden" [style]="{ width: '50vw', height: 'auto' }">
-  <div class="detail">
-    <p-splitButton label="Save" icon="pi pi-plus" (onClick)="save('info')" [model]="items"></p-splitButton>
-  </div>
+<p-dialog [ngModel]="_specificVolunter" header="Detalhes do voluntário" [(visible)]="showHidden" [style]="{ width: '50vw', height: 'auto' }">
   <div class="volunteer-details">
+    <div class="detail p-button-sm mr-2 mb-2 p-splitbutton p-component" style="display: flex; justify-content: flex-end;">
+      <div class="actions">
+        <p-splitButton label="Aplicar"
+                       icon="pi pi-check"
+                       (onClick)="save('info')"
+                       [model]="items">
+        </p-splitButton>
+      </div>
+    </div>
     <div class="detail">
       <p><strong>Name:</strong> {{ _specificVolunter.fullName }}</p>
     </div>
-    <div class="detail">
+    <p-divider type="solid"></p-divider>
+    <div class="detail justify-content-between">
       <p><strong>Email:</strong> {{ _specificVolunter.email }}</p>
     </div>
+    <p-divider type="solid"></p-divider>
     <div class="detail">
       <p><strong>CPF:</strong> {{ _specificVolunter.cpf_voluntario }}</p>
     </div>
+    <p-divider type="solid"></p-divider>
     <div class="detail">
       <p><strong>Cargo:</strong> {{ _specificVolunter.cargo_voluntario }}</p>
     </div>
+    <p-divider type="solid"></p-divider>
     <div class="detail">
       <p><strong>Description:</strong> {{ _specificVolunter.descricao_atividades_voluntario }}</p>
     </div>
+    <p-divider type="solid"></p-divider>
     <div class="detail">
       <p><strong>PF/PJ:</strong> {{ _specificVolunter.pf_pj_voluntario }}</p>
     </div>

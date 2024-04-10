@@ -43,22 +43,19 @@ export class ListVolunteerComponent {
   constructor(private messageService: MessageService) {
     this.items = [
       {
-        label: 'Update',
-        icon: 'pi pi-refresh',
+        label: 'Editar',
+        icon: 'pi pi-wrench',
         command: () => {
           this.update();
         }
       },
       {
         label: 'Delete',
-        icon: 'pi pi-times',
+        icon: 'pi pi-trash',
         command: () => {
           this.delete();
         }
       },
-      { label: 'Angular.io', icon: 'pi pi-info', url: 'http://angular.io' },
-      { separator: true },
-      { label: 'Installation', icon: 'pi pi-cog', routerLink: ['/installation'] }
     ];
   }
 
