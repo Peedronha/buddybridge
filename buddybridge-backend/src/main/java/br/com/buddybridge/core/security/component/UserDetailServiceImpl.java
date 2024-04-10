@@ -38,18 +38,19 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     public UserDetails loadUserByEmail(LoginDto loginDto) throws UsernameNotFoundException, DataAccessException {
 
-        try {
-            if (usuarioService.existsByEmail(loginDto.getUsername())){
+        if (usuarioService.existsByEmailAndPassword(loginDto.getUsername())) {
+
             CustomUser user = getCustomUser(loginDto.getUsername());
-            }
+
             logger.info("Username: " + loginDto.getUsername() + " encontrado." + user.getPassword());
 
             return user;
-        } catch (Exception ex) {
-            logger.error("Username: " + loginDto.getUsername() + " não encontrado na base. Acesso negado. ");
-            throw new UsernameNotFoundException(loginDto.getUsername());
         }
+        logger.error("Username: " + loginDto.getUsername() + " não encontrado na base. Acesso negado. ");
+        throw new UsernameNotFoundException(loginDto.getUsername());
+
     }
+
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
