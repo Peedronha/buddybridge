@@ -55,6 +55,8 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
+    public Boolean existByEmail(String email){ return usuarioRepository.existsByEmail(email);}
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
