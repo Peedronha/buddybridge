@@ -38,11 +38,11 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     public UserDetails loadUserByEmail(LoginDto loginDto) throws UsernameNotFoundException, DataAccessException {
 
-        if (usuarioService.existsByEmailAndPassword(loginDto.getUsername())) {
+        if (usuarioService.existsByEmailAndPassword(loginDto.getUsername(), loginDto.getPassword())) {
 
             CustomUser user = getCustomUser(loginDto.getUsername());
 
-            logger.info("Username: " + loginDto.getUsername() + " encontrado." + user.getPassword());
+            logger.info("Username: " + loginDto.getUsername() + " encontrado." + loginDto.getPassword());
 
             return user;
         }
