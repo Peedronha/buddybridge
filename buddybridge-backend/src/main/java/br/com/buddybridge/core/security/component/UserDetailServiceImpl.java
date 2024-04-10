@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import br.com.buddybridge.core.usuario.entity.dto.LoginDto;
 import br.pucbr.pancake.usuario.service.UsuarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,25 +36,31 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Autowired
     public UsuarioService usuarioService;
 
+    public UserDetails loadUserByEmail(LoginDto loginDto) throws UsernameNotFoundException, DataAccessException {
+
+        try {
+            if (usuarioService.existsByEmail(loginDto.getUsername())){
+            CustomUser user = getCustomUser(loginDto.getUsername());
+            }
+            logger.info("Username: " + loginDto.getUsername() + " encontrado." + user.getPassword());
+
+            return user;
+        } catch (Exception ex) {
+            logger.error("Username: " + loginDto.getUsername() + " não encontrado na base. Acesso negado. ");
+            throw new UsernameNotFoundException(loginDto.getUsername());
+        }
+    }
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
         try {
+            CustomUser user = getCustomUser(userName);
 
-            UserDetails u = new CustomUser("admin",
-                    "$2a$10$oZCgy7RqczY4UKXWJjzsLu99RwHn7bvb2s0X40DxngHLSaQys20Si",
-                    true,
-                    true,
-                    true,
-                    true,
-                    new ArrayList<>(),
-                    null);
+            logger.info("Username: " + userName + " encontrado." + user.getPassword());
 
-            logger.info("Username: " + userName + " encontrado." + u.getPassword());
-
-            return u;
+            return user;
         } catch (Exception ex) {
-            logger.error("Username: " + userName + " não econtrado na base. Acesso negado. ");
+            logger.error("Username: " + userName + " não encontrado na base. Acesso negado. ");
             throw new UsernameNotFoundException(userName);
         }
 
@@ -64,7 +71,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         logger.info("getCustomUser: " + userName + ".");
 
         CustomUser customUser = jdbcTemplate.queryForObject(
-                "select email, senha, guidusuario from usuario where email=?", new Object[] { userName },
+                "select email, senha, guidusuario from usuario where email=?", new Object[]{userName},
                 new UserRowMapper());
 
         if (customUser != null) {
