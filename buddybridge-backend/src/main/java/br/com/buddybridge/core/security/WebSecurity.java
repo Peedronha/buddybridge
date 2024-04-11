@@ -18,7 +18,6 @@ public class WebSecurity{
             "/swagger-resources/**",
             "/swagger-resources",
             "/h2-console/**",
-
     };
 
     @Bean
@@ -29,6 +28,8 @@ public class WebSecurity{
                 .authorizeRequests()
                 .requestMatchers(SWAGGER_WHITELIST).permitAll()
                 .requestMatchers(HttpMethod.GET).permitAll()
+                .requestMatchers(HttpMethod.POST).permitAll()
+                .requestMatchers(HttpMethod.DELETE).permitAll()
                 .anyRequest().authenticated().and().httpBasic();
 
         http.headers().frameOptions().disable();

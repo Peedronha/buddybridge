@@ -14,18 +14,17 @@ import {VolunteerService} from "../service/volunteer.service";
   styleUrl: './register-volunteer.component.scss'
 })
 export class RegisterVolunteerComponent {
+
+
+
   registerForm = this.fb.group({
-    fullName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+    nome_voluntario: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    confirmPassword: ['', Validators.required],
-    cpf_voluntario: ['', Validators.required],
-    cnpj_voluntario: ['', Validators.required],
-    cargo_voluntario: ['', Validators.required],
+    cpf_voluntario: [''/*, [Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]*/],
+    cnpj_voluntario: [''/*, [Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]*/],
+    cargo_voluntario: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     descricao_atividades_voluntario: [''],
-    pf_pj_voluntario: ['', Validators.required]
-  }, {
-    validators: passwordMatchValidator
+    pf_pj_voluntario: [''/*, [Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]*/]
   })
 
   showPj: boolean = true;
@@ -37,20 +36,12 @@ export class RegisterVolunteerComponent {
     private router: Router
   ) { }
 
-  get fullName() {
-    return this.registerForm.controls['fullName'];
+  get nome_voluntario() {
+    return this.registerForm.get('nome_voluntario');
   }
 
-  get email() {
-    return this.registerForm.controls['email'];
-  }
-
-  get password() {
-    return this.registerForm.controls['password'];
-  }
-
-  get confirmPassword() {
-    return this.registerForm.controls['confirmPassword'];
+  get email_voluntario() {
+    return this.registerForm.get('email');
   }
 
   get cpf_voluntario() {
@@ -80,18 +71,18 @@ export class RegisterVolunteerComponent {
   submitDetails() {
     const postData = { ...this.registerForm.value };
     if (!this.showPj) {
-      postData.pf_pj_voluntario = 'Pessoa Fisica';
+      postData.pf_pj_voluntario = 'Pessoa Juridica';
     }
-
+      postData.pf_pj_voluntario = 'Pessoa Fisica'
     this.volunteerService.registerVolunteer(postData as Volunteer).subscribe(
       response => {
         console.log(response);
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
-        this.router.navigate(['login'])
+        this.registerForm.reset();
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
-      }
+      },
     )
   }
 }

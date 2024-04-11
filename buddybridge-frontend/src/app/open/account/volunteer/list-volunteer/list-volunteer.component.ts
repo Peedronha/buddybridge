@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
 import {MenuItem, MessageService} from "primeng/api";
 import {VolunteerService} from "../service/volunteer.service";
+import {Volunteer} from "../../model/volunteer.model";
 
-interface Volunteer {
-  idvoluntario: number;
-  fullName: string;
-  cargo_voluntario: string;
-  email: string;
-  pf_pj_voluntario: string;
-}
+
 @Component({
   selector: 'app-list-volunteer',
   templateUrl: './list-volunteer.component.html',
@@ -60,13 +55,17 @@ export class ListVolunteerComponent {
         }
       },
     ];
+
   }
 
 
   ngOnInit(): void {
-    this.volunteerService.getVolunteers().subscribe(data => {
+    this.volunteerService.getVolunteers().subscribe((data: Volunteer[]) => {
+      console.log(data)
       this.volunteers = data;
     });
+
+    alert(this.volunteers)
   }
 
   onSearch(event: any) {

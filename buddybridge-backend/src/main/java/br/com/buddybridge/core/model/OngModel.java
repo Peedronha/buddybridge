@@ -14,7 +14,7 @@ import java.util.List;
 public class OngModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String mission;
@@ -30,8 +30,6 @@ public class OngModel {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "ong", cascade = CascadeType.ALL)
     private List<AnimalModel> animalList;
 
-    @OneToMany(mappedBy = "ong")
-    private List<EmployeeModel> volunteer;
 
     public OngModel(long l, String savePets, String s, String bestPaws, Date date) {
 

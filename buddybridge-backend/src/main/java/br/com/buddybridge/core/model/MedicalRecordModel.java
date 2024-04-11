@@ -22,7 +22,7 @@ public class MedicalRecordModel {
     https://www.baeldung.com/spring-jasper pra gerar um documento com várias fichas
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String doctor;

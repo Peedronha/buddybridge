@@ -46,7 +46,7 @@
   </ng-template>
   <ng-template pTemplate="body" let-volunteer>
     <tr>
-      <td>{{ volunteer.fullName }}</td>
+      <td>{{ volunteer.nome_voluntario }}</td>
       <td>{{ volunteer.cargo_voluntario }}</td>
       <td>{{ volunteer.email }}</td>
       <td>{{ volunteer.pf_pj_voluntario }}</td>
@@ -74,11 +74,11 @@
       </div>
     </div>
     <div class="detail">
-      <p><strong>Name:</strong> {{ _specificVolunteer.fullName }}</p>
+      <p><strong>Name:</strong> {{ _specificVolunteer.nome_voluntario }}</p>
     </div>
     <p-divider type="solid"></p-divider>
     <div class="detail justify-content-between">
-      <p><strong>Email:</strong> {{ _specificVolunteer.email }}</p>
+      <p><strong>Email:</strong> {{ _specificVolunteer.email_voluntario}}</p>
     </div>
     <p-divider type="solid"></p-divider>
     <div class="detail">

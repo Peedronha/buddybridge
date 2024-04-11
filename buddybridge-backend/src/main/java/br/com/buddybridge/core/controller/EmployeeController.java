@@ -2,6 +2,7 @@ package br.com.buddybridge.core.controller;
 
 import br.com.buddybridge.core.model.EmployeeModel;
 import br.com.buddybridge.core.model.EmployeeModel;
+import br.com.buddybridge.core.model.dto.VolunteerDto;
 import br.com.buddybridge.core.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,10 +30,12 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<EmployeeModel> insertEmployeeModel(@RequestBody EmployeeModel employeeModel){
+    public ResponseEntity<EmployeeModel> insertEmployeeModel(@RequestBody VolunteerDto volunteerDto){
         try{
-            this.employeeService.saveEmployeeModel(employeeModel);
-            return new ResponseEntity<>(employeeModel, HttpStatus.CREATED);
+            if (!employeeService.existsByEmail(volunteerDto.getEmail())) {
+                this.employeeService.saveEmployeeModel(new EmployeeModel(volunteerDto));
+            }
+            return new ResponseEntity<>(new EmployeeModel(volunteerDto), HttpStatus.CREATED);
         }
         catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.OK);
