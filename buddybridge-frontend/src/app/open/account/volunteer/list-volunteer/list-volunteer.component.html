@@ -62,7 +62,7 @@
   </ng-template>
 </p-table>
 
-<p-dialog [ngModel]="_specificVolunter" header="Detalhes do voluntário" [(visible)]="showHidden" [style]="{ width: '50vw', height: 'auto' }">
+<p-dialog [ngModel]="_specificVolunteer" header="Detalhes do voluntário" [(visible)]="showHidden" [style]="{ width: '50vw', height: 'auto' }">
   <div class="volunteer-details">
     <div class="detail p-button-sm mr-2 mb-2 p-splitbutton p-component" style="display: flex; justify-content: flex-end;">
       <div class="actions">
@@ -74,27 +74,27 @@
       </div>
     </div>
     <div class="detail">
-      <p><strong>Name:</strong> {{ _specificVolunter.fullName }}</p>
+      <p><strong>Name:</strong> {{ _specificVolunteer.fullName }}</p>
     </div>
     <p-divider type="solid"></p-divider>
     <div class="detail justify-content-between">
-      <p><strong>Email:</strong> {{ _specificVolunter.email }}</p>
+      <p><strong>Email:</strong> {{ _specificVolunteer.email }}</p>
     </div>
     <p-divider type="solid"></p-divider>
     <div class="detail">
-      <p><strong>CPF:</strong> {{ _specificVolunter.cpf_voluntario }}</p>
+      <p><strong>CPF:</strong> {{ _specificVolunteer.cpf_voluntario }}</p>
     </div>
     <p-divider type="solid"></p-divider>
     <div class="detail">
-      <p><strong>Cargo:</strong> {{ _specificVolunter.cargo_voluntario }}</p>
+      <p><strong>Cargo:</strong> {{ _specificVolunteer.cargo_voluntario }}</p>
     </div>
     <p-divider type="solid"></p-divider>
     <div class="detail">
-      <p><strong>Description:</strong> {{ _specificVolunter.descricao_atividades_voluntario }}</p>
+      <p><strong>Description:</strong> {{ _specificVolunteer.descricao_atividades_voluntario }}</p>
     </div>
     <p-divider type="solid"></p-divider>
     <div class="detail">
-      <p><strong>PF/PJ:</strong> {{ _specificVolunter.pf_pj_voluntario }}</p>
+      <p><strong>PF/PJ:</strong> {{ _specificVolunteer.pf_pj_voluntario }}</p>
     </div>
   </div>
 </p-dialog>

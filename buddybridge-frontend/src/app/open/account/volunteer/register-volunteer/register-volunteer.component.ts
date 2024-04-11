@@ -6,6 +6,7 @@ import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import {User} from "../../model/user.model";
 import {Volunteer} from "../../model/volunteer.model";
+import {VolunteerService} from "../service/volunteer.service";
 
 @Component({
   selector: 'app-register-volunteer',
@@ -31,7 +32,7 @@ export class RegisterVolunteerComponent {
 
   constructor(
     private fb: FormBuilder,
-    private accountService: AccountService,
+    private volunteerService: VolunteerService,
     private messageService: MessageService,
     private router: Router
   ) { }
@@ -82,7 +83,7 @@ export class RegisterVolunteerComponent {
       postData.pf_pj_voluntario = 'Pessoa Fisica';
     }
 
-    this.accountService.registerUser(postData as Volunteer).subscribe(
+    this.volunteerService.registerVolunteer(postData as Volunteer).subscribe(
       response => {
         console.log(response);
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
