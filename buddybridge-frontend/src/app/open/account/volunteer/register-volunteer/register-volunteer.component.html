@@ -39,7 +39,7 @@
             </div>
             <div class="field">
               <label for="email_voluntario">Email</label>
-              <input type="text" pInputText formControlName="email_voluntario" class="w-full" name="email" placeholder="Digite seu email" />
+              <input type="text" pInputText formControlName="email" class="w-full" name="email" placeholder="Digite seu email" />
               <small *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="block p-error">
                 <div *ngIf="registerForm.get('email')?.errors?.['required']">O email é uma informação obrigatória.</div>
                 <div *ngIf="registerForm.get('email')?.errors?.['email']">Email invalido</div>
@@ -57,12 +57,18 @@
               <textarea pInputTextarea formControlName="descricao_atividades_voluntario" class="w-full" name="descricao_atividades_voluntario" placeholder="Digite a descrição das atividades do voluntário"></textarea>
             </div>
           </div>
-          <p-button label="Cadastrar voluntário" styleClass="w-full"  type="submit"></p-button>
-          <p-button label="Voltar" styleClass="w-full"  routerLink="/volunteer"></p-button>
+          <div class="detail">
+            <div class="actions" >
+              <div>
+                <button pButton pRipple style="margin: 20px" label="Cancelar" class="p-button-danger" routerLink="/volunteer" ></button>
+                <button pButton pRipple style="margin: 20px" label="Confirmar" class="p-button-success" [disabled]="registerForm.invalid" type="submit"></button>
+              </div>
+            </div>
+          </div>
         </div>
       </form>
     </div>
     <br/>
   </div>
 </div>
-<!--[disabled]="registerForm.invalid"-->
+

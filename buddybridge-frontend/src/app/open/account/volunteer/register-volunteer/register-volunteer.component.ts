@@ -15,16 +15,14 @@ import {VolunteerService} from "../service/volunteer.service";
 })
 export class RegisterVolunteerComponent {
 
-
-
   registerForm = this.fb.group({
     nome_voluntario: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     email: ['', [Validators.required, Validators.email]],
-    cpf_voluntario: [''/*, [Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]*/],
-    cnpj_voluntario: [''/*, [Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]*/],
+    cpf_voluntario: [''],
+    cnpj_voluntario: [''],
     cargo_voluntario: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     descricao_atividades_voluntario: [''],
-    pf_pj_voluntario: [''/*, [Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]*/]
+    pf_pj_voluntario: ['']
   })
 
   showPj: boolean = true;
@@ -40,7 +38,7 @@ export class RegisterVolunteerComponent {
     return this.registerForm.get('nome_voluntario');
   }
 
-  get email_voluntario() {
+  get email() {
     return this.registerForm.get('email');
   }
 
@@ -64,8 +62,18 @@ export class RegisterVolunteerComponent {
     return this.registerForm.get('pf_pj_voluntario');
   }
 
-  updateState(){
+  updateState() {
     this.showPj = !this.showPj;
+    if (this.showPj) {
+      this.registerForm.get('cpf_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]);
+      this.registerForm.get('cnpj_voluntario')?.clearValidators();
+    } else {
+      this.registerForm.get('cnpj_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]);
+      this.registerForm.get('cpf_voluntario')?.clearValidators();
+    }
+
+    this.registerForm.get('cpf_voluntario')?.updateValueAndValidity();
+    this.registerForm.get('cnpj_voluntario')?.updateValueAndValidity();
   }
 
   submitDetails() {
@@ -79,6 +87,7 @@ export class RegisterVolunteerComponent {
         console.log(response);
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
         this.registerForm.reset();
+        this.router.navigateByUrl('/volunteer')
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });

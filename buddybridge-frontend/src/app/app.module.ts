@@ -36,6 +36,9 @@ import {SplitButtonModule} from "primeng/splitbutton";
 import {DialogModule} from "primeng/dialog";
 import {CheckboxModule} from "primeng/checkbox";
 import {InputTextareaModule} from "primeng/inputtextarea";
+import {RippleModule} from "primeng/ripple";
+import {SplitterModule} from "primeng/splitter";
+import { EditVolunteerComponent } from './open/account/volunteer/edit-volunteer/edit-volunteer.component';
 
 
 @NgModule({
@@ -51,7 +54,8 @@ import {InputTextareaModule} from "primeng/inputtextarea";
       ListVolunteerComponent,
     MenuRestrictComponent,
       DashboardComponent,
-      InsitucionalComponent
+      InsitucionalComponent,
+      EditVolunteerComponent
   ],
   imports: [
     BrowserModule,
@@ -78,6 +82,8 @@ import {InputTextareaModule} from "primeng/inputtextarea";
     DialogModule,
     CheckboxModule,
     InputTextareaModule,
+    RippleModule,
+    SplitterModule,
   ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy },

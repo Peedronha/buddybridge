@@ -33,4 +33,16 @@ export class VolunteerService {
           }
       ))
   }
+
+  updateVolunteer(postData1: Volunteer): Observable<any> {
+    return this.http.put<any>(this.apiUrl, postData1).pipe(
+      map((response) =>{
+          if (response)
+            return response;
+        },
+        (error:any) =>{
+          return error;
+        }
+      ))
+  }
 }
