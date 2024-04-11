@@ -61,11 +61,8 @@ export class ListVolunteerComponent {
 
   ngOnInit(): void {
     this.volunteerService.getVolunteers().subscribe((data: Volunteer[]) => {
-      console.log(data)
       this.volunteers = data;
     });
-
-    alert(this.volunteers)
   }
 
   onSearch(event: any) {
