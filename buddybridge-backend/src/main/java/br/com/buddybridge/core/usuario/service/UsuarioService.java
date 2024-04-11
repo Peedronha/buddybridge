@@ -4,12 +4,12 @@ package br.com.buddybridge.core.usuario.service;
 import br.com.buddybridge.core.usuario.entity.Usuario;
 import br.com.buddybridge.core.usuario.repository.UsuarioRepository;
 import br.com.buddybridge.core.util.ExampleExeption;
-import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.transaction.SystemException;
 import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
