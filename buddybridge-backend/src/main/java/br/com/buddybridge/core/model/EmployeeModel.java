@@ -15,21 +15,24 @@ import lombok.Setter;
 public class EmployeeModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "idvoluntario")
+    private Integer idVoluntario;
 
-    private String firstName;
+    @Column(name = "cpf_voluntario")
+    private String cpfVoluntario;
 
-    private String lastName;
+    @Column(name = "cnpj_coluntario")
+    private String cnpjColuntario;
 
-    private String email;
+    @Column(name = "cargo_voluntario", nullable = false)
+    private String cargoVoluntario;
 
-    private String password;
+    @Column(name = "descricao_atividades_voluntario", columnDefinition = "LONGTEXT")
+    private String descricaoAtividadesVoluntario;
 
-    private String phoneNumber;
+    @Column(name = "pf_pj_voluntario", nullable = false)
+    private String pfPjVoluntario;
 
-    private String role;
-
-    @ManyToOne
     @JoinColumn(name = "ong_id")
-    private OngModel ong; // Corrigido para 'ong'
+    private long ong;
 }

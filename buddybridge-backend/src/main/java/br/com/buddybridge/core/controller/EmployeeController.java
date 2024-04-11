@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("employee")
+@RequestMapping("volunteer")
 public class EmployeeController {
     
     private EmployeeService employeeService;
