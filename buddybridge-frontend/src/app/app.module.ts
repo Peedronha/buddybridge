@@ -15,6 +15,7 @@ import { TopMenuOpenComponent } from './open/component/top-menu-open/top-menu-op
 import { InsitucionalComponent } from './open/insitucional/insitucional.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppLayoutModule } from './layout/app.layout.module';
+import {RecoveryComponent} from "./open/account/recovery/recovery.component";
 import { CommonModule } from '@angular/common';
 import { DividerModule } from 'primeng/divider';
 import { ChartModule } from 'primeng/chart';
@@ -27,6 +28,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import {InputOtpModule} from "primeng/inputotp";
+import {RegisterVolunteerComponent} from "./open/account/volunteer/register-volunteer/register-volunteer.component";
+import {ListVolunteerComponent} from "./open/account/volunteer/list-volunteer/list-volunteer.component";
+import {TableModule} from "primeng/table";
+import {SplitButtonModule} from "primeng/splitbutton";
+import {DialogModule} from "primeng/dialog";
+import {CheckboxModule} from "primeng/checkbox";
+import {InputTextareaModule} from "primeng/inputtextarea";
 
 @NgModule({
   declarations: [
@@ -34,8 +43,11 @@ import { MessageService } from 'primeng/api';
     TopMenuOpenComponent,
       LoginComponent,
       RegisterComponent,
+      RecoveryComponent,
       HomeComponent,
       InsitucionalComponent,
+      RegisterVolunteerComponent,
+      ListVolunteerComponent,
     MenuRestrictComponent,
       DashboardComponent,
       InsitucionalComponent
@@ -59,6 +71,12 @@ import { MessageService } from 'primeng/api';
     ReactiveFormsModule,
     HttpClientModule,
     ToastModule,
+    InputOtpModule,
+    TableModule,
+    SplitButtonModule,
+    DialogModule,
+    CheckboxModule,
+    InputTextareaModule,
   ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy },
