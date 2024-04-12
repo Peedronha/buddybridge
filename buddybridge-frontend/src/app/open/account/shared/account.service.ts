@@ -18,11 +18,12 @@ export class AccountService {
       })
     };
 
-    let login = autenticacao.login;
+    /*let login = autenticacao.login;
     let senha = autenticacao.senha;
-    let body = `login=${login}&senha=${senha}`;
+    let body = `login=${login}&senha=${senha}`;*/
 
-    const result = await this.httpClient.post<any>("http://localhost:8080/public/buddybridge/autenticacao",body,  httpOptions).toPromise();
+    const result = await this.httpClient.post<any>("http://localhost:8080/auth/login",autenticacao).toPromise();
+
     if(result && result.token){
       window.localStorage.setItem('token', result.token);
       return true;
@@ -31,7 +32,7 @@ export class AccountService {
   }
 
   salvar(usuarioModel : User){
-    return this.httpClient.post<User>("http://localhost:8080/usuario/salvar",usuarioModel);
+    return this.httpClient.post<User>("http://localhost:8080/auth/salvar",usuarioModel);
   }
 
   listar(){

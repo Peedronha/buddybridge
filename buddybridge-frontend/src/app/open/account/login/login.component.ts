@@ -29,8 +29,8 @@ export class LoginComponent  implements OnInit {
   async onSubmit() {
     try {
       let autenticacao = new Login();
-      autenticacao.login = this.loginForm.get('login')?.value + '';
-      autenticacao.senha = this.loginForm.get('senha')?.value + '';
+      autenticacao.username = this.loginForm.get('login')?.value + '';
+      autenticacao.password = this.loginForm.get('senha')?.value + '';
 
       const result = await this.accountService.login(autenticacao);
       console.log(`Login Efetuado: ${result}`);

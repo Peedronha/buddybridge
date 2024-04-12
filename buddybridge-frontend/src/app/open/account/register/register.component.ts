@@ -47,17 +47,16 @@ export class RegisterComponent {
   submitDetails() {
 
     let usuario = new User();
-    usuario.idUsuario = undefined;
-    usuario.nomeUsuario = this.registerForm.get('fullName')?.value + '';
-    usuario.emailUsuario = this.registerForm.get('email')?.value + '';
-    usuario.senhaUsuario = this.registerForm.get('password')?.value + '';
-    usuario.adminUsuario = false;
-    usuario.confirmacaoEmailUsuario = false;
-    usuario.ongUsuario = false;
-    usuario.tokenUsuario = false;
-    usuario.telefoneUsuario = false;
-    usuario.enderecoIdendereco = undefined;
-    usuario.voluntarioIdvoluntario = undefined;
+    usuario.id = undefined;
+    usuario.nome = this.registerForm.get('fullName')?.value + '';
+    usuario.login = this.registerForm.get('email')?.value + '';
+    usuario.senha = this.registerForm.get('password')?.value + '';
+    usuario.role = 'user';
+    usuario.confirmacaoEmail = false;
+    usuario.token = '';
+    usuario.telefone = false;
+    usuario.usuarioIdendereco = undefined;
+    usuario.usuarioIdvoluntario = undefined;
 
     this.accountService.salvar(usuario).subscribe(
       response => {

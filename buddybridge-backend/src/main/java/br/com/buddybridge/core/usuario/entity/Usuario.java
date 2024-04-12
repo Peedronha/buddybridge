@@ -3,165 +3,107 @@ package br.com.buddybridge.core.usuario.entity;
 import br.com.buddybridge.core.endereco.entity.Endereco;
 import br.com.buddybridge.core.voluntario.entity.Voluntario;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Usuario implements UserDetails {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idusuario")
-    private Long idUsuario;
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name = "nome_usuario", nullable = false, length = 255)
-    private String nomeUsuario;
+    @Column(name = "nome", nullable = false, length = 255)
+    private String nome;
 
-    @Column(name = "email_usuario", nullable = false, length = 255, unique = true)
-    private String emailUsuario;
+    @Column(name = "login", nullable = false, length = 255, unique = true)
+    private String login;
 
-    @Column(name = "senha_usuario", nullable = false, length = 255, unique = true)
-    private String senhaUsuario;
+    @Column(name = "senha", nullable = false, length = 255)
+    private String senha;
 
-    @Column(name = "admin_usuario")
-    private Boolean adminUsuario;
+    private Set<Role> authorities;
 
-    @Column(name = "confirmacao_email_usuario")
-    private Boolean confirmacaoEmailUsuario;
+    @Column(name = "confirmacao_email")
+    private Boolean confirmacaoEmail;
 
-    @Column(name = "ong_usuario")
-    private Boolean ongUsuario;
+    @Column(name = "token", nullable = false, length = 45)
+    private String token;
 
-    @Column(name = "token_usuario", nullable = false, length = 45, unique = true)
-    private String tokenUsuario;
-
-    @Column(name = "telefone_usuario", nullable = false, length = 45, unique = true)
-    private String telefoneUsuario;
+    @Column(name = "telefone", nullable = false, length = 45)
+    private String telefone;
 
     @ManyToOne
-    @JoinColumn(name="endereco_idendereco", referencedColumnName="idendereco")
-    private Endereco enderecoIdendereco;
+    @JoinColumn(name="usuario_idendereco", referencedColumnName="idendereco")
+    private Endereco usuarioIdendereco;
 
     @ManyToOne
-    @JoinColumn(name="voluntario_idvoluntario", referencedColumnName="idvoluntario")
-    private Voluntario voluntarioIdvoluntario;
-
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public String getNomeUsuario() {
-        return nomeUsuario;
-    }
-
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
-    }
-
-    public String getEmailUsuario() {
-        return emailUsuario;
-    }
-
-    public void setEmailUsuario(String emailUsuario) {
-        this.emailUsuario = emailUsuario;
-    }
-
-    public String getSenhaUsuario() {
-        return senhaUsuario;
-    }
-
-    public void setSenhaUsuario(String senhaUsuario) {
-        this.senhaUsuario = senhaUsuario;
-    }
-
-    public Boolean getAdminUsuario() {
-        return adminUsuario;
-    }
-
-    public void setAdminUsuario(Boolean adminUsuario) {
-        this.adminUsuario = adminUsuario;
-    }
-
-    public Boolean getConfirmacaoEmailUsuario() {
-        return confirmacaoEmailUsuario;
-    }
-
-    public void setConfirmacaoEmailUsuario(Boolean confirmacaoEmailUsuario) {
-        this.confirmacaoEmailUsuario = confirmacaoEmailUsuario;
-    }
-
-    public String getTokenUsuario() {
-        return tokenUsuario;
-    }
-
-    public void setTokenUsuario(String tokenUsuario) {
-        this.tokenUsuario = tokenUsuario;
-    }
-
-    public String getTelefoneUsuario() {
-        return telefoneUsuario;
-    }
-
-    public void setTelefoneUsuario(String telefoneUsuario) {
-        this.telefoneUsuario = telefoneUsuario;
-    }
-
-    public Endereco getEnderecoIdendereco() {
-        return enderecoIdendereco;
-    }
-
-    public void setEnderecoIdendereco(Endereco enderecoIdendereco) {
-        this.enderecoIdendereco = enderecoIdendereco;
-    }
-
-    public Voluntario getVoluntarioIdvoluntario() {
-        return voluntarioIdvoluntario;
-    }
-
-    public void setVoluntarioIdvoluntario(Voluntario voluntarioIdvoluntario) {
-        this.voluntarioIdvoluntario = voluntarioIdvoluntario;
-    }
-
-    public Boolean getOngUsuario() {
-        return ongUsuario;
-    }
-
-    public void setOngUsuario(Boolean ongUsuario) {
-        this.ongUsuario = ongUsuario;
-    }
+    @JoinColumn(name="usuario_idvoluntario", referencedColumnName="idvoluntario")
+    private Voluntario usuarioIdvoluntario;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Usuario)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return getIdUsuario().equals(usuario.getIdUsuario());
+        return Objects.equals(id, usuario.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIdUsuario());
+        return Objects.hash(id);
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+       return authorities;
     }
 
     @Override
-    public String toString() {
-        return "Usuario{" +
-                "idUsuario=" + idUsuario +
-                ", nomeUsuario='" + nomeUsuario + '\'' +
-                ", emailUsuario='" + emailUsuario + '\'' +
-                ", senhaUsuario='" + senhaUsuario + '\'' +
-                ", adminUsuario=" + adminUsuario +
-                ", confirmacaoEmailUsuario=" + confirmacaoEmailUsuario +
-                ", ongUsuario=" + ongUsuario +
-                ", tokenUsuario='" + tokenUsuario + '\'' +
-                ", telefoneUsuario='" + telefoneUsuario + '\'' +
-                ", enderecoIdendereco=" + enderecoIdendereco +
-                ", voluntarioIdvoluntario=" + voluntarioIdvoluntario +
-                '}';
+    public String getPassword() {
+        return getSenha();
     }
+
+    @Override
+    public String getUsername() {
+        return getLogin();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 }

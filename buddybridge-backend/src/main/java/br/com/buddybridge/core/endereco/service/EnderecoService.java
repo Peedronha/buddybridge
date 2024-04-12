@@ -3,13 +3,13 @@ package br.com.buddybridge.core.endereco.service;
 import br.com.buddybridge.core.endereco.entity.Endereco;
 import br.com.buddybridge.core.endereco.repository.EnderecoRepository;
 import br.com.buddybridge.core.util.ExampleExeption;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.SystemException;
-import javax.transaction.Transactional;
-import javax.transaction.UserTransaction;
+import jakarta.transaction.SystemException;
+import jakarta.transaction.Transactional;
+import jakarta.transaction.UserTransaction;
 import java.util.List;
 
 @Service

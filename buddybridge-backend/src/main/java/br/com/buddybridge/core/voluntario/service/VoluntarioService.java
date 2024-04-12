@@ -3,13 +3,13 @@ package br.com.buddybridge.core.voluntario.service;
 import br.com.buddybridge.core.util.ExampleExeption;
 import br.com.buddybridge.core.voluntario.entity.Voluntario;
 import br.com.buddybridge.core.voluntario.repository.VoluntarioRepository;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.SystemException;
-import javax.transaction.Transactional;
-import javax.transaction.UserTransaction;
+import jakarta.transaction.SystemException;
+import jakarta.transaction.Transactional;
+import jakarta.transaction.UserTransaction;
 import java.util.List;
 
 @Service
