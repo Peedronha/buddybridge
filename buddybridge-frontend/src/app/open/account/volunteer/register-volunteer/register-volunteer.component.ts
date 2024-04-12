@@ -64,12 +64,14 @@ export class RegisterVolunteerComponent {
 
   updateState() {
     this.showPj = !this.showPj;
-    if (this.showPj) {
+    if (!this.showPj) {
       this.registerForm.get('cpf_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]);
       this.registerForm.get('cnpj_voluntario')?.clearValidators();
+      this.registerForm.get('cnpj_voluntario')?.disable();
     } else {
       this.registerForm.get('cnpj_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]);
       this.registerForm.get('cpf_voluntario')?.clearValidators();
+      this.registerForm.get('cpf_voluntario')?.disable();
     }
 
     this.registerForm.get('cpf_voluntario')?.updateValueAndValidity();
@@ -93,5 +95,9 @@ export class RegisterVolunteerComponent {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
       },
     )
+  }
+
+  resetForm() {
+    this.registerForm.reset();
   }
 }
