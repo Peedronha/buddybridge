@@ -1,9 +1,8 @@
-package br.com.buddybridge.core.controller;
+package br.com.buddybridge.core.Employee.controller;
 
-import br.com.buddybridge.core.model.EmployeeModel;
-import br.com.buddybridge.core.model.EmployeeModel;
-import br.com.buddybridge.core.model.dto.VolunteerDto;
-import br.com.buddybridge.core.service.EmployeeService;
+import br.com.buddybridge.core.Employee.entity.EmployeeModel;
+import br.com.buddybridge.core.Employee.model.VolunteerDto;
+import br.com.buddybridge.core.Employee.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

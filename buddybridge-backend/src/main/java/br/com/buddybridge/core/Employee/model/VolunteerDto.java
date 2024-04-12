@@ -1,7 +1,7 @@
-package br.com.buddybridge.core.model.dto;
+package br.com.buddybridge.core.Employee.model;
 
 
-import br.com.buddybridge.core.model.EmployeeModel;
+import br.com.buddybridge.core.Employee.entity.EmployeeModel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
