@@ -1,6 +1,6 @@
-package br.com.buddybridge.core.repository;
+package br.com.buddybridge.core.Employee.repository;
 
-import br.com.buddybridge.core.model.EmployeeModel;
+import br.com.buddybridge.core.Employee.entity.EmployeeModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

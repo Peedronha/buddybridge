@@ -1,7 +1,7 @@
-package br.com.buddybridge.core.service;
+package br.com.buddybridge.core.Employee.service;
 
-import br.com.buddybridge.core.model.EmployeeModel;
-import br.com.buddybridge.core.repository.EmployeeRepository;
+import br.com.buddybridge.core.Employee.entity.EmployeeModel;
+import br.com.buddybridge.core.Employee.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

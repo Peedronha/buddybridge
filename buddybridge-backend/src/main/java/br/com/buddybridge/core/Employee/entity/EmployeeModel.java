@@ -1,6 +1,6 @@
-package br.com.buddybridge.core.model;
+package br.com.buddybridge.core.Employee.entity;
 
-import br.com.buddybridge.core.model.dto.VolunteerDto;
+import br.com.buddybridge.core.Employee.model.VolunteerDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
