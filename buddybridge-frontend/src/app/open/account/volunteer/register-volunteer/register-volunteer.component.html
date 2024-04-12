@@ -23,35 +23,28 @@
               </small>
             </div>
             <div  class="field checkbox-field">
-              <label for="pj">
-              <p-checkbox formControlName="pf_pj_voluntario" value="Pessoa Juridica"
-                          [(ngModel)]="showPj" (click)="updateState()" inputId="pj"></p-checkbox>
-              Pessoa Juridica
+              <label for="pf_pj_voluntario">
+              <p-checkbox formControlName="pf_pj_voluntario" value="Pessoa Fisica"
+                           (click)="updateState()" inputId="pj"></p-checkbox>
+              Pessoa Fisica
               </label>
             </div>
             <div class="field">
-              <label for="fullName">Nome Completo</label>
-              <input type="text" pInputText formControlName="fullName" class="w-full" name="fullName" placeholder="Digite seu nome"/>
-              <small *ngIf="registerForm.get('fullName')?.invalid && (registerForm.get('fullName')?.dirty || registerForm.get('fullName')?.touched)" class="block p-error">
-                <div *ngIf="registerForm.get('fullName')?.errors?.['required']">O nome é uma informação obrigatória.</div>
-                <div *ngIf="registerForm.get('fullName')?.errors?.['pattern']">O nome não deve conter caracteres especiais</div>
+              <label for="nome_voluntario">Nome Completo</label>
+              <input type="text" pInputText formControlName="nome_voluntario" class="w-full" name="fullName" placeholder="Digite seu nome"/>
+              <small *ngIf="registerForm.get('nome_voluntario')?.invalid && (registerForm.get('nome_voluntario')?.dirty || registerForm.get('nome_voluntario')?.touched)" class="block p-error">
+                <div *ngIf="registerForm.get('nome_voluntario')?.errors?.['required']">O nome é uma informação obrigatória.</div>
+                <div *ngIf="registerForm.get('nome_voluntario')?.errors?.['pattern']">O nome não deve conter caracteres especiais</div>
               </small>
             </div>
             <div class="field">
-              <label for="email">Email</label>
-              <input type="text" pInputText formControlName="email" class="w-full" name="email" placeholder="Digite seu email" />
+              <label for="email_voluntario">Email</label>
+              <input type="text" pInputText formControlName="email_voluntario" class="w-full" name="email" placeholder="Digite seu email" />
               <small *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="block p-error">
                 <div *ngIf="registerForm.get('email')?.errors?.['required']">O email é uma informação obrigatória.</div>
                 <div *ngIf="registerForm.get('email')?.errors?.['email']">Email invalido</div>
               </small>
             </div>
-<!--            <div class="field">-->
-<!--              <label for="password">Senha</label>-->
-<!--              <input type="password" pInputText formControlName="password" class="w-full" name="password" placeholder="Digite sua senha"/>-->
-<!--              <small *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="block p-error">-->
-<!--                <div *ngIf="registerForm.get('password')?.errors?.['required']">A senha é uma informação obrigatória.</div>-->
-<!--              </small>-->
-<!--            </div>-->
             <div class="field">
               <label for="cargo_voluntario">Cargo Voluntário</label>
               <input type="text" pInputText  formControlName="cargo_voluntario" class="w-full" name="cargo_voluntario" placeholder="Digite o cargo do voluntário"/>
@@ -63,17 +56,13 @@
               <label for="descricao_atividades_voluntario">Descrição das atividades de voluntariado</label>
               <textarea pInputTextarea formControlName="descricao_atividades_voluntario" class="w-full" name="descricao_atividades_voluntario" placeholder="Digite a descrição das atividades do voluntário"></textarea>
             </div>
-<!--            <div class="field">-->
-<!--              <label for="pf_pj_voluntario">PF PJ Voluntário</label>-->
-<!--              <input type="text" pInputText formControlName="pf_pj_voluntario" class="w-full" name="pf_pj_voluntario" placeholder="Digite se o voluntário é PF ou PJ"/>-->
-<!--              <small *ngIf="registerForm.get('pf_pj_voluntario')?.invalid && (registerForm.get('pf_pj_voluntario')?.dirty || registerForm.get('pf_pj_voluntario')?.touched)" class="block p-error">-->
-<!--                <div *ngIf="registerForm.get('pf_pj_voluntario')?.errors?.['required']">Informação obrigatória.</div>-->
-<!--              </small>-->
-<!--            </div>-->
           </div>
+          <p-button label="Cadastrar voluntário" styleClass="w-full"  type="submit"></p-button>
+          <p-button label="Voltar" styleClass="w-full"  routerLink="/volunteer"></p-button>
         </div>
       </form>
     </div>
     <br/>
   </div>
 </div>
+<!--[disabled]="registerForm.invalid"-->
