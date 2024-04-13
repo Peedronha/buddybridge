@@ -4,7 +4,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="Commit buddyBridge-implementacao-jwt" />
+    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="Ajustes da estrutura do Backend - tabela employee">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/security/SimpleCorsFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/api/menuchangeevent.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/app.footer.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/app.footer.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/app.layout.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/app.layout.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/app.layout.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/app.menu.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/app.menu.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/app.menu.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/app.menuitem.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/app.sidebar.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/app.sidebar.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/app.topbar.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/app.topbar.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/config/app.config.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/config/app.config.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/config/config.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/layout/service/app.layout.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/component/top-menu-open/top-menu-open.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/component/top-menu-open/top-menu-open.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/component/top-menu-open/top-menu-open.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/component/top-menu-open/top-menu-open.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/component/menu-restrict/menu-restrict.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/component/menu-restrict/menu-restrict.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/component/menu-restrict/menu-restrict.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/component/menu-restrict/menu-restrict.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge.iml" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,7 +58,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="buddybridge-integrar-volunteer" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -58,7 +93,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;buddyBridge-menu-restrict&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/limag/IdeaProjects/buddybridge&quot;,
@@ -101,6 +136,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CoreApplication" />
         <item itemvalue="Application.CoreApplication" />
         <item itemvalue="Application.CoreApplication" />
       </list>
@@ -163,7 +199,31 @@
       <option name="project" value="LOCAL" />
       <updated>1712884017495</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="merge volunteer aplicações">
+      <option name="closed" value="true" />
+      <created>1712921140394</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1712921140394</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Ajustes da estrutura do Backend - tabela employee">
+      <option name="closed" value="true" />
+      <created>1712921473009</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1712921473009</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Ajustes da estrutura do Backend - tabela employee">
+      <option name="closed" value="true" />
+      <created>1712921752484</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1712921752484</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -194,7 +254,9 @@
     <MESSAGE value="commit branch buddybridge-back-login-cadastro" />
     <MESSAGE value="merge buddyBridgeFront into master" />
     <MESSAGE value="Commit buddyBridge-implementacao-jwt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit buddyBridge-implementacao-jwt" />
+    <MESSAGE value="merge volunteer aplicações" />
+    <MESSAGE value="Ajustes da estrutura do Backend - tabela employee" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajustes da estrutura do Backend - tabela employee" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

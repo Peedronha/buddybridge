@@ -5,8 +5,7 @@
       <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
         <div class="text-center mb-5">
           <div class="text-900 text-3xl font-medium mb-3">RECUPERAÇÃO DE SENHA</div>
-          <br/>
-          <br/>
+
         </div>
         <div>
           <div *ngIf="!show">
@@ -35,6 +34,8 @@
               <p-button label="Enviar código"></p-button>
             </div>
           </div>
+          <div class="mt-2">Não tem uma conta? <a routerLink="/register">Cadastre-se</a></div>
+          <div class="mt-2">Voltar para <a routerLink="/register">login</a></div>
         </div>
       </div>
     </div>

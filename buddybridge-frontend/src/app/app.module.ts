@@ -8,13 +8,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './open/home/home.component';
 import { DashboardComponent } from './restrict/dashboard/dashboard.component';
-import { MenuRestrictComponent } from './restrict/component/menu-restrict/menu-restrict.component';
+import { AppLayoutComponent } from './restrict/layout/app.layout.component';
 import { LoginComponent } from './open/account/login/login.component';
 import { RegisterComponent } from './open/account/register/register.component';
-import { TopMenuOpenComponent } from './open/component/top-menu-open/top-menu-open.component';
+import { TopMenuOpenComponent } from './open/top-menu-open/top-menu-open.component';
 import { InsitucionalComponent } from './open/insitucional/insitucional.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppLayoutModule } from './layout/app.layout.module';
+import { AppLayoutModule } from './restrict/layout/app.layout.module';
 import {RecoveryComponent} from "./open/account/recovery/recovery.component";
 import { CommonModule } from '@angular/common';
 import { DividerModule } from 'primeng/divider';
@@ -36,6 +36,7 @@ import {SplitButtonModule} from "primeng/splitbutton";
 import {DialogModule} from "primeng/dialog";
 import {CheckboxModule} from "primeng/checkbox";
 import {InputTextareaModule} from "primeng/inputtextarea";
+import { AppConfigModule } from './restrict/layout/config/config.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,6 @@ import {InputTextareaModule} from "primeng/inputtextarea";
       InsitucionalComponent,
       RegisterVolunteerComponent,
       ListVolunteerComponent,
-    MenuRestrictComponent,
       DashboardComponent,
       InsitucionalComponent
   ],
@@ -77,6 +77,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
     DialogModule,
     CheckboxModule,
     InputTextareaModule,
+    AppConfigModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy },

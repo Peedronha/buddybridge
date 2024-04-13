@@ -1,9 +1,10 @@
 import { AccountService } from './../shared/account.service';
 import { Component, OnInit } from '@angular/core';
-import { LayoutService } from '../../../layout/service/app.layout.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LayoutService } from '../../../restrict/layout/service/app.layout.service';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Login } from '../model/login.model';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -12,16 +13,16 @@ import { Login } from '../model/login.model';
 })
 export class LoginComponent  implements OnInit {
 
-  hide: any;
-  email: any;
-  invalid: any;
+  constructor(private accountService: AccountService, private router: Router, public layoutService: LayoutService,private fb: FormBuilder) { }
 
-  loginForm = new FormGroup({
-    login: new FormControl('',Validators.required),
-    senha: new FormControl('',Validators.required),
-  });
+  loginForm = this.fb.group({
+    login: ['', [Validators.required, Validators.email]],
+    senha: ['', Validators.required],
+  })
 
-  constructor(private accountService: AccountService, private router: Router, public layoutService: LayoutService) { }
+  get login() {
+    return this.loginForm.controls['login'];
+  }
 
   ngOnInit(): void {
   }
@@ -29,6 +30,7 @@ export class LoginComponent  implements OnInit {
   async onSubmit() {
     try {
       let autenticacao = new Login();
+
       autenticacao.username = this.loginForm.get('login')?.value + '';
       autenticacao.password = this.loginForm.get('senha')?.value + '';
 

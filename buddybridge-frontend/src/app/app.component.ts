@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FilterMatchMode, PrimeNGConfig } from 'primeng/api';
-import { LayoutService, AppConfig } from './layout/service/app.layout.service';
+import { LayoutService, AppConfig } from './restrict/layout/service/app.layout.service';
 
 @Component({
   selector: 'app-root',
