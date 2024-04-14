@@ -43,6 +43,9 @@ import { AccountListComponent } from './restrict/base/account/component/account-
 import { AccountFormComponent } from './restrict/base/account/component/container/account-form/account-form.component';
 import { AccountComponent } from './restrict/base/account/component/container/account/account.component';
 import { ValidateloginComponent } from './open/account/validatelogin/validatelogin.component';
+import { VolunteerListComponent } from './restrict/base/volunteer/component/volunteer-list/volunteer-list.component';
+import { AccountFormSenhaComponent } from './restrict/base/account/component/container/account-form-senha/account-form-senha.component';
+import { VolunteerComponent } from './restrict/base/volunteer/component/container/volunteer/volunteer.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,10 @@ import { ValidateloginComponent } from './open/account/validatelogin/validatelog
       AccountFormComponent,
       AccountComponent,
       ValidateloginComponent,
+      VolunteerListComponent,
+      AccountFormSenhaComponent,
+      VolunteerComponent,
+
   ],
   imports: [
     BrowserModule,

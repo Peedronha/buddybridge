@@ -16,6 +16,8 @@ import { AccountComponent } from './restrict/base/account/component/container/ac
 import { AccountFormComponent } from './restrict/base/account/component/container/account-form/account-form.component';
 import { accountResolver } from './restrict/base/account/guards/account.resolver';
 import { ValidateloginComponent } from './open/account/validatelogin/validatelogin.component';
+import { AccountFormSenhaComponent } from './restrict/base/account/component/container/account-form-senha/account-form-senha.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -26,7 +28,8 @@ const routes: Routes = [
       { path: 'profile', title: 'BuddyBridge - Meu Perfil', component: ProfileComponent },
       { path: 'account', title: 'BuddyBridge - Usuários', component: AccountComponent },
       { path: 'account/addaccount', title: 'BuddyBridge - Novo Usuário', component: AccountFormComponent, resolve: {account : accountResolver} },
-      { path: 'account/editaccount/:id', title: 'BuddyBridge - Alterar Usuário', component: AccountFormComponent, resolve: {account : accountResolver} }
+      { path: 'account/editaccount/:id', title: 'BuddyBridge - Alterar Usuário', component: AccountFormComponent, resolve: {account : accountResolver} },
+      { path: 'account/editpassword/:id', title: 'BuddyBridge - Alterar Usuário', component: AccountFormSenhaComponent, resolve: {account : accountResolver} }
     ],
     canActivate: [AuthGuard]
   },

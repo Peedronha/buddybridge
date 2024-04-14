@@ -4,44 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="Merge buddyBridge-menu-restrict">
-      <change afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/email/service/EmailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/model/AuthRequest.java" afterDir="false" />
+    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="Commit Crud Usuários + Perfil">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/controller/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/controller/UsuarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/entity/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/entity/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/entity/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/model/AuthResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/model/AuthResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/model/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/model/LoginRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/service/AuthService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/service/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/service/UsuarioService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/voluntario/controller/VoluntarioController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/voluntario/entity/Voluntario.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/voluntario/repository/VoluntarioRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/voluntario/service/VoluntarioService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/model/login.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/model/login.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/model/user.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/model/user.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/recovery/recovery.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/recovery/recovery.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/recovery/recovery.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/recovery/recovery.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/register/register.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/register/register.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/shared/account.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/shared/account.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/shared/auth.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/shared/auth.guard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/home/home.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/top-menu-open/top-menu-open.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/top-menu-open/top-menu-open.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.layout.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.layout.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.menu.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.topbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.topbar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.topbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.topbar.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/assets/img/default-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/assets/img/default-logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/account/component/account-list/account-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/account/component/account-list/account-list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/account/component/account-list/account-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/account/component/account-list/account-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/account/component/container/account/account.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/account/component/container/account/account.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/account/component/container/account/account.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/account/component/container/account/account.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,21 +64,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;buddybridge-perfil&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/limag/IdeaProjects/buddybridge&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/limag/IdeaProjects/buddybridge/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "buddybridge-crud-users",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Users/limag/IdeaProjects/buddybridge",
+    "onboarding.tips.debug.path": "C:/Users/limag/IdeaProjects/buddybridge/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="br.com.buddybridge.core.security.component" />
@@ -140,6 +112,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CoreApplication" />
         <item itemvalue="Application.CoreApplication" />
         <item itemvalue="Application.CoreApplication" />
         <item itemvalue="Application.CoreApplication" />
@@ -243,7 +216,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713044447063</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Commit Crud Usuários + Perfil">
+      <option name="closed" value="true" />
+      <created>1713131861027</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1713131861027</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -277,7 +258,9 @@
     <MESSAGE value="merge volunteer aplicações" />
     <MESSAGE value="Ajustes da estrutura do Backend - tabela employee" />
     <MESSAGE value="Merge buddyBridge-menu-restrict" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge buddyBridge-menu-restrict" />
+    <MESSAGE value="merge buddybridge-perfil" />
+    <MESSAGE value="Commit Crud Usuários + Perfil" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit Crud Usuários + Perfil" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
