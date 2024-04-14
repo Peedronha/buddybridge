@@ -2,6 +2,7 @@ package br.com.buddybridge.core.usuario.controller;
 
 import br.com.buddybridge.core.security.jwt.JwtService;
 import br.com.buddybridge.core.usuario.entity.Usuario;
+import br.com.buddybridge.core.usuario.model.AuthRequest;
 import br.com.buddybridge.core.usuario.model.AuthResponse;
 import br.com.buddybridge.core.usuario.model.LoginRequest;
 import br.com.buddybridge.core.usuario.service.AuthService;
@@ -28,7 +29,18 @@ public class AuthenticationController {
     public ResponseEntity<AuthResponse> authenticate(@RequestBody LoginRequest loginRequest) {
         System.out.println(loginRequest.getUsername() + " - "+loginRequest.getPassword());
         return ResponseEntity.ok(authService.login(loginRequest));
+    }
 
+    @PostMapping("/enviarTokenRecuperacao")
+    public ResponseEntity<?> enviarTokenRecuperacao(@RequestBody LoginRequest loginRequest) throws ExampleExeption, SystemException {
+        System.out.println("entrei?");
+        userService.recuperarSenha(loginRequest.getUsername());
+        return new ResponseEntity<>(loginRequest, HttpStatus.OK);
+    }
+
+    @PostMapping("/validarToken")
+    public ResponseEntity<AuthResponse> isTokenValid(@RequestBody AuthRequest authRequest) {
+        return ResponseEntity.ok(authService.isTokenValid(authRequest));
     }
 
     @PostMapping("/salvar")

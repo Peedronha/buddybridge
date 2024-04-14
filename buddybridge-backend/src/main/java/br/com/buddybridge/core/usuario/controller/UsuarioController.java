@@ -1,6 +1,7 @@
 package br.com.buddybridge.core.usuario.controller;
 
 
+import br.com.buddybridge.core.Employee.entity.EmployeeModel;
 import br.com.buddybridge.core.usuario.entity.Usuario;
 import br.com.buddybridge.core.usuario.service.UsuarioService;
 import br.com.buddybridge.core.util.ExampleExeption;
@@ -18,10 +19,8 @@ import java.util.NoSuchElementException;
 @RequestMapping("/usuario")
 @RequiredArgsConstructor
 public class UsuarioController {
-
     @Autowired
     UsuarioService usuarioService;
-
     @GetMapping("/listarAll")
     public List<Usuario> listar() {
         return usuarioService.listar();
@@ -33,6 +32,17 @@ public class UsuarioController {
             Usuario usuario = usuarioService.buscarPorId(id);
             return new ResponseEntity<>(usuario, HttpStatus.OK);
         } catch (NoSuchElementException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity<Usuario> updateUsuario(@RequestBody Usuario usuario) throws SystemException, ExampleExeption {
+        if(this.usuarioService.buscarPorId(usuario.getId()) != null) {
+            this.usuarioService.salvar(usuario);
+            return new ResponseEntity<>(usuario, HttpStatus.OK);
+        }
+        else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }

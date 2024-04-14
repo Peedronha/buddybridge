@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../model/user.model';
 import { Observable } from 'rxjs';
+import { Auth } from '../model/auth.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,20 +13,19 @@ export class AccountService {
   constructor(private httpClient: HttpClient) { }
 
   async login(autenticacao: Login) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/x-www-form-urlencoded'
-      })
-    };
-
-    /*let login = autenticacao.login;
-    let senha = autenticacao.senha;
-    let body = `login=${login}&senha=${senha}`;*/
-
     const result = await this.httpClient.post<any>("http://localhost:8080/auth/login",autenticacao).toPromise();
-
-    if(result && result.token){
-      window.localStorage.setItem('token', result.token);
+    if(result && result.token && result.valid){
+      if(result.validarEmail){
+        window.localStorage.setItem('email', result.validarEmail);
+        window.localStorage.setItem('idUser', result.idUser);
+        window.localStorage.setItem('login', result.login);
+        return false;
+      } else {
+        window.localStorage.setItem('email', result.validarEmail);
+        window.localStorage.setItem('idUser', result.idUser);
+        window.localStorage.setItem('login', result.login);
+        window.localStorage.setItem('token', result.token);
+      }
       return true;
     }
     return false;
@@ -35,21 +35,31 @@ export class AccountService {
     return this.httpClient.post<User>("http://localhost:8080/auth/salvar",usuarioModel);
   }
 
-  listar(){
-    return this.httpClient.get<User[]>("http://localhost:8080/usuario/listarAll");
+  async validarSessao() {
+    const tokenOld = window.localStorage.getItem('token');
+    const idOld = window.localStorage.getItem('idUser');
+    const loginOld = window.localStorage.getItem('login');
+    let auth = new Auth();
+    auth.token = tokenOld +'';
+    auth.idUser = idOld +'';
+    auth.login = loginOld +'';
+    const result = await this.httpClient.post<any>("http://localhost:8080/auth/validarToken",auth).toPromise();
+    if(result && result.valid){
+      window.localStorage.setItem('token', result.token);
+      window.localStorage.setItem('idUser', result.idUser);
+      window.localStorage.setItem('login', result.login);
+      return true;
+    } else {
+      window.localStorage.removeItem('token');
+      window.localStorage.removeItem('idUser');
+      window.localStorage.removeItem('login');
+    }
+    return false;
   }
 
-  getAuthorizationToken() {
-    const token = window.localStorage.getItem('token');
-    return token;
+  async enviarTokenRecuperacao(autenticacao: Login){
+    const result = await this.httpClient.post<any>("http://localhost:8080/auth/enviarTokenRecuperacao",autenticacao).toPromise();
+
   }
 
-  deletar(usuarioid:number):Observable<number>{
-    let httpheaders=new HttpHeaders()
-    .set('Content-type','application/Json');
-    let options={
-      headers:httpheaders
-    };
-    return this.httpClient.delete<number>("http://localhost:8080/usuario"+ "/" + usuarioid);
-  }
 }

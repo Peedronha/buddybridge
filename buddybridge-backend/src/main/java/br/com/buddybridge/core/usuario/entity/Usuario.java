@@ -1,8 +1,7 @@
 package br.com.buddybridge.core.usuario.entity;
 
+import br.com.buddybridge.core.Employee.entity.EmployeeModel;
 import br.com.buddybridge.core.endereco.entity.Endereco;
-import br.com.buddybridge.core.voluntario.entity.Voluntario;
-
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -55,7 +54,7 @@ public class Usuario implements UserDetails {
 
     @ManyToOne
     @JoinColumn(name="usuario_idvoluntario", referencedColumnName="idvoluntario")
-    private Voluntario usuarioIdvoluntario;
+    private EmployeeModel usuarioIdvoluntario;
 
     @Override
     public boolean equals(Object o) {

@@ -1,3 +1,4 @@
+import { AccountService } from '../../open/account/shared/account.service';
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
@@ -28,7 +29,7 @@ export class AppMenuComponent implements OnInit {
                     icon: 'pi pi-fw pi-user',
                     items: [
                         {
-                          label: 'Usuários', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout']
+                          label: 'Usuários', icon: 'pi pi-fw pi-id-card', routerLink: ['/account']
                         },
                         {
                           label: 'Voluntários', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/uikit/input']

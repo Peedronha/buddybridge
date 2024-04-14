@@ -1,43 +1,34 @@
-<div class="surface-ground flex align-items-center justify-content-center overflow-hidden">
-  <div class="flex flex-column align-items-center justify-content-center">
-    <div
-      style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 70%);">
-      <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
-        <div class="text-center mb-5">
-          <div class="text-900 text-3xl font-medium mb-3">RECUPERAÇÃO DE SENHA</div>
 
-        </div>
+<div class="grid grid-nogutter surface-section text-800"
+     style="background: linear-gradient(0deg, var(--primary-color), rgba(40, 2, 255, 0.2)),
+                        radial-gradient(77.36% 256.97% at 77.36% 57.52%, #3b82f6 0%, #C3E3FA 100%); clip-path: ellipse(150% 87% at 93% 13%);">
+  <div class="col-12 md:col-6 p-6 text-center md:text-left ">
+      <section>
+          <span class="block text-6xl font-bold mb-1">RECUPERAR SENHA</span>
+          Você recebera suas novas credenciais via e-mail!
+      </section>
+  </div>
+  <div class="col-12 md:col-6 p-6 text-center md:text-left">
+    <form [formGroup]="recoverForm" (ngSubmit)="onSubmit()">
+      <div class=" surface-card py-8 px-4 sm:px-8" style="border-radius: 35px">
+        <p-messages></p-messages>
+        <div class="text-center"><div class="text-900 text-3xl font-medium mb-3">RECUPERAR SENHA</div></div>
         <div>
-          <div *ngIf="!show">
-            <label for="email1" class="block text-900 text-xl font-medium mb-2">E-mail</label>
-            <input id="email1" type="text" [(ngModel)]="email" placeholder="Digite seu e-mail" pInputText
-                   class="w-full md:w-30rem mb-5"
-                   style="padding:1rem">
-            <div class="flex align-items-center justify-content-center mb-5 gap-5">
-              <button pButton pRipple label="Recuperar Senha" class="w-full p-3 text-xl"
-                      (click)="recuperar()"></button>
-            </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="text" pInputText formControlName="login" class="w-full" name="email" placeholder="Digite seu email" />
+            <small *ngIf="login.invalid && (login.dirty || login.touched)" class="block p-error">
+              <div *ngIf="login.errors?.['required']">O email é uma informação obrigatória.</div>
+              <div *ngIf="login.errors?.['email']">Email invalido</div>
+            </small>
           </div>
-          <div id="otp-section" class="flex flex-column align-items-center" *ngIf="show">
-            <label for="password1" class="block text-900 text-xl font-medium mb-2">Código</label>
-            <p-inputOtp id="password1" [(ngModel)]="value" [length]="6" style="gap: 0">
-              <ng-template pTemplate="input" let-token let-events="events" let-index="index" class="block">
-                <input pInputText type="text" [maxLength]="1" (input)="events.input($event)" [attr.value]="token"
-                       class="custom-otp-input "/>
-                <div *ngIf="index === 3" class="px-3">
-                  <i class="pi pi-minus"></i>
-                </div>
-              </ng-template>
-            </p-inputOtp>
-            <div class="flex justify-content-between mt-5 align-self-stretch">
-              <p-button label="Reenviar Código" [link]="true" class="p-0"></p-button>
-              <p-button label="Enviar código"></p-button>
-            </div>
-          </div>
-          <div class="mt-2">Não tem uma conta? <a routerLink="/register">Cadastre-se</a></div>
-          <div class="mt-2">Voltar para <a routerLink="/register">login</a></div>
+          <p-button label="RECUPERAR SENHA" styleClass="w-full" [disabled]="recoverForm.invalid" type="submit"></p-button>
+          <div class="mt-2">Voltar para <a routerLink="/login">LOGIN</a></div>
         </div>
       </div>
-    </div>
+    </form>
+    <br/>
+    <br/>
+    <br/>
   </div>
 </div>

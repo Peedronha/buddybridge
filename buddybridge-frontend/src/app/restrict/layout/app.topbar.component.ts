@@ -20,7 +20,9 @@ export class AppTopBarComponent {
 
     sair(){
       window.localStorage.removeItem('token');
-      window.location.href = '/home';
+      window.localStorage.removeItem('idUser');
+      window.localStorage.removeItem('login');
+      window.location.href = '/login';
     }
 
 

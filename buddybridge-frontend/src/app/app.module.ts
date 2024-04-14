@@ -1,3 +1,4 @@
+import { MessagesModule } from 'primeng/messages';
 import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
@@ -37,6 +38,11 @@ import {DialogModule} from "primeng/dialog";
 import {CheckboxModule} from "primeng/checkbox";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import { AppConfigModule } from './restrict/layout/config/config.module';
+import { ProfileComponent } from './restrict/base/account/component/profile/profile.component';
+import { AccountListComponent } from './restrict/base/account/component/account-list/account-list.component';
+import { AccountFormComponent } from './restrict/base/account/component/container/account-form/account-form.component';
+import { AccountComponent } from './restrict/base/account/component/container/account/account.component';
+import { ValidateloginComponent } from './open/account/validatelogin/validatelogin.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +56,12 @@ import { AppConfigModule } from './restrict/layout/config/config.module';
       RegisterVolunteerComponent,
       ListVolunteerComponent,
       DashboardComponent,
-      InsitucionalComponent
+      InsitucionalComponent,
+      ProfileComponent,
+      AccountListComponent,
+      AccountFormComponent,
+      AccountComponent,
+      ValidateloginComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +88,8 @@ import { AppConfigModule } from './restrict/layout/config/config.module';
     DialogModule,
     CheckboxModule,
     InputTextareaModule,
-    AppConfigModule
+    AppConfigModule,
+    MessagesModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy },
