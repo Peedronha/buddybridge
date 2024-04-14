@@ -12,7 +12,9 @@ export class AccountListComponent {
   _specificUser!: User;
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
+  @Output() editPassword = new EventEmitter(false);
   @Output() remove = new EventEmitter(false);
+
 
   constructor() { }
 
@@ -28,6 +30,10 @@ export class AccountListComponent {
 
   onDelete(idUser: any) {
     this.remove.emit(idUser);
+  }
+
+  onEditPassword(idUser: any) {
+    this.editPassword.emit(idUser);
   }
 
 }

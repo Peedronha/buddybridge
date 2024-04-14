@@ -40,6 +40,10 @@ export class AccountComponent {
     this.router.navigate(['editaccount', idUser], { relativeTo: this.route });
   }
 
+  onEditPassword(idUser: any) {
+    this.router.navigate(['editpassword', idUser], { relativeTo: this.route });
+  }
+
   onRemove(idUser: any) {
     this.accountRestrictService.deletar(idUser).subscribe(() =>{
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Deleted' });

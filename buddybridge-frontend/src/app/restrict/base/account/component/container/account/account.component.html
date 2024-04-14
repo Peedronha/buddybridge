@@ -14,6 +14,7 @@
     </div>
   </div>
   @if (users != null) {
-    <app-account-list [users]="users" (add)="onAdd()" (edit)="onEdit($event)" (remove)="onRemove($event)"></app-account-list>
+    <app-account-list [users]="users" (add)="onAdd()" (edit)="onEdit($event)" (remove)="onRemove($event)" (editPassword)="onEditPassword($event)">
+    </app-account-list>
   }
 </div>
