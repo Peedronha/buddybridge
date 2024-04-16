@@ -1,66 +1,44 @@
-import { Component } from '@angular/core';
-import _default from "chart.js/dist/plugins/plugin.tooltip";
-import bodyFont = _default.defaults.bodyFont;
+import { AccountService } from './../shared/account.service';
+import { Component, OnInit } from '@angular/core';
+import { LayoutService } from '../../../restrict/layout/service/app.layout.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Login } from '../model/login.model';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-recovery',
   templateUrl: './recovery.component.html',
   styleUrl: './recovery.component.scss',
-  styles: [
-    `
-        .custom-otp-input {
-            width: 48px;
-            height: 48px;
-            font-size: 24px;
-            appearance: none;
-            text-align: center;
-            transition: all 0.2s;
-            border-radius: 0;
-            border: 1px solid var(--surface-400);
-            background: transparent;
-            outline-offset: -2px;
-            outline-color: transparent;
-            border-right: 0 none;
-            transition: outline-color 0.3s;
-            color: var(--text-color);
-        }
-
-        .custom-otp-input:focus {
-            outline: 2px solid var(--primary-color);
-        }
-
-        .custom-otp-input:first-child,
-        .custom-otp-input:nth-child(5) {
-            border-top-left-radius: 12px;
-            border-bottom-left-radius: 12px;
-        }
-
-        .custom-otp-input:nth-child(3),
-        .custom-otp-input:last-child {
-            border-top-right-radius: 12px;
-            border-bottom-right-radius: 12px;
-            border-right-width: 1px;
-            border-right-style: solid;
-            border-color: var(--surface-400);
-        }`
-  ],
 })
 export class RecoveryComponent {
+  recoverForm = this.fb.group({
+    login: ['', [Validators.required, Validators.email]],
+  })
 
-    protected readonly alert = alert;
-    email: string = "";
-    value: string = "";
-
-    show: boolean = false;
-
-  constructor() {
+  get login() {
+    return this.recoverForm.controls['login'];
   }
 
-  recuperar(){
-  this.toggle()
-  }
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    public layoutService: LayoutService,
+    private fb: FormBuilder,
+    private messageService : MessageService) { }
 
-  toggle(){
-    this.show = !this.show;
-  }
+    async onSubmit() {
+      try {
+        let autenticacao = new Login();
+        autenticacao.username = this.recoverForm.get('login')?.value + '';
+        autenticacao.password = '';
+        autenticacao.otp = '';
+        this.accountService.enviarTokenRecuperacao(autenticacao);
+        window.location.href='/login';
+      } catch (error) {
+        this.messageService.add({ severity: 'error', summary: 'Login Inválido', detail: 'Senha e/ou Email digitados inválidos' });
+        console.error(error);
+      }
+    }
+
 }

@@ -1,3 +1,4 @@
+import { MessagesModule } from 'primeng/messages';
 import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
@@ -8,13 +9,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './open/home/home.component';
 import { DashboardComponent } from './restrict/dashboard/dashboard.component';
-import { MenuRestrictComponent } from './restrict/component/menu-restrict/menu-restrict.component';
+import { AppLayoutComponent } from './restrict/layout/app.layout.component';
 import { LoginComponent } from './open/account/login/login.component';
 import { RegisterComponent } from './open/account/register/register.component';
-import { TopMenuOpenComponent } from './open/component/top-menu-open/top-menu-open.component';
+import { TopMenuOpenComponent } from './open/top-menu-open/top-menu-open.component';
 import { InsitucionalComponent } from './open/insitucional/insitucional.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppLayoutModule } from './layout/app.layout.module';
+import { AppLayoutModule } from './restrict/layout/app.layout.module';
 import {RecoveryComponent} from "./open/account/recovery/recovery.component";
 import { CommonModule } from '@angular/common';
 import { DividerModule } from 'primeng/divider';
@@ -36,10 +37,15 @@ import {SplitButtonModule} from "primeng/splitbutton";
 import {DialogModule} from "primeng/dialog";
 import {CheckboxModule} from "primeng/checkbox";
 import {InputTextareaModule} from "primeng/inputtextarea";
-import {RippleModule} from "primeng/ripple";
-import {SplitterModule} from "primeng/splitter";
-import { EditVolunteerComponent } from './open/account/volunteer/edit-volunteer/edit-volunteer.component';
-
+import { AppConfigModule } from './restrict/layout/config/config.module';
+import { ProfileComponent } from './restrict/base/account/component/profile/profile.component';
+import { AccountListComponent } from './restrict/base/account/component/account-list/account-list.component';
+import { AccountFormComponent } from './restrict/base/account/component/container/account-form/account-form.component';
+import { AccountComponent } from './restrict/base/account/component/container/account/account.component';
+import { ValidateloginComponent } from './open/account/validatelogin/validatelogin.component';
+import { VolunteerListComponent } from './restrict/base/volunteer/component/volunteer-list/volunteer-list.component';
+import { AccountFormSenhaComponent } from './restrict/base/account/component/container/account-form-senha/account-form-senha.component';
+import { VolunteerComponent } from './restrict/base/volunteer/component/container/volunteer/volunteer.component';
 
 @NgModule({
   declarations: [
@@ -52,10 +58,17 @@ import { EditVolunteerComponent } from './open/account/volunteer/edit-volunteer/
       InsitucionalComponent,
       RegisterVolunteerComponent,
       ListVolunteerComponent,
-    MenuRestrictComponent,
       DashboardComponent,
       InsitucionalComponent,
-      EditVolunteerComponent
+      ProfileComponent,
+      AccountListComponent,
+      AccountFormComponent,
+      AccountComponent,
+      ValidateloginComponent,
+      VolunteerListComponent,
+      AccountFormSenhaComponent,
+      VolunteerComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -82,8 +95,8 @@ import { EditVolunteerComponent } from './open/account/volunteer/edit-volunteer/
     DialogModule,
     CheckboxModule,
     InputTextareaModule,
-    RippleModule,
-    SplitterModule,
+    AppConfigModule,
+    MessagesModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy },

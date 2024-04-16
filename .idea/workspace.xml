@@ -4,23 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="merge buddyBridgeFront into master">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/recovery/recovery.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/recovery/recovery.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/recovery/recovery.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/recovery/recovery.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="Commit Crud Usuários" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Record" />
+        <option value="Enum" />
+        <option value="package-info" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="buddybridge-crud-users" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -31,16 +35,21 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+        <option name="mavenHome" value="Use Maven wrapper" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="2e9UY8pFBRkTmRfSKrbuSk8fQ2K" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -50,11 +59,56 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "buddybridge-front-recuperar-senha",
-    "last_opened_file_path": "C:/Users/limag/Downloads/exemple",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Users/limag/IdeaProjects/buddybridge",
+    "onboarding.tips.debug.path": "C:/Users/limag/IdeaProjects/buddybridge/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="br.com.buddybridge.core.security.component" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\limag\IdeaProjects\buddybridge\buddybridge-backend\src\main\java\br\com\buddybridge\core\endereco" />
+      <recent name="C:\Users\limag\IdeaProjects\buddybridge\buddybridge-backend\src\main\java\br\com\buddybridge\core\voluntario" />
+      <recent name="C:\Users\limag\IdeaProjects\buddybridge\buddybridge-backend\src\main\java\br\com\buddybridge\core\ong" />
+      <recent name="C:\Users\limag\IdeaProjects\buddybridge\buddybridge-backend\src\main\java\br\com\buddybridge\core" />
+      <recent name="C:\Users\limag\IdeaProjects\buddybridge\buddybridge-backend\src\main\java\br\com\buddybridge\core\usuario\model" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="br.com.buddybridge.core.usuario.model" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="CoreApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="br.com.buddybridge.core.CoreApplication" />
+      <module name="core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.com.buddybridge.core.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.CoreApplication" />
+        <item itemvalue="Application.CoreApplication" />
+        <item itemvalue="Application.CoreApplication" />
+        <item itemvalue="Application.CoreApplication" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -80,7 +134,103 @@
       <option name="project" value="LOCAL" />
       <updated>1711812943526</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Commit buddybridge-ajustes-projeto">
+      <option name="closed" value="true" />
+      <created>1712522499724</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1712522499724</updated>
+    </task>
+    <task id="LOCAL-00004" summary="merge buddyBridgeFront into master">
+      <option name="closed" value="true" />
+      <created>1712844857236</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1712844857236</updated>
+    </task>
+    <task id="LOCAL-00005" summary="merge buddyBridgeFront into master">
+      <option name="closed" value="true" />
+      <created>1712844922612</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1712844922612</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Commit buddyBridge-implementacao-jwt">
+      <option name="closed" value="true" />
+      <created>1712884017495</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1712884017495</updated>
+    </task>
+    <task id="LOCAL-00007" summary="merge volunteer aplicações">
+      <option name="closed" value="true" />
+      <created>1712921140394</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1712921140394</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Ajustes da estrutura do Backend - tabela employee">
+      <option name="closed" value="true" />
+      <created>1712921473009</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1712921473009</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Ajustes da estrutura do Backend - tabela employee">
+      <option name="closed" value="true" />
+      <created>1712921752484</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1712921752484</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Merge buddyBridge-menu-restrict">
+      <option name="closed" value="true" />
+      <created>1713020953179</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1713020953179</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Merge buddyBridge-menu-restrict">
+      <option name="closed" value="true" />
+      <created>1713044447063</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1713044447063</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Commit Crud Usuários + Perfil">
+      <option name="closed" value="true" />
+      <created>1713131861027</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1713131861027</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Commit Crud Usuários">
+      <option name="closed" value="true" />
+      <created>1713136485881</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1713136485881</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Commit Crud Usuários">
+      <option name="closed" value="true" />
+      <created>1713136492227</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1713136492227</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -94,7 +244,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="buddybridge-front-login-cadastro" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -107,7 +257,36 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Commit buddybridge-ajustes-projeto" />
+    <MESSAGE value="commit branch buddybridge-back-login-cadastro" />
     <MESSAGE value="merge buddyBridgeFront into master" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge buddyBridgeFront into master" />
+    <MESSAGE value="Commit buddyBridge-implementacao-jwt" />
+    <MESSAGE value="merge volunteer aplicações" />
+    <MESSAGE value="Ajustes da estrutura do Backend - tabela employee" />
+    <MESSAGE value="Merge buddyBridge-menu-restrict" />
+    <MESSAGE value="merge buddybridge-perfil" />
+    <MESSAGE value="Commit Crud Usuários + Perfil" />
+    <MESSAGE value="Commit Crud Usuários" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit Crud Usuários" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/2.7.2/spring-data-commons-2.7.2.jar!/org/springframework/data/mapping/PropertyReferenceException.class</url>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/buddybridge$CoreApplication.ic" NAME="CoreApplication Coverage Results" MODIFIED="1712514296420" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>br.com.buddybridge.core.*</FILTER>
+    </SUITE>
   </component>
 </project>
