@@ -12,11 +12,12 @@ import { User } from '../model/user.model';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+
   registerForm = this.fb.group({
     fullName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    confirmPassword: ['', Validators.required]
+    password: ['', [Validators.required, Validators.pattern(/(?=.*\d)(?=.*[a-zA-Z]).{8,}/)]],
+    confirmPassword: ['', [Validators.required, Validators.pattern(/(?=.*\d)(?=.*[a-zA-Z]).{8,}/)]]
   }, {
     validators: passwordMatchValidator
   })
@@ -45,17 +46,29 @@ export class RegisterComponent {
   }
 
   submitDetails() {
-    const postData = { ...this.registerForm.value };
-    delete postData.confirmPassword;
-    this.accountService.registerUser(postData as User).subscribe(
+
+    let usuario = new User();
+    usuario.id = undefined;
+    usuario.nome = this.registerForm.get('fullName')?.value + '';
+    usuario.login = this.registerForm.get('email')?.value + '';
+    usuario.senha = this.registerForm.get('password')?.value + '';
+    usuario.role = 'user';
+    usuario.confirmacaoEmail = false;
+    usuario.token = '';
+    usuario.telefone = '';
+    usuario.usuarioIdendereco = undefined;
+    usuario.usuarioIdvoluntario = undefined;
+
+    this.accountService.salvar(usuario).subscribe(
       response => {
         console.log(response);
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
-        this.router.navigate(['login'])
+        this.messageService.add({ severity: 'success', summary: 'Cadastro efetuado com sucesso.', detail: 'Agora você pode fazer login no sistema!' });
+
       },
       error => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
+        this.messageService.add({ severity: 'error', summary: 'Não é possível continuar: ', detail: 'Já existe um conta para o endereço de email fornecido' });
       }
     )
   }
+
 }

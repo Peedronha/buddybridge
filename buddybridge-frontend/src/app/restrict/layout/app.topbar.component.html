@@ -1,0 +1,24 @@
+<div class="layout-topbar">
+  <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+    <i class="pi pi-bars"></i>
+  </button>
+  <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+    <i class="pi pi-ellipsis-v"></i>
+  </button>
+  &nbsp;&nbsp;
+  <a class="layout-topbar-logo" routerLink="">
+    <img src="../../../assets/img/logo_buddyBridge_light.png" alt="logo">
+    |&nbsp;&nbsp;
+    <img src="../../../assets/img/default-logo.png" alt="logo">
+  </a>
+  <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+      <button class="p-link layout-topbar-button" routerLink="/profile">
+          <i class="pi pi-user"></i>
+          <span>Minha conta</span>
+      </button>
+      <button class="p-link layout-topbar-button" (click)="sair()">
+          <i class="pi pi-sign-out"></i>
+          <span>Sair</span>
+      </button>
+  </div>
+</div>

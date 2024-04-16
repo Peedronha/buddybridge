@@ -1,14 +1,14 @@
+import { AccountService } from './open/account/shared/account.service';
 import { Component, OnInit } from '@angular/core';
 import { FilterMatchMode, PrimeNGConfig } from 'primeng/api';
-import { LayoutService, AppConfig } from './layout/service/app.layout.service';
+import { LayoutService, AppConfig } from './restrict/layout/service/app.layout.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  constructor(private primengConfig: PrimeNGConfig, private layoutService: LayoutService) {}
-
+  constructor(private primengConfig: PrimeNGConfig, private layoutService: LayoutService, private accountService: AccountService) {}
 
   ngOnInit() {
       this.primengConfig.ripple = true;
@@ -37,6 +37,6 @@ export class AppComponent {
       scale: 14                           //size of the body font size to scale the whole application
     };
     this.layoutService.config.set(config);
-
+    this.accountService.validarSessao();
   }
 }
