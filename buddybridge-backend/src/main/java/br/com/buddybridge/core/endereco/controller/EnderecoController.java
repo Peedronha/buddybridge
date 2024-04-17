@@ -3,6 +3,7 @@ package br.com.buddybridge.core.endereco.controller;
 import br.com.buddybridge.core.endereco.entity.Endereco;
 import br.com.buddybridge.core.endereco.service.EnderecoService;
 import br.com.buddybridge.core.util.ExampleExeption;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/endereco")
 public class EnderecoController {
 

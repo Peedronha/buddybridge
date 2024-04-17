@@ -1,4 +1,4 @@
-<p-dialog header="Detalhes do voluntário"  [style]="{ 'width': '50vw', 'height': 'auto' }">
+<p-dialog header="Detalhes do voluntário" [style]="{ 'width': '50vw', 'height': 'auto' }">
   <form [formGroup]="editForm" (ngSubmit)="confirmUpdate()">
     <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
       <div class="text-center mb-5">
@@ -7,55 +7,88 @@
       <div>
         <div class="field">
           <label for="nome_voluntario">Nome Completo</label>
-          <input type="text" pInputText formControlName="nome_voluntario" class="w-full" name="nome_voluntario" placeholder="{{ _specificVolunteer.nome_voluntario }}"/>
-          <small *ngIf="editForm.get('nome_voluntario')?.invalid && (editForm.get('nome_voluntario')?.dirty || editForm.get('nome_voluntario')?.touched)" class="block p-error">
-            <div *ngIf="editForm.get('nome_voluntario')?.errors?.['required']">O nome é uma informação obrigatória.</div>
-            <div *ngIf="editForm.get('nome_voluntario')?.errors?.['pattern']">O nome não deve conter caracteres especiais</div>
+          <input type="text" pInputText formControlName="nome_voluntario" class="w-full" name="nome_voluntario"
+                 placeholder="{{ _specificVolunteer.nome_voluntario }}"/>
+          <small
+            *ngIf="editForm.get('nome_voluntario')?.invalid && (editForm.get('nome_voluntario')?.dirty || editForm.get('nome_voluntario')?.touched)"
+            class="block p-error">
+            <div *ngIf="editForm.get('nome_voluntario')?.errors?.['required']">O nome é uma informação obrigatória.
+            </div>
+            <div *ngIf="editForm.get('nome_voluntario')?.errors?.['pattern']">O nome não deve conter caracteres
+              especiais
+            </div>
           </small>
         </div>
         <div class="field">
           <label for="email_voluntario">Email</label>
-          <input type="text" pInputText formControlName="email_voluntario" class="w-full" name="email_voluntario" placeholder="{{_specificVolunteer.email}}" />
-          <small *ngIf="editForm.get('email')?.invalid && (editForm.get('email_voluntario')?.dirty || editForm.get('email')?.touched)" class="block p-error">
+          <input type="text" pInputText formControlName="email_voluntario" class="w-full" name="email_voluntario"
+                 placeholder="{{_specificVolunteer.email}}"/>
+          <small
+            *ngIf="editForm.get('email')?.invalid && (editForm.get('email_voluntario')?.dirty || editForm.get('email')?.touched)"
+            class="block p-error">
             <div *ngIf="editForm.get('email')?.errors?.['required']">O email é uma informação obrigatória.</div>
             <div *ngIf="editForm.get('email')?.errors?.['email']">Email inválido</div>
           </small>
         </div>
-        <div class="field">
-          <label for="cpf_voluntario">CPF Voluntário</label>
-          <input type="text" pInputText formControlName="cpf_voluntario" class="w-full" name="cpf_voluntario" placeholder="{{ _specificVolunteer.cpf_voluntario }}"/>
-          <small *ngIf="editForm.get('cpf_voluntario')?.invalid && (editForm.get('cpf_voluntario')?.dirty || editForm.get('cpf_voluntario')?.touched)" class="block p-error">
-            <div *ngIf="editForm.get('cpf_voluntario')?.errors?.['required']">O CPF do voluntário é uma informação obrigatória.</div>
-          </small>
+
+        <div *ngIf="isPessoaJuridica()">
+          <div class="field">
+            <label for="cnpj_voluntario">CNPJ Voluntário</label>
+            <input type="text" pInputText formControlName="cnpj_voluntario" class="w-full" name="cnpj_voluntario"
+                   placeholder="{{_specificVolunteer.cnpj_voluntario}}"/>
+            <small
+              *ngIf="editForm.get('cnpj_voluntario')?.invalid && (editForm.get('cnpj_voluntario')?.dirty || editForm.get('cnpj_voluntario')?.touched)"
+              class="block p-error">
+              <div *ngIf="editForm.get('cnpj_voluntario')?.errors?.['required']">O CNPJ do voluntário é uma informação
+                obrigatória.
+              </div>
+            </small>
+          </div>
+        </div>
+        <div *ngIf="!isPessoaJuridica()">
+          <div class="field">
+            <label for="cpf_voluntario">CPF Voluntário</label>
+            <input type="text" pInputText formControlName="cpf_voluntario" class="w-full" name="cpf_voluntario"
+                   placeholder="{{_specificVolunteer.cpf_voluntario}}"/>
+            <small
+              *ngIf="editForm.get('cpf_voluntario')?.invalid && (editForm.get('cpf_voluntario')?.dirty || editForm.get('cpf_voluntario')?.touched)"
+              class="block p-error">
+              <div *ngIf="editForm.get('cpf_voluntario')?.errors?.['required']">O CPF do voluntário é uma informação
+                obrigatória.
+              </div>
+              <small
+                *ngIf="editForm.get('cpf_voluntario')?.invalid && (editForm.get('cpf_voluntario')?.dirty || editForm.get('cpf_voluntario')?.touched)"
+                class="block p-error">
+                <div *ngIf="editForm.get('cpf_voluntario')?.errors?.['required']">O nome é uma informação obrigatória.
+                </div>
+                <div *ngIf="editForm.get('cpf_voluntario')?.errors?.['pattern']">O CPF não deve conter caracteres
+                  especiais
+                </div>
+              </small>
+            </small>
+          </div>
         </div>
         <div class="field">
           <label for="cargo_voluntario">Cargo Voluntário</label>
-          <input type="text" pInputText formControlName="cargo_voluntario" class="w-full" name="cargo_voluntario" placeholder="{{ _specificVolunteer.cargo_voluntario }}"/>
-          <small *ngIf="editForm.get('cargo_voluntario')?.invalid && (editForm.get('cargo_voluntario')?.dirty || editForm.get('cargo_voluntario')?.touched)" class="block p-error">
-            <div *ngIf="editForm.get('cargo_voluntario')?.errors?.['required']">O cargo do voluntário é uma informação obrigatória.</div>
+          <input type="text" pInputText formControlName="cargo_voluntario" class="w-full" name="cargo_voluntario"
+                 placeholder="{{ _specificVolunteer.cargo_voluntario }}"/>
+          <small
+            *ngIf="editForm.get('cargo_voluntario')?.invalid && (editForm.get('cargo_voluntario')?.dirty || editForm.get('cargo_voluntario')?.touched)"
+            class="block p-error">
+            <div *ngIf="editForm.get('cargo_voluntario')?.errors?.['required']">O cargo do voluntário é uma informação
+              obrigatória.
+            </div>
           </small>
         </div>
         <div class="field">
-          <label for="descricao_atividades_voluntario">Descrição das atividades de voluntariado</label>
-          <textarea pInputTextarea formControlName="descricao_atividades_voluntario" class="w-full" name="descricao_atividades_voluntario" placeholder="{{ _specificVolunteer.descricao_atividades_voluntario }}"></textarea>
+          <label for="descricao_atividades_voluntario">Descrição das atividade</label>
+          <textarea pInputTextarea formControlName="descricao_atividades_voluntario" class="w-full"
+                    name="descricao_atividades_voluntario"
+                    placeholder="{{ _specificVolunteer.descricao_atividades_voluntario }}"></textarea>
         </div>
-        <div class="field">
-          <label for="cpf_voluntario">CPF Voluntário</label>
-          <input type="text" pInputText formControlName="cpf_voluntario" class="w-full" name="cpf_voluntario" placeholder="{{_specificVolunteer.cpf_voluntario}}"/>
-          <small *ngIf="editForm.get('cpf_voluntario')?.invalid && (editForm.get('cpf_voluntario')?.dirty || editForm.get('cpf_voluntario')?.touched)" class="block p-error">
-            <div *ngIf="editForm.get('cpf_voluntario')?.errors?.['required']">O CPF do voluntário é uma informação obrigatória.</div>
-          </small>
-        </div>
-        <div class="field">
-          <label for="cnpj_voluntario">CNPJ Voluntário</label>
-          <input type="text" pInputText formControlName="cnpj_voluntario" class="w-full" name="cnpj_voluntario" placeholder="{{_specificVolunteer.cnpj_voluntario}}"/>
-          <small *ngIf="editForm.get('cnpj_voluntario')?.invalid && (editForm.get('cnpj_voluntario')?.dirty || editForm.get('cnpj_voluntario')?.touched)" class="block p-error">
-            <div *ngIf="editForm.get('cnpj_voluntario')?.errors?.['required']">O CNPJ do voluntário é uma informação obrigatória.</div>
-          </small>
-        </div>
-      </div >
+      </div>
       <div class="detail">
-        <div class="actions" >
+        <div class="actions">
           <div class="p-col-6">
             <button pButton pRipple style="margin: 20px" label="Cancelar" class="p-button-danger"></button>
           </div>

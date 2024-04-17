@@ -81,9 +81,9 @@ export class RegisterVolunteerComponent {
   submitDetails() {
     const postData = { ...this.registerForm.value };
     if (!this.showPj) {
-      postData.pf_pj_voluntario = 'Pessoa Juridica';
+      postData.pf_pj_voluntario = 'PESSOA JURIDICA';
     }
-      postData.pf_pj_voluntario = 'Pessoa Fisica'
+      postData.pf_pj_voluntario = 'PESSOA FISICA'
     this.volunteerService.registerVolunteer(postData as Volunteer).subscribe(
       response => {
         console.log(response);

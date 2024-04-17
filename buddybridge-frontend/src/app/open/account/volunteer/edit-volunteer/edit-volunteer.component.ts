@@ -31,12 +31,34 @@ export class EditVolunteerComponent {
       response => {
         console.log(response);
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
+
+        this.editForm.get('cnpj_voluntario')?.enable();
+        this.editForm.get('cpf_voluntario')?.enable();
+
         this.editForm.reset();
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
       },
     )
+  }
+
+  updateValidator(cnpj: boolean){
+    if (cnpj) {
+      this.editForm.get('cnpj_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]);
+      this.editForm.get('cpf_voluntario')?.clearValidators();
+      this.editForm.get('cpf_voluntario')?.disable();
+    } else {
+      this.editForm.get('cpf_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]);
+      this.editForm.get('cnpj_voluntario')?.clearValidators();
+      this.editForm.get('cnpj_voluntario')?.disable();
+    }
+    this.editForm.get('cpf_voluntario')?.updateValueAndValidity();
+    this.editForm.get('cnpj_voluntario')?.updateValueAndValidity();
+  }
+
+  isPessoaJuridica(): boolean {
+    return this._specificVolunteer.pf_pj_voluntario === 'PESSOA JURIDICA';
   }
 
   cancel(){

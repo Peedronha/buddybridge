@@ -29,7 +29,10 @@ const routes: Routes = [
       { path: 'account', title: 'BuddyBridge - Usuários', component: AccountComponent },
       { path: 'account/addaccount', title: 'BuddyBridge - Novo Usuário', component: AccountFormComponent, resolve: {account : accountResolver} },
       { path: 'account/editaccount/:id', title: 'BuddyBridge - Alterar Usuário', component: AccountFormComponent, resolve: {account : accountResolver} },
-      { path: 'account/editpassword/:id', title: 'BuddyBridge - Alterar Usuário', component: AccountFormSenhaComponent, resolve: {account : accountResolver} }
+      { path: 'account/editpassword/:id', title: 'BuddyBridge - Alterar Usuário', component: AccountFormSenhaComponent, resolve: {account : accountResolver} },
+      { path: 'volunteer', title: 'BuddyBridge - Recovery', component: ListVolunteerComponent },
+      { path: 'register-volunteer', title: 'BuddyBridge - Recovery', component: RegisterVolunteerComponent },
+
     ],
     canActivate: [AuthGuard]
   },
@@ -43,10 +46,7 @@ const routes: Routes = [
       { path: 'register', title: 'BuddyBridge - Criar Conta', component: RegisterComponent },
       { path: 'login', title: 'BuddyBridge - Login', component: LoginComponent },
       { path: 'recovery', title: 'BuddyBridge - Recovery', component: RecoveryComponent },
-      { path: 'register-volunteer', title: 'BuddyBridge - Recovery', component: RegisterVolunteerComponent },
-      { path: 'volunteer', title: 'BuddyBridge - Recovery', component: ListVolunteerComponent },
-      { path: 'validatelogin', title: 'BuddyBridge - Validar código OTP', component: ValidateloginComponent },
-
+      { path: 'validate-login', title: 'BuddyBridge - Validar código OTP', component: ValidateloginComponent },
     ]
   },
   { path: '', redirectTo: 'home', pathMatch: 'full'},

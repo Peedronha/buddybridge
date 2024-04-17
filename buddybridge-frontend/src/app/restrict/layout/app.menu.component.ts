@@ -32,7 +32,7 @@ export class AppMenuComponent implements OnInit {
                           label: 'Usuários', icon: 'pi pi-fw pi-id-card', routerLink: ['/account']
                         },
                         {
-                          label: 'Voluntários', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/uikit/input']
+                          label: 'Voluntários', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/volunteer']
                         }
                     ]
                   },
