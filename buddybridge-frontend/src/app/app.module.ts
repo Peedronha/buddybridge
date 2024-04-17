@@ -46,6 +46,7 @@ import { ValidateloginComponent } from './open/account/validatelogin/validatelog
 import { VolunteerListComponent } from './restrict/base/volunteer/component/volunteer-list/volunteer-list.component';
 import { AccountFormSenhaComponent } from './restrict/base/account/component/container/account-form-senha/account-form-senha.component';
 import { VolunteerComponent } from './restrict/base/volunteer/component/container/volunteer/volunteer.component';
+import { VolunteerFormComponent } from './restrict/base/volunteer/component/container/volunteer-form/volunteer-form.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { VolunteerComponent } from './restrict/base/volunteer/component/containe
       VolunteerListComponent,
       AccountFormSenhaComponent,
       VolunteerComponent,
+      VolunteerFormComponent,
 
   ],
   imports: [

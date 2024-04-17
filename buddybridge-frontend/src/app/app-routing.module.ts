@@ -9,7 +9,6 @@ import { RegisterComponent } from './open/account/register/register.component';
 import { InsitucionalComponent } from './open/insitucional/insitucional.component';
 import { RecoveryComponent } from "./open/account/recovery/recovery.component";
 import { RegisterVolunteerComponent } from "./open/account/volunteer/register-volunteer/register-volunteer.component";
-import { ListVolunteerComponent } from "./open/account/volunteer/list-volunteer/list-volunteer.component";
 import { AppLayoutComponent } from './restrict/layout/app.layout.component';
 import { ProfileComponent } from './restrict/base/account/component/profile/profile.component';
 import { AccountComponent } from './restrict/base/account/component/container/account/account.component';
@@ -17,6 +16,9 @@ import { AccountFormComponent } from './restrict/base/account/component/containe
 import { accountResolver } from './restrict/base/account/guards/account.resolver';
 import { ValidateloginComponent } from './open/account/validatelogin/validatelogin.component';
 import { AccountFormSenhaComponent } from './restrict/base/account/component/container/account-form-senha/account-form-senha.component';
+import { VolunteerComponent } from './restrict/base/volunteer/component/container/volunteer/volunteer.component';
+import { VolunteerFormComponent } from './restrict/base/volunteer/component/container/volunteer-form/volunteer-form.component';
+import { volunteerResolver } from './restrict/base/volunteer/guards/volunteer.resolver';
 
 const routes: Routes = [
   {
@@ -29,7 +31,11 @@ const routes: Routes = [
       { path: 'account', title: 'BuddyBridge - Usuários', component: AccountComponent },
       { path: 'account/addaccount', title: 'BuddyBridge - Novo Usuário', component: AccountFormComponent, resolve: {account : accountResolver} },
       { path: 'account/editaccount/:id', title: 'BuddyBridge - Alterar Usuário', component: AccountFormComponent, resolve: {account : accountResolver} },
-      { path: 'account/editpassword/:id', title: 'BuddyBridge - Alterar Usuário', component: AccountFormSenhaComponent, resolve: {account : accountResolver} }
+      { path: 'account/editpassword/:id', title: 'BuddyBridge - Alterar Usuário', component: AccountFormSenhaComponent, resolve: {account : accountResolver} },
+      { path: 'volunteer', title: 'BuddyBridge - Voluntários', component: VolunteerComponent },
+      { path: 'volunteer/addvolunteer', title: 'BuddyBridge - Novo Voluntário', component: VolunteerFormComponent, resolve: {volunteer : volunteerResolver} },
+      { path: 'volunteer/editvolunteer/:id', title: 'BuddyBridge - Alterar Voluntário', component: VolunteerFormComponent, resolve: {volunteer : volunteerResolver} },
+
     ],
     canActivate: [AuthGuard]
   },
@@ -44,7 +50,7 @@ const routes: Routes = [
       { path: 'login', title: 'BuddyBridge - Login', component: LoginComponent },
       { path: 'recovery', title: 'BuddyBridge - Recovery', component: RecoveryComponent },
       { path: 'register-volunteer', title: 'BuddyBridge - Recovery', component: RegisterVolunteerComponent },
-      { path: 'volunteer', title: 'BuddyBridge - Recovery', component: ListVolunteerComponent },
+      //{ path: 'volunteer', title: 'BuddyBridge - Recovery', component: ListVolunteerComponent },
       { path: 'validatelogin', title: 'BuddyBridge - Validar código OTP', component: ValidateloginComponent },
 
     ]
