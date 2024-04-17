@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-import {Volunteer} from "../../model/volunteer.model";
+import {Volunteer} from "../../../../restrict/base/volunteer/model/volunteer.model";
 import {VolunteerService} from "../service/volunteer.service";
 import {MessageService} from "primeng/api";
 

@@ -1,6 +1,6 @@
 import { AccountService } from '../../../../../../open/account/shared/account.service';
 import { VolunteerService } from '../../../shared/volunteer.service';
-import { Volunteer } from './../../../model/volunteer.model';
+import {Volunteer} from "../../../model/volunteer.model";
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MenuItem, MessageService} from "primeng/api";
