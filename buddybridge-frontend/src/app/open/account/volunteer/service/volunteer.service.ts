@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
-import {Volunteer} from "../../model/volunteer.model";
+import {Volunteer} from "../../../../restrict/base/volunteer/model/volunteer.model";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Injectable({

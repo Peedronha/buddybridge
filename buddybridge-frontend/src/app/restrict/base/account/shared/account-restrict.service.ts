@@ -10,7 +10,7 @@ export class AccountRestrictService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private getAuthorizationToken() {
+  public getAuthorizationToken() {
     const token = window.localStorage.getItem('token');
     return token;
   }

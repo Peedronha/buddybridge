@@ -5,7 +5,7 @@ import {AccountService} from "../../shared/account.service";
 import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import {User} from "../../model/user.model";
-import {Volunteer} from "../../model/volunteer.model";
+import {Volunteer} from "../../../../restrict/base/volunteer/model/volunteer.model";
 import {VolunteerService} from "../service/volunteer.service";
 
 @Component({

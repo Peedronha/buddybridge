@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './open/home/home.component';
 import { DashboardComponent } from './restrict/dashboard/dashboard.component';
 import { AppLayoutComponent } from './restrict/layout/app.layout.component';
-import {EditVolunteerComponent} from "./open/account/volunteer/edit-volunteer/edit-volunteer.component";
 import { LoginComponent } from './open/account/login/login.component';
 import { RegisterComponent } from './open/account/register/register.component';
 import { TopMenuOpenComponent } from './open/top-menu-open/top-menu-open.component';
@@ -47,7 +46,6 @@ import { ValidateloginComponent } from './open/account/validatelogin/validatelog
 import { VolunteerListComponent } from './restrict/base/volunteer/component/volunteer-list/volunteer-list.component';
 import { AccountFormSenhaComponent } from './restrict/base/account/component/container/account-form-senha/account-form-senha.component';
 import { VolunteerComponent } from './restrict/base/volunteer/component/container/volunteer/volunteer.component';
-import {RippleModule} from "primeng/ripple";
 
 @NgModule({
   declarations: [
@@ -70,7 +68,6 @@ import {RippleModule} from "primeng/ripple";
       VolunteerListComponent,
       AccountFormSenhaComponent,
       VolunteerComponent,
-      EditVolunteerComponent,
 
   ],
   imports: [
@@ -99,8 +96,7 @@ import {RippleModule} from "primeng/ripple";
     CheckboxModule,
     InputTextareaModule,
     AppConfigModule,
-    MessagesModule,
-    RippleModule
+    MessagesModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy },

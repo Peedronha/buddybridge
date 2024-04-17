@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {MenuItem, MessageService} from "primeng/api";
 import {VolunteerService} from "../service/volunteer.service";
 import {Volunteer} from "../../model/volunteer.model";
-import {FormBuilder, Validators} from "@angular/forms";
 
 
 @Component({
@@ -11,16 +10,29 @@ import {FormBuilder, Validators} from "@angular/forms";
   styleUrl: './list-volunteer.component.scss'
 })
 export class ListVolunteerComponent {
-
+  // volunteers: Volunteer[] = [
+  //   { idvoluntario: 1, fullName: 'John Doe', cargo_voluntario: 'Manager', email: 'john@example.com', pf_pj_voluntario: 'Pessoa Fisica' },
+  //   { idvoluntario: 2, fullName: 'Jane Smith', cargo_voluntario: 'Developer', email: 'jane@example.com', pf_pj_voluntario: 'Pessoa Juridica' },
+  //   { idvoluntario: 3, fullName: 'Alice Johnson', cargo_voluntario: 'Designer', email: 'alice@example.com', pf_pj_voluntario: 'Pessoa Fisica' },
+  //   { idvoluntario: 4, fullName: 'Michael Brown', cargo_voluntario: 'Manager', email: 'michael@example.com', pf_pj_voluntario: 'Pessoa Fisica' },
+  //   { idvoluntario: 5, fullName: 'Emily Jones', cargo_voluntario: 'Developer', email: 'emily@example.com', pf_pj_voluntario: 'Pessoa Fisica' },
+  //   { idvoluntario: 6, fullName: 'David Wilson', cargo_voluntario: 'Designer', email: 'david@example.com', pf_pj_voluntario: 'Pessoa Juridica' },
+  //   { idvoluntario: 7, fullName: 'Emma Davis', cargo_voluntario: 'Manager', email: 'emma@example.com', pf_pj_voluntario: 'Pessoa Fisica' },
+  //   { idvoluntario: 8, fullName: 'James Martinez', cargo_voluntario: 'Developer', email: 'james@example.com', pf_pj_voluntario: 'Pessoa Fisica' },
+  //   { idvoluntario: 9, fullName: 'Olivia Taylor', cargo_voluntario: 'Designer', email: 'olivia@example.com', pf_pj_voluntario: 'Pessoa Fisica' },
+  //   { idvoluntario: 10, fullName: 'William Anderson', cargo_voluntario: 'Manager', email: 'william@example.com', pf_pj_voluntario: 'Pessoa Juridica' },
+  //   { idvoluntario: 11, fullName: 'Sophia Thomas', cargo_voluntario: 'Developer', email: 'sophia@example.com', pf_pj_voluntario: 'Pessoa Fisica' },
+  //   { idvoluntario: 12, fullName: 'Daniel Hernandez', cargo_voluntario: 'Designer', email: 'daniel@example.com', pf_pj_voluntario: 'Pessoa Fisica' },
+  //   { idvoluntario: 13, fullName: 'Isabella Moore', cargo_voluntario: 'Manager', email: 'isabella@example.com', pf_pj_voluntario: 'Pessoa Fisica' },
+  //   { idvoluntario: 14, fullName: 'Alexander White', cargo_voluntario: 'Developer', email: 'alexander@example.com', pf_pj_voluntario: 'Pessoa Fisica' },
+  //   { idvoluntario: 15, fullName: 'Mia Harris', cargo_voluntario: 'Designer', email: 'mia@example.com', pf_pj_voluntario: 'Pessoa Juridica' }
+  // ];
 
   volunteers: Volunteer[] = [];
 
   loading: boolean = false;
 
   showHidden: boolean = false;
-
-  showEdit: boolean = false;
-
   _specificVolunteer: any = {};
 
 
@@ -32,7 +44,7 @@ export class ListVolunteerComponent {
         label: 'Editar',
         icon: 'pi pi-wrench',
         command: () => {
-          this.updateEdit(this._specificVolunteer);
+          this.update();
         }
       },
       {
@@ -43,13 +55,17 @@ export class ListVolunteerComponent {
         }
       },
     ];
+
   }
 
 
   ngOnInit(): void {
     this.volunteerService.getVolunteers().subscribe((data: Volunteer[]) => {
+      console.log(data)
       this.volunteers = data;
     });
+
+    alert(this.volunteers)
   }
 
   onSearch(event: any) {
@@ -59,11 +75,6 @@ export class ListVolunteerComponent {
   updateState(idvoluntario: any){
     this._specificVolunteer = this.volunteers.find(volunteer => volunteer.idvoluntario === idvoluntario) || null;
     this.showHidden = true;
-  }
-
-  updateEdit(_specificVolunteer: any){
-    // this._specificVolunteer = this.volunteers.find(volunteer => volunteer.idvoluntario === idvoluntario) || null;
-    this.showEdit = !this.showEdit;
   }
 
   save(severity: string) {
@@ -78,10 +89,5 @@ export class ListVolunteerComponent {
     this.volunteerService.deleteVolunteer(idvoluntario).subscribe(() =>{
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Deleted' });
     })
-  }
-
-
-  showCnpj() {
-    this.showHidden = true;
   }
 }

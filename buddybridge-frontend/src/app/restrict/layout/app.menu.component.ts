@@ -36,7 +36,7 @@ export class AppMenuComponent implements OnInit {
                         }
                     ]
                   },
-                  {
+                  /*{
                     label: 'Configurações',
                     icon: 'pi pi-fw pi-cog',
                     items: [
@@ -48,9 +48,9 @@ export class AppMenuComponent implements OnInit {
                         }
                     ]
                   },
-                  { label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }
+                  { label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }*/
                 ]
-            },
+            }/*,
             {
                 label: 'Buddy Animais',
                 items: [
@@ -82,7 +82,7 @@ export class AppMenuComponent implements OnInit {
                     },
                     { label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }
                 ]
-            },
+            },*/
 
         ];
     }

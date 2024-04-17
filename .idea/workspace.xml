@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="Commit Crud Usuários" />
+    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="Commit Crud Usuários">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/model/volunteer.model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/volunteer/list-volunteer/list-volunteer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/volunteer/list-volunteer/list-volunteer.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/volunteer/register-volunteer/register-volunteer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/volunteer/register-volunteer/register-volunteer.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/volunteer/service/volunteer.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/volunteer/service/volunteer.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/account/shared/account-restrict.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/account/shared/account-restrict.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/component/container/volunteer/volunteer.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/component/container/volunteer/volunteer.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/component/container/volunteer/volunteer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/component/container/volunteer/volunteer.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/component/volunteer-list/volunteer-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/component/volunteer-list/volunteer-list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/component/volunteer-list/volunteer-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/component/volunteer-list/volunteer-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/guards/volunteer.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/guards/volunteer.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/shared/volunteer.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/shared/volunteer.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.menu.component.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,7 +41,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="buddybridge-crud-users" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -59,7 +76,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "crud-volunteer",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "17",
     "last_opened_file_path": "C:/Users/limag/IdeaProjects/buddybridge",
@@ -230,7 +247,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713136492227</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Commit Crud Usuários">
+      <option name="closed" value="true" />
+      <created>1713136551008</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1713136551008</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -244,7 +269,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="crud-volunteer" />
                       </list>
                     </value>
                   </entry>
