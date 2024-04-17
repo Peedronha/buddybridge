@@ -5,7 +5,7 @@ import {AccountService} from "../../shared/account.service";
 import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import {User} from "../../model/user.model";
-import {Volunteer} from "../../model/volunteer.model";
+import {Volunteer} from "../../../../restrict/base/volunteer/model/volunteer.model";
 import {VolunteerService} from "../service/volunteer.service";
 
 @Component({
@@ -81,9 +81,9 @@ export class RegisterVolunteerComponent {
   submitDetails() {
     const postData = { ...this.registerForm.value };
     if (!this.showPj) {
-      postData.pf_pj_voluntario = 'Pessoa Juridica';
+      postData.pf_pj_voluntario = 'PESSOA JURIDICA';
     }
-      postData.pf_pj_voluntario = 'Pessoa Fisica'
+      postData.pf_pj_voluntario = 'PESSOA FISICA'
     this.volunteerService.registerVolunteer(postData as Volunteer).subscribe(
       response => {
         console.log(response);

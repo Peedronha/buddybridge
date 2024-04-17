@@ -4,6 +4,7 @@ import br.com.buddybridge.core.endereco.entity.Endereco;
 import br.com.buddybridge.core.endereco.repository.EnderecoRepository;
 import br.com.buddybridge.core.util.ExampleExeption;
 import jakarta.annotation.Resource;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import jakarta.transaction.SystemException;
 import jakarta.transaction.Transactional;
 import jakarta.transaction.UserTransaction;
 import java.util.List;
-
+@AllArgsConstructor
 @Service
 public class EnderecoService {
 

@@ -32,11 +32,11 @@ export class AppMenuComponent implements OnInit {
                           label: 'Usuários', icon: 'pi pi-fw pi-id-card', routerLink: ['/account']
                         },
                         {
-                          label: 'Voluntários', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/uikit/input']
+                          label: 'Voluntários', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/volunteer']
                         }
                     ]
                   },
-                  {
+                  /*{
                     label: 'Configurações',
                     icon: 'pi pi-fw pi-cog',
                     items: [
@@ -48,9 +48,9 @@ export class AppMenuComponent implements OnInit {
                         }
                     ]
                   },
-                  { label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }
+                  { label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }*/
                 ]
-            },
+            }/*,
             {
                 label: 'Buddy Animais',
                 items: [
@@ -82,7 +82,7 @@ export class AppMenuComponent implements OnInit {
                     },
                     { label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }
                 ]
-            },
+            },*/
 
         ];
     }

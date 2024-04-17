@@ -37,6 +37,12 @@ import {SplitButtonModule} from "primeng/splitbutton";
 import {DialogModule} from "primeng/dialog";
 import {CheckboxModule} from "primeng/checkbox";
 import {InputTextareaModule} from "primeng/inputtextarea";
+<<<<<<<<< Temporary merge branch 1
+import {RippleModule} from "primeng/ripple";
+import {SplitterModule} from "primeng/splitter";
+import { EditVolunteerComponent } from './open/account/volunteer/edit-volunteer/edit-volunteer.component';
+
+=========
 import { AppConfigModule } from './restrict/layout/config/config.module';
 import { ProfileComponent } from './restrict/base/account/component/profile/profile.component';
 import { AccountListComponent } from './restrict/base/account/component/account-list/account-list.component';
@@ -46,6 +52,7 @@ import { ValidateloginComponent } from './open/account/validatelogin/validatelog
 import { VolunteerListComponent } from './restrict/base/volunteer/component/volunteer-list/volunteer-list.component';
 import { AccountFormSenhaComponent } from './restrict/base/account/component/container/account-form-senha/account-form-senha.component';
 import { VolunteerComponent } from './restrict/base/volunteer/component/container/volunteer/volunteer.component';
+>>>>>>>>> Temporary merge branch 2
 
 @NgModule({
   declarations: [
@@ -60,6 +67,9 @@ import { VolunteerComponent } from './restrict/base/volunteer/component/containe
       ListVolunteerComponent,
       DashboardComponent,
       InsitucionalComponent,
+<<<<<<<<< Temporary merge branch 1
+      EditVolunteerComponent
+=========
       ProfileComponent,
       AccountListComponent,
       AccountFormComponent,
@@ -69,6 +79,7 @@ import { VolunteerComponent } from './restrict/base/volunteer/component/containe
       AccountFormSenhaComponent,
       VolunteerComponent,
 
+>>>>>>>>> Temporary merge branch 2
   ],
   imports: [
     BrowserModule,
@@ -95,8 +106,13 @@ import { VolunteerComponent } from './restrict/base/volunteer/component/containe
     DialogModule,
     CheckboxModule,
     InputTextareaModule,
+<<<<<<<<< Temporary merge branch 1
+    RippleModule,
+    SplitterModule,
+=========
     AppConfigModule,
     MessagesModule
+>>>>>>>>> Temporary merge branch 2
   ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy },

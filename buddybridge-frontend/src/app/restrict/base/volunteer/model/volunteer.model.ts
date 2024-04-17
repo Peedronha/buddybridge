@@ -5,6 +5,6 @@ export interface Volunteer {
   cnpj_voluntario:string;
   cargo_voluntario: string;
   descricao_atividades_voluntario: string;
-  email_voluntario: string;
+  email: string;
   pf_pj_voluntario: string;
 }

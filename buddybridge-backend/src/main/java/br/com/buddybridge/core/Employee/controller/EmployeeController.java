@@ -3,6 +3,8 @@ package br.com.buddybridge.core.Employee.controller;
 import br.com.buddybridge.core.Employee.entity.EmployeeModel;
 import br.com.buddybridge.core.Employee.model.VolunteerDto;
 import br.com.buddybridge.core.Employee.service.EmployeeService;
+import br.com.buddybridge.core.usuario.entity.Usuario;
+import br.com.buddybridge.core.usuario.service.UsuarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static br.com.buddybridge.core.security.config.PasswordGenerator.generatePassword;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("volunteer")
 public class EmployeeController {
     
     private EmployeeService employeeService;
-    
+
+    private UsuarioService usuarioService;
     @GetMapping
     public ResponseEntity<List<EmployeeModel>> getALlEmployeeModels(){
         List<EmployeeModel> employeeModels = new ArrayList<>(this.employeeService.findAll());
@@ -33,6 +38,10 @@ public class EmployeeController {
         try{
             if (!employeeService.existsByEmail(volunteerDto.getEmail())) {
                 this.employeeService.saveEmployeeModel(new EmployeeModel(volunteerDto));
+
+                Usuario u = gerarUsuario(volunteerDto);
+
+                this.usuarioService.salvar(u);
             }
             return new ResponseEntity<>(new EmployeeModel(volunteerDto), HttpStatus.CREATED);
         }
@@ -66,5 +75,12 @@ public class EmployeeController {
             return new ResponseEntity<>(true, HttpStatus.OK);
         }
         return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    public Usuario gerarUsuario(VolunteerDto volunteerDto){
+        Usuario u = new Usuario();
+        u.setLogin(volunteerDto.getEmail());
+        u.setSenha(generatePassword(8));
+
+        return u;
     }
 }
