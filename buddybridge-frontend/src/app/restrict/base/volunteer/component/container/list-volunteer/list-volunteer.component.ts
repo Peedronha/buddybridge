@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
+import {MenuItem, MessageService} from "primeng/api";
+import {Volunteer} from "../../../model/volunteer.model";
+import {VolunteerService} from "../../../service/volunteer.service";
 import {FormBuilder, Validators} from "@angular/forms";
-import {Volunteer} from "../../../../restrict/base/volunteer/model/volunteer.model";
-import {VolunteerService} from "../service/volunteer.service";
-import {MessageService} from "primeng/api";
+import {Router} from "@angular/router";
+
 
 @Component({
-  selector: 'app-edit-volunteer',
-  templateUrl: './edit-volunteer.component.html',
-  styleUrl: './edit-volunteer.component.scss'
+  selector: 'app-list-volunteer',
+  templateUrl: './list-volunteer.component.html',
+  styleUrl: './list-volunteer.component.scss'
 })
-export class EditVolunteerComponent {
+export class ListVolunteerComponent {
+
   editForm = this.fb.group({
     nome_voluntario: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     email: ['', [Validators.required, Validators.email]],
@@ -20,9 +23,42 @@ export class EditVolunteerComponent {
     pf_pj_voluntario: [''/*, [Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]*/]
   });
 
+  volunteers: Volunteer[] = [];
+
+  loading: boolean = false;
+
+  showHidden: boolean = false;
   _specificVolunteer: any = {};
 
-  constructor(private fb: FormBuilder, private volunteerService: VolunteerService, private messageService: MessageService) {
+  showEdit: boolean = false;
+
+  constructor(private fb: FormBuilder, private messageService: MessageService, private volunteerService: VolunteerService, private router: Router) {
+
+  }
+
+
+  ngOnInit(): void {
+    this.volunteerService.getVolunteers().subscribe((data: Volunteer[]) => {
+      console.log(data)
+      this.volunteers = data;
+    });
+  }
+
+  onSearch(event: any) {
+    const searchTerm = event.target.value;
+  }
+
+  updateEdit(idvoluntario: any){
+    this._specificVolunteer = this.volunteers.find(volunteer => volunteer.idvoluntario === idvoluntario) || null;
+
+    this.showHidden = !this.showHidden;
+    this.showEdit = !this.showEdit;
+    // this.router.navigateByUrl('/edit-volunteer')
+  }
+
+  updateState(idvoluntario: any){
+    this._specificVolunteer = this.volunteers.find(volunteer => volunteer.idvoluntario === idvoluntario) || null;
+    this.showHidden = !this.showHidden;
   }
 
   confirmUpdate(){
@@ -61,7 +97,17 @@ export class EditVolunteerComponent {
     return this._specificVolunteer.pf_pj_voluntario === 'PESSOA JURIDICA';
   }
 
-  cancel(){
+  save(severity: string) {
+    this.messageService.add({ severity: severity, summary: 'Success', detail: 'Data Saved' });
+  }
 
+  update() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Updated' });
+  }
+
+  delete(idvoluntario: any) {
+    this.volunteerService.deleteVolunteer(idvoluntario).subscribe(() =>{
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Deleted' });
+    })
   }
 }

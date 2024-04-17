@@ -1,5 +1,6 @@
 package br.com.buddybridge.core.Employee.controller;
 
+import static br.com.buddybridge.core.security.config.PasswordGenerator.generatePassword;
 import br.com.buddybridge.core.Employee.entity.EmployeeModel;
 import br.com.buddybridge.core.Employee.model.VolunteerDto;
 import br.com.buddybridge.core.Employee.service.EmployeeService;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static br.com.buddybridge.core.security.config.PasswordGenerator.generatePassword;
+
 
 @RestController
 @AllArgsConstructor
@@ -78,6 +79,7 @@ public class EmployeeController {
     }
     public Usuario gerarUsuario(VolunteerDto volunteerDto){
         Usuario u = new Usuario();
+        u.setNome(volunteerDto.getNome_voluntario());
         u.setLogin(volunteerDto.getEmail());
         u.setSenha(generatePassword(8));
 

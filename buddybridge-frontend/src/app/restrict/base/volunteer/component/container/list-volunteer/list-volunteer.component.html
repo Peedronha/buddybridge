@@ -1,0 +1,259 @@
+<p-table
+  #dt2
+  [value]="volunteers"
+  dataKey="idvoluntario"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [loading]="loading"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [globalFilterFields]="['fullName', 'cargo_voluntario', 'email', 'pf_pj_voluntario']"
+  [tableStyle]="{ 'min-width': '75rem' }"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <span class="p-input-icon-left ml-auto">
+        <i class="pi pi-search"></i>
+        <input pInputText type="text" (input)="onSearch($event)" placeholder="Search keyword"/>
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width:22%">Full Name</th>
+      <th style="width:22%">Cargo</th>
+      <th style="width:22%">Email</th>
+      <th style="width:20%">PF/PJ</th>
+      <th style="width:3%">Actions</th>
+    </tr>
+    <tr>
+      <th>
+        <p-columnFilter type="text" field="fullName"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="cargo_voluntario"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="email"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="pf_pj_voluntario"></p-columnFilter>
+      </th>
+      <th>
+        <button pButton pRipple label="Adicionar" class="p-button-Secondary" icon="pi pi-plus"
+                routerLink="/register-volunteer"></button>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-volunteer>
+    <tr>
+      <td>{{ volunteer.nome_voluntario }}</td>
+      <td>{{ volunteer.cargo_voluntario }}</td>
+      <td>{{ volunteer.email }}</td>
+      <td>{{ volunteer.pf_pj_voluntario }}</td>
+      <td>
+        <p-button (click)="updateState(volunteer.idvoluntario)"
+                  icon="pi pi-arrow-up-right-and-arrow-down-left-from-center" label="Ampliar"></p-button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="5">No volunteers found.</td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-card *ngIf="showHidden" [ngModel]="_specificVolunteer" header="Detalhes do voluntário"
+        [style]="{ 'min-width': '75rem', height: 'auto' }">
+  <div class="surface-section py-2 md-3">
+    <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BASE</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Cadastros Gerais</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Voluntários</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><span class="text-900 line-height-3">Perfil</span></li>
+      <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você exibe os voluntarios do sistema!</a>
+      </li>
+    </ul>
+    <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
+      <div>
+        <div class="font-medium text-3xl text-900">Perfil do Voluntário</div>
+        <br/><br/>
+      </div>
+      <div class="mt-3 lg:mt-0">
+        <button pButton pRipple label="Voltar" class="p-button-danger p-button mr-2"
+                icon="pi pi-arrow-down-left-and-arrow-up-right-to-center"
+                (click)="updateState(_specificVolunteer.idvoluntario)"></button>
+      </div>
+    </div>
+  </div>
+  <ng-container>
+    <div class="volunteer-details">
+      <div class="detail">
+        <p><strong>Name:</strong> {{ _specificVolunteer.nome_voluntario }}</p>
+      </div>
+      <p-divider type="solid"></p-divider>
+      <div class="detail justify-content-between">
+        <p><strong>Email:</strong> {{ _specificVolunteer.email }}</p>
+      </div>
+      <p-divider type="solid"></p-divider>
+      <div class="detail">
+        <p><strong>CPF:</strong> {{ _specificVolunteer.cpf_voluntario }}</p>
+      </div>
+      <p-divider type="solid"></p-divider>
+      <div class="detail">
+        <p><strong>Cargo:</strong> {{ _specificVolunteer.cargo_voluntario }}</p>
+      </div>
+      <p-divider type="solid"></p-divider>
+      <div class="detail">
+        <p><strong>Description:</strong> {{ _specificVolunteer.descricao_atividades_voluntario }}</p>
+      </div>
+      <p-divider type="solid"></p-divider>
+      <div class="detail">
+        <p><strong>PF/PJ:</strong> {{ _specificVolunteer.pf_pj_voluntario }}</p>
+      </div>
+      <p-divider type="solid"></p-divider>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button pButton pRipple label="Deletar" class="p-button-danger p-button mr-2" icon="pi pi-trash"
+                (click)="delete(_specificVolunteer.idvoluntario)"></button>
+        <button pButton pRipple label="Editar" class="col text-right p-button-success p-button mr-2" icon="pi pi-wrench"
+                (click)="updateEdit(_specificVolunteer.idvoluntario)"></button>
+      </div>
+    </div>
+  </ng-container>
+</p-card>
+
+<p-dialog [(visible)]="showEdit"
+          ngModel="_specificVolunteer" header="Detalhes do voluntário"
+          [formGroup]="editForm"
+          [style]="{ 'min-width': '75rem', height: 'auto' }"
+          (ngSubmit)="confirmUpdate()">
+  <div class="surface-section py-2 md-3">
+    <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BASE</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Cadastros Gerais</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Voluntários</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><span class="text-900 line-height-3">Editar</span></li>
+      <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você edita os voluntarios do sistema!</a>
+      </li>
+    </ul>
+    <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
+      <div>
+        <div class="font-medium text-3xl text-900">Editar Voluntário</div>
+        <br/><br/>
+      </div>
+      <div class="mt-3 lg:mt-0">
+        <button pButton pRipple label="Voltar" class="p-button-danger p-button mr-2" icon="pi pi-arrow-left"
+                routerLink="/volunteer"></button>
+      </div>
+    </div>
+  </div>
+  <ng-container>
+    <div class="volunteer-details">
+      <form [formGroup]="editForm" (ngSubmit)="confirmUpdate()">
+        <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+          <div class="text-center mb-5">
+            <div class="text-900 text-3xl font-medium mb-3">EDITAR VOLUNTÁRIO</div>
+          </div>
+          <div>
+            <div class="field">
+              <label for="nome_voluntario">Nome Completo</label>
+              <input type="text" pInputText formControlName="nome_voluntario" class="w-full" name="nome_voluntario"
+                     [value]="_specificVolunteer.nome_voluntario"/>
+              <small
+                *ngIf="editForm.get('nome_voluntario')?.invalid && (editForm.get('nome_voluntario')?.dirty || editForm.get('nome_voluntario')?.touched)"
+                class="block p-error">
+                <div *ngIf="editForm.get('nome_voluntario')?.errors?.['required']">O nome é uma informação obrigatória.
+                </div>
+                <div *ngIf="editForm.get('nome_voluntario')?.errors?.['pattern']">O nome não deve conter caracteres
+                  especiais
+                </div>
+              </small>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="text" pInputText formControlName="email" class="w-full" name="email"
+                     [value]="_specificVolunteer.email"/>
+              <small
+                *ngIf="editForm.get('email')?.invalid && (editForm.get('email')?.dirty || editForm.get('email')?.touched)"
+                class="block p-error">
+                <div *ngIf="editForm.get('email')?.errors?.['required']">O email é uma informação obrigatória.</div>
+                <div *ngIf="editForm.get('email')?.errors?.['email']">Email inválido</div>
+              </small>
+            </div>
+
+            <div *ngIf="isPessoaJuridica()">
+              <div class="field">
+                <label for="cnpj_voluntario">CNPJ Voluntário</label>
+                <input type="text" pInputText formControlName="cnpj_voluntario" class="w-full" name="cnpj_voluntario"
+                       [value]="_specificVolunteer.cnpj_voluntario"/>
+                <small
+                  *ngIf="editForm.get('cnpj_voluntario')?.invalid && (editForm.get('cnpj_voluntario')?.dirty || editForm.get('cnpj_voluntario')?.touched)"
+                  class="block p-error">
+                  <div *ngIf="editForm.get('cnpj_voluntario')?.errors?.['required']">O CNPJ do voluntário é uma
+                    informação
+                    obrigatória.
+                  </div>
+                </small>
+              </div>
+            </div>
+            <div *ngIf="!isPessoaJuridica()">
+              <div class="field">
+                <label for="cpf_voluntario">CPF Voluntário</label>
+                <input type="text" pInputText formControlName="cpf_voluntario" class="w-full" name="cpf_voluntario"
+                       [value]="_specificVolunteer.cpf_voluntario"/>
+                <small
+                  *ngIf="editForm.get('cpf_voluntario')?.invalid && (editForm.get('cpf_voluntario')?.dirty || editForm.get('cpf_voluntario')?.touched)"
+                  class="block p-error">
+                  <div *ngIf="editForm.get('cpf_voluntario')?.errors?.['required']">O CPF do voluntário é uma informação
+                    obrigatória.
+                  </div>
+                  <small
+                    *ngIf="editForm.get('cpf_voluntario')?.invalid && (editForm.get('cpf_voluntario')?.dirty || editForm.get('cpf_voluntario')?.touched)"
+                    class="block p-error">
+                    <div *ngIf="editForm.get('cpf_voluntario')?.errors?.['required']">O nome é uma informação
+                      obrigatória.
+                    </div>
+                    <div *ngIf="editForm.get('cpf_voluntario')?.errors?.['pattern']">O CPF não deve conter caracteres
+                      especiais
+                    </div>
+                  </small>
+                </small>
+              </div>
+            </div>
+            <div class="field">
+              <label for="cargo_voluntario">Cargo Voluntário</label>
+              <input type="text" pInputText formControlName="cargo_voluntario" class="w-full" name="cargo_voluntario"
+                     [value]="_specificVolunteer.cargo_voluntario"/>
+              <small
+                *ngIf="editForm.get('cargo_voluntario')?.invalid && (editForm.get('cargo_voluntario')?.dirty || editForm.get('cargo_voluntario')?.touched)"
+                class="block p-error">
+                <div *ngIf="editForm.get('cargo_voluntario')?.errors?.['required']">O cargo do voluntário é uma
+                  informação
+                  obrigatória.
+                </div>
+              </small>
+            </div>
+            <div class="field">
+              <label for="descricao_atividades_voluntario">Descrição das atividade</label>
+              <textarea pInputTextarea formControlName="descricao_atividades_voluntario" class="w-full"
+                        name="descricao_atividades_voluntario"
+                        [value]="_specificVolunteer.descricao_atividades_voluntario"></textarea>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+            <button pButton pRipple label="Confirmar" styleClass="w-full" class="p-button-success" icon="pi pi-wrench" (click)="updateEdit(_specificVolunteer.idvoluntario)"></button>
+  </ng-container>
+</p-dialog>

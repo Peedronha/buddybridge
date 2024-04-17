@@ -30,29 +30,30 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import {InputOtpModule} from "primeng/inputotp";
-import {RegisterVolunteerComponent} from "./open/account/volunteer/register-volunteer/register-volunteer.component";
-import {ListVolunteerComponent} from "./open/account/volunteer/list-volunteer/list-volunteer.component";
 import {TableModule} from "primeng/table";
 import {SplitButtonModule} from "primeng/splitbutton";
 import {DialogModule} from "primeng/dialog";
 import {CheckboxModule} from "primeng/checkbox";
 import {InputTextareaModule} from "primeng/inputtextarea";
-<<<<<<<<< Temporary merge branch 1
 import {RippleModule} from "primeng/ripple";
 import {SplitterModule} from "primeng/splitter";
-import { EditVolunteerComponent } from './open/account/volunteer/edit-volunteer/edit-volunteer.component';
-
-=========
 import { AppConfigModule } from './restrict/layout/config/config.module';
 import { ProfileComponent } from './restrict/base/account/component/profile/profile.component';
 import { AccountListComponent } from './restrict/base/account/component/account-list/account-list.component';
 import { AccountFormComponent } from './restrict/base/account/component/container/account-form/account-form.component';
 import { AccountComponent } from './restrict/base/account/component/container/account/account.component';
 import { ValidateloginComponent } from './open/account/validatelogin/validatelogin.component';
-import { VolunteerListComponent } from './restrict/base/volunteer/component/volunteer-list/volunteer-list.component';
 import { AccountFormSenhaComponent } from './restrict/base/account/component/container/account-form-senha/account-form-senha.component';
-import { VolunteerComponent } from './restrict/base/volunteer/component/container/volunteer/volunteer.component';
->>>>>>>>> Temporary merge branch 2
+import {
+  RegisterVolunteerComponent
+} from "./restrict/base/volunteer/component/container/register-volunteer/register-volunteer.component";
+import {
+  ListVolunteerComponent
+} from "./restrict/base/volunteer/component/container/list-volunteer/list-volunteer.component";
+import {
+  EditVolunteerComponent
+} from "./restrict/base/volunteer/component/container/edit-volunteer/edit-volunteer.component";
+
 
 @NgModule({
   declarations: [
@@ -67,19 +68,15 @@ import { VolunteerComponent } from './restrict/base/volunteer/component/containe
       ListVolunteerComponent,
       DashboardComponent,
       InsitucionalComponent,
-<<<<<<<<< Temporary merge branch 1
-      EditVolunteerComponent
-=========
+      EditVolunteerComponent,
+
       ProfileComponent,
       AccountListComponent,
       AccountFormComponent,
       AccountComponent,
       ValidateloginComponent,
-      VolunteerListComponent,
       AccountFormSenhaComponent,
-      VolunteerComponent,
 
->>>>>>>>> Temporary merge branch 2
   ],
   imports: [
     BrowserModule,
@@ -106,13 +103,11 @@ import { VolunteerComponent } from './restrict/base/volunteer/component/containe
     DialogModule,
     CheckboxModule,
     InputTextareaModule,
-<<<<<<<<< Temporary merge branch 1
     RippleModule,
     SplitterModule,
-=========
     AppConfigModule,
     MessagesModule
->>>>>>>>> Temporary merge branch 2
+
   ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy },

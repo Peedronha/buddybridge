@@ -3,8 +3,8 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import { Router, ActivatedRoute } from '@angular/router';
 import { Volunteer } from '../../../model/volunteer.model';
-import { VolunteerService } from '../../../shared/volunteer.service';
 import { AccountService } from '../../../../../../open/account/shared/account.service';
+import {VolunteerService} from "../../../service/volunteer.service";
 
 @Component({
   selector: 'app-volunteer-form',
@@ -41,7 +41,7 @@ export class VolunteerFormComponent {
     this.registerForm.setValue({
       idvoluntario: volunteer.idvoluntario,
       nome_voluntario: volunteer.nome_voluntario+'',
-      email_voluntario: volunteer.email_voluntario+'',
+      email_voluntario: volunteer.email+'',
       cpf_voluntario: volunteer.cpf_voluntario+'',
       cnpj_voluntario: volunteer.cnpj_voluntario+'',
       cargo_voluntario: volunteer.cargo_voluntario+'',

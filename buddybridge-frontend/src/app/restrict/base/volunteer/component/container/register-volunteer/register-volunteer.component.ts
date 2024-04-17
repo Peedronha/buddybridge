@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-import {passwordMatchValidator} from "../../shared/password-match.directive";
-import {AccountService} from "../../shared/account.service";
 import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
-import {User} from "../../model/user.model";
-import {Volunteer} from "../../../../restrict/base/volunteer/model/volunteer.model";
-import {VolunteerService} from "../service/volunteer.service";
+import {VolunteerService} from "../../../service/volunteer.service";
+import {Volunteer} from "../../../model/volunteer.model";
+import {AccountService} from "../../../../../../open/account/shared/account.service";
+
+
 
 @Component({
   selector: 'app-register-volunteer',
@@ -28,11 +28,15 @@ export class RegisterVolunteerComponent {
   showPj: boolean = true;
 
   constructor(
+    private accountService: AccountService,
     private fb: FormBuilder,
     private volunteerService: VolunteerService,
     private messageService: MessageService,
     private router: Router
-  ) { }
+  ) {}
+  ngOnInit(): void {
+    this.accountService.validarSessao();
+  }
 
   get nome_voluntario() {
     return this.registerForm.get('nome_voluntario');
@@ -63,7 +67,9 @@ export class RegisterVolunteerComponent {
   }
 
   updateState() {
+
     this.showPj = !this.showPj;
+
     if (!this.showPj) {
       this.registerForm.get('cpf_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]);
       this.registerForm.get('cnpj_voluntario')?.clearValidators();
@@ -73,9 +79,12 @@ export class RegisterVolunteerComponent {
       this.registerForm.get('cpf_voluntario')?.clearValidators();
       this.registerForm.get('cpf_voluntario')?.disable();
     }
-
     this.registerForm.get('cpf_voluntario')?.updateValueAndValidity();
     this.registerForm.get('cnpj_voluntario')?.updateValueAndValidity();
+  }
+
+  isPessoaJuridica(): boolean {
+    return this.showPj;
   }
 
   submitDetails() {
@@ -88,6 +97,10 @@ export class RegisterVolunteerComponent {
       response => {
         console.log(response);
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
+
+        this.registerForm.get('cnpj_voluntario')?.enable();
+        this.registerForm.get('cpf_voluntario')?.enable();
+
         this.registerForm.reset();
         this.router.navigateByUrl('/volunteer')
       },
