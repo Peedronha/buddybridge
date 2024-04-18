@@ -8,7 +8,7 @@
           <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
           <li><a class="text-500 no-underline line-height-3 cursor-pointer">Voluntários</a></li>
           <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-          @if (registerForm.get('idvoluntario')?.invalid) {
+          @if (idvoluntario?.value != null && idvoluntario?.value != 'NaN') {
             <li><span class="text-900 line-height-3">Alterar </span></li>
             <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
             <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você Altera os voluntarios do sistema!</a></li>
@@ -20,7 +20,7 @@
       </ul>
       <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
         <div>
-          @if (registerForm.get('idvoluntario')?.invalid) {
+          @if (idvoluntario?.value != null && idvoluntario?.value != 'NaN') {
             <div class="font-medium text-3xl text-900">Alterar Voluntário</div><br/><br/>
           } @else {
             <div class="font-medium text-3xl text-900">Novo Voluntário</div><br/><br/>

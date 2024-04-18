@@ -25,16 +25,16 @@ public class EmployeeModel {
     private String nome_voluntario;
 
     @Email
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "cpf_voluntario")
     private String cpf_voluntario;
 
-    @Column(name = "cnpj_voluntario")
+    @Column(name = "cnpj_voluntario", unique = true)
     private String cnpj_voluntario;
 
-    @Column(name = "cargo_voluntario", nullable = false)
+    @Column(name = "cargo_voluntario", unique = true)
     private String cargo_voluntario;
 
     @Column(name = "descricao_atividades_voluntario", columnDefinition = "LONGTEXT")

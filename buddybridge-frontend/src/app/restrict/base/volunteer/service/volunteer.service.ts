@@ -14,7 +14,6 @@ export class VolunteerService {
     return token;
   }
 
-
   private apiUrl = 'http://localhost:8080/volunteer';
 
   constructor(private http: HttpClient) {

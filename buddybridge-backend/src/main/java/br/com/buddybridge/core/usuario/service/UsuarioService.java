@@ -48,6 +48,7 @@ public class UsuarioService {
 
                 if (voluntario){
                    message = message.concat("\nSua senha inicial é: " + usuario.getSenha() +
+                           "\n<a>http://localhost:4200/validatelogin</a>"+
                                        "\nVocê pode altera-la nas configurações de perfil.");
                 }
 

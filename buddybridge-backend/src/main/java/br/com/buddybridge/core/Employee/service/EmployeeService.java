@@ -36,10 +36,13 @@ public class EmployeeService {
 
     public EmployeeModel saveEmployeeModel(EmployeeModel employeeModel) throws SystemException, ExampleExeption {
         try {
-            EmployeeModel voluntario = employeeRepository.save(employeeModel);
-
-            this.usuarioService.salvar(gerarUsuario(voluntario), true);
-
+            EmployeeModel voluntario = null;
+            if(employeeModel.getIdvoluntario() != null){
+                voluntario = employeeRepository.save(employeeModel);
+            } else {
+                voluntario = employeeRepository.save(employeeModel);
+                this.usuarioService.salvar(gerarUsuario(voluntario), true);
+            }
             return voluntario;
         } catch (Exception e) {
             throw new SystemException(String.valueOf(e));

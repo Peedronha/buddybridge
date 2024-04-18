@@ -1,8 +1,8 @@
+import { Volunteer } from './../../../model/volunteer.model';
 import { Component } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import { Router, ActivatedRoute } from '@angular/router';
-import { Volunteer } from '../../../model/volunteer.model';
 import { AccountService } from '../../../../../../open/account/shared/account.service';
 import {VolunteerService} from "../../../service/volunteer.service";
 
@@ -13,7 +13,7 @@ import {VolunteerService} from "../../../service/volunteer.service";
 })
 export class VolunteerFormComponent {
   registerForm = this.fb.group({
-    idvoluntario: [parseInt(''),],
+    idvoluntario: [''],
     nome_voluntario: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     email: ['', [Validators.required, Validators.email]],
     cpf_voluntario: [''],
@@ -22,8 +22,6 @@ export class VolunteerFormComponent {
     descricao_atividades_voluntario: [''],
     pf_pj_voluntario: ['']
   })
-
-  volunteer: any = {};
 
   showPj: boolean = true;
 
@@ -38,18 +36,17 @@ export class VolunteerFormComponent {
 
   ngOnInit(): void {
     this.accountService.validarSessao();
-    this.volunteer = this.router.snapshot.data['volunteer'];
-
-    console.log(this.volunteer);
+    const volunteer: Volunteer = this.router.snapshot.data['volunteer'];
+    console.log(volunteer);
     this.registerForm.setValue({
-      idvoluntario: this.volunteer.idvoluntario,
-      nome_voluntario: this.volunteer.nome_voluntario+'',
-      email: this.volunteer.email+'',
-      cpf_voluntario: this.volunteer.cpf_voluntario+'',
-      cnpj_voluntario: this.volunteer.cnpj_voluntario+'',
-      cargo_voluntario: this.volunteer.cargo_voluntario+'',
-      descricao_atividades_voluntario: this.volunteer.descricao_atividades_voluntario+'',
-      pf_pj_voluntario: this.volunteer.pf_pj_voluntario+'',
+      idvoluntario: volunteer.idvoluntario +'',
+      nome_voluntario: volunteer.nome_voluntario,
+      email: volunteer.email,
+      cpf_voluntario: volunteer.cpf_voluntario,
+      cnpj_voluntario: volunteer.cnpj_voluntario,
+      cargo_voluntario: volunteer.cargo_voluntario,
+      descricao_atividades_voluntario: volunteer.descricao_atividades_voluntario,
+      pf_pj_voluntario: volunteer.pf_pj_voluntario,
     })
   }
 
@@ -87,23 +84,16 @@ export class VolunteerFormComponent {
   }
 
   updateState() {
-
     this.showPj = !this.showPj;
-
     if (!this.showPj) {
       this.registerForm.get('cpf_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]);
       this.registerForm.get('cnpj_voluntario')?.clearValidators();
       this.registerForm.get('cnpj_voluntario')?.disable();
-
-
       this.registerForm.get('cpf_voluntario')?.enable();
-
-
     } else {
       this.registerForm.get('cnpj_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]);
       this.registerForm.get('cpf_voluntario')?.clearValidators();
       this.registerForm.get('cpf_voluntario')?.disable();
-
       this.registerForm.get('cnpj_voluntario')?.enable();
     }
     this.registerForm.get('cpf_voluntario')?.updateValueAndValidity();
@@ -116,40 +106,41 @@ export class VolunteerFormComponent {
 
 
   submitDetails() {
-
-    const postData = { ...this.registerForm.value };
-
-    if (!this.showPj) {
-      postData.pf_pj_voluntario = 'PESSOA JURIDICA';
-    }
-
-    var id = this.registerForm.get('idvoluntario')?.value + '';
-    postData.idvoluntario = parseInt(id);
-    postData.pf_pj_voluntario = 'PESSOA FISICA';
-    console.log(this.registerForm.get('idvoluntario')?.value + '');
-
+    console.log(this.registerForm.get('idvoluntario')?.value+'');
+    let volunteer = new Volunteer();
+    var id = this.registerForm.get('idvoluntario')?.value+'';
+    volunteer.idvoluntario = parseInt(id);
+    volunteer.nome_voluntario = this.registerForm.get('nome_voluntario')?.value+'';
+    volunteer.cpf_voluntario = this.registerForm.get('cpf_voluntario')?.value+'';
+    volunteer.cnpj_voluntario = this.registerForm.get('cnpj_voluntario')?.value +'';
+    volunteer.email = this.registerForm.get('email')?.value + '';
+    volunteer.cargo_voluntario = this.registerForm.get('cargo_voluntario')?.value+'';
+    volunteer.descricao_atividades_voluntario = this.registerForm.get('descricao_atividades_voluntario')?.value+'';
+    volunteer.pf_pj_voluntario =  this.registerForm.get('pf_pj_voluntario')?.value + '';
+    console.log(volunteer);
     if (this.registerForm.get('idvoluntario')?.value + '' != 'NaN'){
-      this.volunteerService.updateVolunteer(postData as Volunteer).subscribe(
+      this.volunteerService.updateVolunteer(volunteer).subscribe(
         response => {
           console.log(response);
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso' });
           this.registerForm.reset();
           this.route.navigateByUrl('/volunteer')
         },
         error => {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Já existe um usuário com este CPF / Email cadastrado no sistema' });
         },
       )
     } else {
-      this.volunteerService.registerVolunteer(postData as Volunteer).subscribe(
+      volunteer.idvoluntario = undefined;
+      this.volunteerService.registerVolunteer(volunteer).subscribe(
         response => {
           console.log(response);
-          this.messageService.add({severity: 'success', summary: 'Success', detail: 'Register successfully'});
+          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso!'});
           this.registerForm.reset();
-          this.route.navigateByUrl('/validate-login')
+          this.route.navigateByUrl('/volunteer')
         },
         error => {
-          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Something went wrong'});
+          this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Já existe um usuário cadastrado no sistema com este email.'});
         },
       )
     }

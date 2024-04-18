@@ -49,14 +49,16 @@ public class AuthService {
         UserDetails user = userRepository.findByLogin(authRequest.getLogin()).orElseThrow();
         Usuario usuario = userRepository.findByLogin(authRequest.getLogin()).orElseThrow();
         AuthResponse response = new AuthResponse();
-        response.setToken(authRequest.getToken());
+
         response.setIdUser(usuario.getId().toString());
         response.setLogin(usuario.getLogin());
         if (jwtService.isTokenValid(authRequest.getToken(), user)){
+            response.setToken(authRequest.getToken());
             System.out.println("é valido");
             response.setValid(true);
         } else {
             System.out.println("não é valido");
+            response.setToken("");
             response.setValid(false);
         }
         return response;

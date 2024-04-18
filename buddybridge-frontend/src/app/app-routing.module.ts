@@ -50,7 +50,7 @@ const routes: Routes = [
       { path: 'register', title: 'BuddyBridge - Criar Conta', component: RegisterComponent },
       { path: 'login', title: 'BuddyBridge - Login', component: LoginComponent },
       { path: 'recovery', title: 'BuddyBridge - Recovery', component: RecoveryComponent },
-      { path: 'validate-login', title: 'BuddyBridge - Validar código OTP', component: ValidateloginComponent },
+      { path: 'validatelogin', title: 'BuddyBridge - Validar código OTP', component: ValidateloginComponent },
     ]
   },
   { path: '', redirectTo: 'home', pathMatch: 'full'},
