@@ -116,20 +116,25 @@ export class VolunteerFormComponent {
 
 
   submitDetails() {
+
     const postData = { ...this.registerForm.value };
+
     if (!this.showPj) {
       postData.pf_pj_voluntario = 'PESSOA JURIDICA';
     }
+
     var id = this.registerForm.get('idvoluntario')?.value + '';
     postData.idvoluntario = parseInt(id);
     postData.pf_pj_voluntario = 'PESSOA FISICA';
     console.log(this.registerForm.get('idvoluntario')?.value + '');
+
     if (this.registerForm.get('idvoluntario')?.value + '' != 'NaN'){
       this.volunteerService.updateVolunteer(postData as Volunteer).subscribe(
         response => {
           console.log(response);
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
           this.registerForm.reset();
+          this.route.navigateByUrl('/volunteer')
         },
         error => {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
@@ -141,6 +146,7 @@ export class VolunteerFormComponent {
           console.log(response);
           this.messageService.add({severity: 'success', summary: 'Success', detail: 'Register successfully'});
           this.registerForm.reset();
+          this.route.navigateByUrl('/validate-login')
         },
         error => {
           this.messageService.add({severity: 'error', summary: 'Error', detail: 'Something went wrong'});
