@@ -38,17 +38,16 @@ public class UsuarioService {
         if (usuario.getNome() == null || usuario.getNome().isEmpty()) {
             throw new ExampleExeption("O nome é uma informação obrigatória. ", "ERRO001");
         }
-
-        String message = "Seja bem vindo a BuddyBridge - para acessar o sistema usar o seguinte código OTP: " + usuario.getToken();
-
         try {
             if (usuario.getId() == null) {
                 usuario.setConfirmacaoEmail(true);
                 usuario.setToken(gerarNumeroSeisDigitos());
 
+                String message = "Seja bem vindo a BuddyBridge - para acessar o sistema usar o seguinte código OTP: " + usuario.getToken();
+
                 if (voluntario){
-                    message.concat("\n Sua senha inicial é: " + usuario.getSenha() +
-                                       "\n Você pode altera-la nas configurações de perfil");
+                   message = message.concat("\nSua senha inicial é: " + usuario.getSenha() +
+                                       "\nVocê pode altera-la nas configurações de perfil.");
                 }
 
                 emailService.enviarEmailTexto(usuario.getLogin(),
