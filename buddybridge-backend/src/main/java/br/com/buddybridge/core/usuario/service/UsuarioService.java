@@ -33,41 +33,34 @@ public class UsuarioService {
     @Resource
     private UserTransaction utx;
 
-    @Transactional(value = Transactional.TxType.REQUIRES_NEW)
+
     public void salvar(Usuario usuario) throws ExampleExeption, SystemException {
+        if (usuario.getNome() == null || usuario.getNome().isEmpty()) {
+            throw new ExampleExeption("O nome é uma informação obrigatória. ", "ERRO001");
+        }
+
         try {
-            utx.begin();
-
-            if(usuario.getNome() == null && usuario.getNome().equals("")){
-                throw new ExampleExeption("O nome é uma informação obrigatória. ", "ERRO001");
-            }
-
-
-            if(usuario.getId() == null) {
+            if (usuario.getId() == null) {
                 usuario.setConfirmacaoEmail(true);
                 usuario.setToken(gerarNumeroSeisDigitos());
                 emailService.enviarEmailTexto(usuario.getLogin(),
                         "BuddyBridge - Token de Acesso ao Sistema",
-                        "Seja bem vindo a BuddyBridge - para acessar o sistema usar o seguinte código OTP: "+usuario.getToken());
+                        "Seja bem vindo a BuddyBridge - para acessar o sistema usar o seguinte código OTP: " + usuario.getToken());
             }
 
-            System.out.println("senha"+usuario.getSenha());
-            if(usuario.getSenha() != null && usuario.getSenha() != "") {
+            if (usuario.getSenha() != null && !usuario.getSenha().isEmpty()) {
                 String senhaHash = this.bCryptPasswordEncoder().encode(usuario.getSenha());
                 usuario.setSenha(senhaHash);
-                System.out.println(senhaHash);
             } else {
-                if(usuario.getId() != null){
+                if (usuario.getId() != null) {
                     Usuario origin = usuarioRepository.getReferenceById(usuario.getId());
                     usuario.setSenha(origin.getSenha());
                 }
             }
-            System.out.println("senha"+usuario.getSenha());
+
             usuarioRepository.save(usuario);
-            utx.commit();
         } catch (Exception e) {
-            //return e.getMessage()
-            utx.rollback();
+            throw new SystemException(String.valueOf(e));
         }
     }
 

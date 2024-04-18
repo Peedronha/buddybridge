@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class Usuario implements UserDetails {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -105,4 +104,9 @@ public class Usuario implements UserDetails {
         return true;
     }
 
+    public Usuario(EmployeeModel employeeModel) {
+        this.nome = employeeModel.getNome_voluntario();
+        this.login = employeeModel.getEmail();
+        this.usuarioIdvoluntario = employeeModel;
+    }
 }

@@ -6,6 +6,8 @@ import br.com.buddybridge.core.Employee.model.VolunteerDto;
 import br.com.buddybridge.core.Employee.service.EmployeeService;
 import br.com.buddybridge.core.usuario.entity.Usuario;
 import br.com.buddybridge.core.usuario.service.UsuarioService;
+import br.com.buddybridge.core.util.ExampleExeption;
+import jakarta.transaction.SystemException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,14 +39,11 @@ public class EmployeeController {
     @PostMapping
     public ResponseEntity<EmployeeModel> insertEmployeeModel(@RequestBody VolunteerDto volunteerDto){
         try{
-
+            EmployeeModel voluntario = new EmployeeModel();
             if (!employeeService.existsByEmail(volunteerDto.getEmail())) {
-                EmployeeModel voluntario = this.employeeService.saveEmployeeModel(new EmployeeModel(volunteerDto));
-                Usuario u = gerarUsuario(volunteerDto);
-                u.setUsuarioIdvoluntario(voluntario);
-                this.usuarioService.salvar(u);
+                 voluntario = this.employeeService.saveEmployeeModel(new EmployeeModel(volunteerDto));
             }
-            return new ResponseEntity<>(new EmployeeModel(volunteerDto), HttpStatus.CREATED);
+            return new ResponseEntity<>(voluntario, HttpStatus.CREATED);
         }
         catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.OK);
@@ -59,7 +58,7 @@ public class EmployeeController {
     }
 
     @PutMapping
-    public ResponseEntity<EmployeeModel> updateEmployeeModel(@RequestBody EmployeeModel employeeModel){
+    public ResponseEntity<EmployeeModel> updateEmployeeModel(@RequestBody EmployeeModel employeeModel) throws SystemException, ExampleExeption {
         if(this.employeeService.findEmployeeModelById(employeeModel.getIdvoluntario().longValue()).isPresent()) {
             this.employeeService.saveEmployeeModel(employeeModel);
             return new ResponseEntity<>(employeeModel, HttpStatus.OK);
@@ -77,12 +76,5 @@ public class EmployeeController {
         }
         return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    public Usuario gerarUsuario(VolunteerDto volunteerDto){
-        Usuario u = new Usuario();
-        u.setNome(volunteerDto.getNome_voluntario());
-        u.setLogin(volunteerDto.getEmail());
-        u.setSenha(generatePassword(8));
 
-        return u;
-    }
 }
