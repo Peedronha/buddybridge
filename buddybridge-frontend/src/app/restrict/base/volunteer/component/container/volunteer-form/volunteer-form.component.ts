@@ -86,49 +86,34 @@ export class VolunteerFormComponent {
     return this.registerForm.get('pf_pj_voluntario');
   }
 
-  isPessoaJuridica(): boolean {
-    if(this.volunteer == null) {
-      return false
-    }
-    return this.volunteer.pf_pj_voluntario === 'PESSOA JURIDICA';
-  }
+  updateState() {
 
-  updateState(){
     this.showPj = !this.showPj;
-  }
 
-  updateValidator(cnpj: boolean){
-    if (cnpj) {
-      this.registerForm.get('cnpj_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]);
-      this.registerForm.get('cpf_voluntario')?.clearValidators();
-      this.registerForm.get('cpf_voluntario')?.disable();
-    } else {
+    if (!this.showPj) {
       this.registerForm.get('cpf_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]);
       this.registerForm.get('cnpj_voluntario')?.clearValidators();
       this.registerForm.get('cnpj_voluntario')?.disable();
+
+
+      this.registerForm.get('cpf_voluntario')?.enable();
+
+
+    } else {
+      this.registerForm.get('cnpj_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]);
+      this.registerForm.get('cpf_voluntario')?.clearValidators();
+      this.registerForm.get('cpf_voluntario')?.disable();
+
+      this.registerForm.get('cnpj_voluntario')?.enable();
     }
     this.registerForm.get('cpf_voluntario')?.updateValueAndValidity();
     this.registerForm.get('cnpj_voluntario')?.updateValueAndValidity();
   }
 
-  //
-  // confirmUpdate(){
-  //   const postData = { ...this.editForm.value };
-  //   this.volunteerService.updateVolunteer(postData as Volunteer).subscribe(
-  //     response => {
-  //       console.log(response);
-  //       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
-  //
-  //       this.editForm.get('cnpj_voluntario')?.enable();
-  //       this.editForm.get('cpf_voluntario')?.enable();
-  //
-  //       this.editForm.reset();
-  //     },
-  //     error => {
-  //       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
-  //     },
-  //   )
-  // }
+  isPessoaJuridica(): boolean {
+    return this.showPj;
+  }
+
 
   submitDetails() {
     const postData = { ...this.registerForm.value };
