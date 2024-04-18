@@ -50,10 +50,8 @@ import {
 import {
   ListVolunteerComponent
 } from "./restrict/base/volunteer/component/container/list-volunteer/list-volunteer.component";
-import {
-  EditVolunteerComponent
-} from "./restrict/base/volunteer/component/container/edit-volunteer/edit-volunteer.component";
-
+import { VolunteerComponent } from './restrict/base/volunteer/component/container/volunteer/volunteer.component';
+import {VolunteerFormComponent} from "./restrict/base/volunteer/component/container/volunteer-form/volunteer-form.component";
 
 @NgModule({
   declarations: [
@@ -68,14 +66,15 @@ import {
       ListVolunteerComponent,
       DashboardComponent,
       InsitucionalComponent,
-      EditVolunteerComponent,
-
       ProfileComponent,
       AccountListComponent,
       AccountFormComponent,
       AccountComponent,
       ValidateloginComponent,
       AccountFormSenhaComponent,
+      VolunteerComponent,
+      VolunteerFormComponent
+
 
   ],
   imports: [

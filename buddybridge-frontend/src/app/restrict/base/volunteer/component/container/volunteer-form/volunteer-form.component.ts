@@ -15,13 +15,15 @@ export class VolunteerFormComponent {
   registerForm = this.fb.group({
     idvoluntario: [parseInt(''),],
     nome_voluntario: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
-    email_voluntario: ['', [Validators.required, Validators.email]],
-    cpf_voluntario: [''/*, [Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]*/],
-    cnpj_voluntario: [''/*, [Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]*/],
+    email: ['', [Validators.required, Validators.email]],
+    cpf_voluntario: [''],
+    cnpj_voluntario: [''],
     cargo_voluntario: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     descricao_atividades_voluntario: [''],
-    pf_pj_voluntario: [''/*, [Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]*/]
+    pf_pj_voluntario: ['']
   })
+
+  volunteer: any = {};
 
   showPj: boolean = true;
 
@@ -36,17 +38,18 @@ export class VolunteerFormComponent {
 
   ngOnInit(): void {
     this.accountService.validarSessao();
-    const volunteer: Volunteer = this.router.snapshot.data['volunteer']
-    console.log(volunteer);
+    this.volunteer = this.router.snapshot.data['volunteer'];
+
+    console.log(this.volunteer);
     this.registerForm.setValue({
-      idvoluntario: volunteer.idvoluntario,
-      nome_voluntario: volunteer.nome_voluntario+'',
-      email_voluntario: volunteer.email+'',
-      cpf_voluntario: volunteer.cpf_voluntario+'',
-      cnpj_voluntario: volunteer.cnpj_voluntario+'',
-      cargo_voluntario: volunteer.cargo_voluntario+'',
-      descricao_atividades_voluntario: volunteer.descricao_atividades_voluntario+'',
-      pf_pj_voluntario: volunteer.pf_pj_voluntario+'',
+      idvoluntario: this.volunteer.idvoluntario,
+      nome_voluntario: this.volunteer.nome_voluntario+'',
+      email: this.volunteer.email+'',
+      cpf_voluntario: this.volunteer.cpf_voluntario+'',
+      cnpj_voluntario: this.volunteer.cnpj_voluntario+'',
+      cargo_voluntario: this.volunteer.cargo_voluntario+'',
+      descricao_atividades_voluntario: this.volunteer.descricao_atividades_voluntario+'',
+      pf_pj_voluntario: this.volunteer.pf_pj_voluntario+'',
     })
   }
 
@@ -59,8 +62,8 @@ export class VolunteerFormComponent {
     return this.registerForm.get('nome_voluntario');
   }
 
-  get email_voluntario() {
-    return this.registerForm.get('email_voluntario');
+  get email() {
+    return this.registerForm.get('email');
   }
 
   get cpf_voluntario() {
@@ -83,27 +86,81 @@ export class VolunteerFormComponent {
     return this.registerForm.get('pf_pj_voluntario');
   }
 
+  isPessoaJuridica(): boolean {
+    if(this.volunteer == null) {
+      return false
+    }
+    return this.volunteer.pf_pj_voluntario === 'PESSOA JURIDICA';
+  }
+
   updateState(){
     this.showPj = !this.showPj;
   }
 
+  updateValidator(cnpj: boolean){
+    if (cnpj) {
+      this.registerForm.get('cnpj_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]);
+      this.registerForm.get('cpf_voluntario')?.clearValidators();
+      this.registerForm.get('cpf_voluntario')?.disable();
+    } else {
+      this.registerForm.get('cpf_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]);
+      this.registerForm.get('cnpj_voluntario')?.clearValidators();
+      this.registerForm.get('cnpj_voluntario')?.disable();
+    }
+    this.registerForm.get('cpf_voluntario')?.updateValueAndValidity();
+    this.registerForm.get('cnpj_voluntario')?.updateValueAndValidity();
+  }
+
+  //
+  // confirmUpdate(){
+  //   const postData = { ...this.editForm.value };
+  //   this.volunteerService.updateVolunteer(postData as Volunteer).subscribe(
+  //     response => {
+  //       console.log(response);
+  //       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
+  //
+  //       this.editForm.get('cnpj_voluntario')?.enable();
+  //       this.editForm.get('cpf_voluntario')?.enable();
+  //
+  //       this.editForm.reset();
+  //     },
+  //     error => {
+  //       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
+  //     },
+  //   )
+  // }
+
   submitDetails() {
     const postData = { ...this.registerForm.value };
     if (!this.showPj) {
-      postData.pf_pj_voluntario = 'Pessoa Juridica';
+      postData.pf_pj_voluntario = 'PESSOA JURIDICA';
     }
-    var id = this.registerForm.get('id')?.value + '';
+    var id = this.registerForm.get('idvoluntario')?.value + '';
     postData.idvoluntario = parseInt(id);
-    postData.pf_pj_voluntario = 'Pessoa Fisica'
-    this.volunteerService.registerVolunteer(postData as Volunteer).subscribe(
-      response => {
-        console.log(response);
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
-        this.registerForm.reset();
-      },
-      error => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
-      },
-    )
+    postData.pf_pj_voluntario = 'PESSOA FISICA';
+    console.log(this.registerForm.get('idvoluntario')?.value + '');
+    if (this.registerForm.get('idvoluntario')?.value + '' != 'NaN'){
+      this.volunteerService.updateVolunteer(postData as Volunteer).subscribe(
+        response => {
+          console.log(response);
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
+          this.registerForm.reset();
+        },
+        error => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
+        },
+      )
+    } else {
+      this.volunteerService.registerVolunteer(postData as Volunteer).subscribe(
+        response => {
+          console.log(response);
+          this.messageService.add({severity: 'success', summary: 'Success', detail: 'Register successfully'});
+          this.registerForm.reset();
+        },
+        error => {
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Something went wrong'});
+        },
+      )
+    }
   }
 }

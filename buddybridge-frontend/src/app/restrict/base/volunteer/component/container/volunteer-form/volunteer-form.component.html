@@ -32,25 +32,27 @@
       </div>
     </div>
     <div>
-      <div *ngIf="!showPj" class="field">
+      <div *ngIf="!isPessoaJuridica()" class="field">
         <label  for="cpf_voluntario">CPF Voluntário</label>
         <input type="text" pInputText  formControlName="cpf_voluntario" class="w-full" name="cpf_voluntario" placeholder="Digite o CPF do voluntário"/>
         <small *ngIf="registerForm.get('cpf_voluntario')?.invalid && (registerForm.get('cpf_voluntario')?.dirty || registerForm.get('cpf_voluntario')?.touched)" class="block p-error">
           <div *ngIf="registerForm.get('cpf_voluntario')?.errors?.['required']">O CPF do voluntário é uma informação obrigatória.</div>
+          <div *ngIf="registerForm.get('cpf_voluntario')?.errors?.['pattern']">O CPF não deve conter caracteres especiais</div>
         </small>
       </div>
-      <div *ngIf="showPj" class="field">
+      <div *ngIf="isPessoaJuridica()" class="field">
         <label for="cnpj_coluntario">CNPJ Voluntário</label>
         <input type="text" pInputText formControlName="cnpj_voluntario" class="w-full" name="cnpj_coluntario" placeholder="Digite o CNPJ do coluntário"/>
         <small *ngIf="registerForm.get('cnpj_coluntario')?.invalid && (registerForm.get('cnpj_coluntario')?.dirty || registerForm.get('cnpj_coluntario')?.touched)" class="block p-error">
           <div *ngIf="registerForm.get('cnpj_coluntario')?.errors?.['required']">O CNPJ do coluntário é uma informação obrigatória.</div>
+          <div *ngIf="registerForm.get('cnpj_coluntario')?.errors?.['pattern']">O CNPJ não deve conter caracteres especiais</div>
         </small>
       </div>
       <div  class="field checkbox-field">
         <label for="pf_pj_voluntario">
-        <p-checkbox formControlName="pf_pj_voluntario" value="Pessoa Fisica"
+          <p-checkbox formControlName="pf_pj_voluntario" value="Pessoa Fisica"
                       (click)="updateState()" inputId="pj"></p-checkbox>
-        Pessoa Fisica
+          Pessoa Fisica
         </label>
       </div>
       <div class="field">
@@ -62,11 +64,11 @@
         </small>
       </div>
       <div class="field">
-        <label for="email_voluntario">Email</label>
-        <input type="text" pInputText formControlName="email_voluntario" class="w-full" name="email" placeholder="Digite seu email" />
-        <small *ngIf="registerForm.get('email_voluntario')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="block p-error">
-          <div *ngIf="registerForm.get('email_voluntario')?.errors?.['required']">O email é uma informação obrigatória.</div>
-          <div *ngIf="registerForm.get('email_voluntario')?.errors?.['email']">Email invalido</div>
+        <label for="email">Email</label>
+        <input type="text" pInputText formControlName="email" class="w-full" name="email" placeholder="Digite seu email" />
+        <small *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="block p-error">
+          <div *ngIf="registerForm.get('email')?.errors?.['required']">O email é uma informação obrigatória.</div>
+          <div *ngIf="registerForm.get('email')?.errors?.['email']">Email invalido</div>
         </small>
       </div>
       <div class="field">
@@ -81,6 +83,6 @@
         <textarea pInputTextarea formControlName="descricao_atividades_voluntario" class="w-full" name="descricao_atividades_voluntario" placeholder="Digite a descrição das atividades do voluntário"></textarea>
       </div>
     </div>
-    <p-button label="SALVAR" styleClass="w-full"  type="submit"></p-button>
+      <button pButton label="SALVAR" styleClass="w-full"  type="submit"></button>
   </form>
 </div>

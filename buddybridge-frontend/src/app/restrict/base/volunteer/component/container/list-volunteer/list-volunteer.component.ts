@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MenuItem, MessageService} from "primeng/api";
 import {Volunteer} from "../../../model/volunteer.model";
 import {VolunteerService} from "../../../service/volunteer.service";
@@ -13,6 +13,15 @@ import {Router} from "@angular/router";
 })
 export class ListVolunteerComponent {
 
+  @Input() volunteers!: Volunteer[];
+  _specificVolunteer: any = {};
+  @Output() add = new EventEmitter(false);
+  @Output() edit = new EventEmitter(false);
+  @Output() editPassword = new EventEmitter(false);
+  @Output() remove = new EventEmitter(false);
+
+
+
   editForm = this.fb.group({
     nome_voluntario: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     email: ['', [Validators.required, Validators.email]],
@@ -23,12 +32,9 @@ export class ListVolunteerComponent {
     pf_pj_voluntario: [''/*, [Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]*/]
   });
 
-  volunteers: Volunteer[] = [];
-
   loading: boolean = false;
 
   showHidden: boolean = false;
-  _specificVolunteer: any = {};
 
   showEdit: boolean = false;
 
@@ -61,23 +67,6 @@ export class ListVolunteerComponent {
     this.showHidden = !this.showHidden;
   }
 
-  confirmUpdate(){
-    const postData = { ...this.editForm.value };
-    this.volunteerService.updateVolunteer(postData as Volunteer).subscribe(
-      response => {
-        console.log(response);
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
-
-        this.editForm.get('cnpj_voluntario')?.enable();
-        this.editForm.get('cpf_voluntario')?.enable();
-
-        this.editForm.reset();
-      },
-      error => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
-      },
-    )
-  }
 
   updateValidator(cnpj: boolean){
     if (cnpj) {
@@ -93,21 +82,20 @@ export class ListVolunteerComponent {
     this.editForm.get('cnpj_voluntario')?.updateValueAndValidity();
   }
 
-  isPessoaJuridica(): boolean {
-    return this._specificVolunteer.pf_pj_voluntario === 'PESSOA JURIDICA';
+
+  onAdd() {
+    this.add.emit(true);
   }
 
-  save(severity: string) {
-    this.messageService.add({ severity: severity, summary: 'Success', detail: 'Data Saved' });
+  onEdit(idUser: any) {
+    this.edit.emit(idUser);
   }
 
-  update() {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Updated' });
+  onDelete(idUser: any) {
+    this.remove.emit(idUser);
   }
 
-  delete(idvoluntario: any) {
-    this.volunteerService.deleteVolunteer(idvoluntario).subscribe(() =>{
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Deleted' });
-    })
+  onEditPassword(idUser: any) {
+    this.editPassword.emit(idUser);
   }
 }

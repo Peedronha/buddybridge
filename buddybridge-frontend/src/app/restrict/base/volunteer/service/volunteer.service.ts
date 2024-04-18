@@ -66,4 +66,12 @@ export class VolunteerService {
         }
       ))
   }
+
+  getVolunteersById(id: any): Observable<any> {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.http.get<any>(this.apiUrl + '/' + id,{headers: reqHeader})
+  }
 }

@@ -19,8 +19,8 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
     @Transactional
-    public void saveEmployeeModel(EmployeeModel employeeModel) {
-        employeeRepository.save(employeeModel);
+    public EmployeeModel saveEmployeeModel(EmployeeModel employeeModel) {
+        return employeeRepository.save(employeeModel);
     }
     @Transactional
     public Optional<EmployeeModel> findEmployeeModelById(Long id) {

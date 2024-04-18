@@ -16,14 +16,10 @@ import { accountResolver } from './restrict/base/account/guards/account.resolver
 import { ValidateloginComponent } from './open/account/validatelogin/validatelogin.component';
 import { AccountFormSenhaComponent } from './restrict/base/account/component/container/account-form-senha/account-form-senha.component';
 import {
-  RegisterVolunteerComponent
-} from "./restrict/base/volunteer/component/container/register-volunteer/register-volunteer.component";
-import {
-  ListVolunteerComponent
-} from "./restrict/base/volunteer/component/container/list-volunteer/list-volunteer.component";
-import {
-  EditVolunteerComponent
-} from "./restrict/base/volunteer/component/container/edit-volunteer/edit-volunteer.component";
+  VolunteerFormComponent
+} from "./restrict/base/volunteer/component/container/volunteer-form/volunteer-form.component";
+import {VolunteerComponent} from "./restrict/base/volunteer/component/container/volunteer/volunteer.component";
+import {volunteerResolver} from "./restrict/base/volunteer/guards/volunteer.resolver";
 
 const routes: Routes = [
   {
@@ -37,9 +33,10 @@ const routes: Routes = [
       { path: 'account/addaccount', title: 'BuddyBridge - Novo Usuário', component: AccountFormComponent, resolve: {account : accountResolver} },
       { path: 'account/editaccount/:id', title: 'BuddyBridge - Alterar Usuário', component: AccountFormComponent, resolve: {account : accountResolver} },
       { path: 'account/editpassword/:id', title: 'BuddyBridge - Alterar Usuário', component: AccountFormSenhaComponent, resolve: {account : accountResolver} },
-      { path: 'volunteer', title: 'BuddyBridge - Volunteer', component: ListVolunteerComponent },
-      { path: 'edit-volunteer', title: 'BuddyBridge - Volunteer', component: EditVolunteerComponent },
-      { path: 'register-volunteer', title: 'BuddyBridge - Volunteer', component: RegisterVolunteerComponent },
+
+      { path: 'volunteer', title: 'BuddyBridge - Voluntários', component: VolunteerComponent },
+      { path: 'volunteer/addvolunteer', title: 'BuddyBridge - Novo Voluntário', component: VolunteerFormComponent, resolve: {volunteer : volunteerResolver} },
+      { path: 'volunteer/editvolunteer/:id', title: 'BuddyBridge - Alterar Voluntário', component: VolunteerFormComponent, resolve: {volunteer : volunteerResolver} },
     ],
     canActivate: [AuthGuard]
   },

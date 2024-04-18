@@ -37,11 +37,11 @@ public class EmployeeController {
     @PostMapping
     public ResponseEntity<EmployeeModel> insertEmployeeModel(@RequestBody VolunteerDto volunteerDto){
         try{
+
             if (!employeeService.existsByEmail(volunteerDto.getEmail())) {
-                this.employeeService.saveEmployeeModel(new EmployeeModel(volunteerDto));
-
+                EmployeeModel voluntario = this.employeeService.saveEmployeeModel(new EmployeeModel(volunteerDto));
                 Usuario u = gerarUsuario(volunteerDto);
-
+                u.setUsuarioIdvoluntario(voluntario);
                 this.usuarioService.salvar(u);
             }
             return new ResponseEntity<>(new EmployeeModel(volunteerDto), HttpStatus.CREATED);
@@ -59,10 +59,10 @@ public class EmployeeController {
     }
 
     @PutMapping
-    public ResponseEntity<EmployeeModel> updateEmployeeModel(@RequestAttribute Long id,@RequestBody EmployeeModel EmployeeModel){
-        if(this.employeeService.findEmployeeModelById(id).isPresent()) {
-            this.employeeService.saveEmployeeModel(EmployeeModel);
-            return new ResponseEntity<>(EmployeeModel, HttpStatus.OK);
+    public ResponseEntity<EmployeeModel> updateEmployeeModel(@RequestBody EmployeeModel employeeModel){
+        if(this.employeeService.findEmployeeModelById(employeeModel.getIdvoluntario().longValue()).isPresent()) {
+            this.employeeService.saveEmployeeModel(employeeModel);
+            return new ResponseEntity<>(employeeModel, HttpStatus.OK);
         }
         else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
