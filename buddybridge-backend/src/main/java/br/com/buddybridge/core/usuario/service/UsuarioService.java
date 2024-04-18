@@ -34,18 +34,25 @@ public class UsuarioService {
     private UserTransaction utx;
 
 
-    public void salvar(Usuario usuario) throws ExampleExeption, SystemException {
+    public void salvar(Usuario usuario, Boolean voluntario) throws ExampleExeption, SystemException {
         if (usuario.getNome() == null || usuario.getNome().isEmpty()) {
             throw new ExampleExeption("O nome é uma informação obrigatória. ", "ERRO001");
         }
+
+        String message = "Seja bem vindo a BuddyBridge - para acessar o sistema usar o seguinte código OTP: " + usuario.getToken();
 
         try {
             if (usuario.getId() == null) {
                 usuario.setConfirmacaoEmail(true);
                 usuario.setToken(gerarNumeroSeisDigitos());
+
+                if (voluntario){
+                    message.concat("\n Sua senha inicial é: " + usuario.getSenha() +
+                                       "\n Você pode altera-la nas configurações de perfil");
+                }
+
                 emailService.enviarEmailTexto(usuario.getLogin(),
-                        "BuddyBridge - Token de Acesso ao Sistema",
-                        "Seja bem vindo a BuddyBridge - para acessar o sistema usar o seguinte código OTP: " + usuario.getToken());
+                        "BuddyBridge - Token de Acesso ao Sistema", message);
             }
 
             if (usuario.getSenha() != null && !usuario.getSenha().isEmpty()) {

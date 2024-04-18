@@ -45,7 +45,7 @@ public class AuthenticationController {
 
     @PostMapping("/salvar")
     public ResponseEntity<?> salvar(@RequestBody Usuario usuario) throws ExampleExeption, SystemException {
-        userService.salvar(usuario);
+        userService.salvar(usuario, false);
         return new ResponseEntity<>(usuario, HttpStatus.CREATED);
     }
 

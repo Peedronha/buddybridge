@@ -38,7 +38,7 @@ public class EmployeeService {
         try {
             EmployeeModel voluntario = employeeRepository.save(employeeModel);
 
-            this.usuarioService.salvar(gerarUsuario(voluntario));
+            this.usuarioService.salvar(gerarUsuario(voluntario), true);
 
             return voluntario;
         } catch (Exception e) {
