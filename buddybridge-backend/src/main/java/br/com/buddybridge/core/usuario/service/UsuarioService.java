@@ -1,6 +1,7 @@
 package br.com.buddybridge.core.usuario.service;
 
 
+import br.com.buddybridge.core.Employee.entity.EmployeeModel;
 import br.com.buddybridge.core.email.service.EmailService;
 import br.com.buddybridge.core.security.jwt.JwtService;
 import br.com.buddybridge.core.security.config.SecurityConfig;
@@ -127,10 +128,20 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
+
+    public Usuario buscarPorUsuario_idvoluntario(EmployeeModel employeeModel) {
+        return usuarioRepository.findByUsuarioIdvoluntario(employeeModel);
+    }
+
+    public void deletarPorUsuario_idvoluntario(EmployeeModel employeeModel) {
+        usuarioRepository.deleteByUsuarioIdvoluntario(employeeModel);
+    }
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 
 
 }

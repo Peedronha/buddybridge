@@ -7,16 +7,15 @@ import br.com.buddybridge.core.Employee.service.EmployeeService;
 import br.com.buddybridge.core.usuario.entity.Usuario;
 import br.com.buddybridge.core.usuario.service.UsuarioService;
 import br.com.buddybridge.core.util.ExampleExeption;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.SystemException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
+import java.util.*;
 
 
 @RestController
@@ -68,10 +67,20 @@ public class EmployeeController {
         }
     }
 
+    @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteEmployeeModel(@PathVariable Long id){
         if (this.employeeService.findEmployeeModelById(id).isPresent()){
+            Optional<EmployeeModel> optionalEmployeeModel = this.employeeService.findEmployeeModelById(id);
+
+            EmployeeModel model = optionalEmployeeModel.orElseThrow(() -> new NoSuchElementException("Voluntario not found"));
+
+            Usuario u = this.usuarioService.buscarPorUsuario_idvoluntario(model);
+
+            this.usuarioService.excluir(u.getId());
+
             this.employeeService.deleteEmployeeModel(id);
+
             return new ResponseEntity<>(true, HttpStatus.OK);
         }
         return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);

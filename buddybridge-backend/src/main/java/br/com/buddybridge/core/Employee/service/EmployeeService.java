@@ -49,6 +49,7 @@ public class EmployeeService {
     public Optional<EmployeeModel> findEmployeeModelById(Long id) {
         return employeeRepository.findById(id);
     }
+
     @Transactional
     public void deleteEmployeeModel(Long id) {
         employeeRepository.deleteById(id);
