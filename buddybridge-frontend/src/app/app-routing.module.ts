@@ -20,6 +20,9 @@ import {
 } from "./restrict/base/volunteer/component/container/volunteer-form/volunteer-form.component";
 import {VolunteerComponent} from "./restrict/base/volunteer/component/container/volunteer/volunteer.component";
 import {volunteerResolver} from "./restrict/base/volunteer/guards/volunteer.resolver";
+import {AnimalComponent} from "./restrict/base/animal/component/animal/animal.component";
+import {AnimalFormComponent} from "./restrict/base/animal/component/animal-form/animal-form.component";
+import {animalResolver} from "./restrict/base/animal/guard/animal.resolver";
 
 const routes: Routes = [
   {
@@ -37,6 +40,11 @@ const routes: Routes = [
       { path: 'volunteer', title: 'BuddyBridge - Voluntários', component: VolunteerComponent },
       { path: 'volunteer/addvolunteer', title: 'BuddyBridge - Novo Voluntário', component: VolunteerFormComponent, resolve: {volunteer : volunteerResolver} },
       { path: 'volunteer/editvolunteer/:id', title: 'BuddyBridge - Alterar Voluntário', component: VolunteerFormComponent, resolve: {volunteer : volunteerResolver} },
+
+      { path: 'animal', title: 'BuddyBridge - Animais', component: AnimalComponent },
+      { path: 'animal/addanimal', title: 'BuddyBridge - Novo Animal', component: AnimalFormComponent, resolve: {animal : animalResolver} },
+      { path: 'animal/editanimal/:id', title: 'BuddyBridge - Alterar Animal', component: AnimalFormComponent, resolve: {animal : animalResolver} },
+
     ],
     canActivate: [AuthGuard]
   },

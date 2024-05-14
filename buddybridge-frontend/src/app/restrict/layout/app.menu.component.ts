@@ -33,6 +33,9 @@ export class AppMenuComponent implements OnInit {
                         },
                         {
                           label: 'Voluntários', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/volunteer']
+                        },
+                        {
+                          label: 'Animais', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/animal']
                         }
                     ]
                   },
