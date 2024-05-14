@@ -1,4 +1,4 @@
-export class Animal {
+export class AnimalModel {
   id_animal: number | undefined;
   nome_animal!: string;
   raca!: string;

@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {Animal} from "../../model/animal";
+import {AnimalModel} from "../../model/animal.model";
 import {AnimalService} from "../../service/animal.service";
 import {AccountService} from "../../../../../open/account/shared/account.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -11,7 +11,7 @@ import {MessageService} from "primeng/api";
   styleUrl: './animal.component.scss'
 })
 export class AnimalComponent {
-  animals!: Animal[]
+  animals!: AnimalModel[]
 
   constructor(
     private animalService: AnimalService,
@@ -26,7 +26,7 @@ export class AnimalComponent {
   ngOnInit(): void { this.accountService.validarSessao(); }
 
   refresh() {
-    this.animalService.getAnimals().subscribe((data: Animal[]) => {
+    this.animalService.getAnimals().subscribe((data: AnimalModel[]) => {
       this.animals! = data;
     });
   }

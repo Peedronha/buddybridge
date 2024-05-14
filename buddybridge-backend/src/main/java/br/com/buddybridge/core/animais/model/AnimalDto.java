@@ -11,21 +11,21 @@ import lombok.Setter;
 @Setter
 public class AnimalDto {
 
-    private Long idAnimal;
-    private String nomeAnimal;
+    private Long id_animal;
+    private String nome_animal;
     private String raca;
     private Integer idade;
-    private Double pesoAnimal;
-    private Double comprimentoAnimal;
-    private String dataResgate;
+    private Double peso_animal;
+    private Double comprimento_animal;
+    private String data_resgate;
 
     public AnimalDto(AnimalModel animalModel) {
-        this.idAnimal = animalModel.getId_animal();
-        this.nomeAnimal = animalModel.getNome_animal();
+        this.id_animal = animalModel.getId_animal();
+        this.nome_animal = animalModel.getNome_animal();
         this.raca = animalModel.getRaca();
         this.idade = animalModel.getIdade();
-        this.pesoAnimal = animalModel.getPeso_animal();
-        this.comprimentoAnimal = animalModel.getComprimento_animal();
-        this.dataResgate = animalModel.getData_resgate().toString();
+        this.peso_animal = animalModel.getPeso_animal();
+        this.comprimento_animal = animalModel.getComprimento_animal();
+        this.data_resgate = animalModel.getData_resgate().toString();
     }
 }

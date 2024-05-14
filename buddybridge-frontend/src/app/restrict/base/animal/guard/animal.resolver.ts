@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {AnimalService} from "../service/animal.service";
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import {Animal} from "../model/animal";
+import {AnimalModel} from "../model/animal.model";
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +11,7 @@ export class animalResolver{
 
   constructor(private service: AnimalService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Animal> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<AnimalModel> {
     if (route.params && route.params['id']) {
       return this.service.getAnimalsById(route.params['id']);
     }

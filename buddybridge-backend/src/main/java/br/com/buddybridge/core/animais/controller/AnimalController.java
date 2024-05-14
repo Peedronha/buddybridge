@@ -35,11 +35,8 @@ public class AnimalController {
 
     @PostMapping
     public ResponseEntity<AnimalModel> insertAnimalModel(@RequestBody AnimalDto animalDto){
-        try{
-            AnimalModel animal = new AnimalModel();
-            if (!animalService.existsByIdAnimal(animalDto.getIdAnimal())) {
-                 animal = this.animalService.saveAnimalModel(new AnimalModel(animalDto));
-            }
+        try {
+            AnimalModel animal = this.animalService.saveAnimalModel(new AnimalModel(animalDto));
             return new ResponseEntity<>(animal, HttpStatus.CREATED);
         }
         catch (Exception e){

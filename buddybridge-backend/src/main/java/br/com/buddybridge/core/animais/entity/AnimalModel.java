@@ -42,13 +42,12 @@ public class AnimalModel {
 
 
     public AnimalModel(AnimalDto animalDto) {
-        this.id_animal = animalDto.getIdAnimal();
-        this.nome_animal = animalDto.getNomeAnimal();
+        this.nome_animal = animalDto.getNome_animal();
         this.raca = animalDto.getRaca();
         this.idade = animalDto.getIdade();
-        this.peso_animal = animalDto.getPesoAnimal();
-        this.comprimento_animal = animalDto.getComprimentoAnimal();
-        this.data_resgate = LocalDate.parse(animalDto.getDataResgate());
+        this.peso_animal = animalDto.getPeso_animal();
+        this.comprimento_animal = animalDto.getComprimento_animal();
+        this.data_resgate = LocalDate.parse(animalDto.getData_resgate());
     }
 
 }

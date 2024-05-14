@@ -3,7 +3,7 @@ import {AnimalService} from "../../service/animal.service";
 import {MessageService} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AccountService} from "../../../../../open/account/shared/account.service";
-import {Animal} from "../../model/animal";
+import {AnimalModel} from "../../model/animal.model";
 import {FormBuilder, Validators} from "@angular/forms";
 
 
@@ -36,7 +36,7 @@ export class AnimalFormComponent {
 
   ngOnInit(): void {
     this.accountService.validarSessao();
-    const animal: Animal = this.router.snapshot.data['animal'];
+    const animal: AnimalModel = this.router.snapshot.data['animal'];
     console.log(animal);
     this.registerForm.setValue({
       nome_animal: animal.id_animal + '',
@@ -50,7 +50,9 @@ export class AnimalFormComponent {
 
   submitDetails() {
     console.log(this.registerForm.get('id_animal')?.value+'');
-    let animal = new Animal();
+
+    let animal = new AnimalModel();
+
     var id = this.registerForm.get('id_animal')?.value+'';
     animal.id_animal = parseInt(id);
     animal.nome_animal = this.registerForm.get('nome_animal')?.value+'';
@@ -61,7 +63,10 @@ export class AnimalFormComponent {
     animal.idade = this.registerForm.get('idade')?.value + '';
 
     console.log(animal);
-    if (this.registerForm.get('id_animal')?.value + '' != 'NaN'){
+
+    alert(this.registerForm.get('id_animal')?.value+'');
+
+    if (this.registerForm.get('id_animal')?.value + '' !== 'undefined'){
       this.animalService.updateanimal(animal).subscribe(
         response => {
           console.log(response);
@@ -74,7 +79,7 @@ export class AnimalFormComponent {
         },
       )
     } else {
-      animal.id_animal = undefined;
+      animal.id_animal = undefined
       this.animalService.registerAnimal(animal).subscribe(
         response => {
           console.log(response);

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output, signal} from '@angular/core';
-import {Animal} from "../../model/animal";
+import {AnimalModel} from "../../model/animal.model";
 import {FormBuilder, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
@@ -12,7 +12,7 @@ import {AnimalService} from "../../service/animal.service";
 })
 export class ListAnimalComponent {
 
-  @Input() animals!: Animal[];
+  @Input() animals!: AnimalModel[];
   _specificAnimal: any = {};
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
@@ -42,7 +42,7 @@ export class ListAnimalComponent {
 
 
   ngOnInit(): void {
-    this.animalService.getAnimals().subscribe((data: Animal[]) => {
+    this.animalService.getAnimals().subscribe((data: AnimalModel[]) => {
       console.log(data)
       this.animals = data;
     });

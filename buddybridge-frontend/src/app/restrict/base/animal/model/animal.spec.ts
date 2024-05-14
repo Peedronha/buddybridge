@@ -1,7 +1,7 @@
-import { Animal } from './animal';
+import { AnimalModel } from './animal.model';
 
 describe('Animal', () => {
   it('should create an instance', () => {
-    expect(new Animal()).toBeTruthy();
+    expect(new AnimalModel()).toBeTruthy();
   });
 });

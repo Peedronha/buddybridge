@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {map, Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Animal} from "../model/animal";
+import {AnimalModel} from "../model/animal.model";
 import {Volunteer} from "../../volunteer/model/volunteer.model";
 
 @Injectable({
@@ -42,7 +42,7 @@ export class AnimalService {
     return this.http.delete<any>(this.apiUrl + '/' +idUser,{headers: reqHeader})
   }
 
-  updateanimal(animal: Animal){
+  updateanimal(animal: AnimalModel){
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
@@ -58,7 +58,7 @@ export class AnimalService {
       ))
   }
 
-  registerAnimal(postData1: Animal): Observable<any> {
+  registerAnimal(postData1: AnimalModel): Observable<any> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
