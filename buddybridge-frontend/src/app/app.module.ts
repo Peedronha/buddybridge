@@ -55,6 +55,7 @@ import {VolunteerFormComponent} from "./restrict/base/volunteer/component/contai
 import { AnimalFormComponent } from './restrict/base/animal/component/animal-form/animal-form.component';
 import { AnimalComponent } from './restrict/base/animal/component/animal/animal.component';
 import { ListAnimalComponent } from './restrict/base/animal/component/list-animal/list-animal.component';
+import {InputNumberModule} from "primeng/inputnumber";
 
 @NgModule({
   declarations: [
@@ -83,37 +84,38 @@ import { ListAnimalComponent } from './restrict/base/animal/component/list-anima
 
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MenubarModule,
-    ButtonModule,
-    StyleClassModule,
-    BrowserAnimationsModule,
-    AppLayoutModule,
-    CommonModule,
-    DividerModule,
-    ChartModule,
-    PanelModule,
-    FormsModule,
-    PasswordModule,
-    InputTextModule,
-    CardModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    ToastModule,
-    InputOtpModule,
-    TableModule,
-    SplitButtonModule,
-    DialogModule,
-    CheckboxModule,
-    InputTextareaModule,
-    RippleModule,
-    SplitterModule,
-    AppConfigModule,
-    MessagesModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MenubarModule,
+        ButtonModule,
+        StyleClassModule,
+        BrowserAnimationsModule,
+        AppLayoutModule,
+        CommonModule,
+        DividerModule,
+        ChartModule,
+        PanelModule,
+        FormsModule,
+        PasswordModule,
+        InputTextModule,
+        CardModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        ToastModule,
+        InputOtpModule,
+        TableModule,
+        SplitButtonModule,
+        DialogModule,
+        CheckboxModule,
+        InputTextareaModule,
+        RippleModule,
+        SplitterModule,
+        AppConfigModule,
+        MessagesModule,
+        InputNumberModule
 
-  ],
+    ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy },
     MessageService

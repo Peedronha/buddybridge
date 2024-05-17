@@ -40,7 +40,6 @@ public class AnimalModel {
     @Column(name = "data_resgate", nullable = false)
     private LocalDate data_resgate;
 
-
     public AnimalModel(AnimalDto animalDto) {
         this.nome_animal = animalDto.getNome_animal();
         this.raca = animalDto.getRaca();
@@ -49,5 +48,4 @@ public class AnimalModel {
         this.comprimento_animal = animalDto.getComprimento_animal();
         this.data_resgate = LocalDate.parse(animalDto.getData_resgate());
     }
-
 }

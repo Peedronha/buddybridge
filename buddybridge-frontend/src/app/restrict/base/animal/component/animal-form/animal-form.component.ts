@@ -14,12 +14,13 @@ import {FormBuilder, Validators} from "@angular/forms";
 })
 export class AnimalFormComponent {
 
-   registerForm = this.fb.group({
+  registerForm = this.fb.group({
+    id_animal:[''],
     nome_animal: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
-    raca: ['', Validators.required],
-    idade: ['', Validators.required],
-    peso_animal: ['', Validators.required],
-    comprimento_animal: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+    raca: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+    idade: ['', Validators.required, Validators.pattern(/^\d{1,20}$/)],
+    peso_animal: ['', Validators.required, Validators.pattern(/^\d{1,100}$/)],
+    comprimento_animal: ['', [Validators.required, Validators.pattern(/^\d{1,2000}$/)]],
     data_resgate: ['', Validators.required],
   })
 
@@ -37,19 +38,20 @@ export class AnimalFormComponent {
   ngOnInit(): void {
     this.accountService.validarSessao();
     const animal: AnimalModel = this.router.snapshot.data['animal'];
-    console.log(animal);
+    console.log("ngOnInit: "+JSON.stringify(animal));
     this.registerForm.setValue({
-      nome_animal: animal.id_animal + '',
+      id_animal: animal.id_animal +'',
+      nome_animal: animal.nome_animal + '',
       raca: animal.raca,
       idade: animal.idade + '',
       peso_animal: animal.peso_animal,
       comprimento_animal: animal.comprimento_animal,
-      data_resgate: animal.comprimento_animal,
+      data_resgate: animal.data_resgate,
     })
   }
 
   submitDetails() {
-    console.log(this.registerForm.get('id_animal')?.value+'');
+    alert(this.registerForm.get('id_animal')?.value+'');
 
     let animal = new AnimalModel();
 
@@ -64,9 +66,7 @@ export class AnimalFormComponent {
 
     console.log(animal);
 
-    alert(this.registerForm.get('id_animal')?.value+'');
-
-    if (this.registerForm.get('id_animal')?.value + '' !== 'undefined'){
+    if (this.registerForm.get('id_animal')?.value + '' != 'NaN'){
       this.animalService.updateanimal(animal).subscribe(
         response => {
           console.log(response);

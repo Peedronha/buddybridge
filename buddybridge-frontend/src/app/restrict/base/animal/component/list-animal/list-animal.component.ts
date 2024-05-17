@@ -57,8 +57,9 @@ export class ListAnimalComponent {
     this.add.emit(true);
   }
 
-  onEdit(idUser: any) {
-    this.edit.emit(idUser);
+  onEdit(idAnimal: any) {
+    alert("IdAnimal: "+idAnimal)
+    this.edit.emit(idAnimal);
   }
 
   onDelete(idUser: any) {

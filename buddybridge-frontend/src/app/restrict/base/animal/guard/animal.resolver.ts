@@ -16,7 +16,7 @@ export class animalResolver{
       return this.service.getAnimalsById(route.params['id']);
     }
     return of({
-      id_animal: parseFloat(''),
+      id_animal: parseInt(''),
       nome_animal: '',
       raca: '',
       idade: '',
