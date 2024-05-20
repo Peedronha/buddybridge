@@ -1,7 +1,7 @@
-package br.com.buddybridge.core.animais.service;
+package br.com.buddybridge.core.animais.animal.service;
 
-import br.com.buddybridge.core.animais.entity.AnimalModel;
-import br.com.buddybridge.core.animais.repository.AnimalRepository;
+import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
+import br.com.buddybridge.core.animais.animal.repository.AnimalRepository;
 import br.com.buddybridge.core.util.ExampleExeption;
 import jakarta.transaction.SystemException;
 import lombok.AllArgsConstructor;

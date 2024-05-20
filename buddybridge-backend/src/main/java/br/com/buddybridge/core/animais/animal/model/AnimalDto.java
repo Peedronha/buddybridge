@@ -1,7 +1,7 @@
-package br.com.buddybridge.core.animais.model;
+package br.com.buddybridge.core.animais.animal.model;
 
 
-import br.com.buddybridge.core.animais.entity.AnimalModel;
+import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
