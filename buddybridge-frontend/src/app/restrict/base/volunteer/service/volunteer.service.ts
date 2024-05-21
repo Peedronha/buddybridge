@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
-import {Volunteer} from "../../../../restrict/base/volunteer/model/volunteer.model";
+import {Colaborador} from "../model/colaborador";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Injectable({
@@ -14,7 +14,7 @@ export class VolunteerService {
     return token;
   }
 
-  private apiUrl = 'http://localhost:8080/volunteer';
+  private apiUrl = 'http://localhost:8080/colaborador';
 
   constructor(private http: HttpClient) {
   }
@@ -35,7 +35,7 @@ export class VolunteerService {
     return this.http.delete(this.apiUrl + '/' + idvoluntario, {headers: reqHeader});
   }
 
-  registerVolunteer(postData1: Volunteer): Observable<any> {
+  registerVolunteer(postData1: Colaborador): Observable<any> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
@@ -50,7 +50,7 @@ export class VolunteerService {
           }
       ))
   }
-  updateVolunteer(postData1: Volunteer): Observable<any> {
+  updateVolunteer(postData1: Colaborador): Observable<any> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()

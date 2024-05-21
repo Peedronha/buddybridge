@@ -15,14 +15,12 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    console.log('validando sessão');
     this.accountService.validarSessao();
     const token = window.localStorage.getItem('token');
     if (token) {
-      console.log('true');
       return true;
     } else {
-      console.log('not true');
+      this.router.navigate(['/login']);
       return false;
     }
   }

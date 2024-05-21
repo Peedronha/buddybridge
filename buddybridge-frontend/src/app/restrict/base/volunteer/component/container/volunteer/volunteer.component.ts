@@ -1,6 +1,6 @@
 import { AccountService } from '../../../../../../open/account/shared/account.service';
 import { VolunteerService } from '../../../service/volunteer.service';
-import { Volunteer } from './../../../model/volunteer.model';
+import { Colaborador } from '../../../model/colaborador';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MenuItem, MessageService} from "primeng/api";
@@ -10,7 +10,7 @@ import {MenuItem, MessageService} from "primeng/api";
   styleUrl: './volunteer.component.scss'
 })
 export class VolunteerComponent {
-  volunteers!: Volunteer[]
+  volunteers!: Colaborador[]
 
   constructor(
     private volunteerService: VolunteerService,
@@ -25,7 +25,7 @@ export class VolunteerComponent {
   ngOnInit(): void { this.accountService.validarSessao(); }
 
   refresh() {
-    this.volunteerService.getVolunteers().subscribe((data: Volunteer[]) => {
+    this.volunteerService.getVolunteers().subscribe((data: Colaborador[]) => {
       this.volunteers! = data;
     });
   }

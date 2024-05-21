@@ -20,6 +20,7 @@ import {
 } from "./restrict/base/volunteer/component/container/volunteer-form/volunteer-form.component";
 import {VolunteerComponent} from "./restrict/base/volunteer/component/container/volunteer/volunteer.component";
 import {volunteerResolver} from "./restrict/base/volunteer/guards/volunteer.resolver";
+import { LoginGuard } from './open/account/shared/login.guard';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
     component: AppLayoutComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+
+      { path: 'restrict/home', title: 'BuddyBridge - Home', component: HomeComponent },
+      { path: 'restrict/institucional', title: 'BuddyBridge - Institucional', component: InsitucionalComponent },
+
       { path: 'dashboard', title: 'BuddyBridge - DashBoard', component: DashboardComponent },
       { path: 'profile', title: 'BuddyBridge - Meu Perfil', component: ProfileComponent },
       { path: 'account', title: 'BuddyBridge - Usuários', component: AccountComponent },
@@ -37,6 +42,7 @@ const routes: Routes = [
       { path: 'volunteer', title: 'BuddyBridge - Voluntários', component: VolunteerComponent },
       { path: 'volunteer/addvolunteer', title: 'BuddyBridge - Novo Voluntário', component: VolunteerFormComponent, resolve: {volunteer : volunteerResolver} },
       { path: 'volunteer/editvolunteer/:id', title: 'BuddyBridge - Alterar Voluntário', component: VolunteerFormComponent, resolve: {volunteer : volunteerResolver} },
+
     ],
     canActivate: [AuthGuard]
   },
@@ -45,12 +51,12 @@ const routes: Routes = [
     component: TopMenuOpenComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full'},
-      { path: 'home', title: 'BuddyBridge - Home', component: HomeComponent },
-      { path: 'institucional', title: 'BuddyBridge - Institucional', component: InsitucionalComponent },
-      { path: 'register', title: 'BuddyBridge - Criar Conta', component: RegisterComponent },
-      { path: 'login', title: 'BuddyBridge - Login', component: LoginComponent },
-      { path: 'recovery', title: 'BuddyBridge - Recovery', component: RecoveryComponent },
-      { path: 'validatelogin', title: 'BuddyBridge - Validar código OTP', component: ValidateloginComponent },
+      { path: 'home', title: 'BuddyBridge - Home', component: HomeComponent, canActivate: [LoginGuard] },
+      { path: 'institucional', title: 'BuddyBridge - Institucional', component: InsitucionalComponent, canActivate: [LoginGuard] },
+      { path: 'register', title: 'BuddyBridge - Criar Conta', component: RegisterComponent, canActivate: [LoginGuard] },
+      { path: 'login', title: 'BuddyBridge - Login', component: LoginComponent, canActivate: [LoginGuard] },
+      { path: 'recovery', title: 'BuddyBridge - Recovery', component: RecoveryComponent, canActivate: [LoginGuard] },
+      { path: 'validatelogin', title: 'BuddyBridge - Validar código OTP', component: ValidateloginComponent, canActivate: [LoginGuard] },
     ]
   },
   { path: '', redirectTo: 'home', pathMatch: 'full'},

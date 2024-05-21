@@ -3,7 +3,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import {VolunteerService} from "../../../service/volunteer.service";
-import {Volunteer} from "../../../model/volunteer.model";
+import {Colaborador} from "../../../model/colaborador";
 import {AccountService} from "../../../../../../open/account/shared/account.service";
 
 
@@ -16,13 +16,13 @@ import {AccountService} from "../../../../../../open/account/shared/account.serv
 export class RegisterVolunteerComponent {
 
   registerForm = this.fb.group({
-    nome_voluntario: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+    nome_colaborador: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     email: ['', [Validators.required, Validators.email]],
-    cpf_voluntario: [''],
-    cnpj_voluntario: [''],
-    cargo_voluntario: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
-    descricao_atividades_voluntario: [''],
-    pf_pj_voluntario: ['']
+    cpf_colaborador: [''],
+    cnpj_colaborador: [''],
+    cargo_colaborador: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+    descricao_atividades_colaborador: [''],
+    pf_pj_colaborador: ['']
   })
 
   showPj: boolean = true;
@@ -38,32 +38,32 @@ export class RegisterVolunteerComponent {
     this.accountService.validarSessao();
   }
 
-  get nome_voluntario() {
-    return this.registerForm.get('nome_voluntario');
+  get nome_colaborador() {
+    return this.registerForm.get('nome_colaborador');
   }
 
   get email() {
     return this.registerForm.get('email');
   }
 
-  get cpf_voluntario() {
-    return this.registerForm.get('cpf_voluntario');
+  get cpf_colaborador() {
+    return this.registerForm.get('cpf_colaborador');
   }
 
-  get cnpj_voluntario() {
-    return this.registerForm.get('cnpj_voluntario');
+  get cnpj_colaborador() {
+    return this.registerForm.get('cnpj_colaborador');
   }
 
-  get cargo_voluntario() {
-    return this.registerForm.get('cargo_voluntario');
+  get cargo_colaborador() {
+    return this.registerForm.get('cargo_colaborador');
   }
 
-  get descricao_atividades_voluntario() {
-    return this.registerForm.get('descricao_atividades_voluntario');
+  get descricao_atividades_colaborador() {
+    return this.registerForm.get('descricao_atividades_colaborador');
   }
 
-  get pf_pj_voluntario() {
-    return this.registerForm.get('pf_pj_voluntario');
+  get pf_pj_colaborador() {
+    return this.registerForm.get('pf_pj_colaborador');
   }
 
   updateState() {
@@ -71,16 +71,16 @@ export class RegisterVolunteerComponent {
     this.showPj = !this.showPj;
 
     if (!this.showPj) {
-      this.registerForm.get('cpf_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]);
-      this.registerForm.get('cnpj_voluntario')?.clearValidators();
-      this.registerForm.get('cnpj_voluntario')?.disable();
+      this.registerForm.get('cpf_colaborador')?.setValidators([Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]);
+      this.registerForm.get('cnpj_colaborador')?.clearValidators();
+      this.registerForm.get('cnpj_colaborador')?.disable();
     } else {
-      this.registerForm.get('cnpj_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]);
-      this.registerForm.get('cpf_voluntario')?.clearValidators();
-      this.registerForm.get('cpf_voluntario')?.disable();
+      this.registerForm.get('cnpj_colaborador')?.setValidators([Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]);
+      this.registerForm.get('cpf_colaborador')?.clearValidators();
+      this.registerForm.get('cpf_colaborador')?.disable();
     }
-    this.registerForm.get('cpf_voluntario')?.updateValueAndValidity();
-    this.registerForm.get('cnpj_voluntario')?.updateValueAndValidity();
+    this.registerForm.get('cpf_colaborador')?.updateValueAndValidity();
+    this.registerForm.get('cnpj_colaborador')?.updateValueAndValidity();
   }
 
   isPessoaJuridica(): boolean {
@@ -90,16 +90,16 @@ export class RegisterVolunteerComponent {
   submitDetails() {
     const postData = { ...this.registerForm.value };
     if (!this.showPj) {
-      postData.pf_pj_voluntario = 'PESSOA JURIDICA';
+      postData.pf_pj_colaborador = 'PESSOA JURIDICA';
     }
-      postData.pf_pj_voluntario = 'PESSOA FISICA'
-    this.volunteerService.registerVolunteer(postData as Volunteer).subscribe(
+      postData.pf_pj_colaborador = 'PESSOA FISICA'
+    this.volunteerService.registerVolunteer(postData as Colaborador).subscribe(
       response => {
         console.log(response);
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Register successfully' });
 
-        this.registerForm.get('cnpj_voluntario')?.enable();
-        this.registerForm.get('cpf_voluntario')?.enable();
+        this.registerForm.get('cnpj_colaborador')?.enable();
+        this.registerForm.get('cpf_colaborador')?.enable();
 
         this.registerForm.reset();
         this.router.navigateByUrl('/volunteer')

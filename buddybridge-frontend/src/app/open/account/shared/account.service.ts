@@ -39,6 +39,10 @@ export class AccountService {
     const tokenOld = window.localStorage.getItem('token');
     const idOld = window.localStorage.getItem('idUser');
     const loginOld = window.localStorage.getItem('login');
+    if(!tokenOld && !idOld && !loginOld){
+      return false;
+    }
+    console.log('validando a sessão')
     let auth = new Auth();
     auth.token = tokenOld +'';
     auth.idUser = idOld +'';

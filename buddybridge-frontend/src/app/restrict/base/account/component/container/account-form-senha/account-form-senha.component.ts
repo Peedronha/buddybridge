@@ -6,6 +6,7 @@ import { AccountRestrictService } from '../../../shared/account-restrict.service
 import { User } from '../../../../../../open/account/model/user.model';
 import { passwordMatchValidator } from '../../../../../../open/account/shared/password-match.directive';
 import { AccountService } from '../../../../../../open/account/shared/account.service';
+import { UsuarioEndereco } from '../../../../../../open/account/model/usuarioEndereco.model';
 
 @Component({
   selector: 'app-account-form-senha',
@@ -16,7 +17,7 @@ export class AccountFormSenhaComponent {
 
   registerForm = this.fb.group({
     id:'',
-    fullName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+    fullName: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.pattern(/(?=.*\d)(?=.*[a-zA-Z]).{8,}/)]],
     confirmPassword: ['', [Validators.required, Validators.pattern(/(?=.*\d)(?=.*[a-zA-Z]).{8,}/)]],
@@ -24,8 +25,7 @@ export class AccountFormSenhaComponent {
     confirmacaoEmail: [''],
     token: [''],
     telefone: [''],
-    usuarioIdendereco: [''],
-    usuarioIdvoluntario: [''],
+
   }, {
     validators: passwordMatchValidator
   })
@@ -53,8 +53,6 @@ export class AccountFormSenhaComponent {
       confirmacaoEmail: user.confirmacaoEmail + '',
       token: user.token+ '',
       telefone: user.telefone+'',
-      usuarioIdendereco: user.usuarioIdendereco+'',
-      usuarioIdvoluntario: user.usuarioIdendereco+''
     })
   }
 
@@ -89,8 +87,7 @@ export class AccountFormSenhaComponent {
     usuario.confirmacaoEmail = false;
     usuario.token = this.registerForm.get('toekn')?.value + '';
     usuario.telefone = this.registerForm.get('telefone')?.value + '';
-    usuario.usuarioIdendereco = undefined;
-    usuario.usuarioIdvoluntario = undefined;
+    usuario.usuarioEndereco = new UsuarioEndereco();
 
     this.accountRestrictService.update(usuario).subscribe(
       response => {

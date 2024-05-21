@@ -14,7 +14,7 @@ import { User } from '../model/user.model';
 export class RegisterComponent {
 
   registerForm = this.fb.group({
-    fullName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+    fullName: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.pattern(/(?=.*\d)(?=.*[a-zA-Z]).{8,}/)]],
     confirmPassword: ['', [Validators.required, Validators.pattern(/(?=.*\d)(?=.*[a-zA-Z]).{8,}/)]]
@@ -56,8 +56,7 @@ export class RegisterComponent {
     usuario.confirmacaoEmail = false;
     usuario.token = '';
     usuario.telefone = '';
-    usuario.usuarioIdendereco = undefined;
-    usuario.usuarioIdvoluntario = undefined;
+    usuario.usuarioEndereco = undefined;
 
     this.accountService.salvar(usuario).subscribe(
       response => {

@@ -1,10 +1,19 @@
 package br.com.buddybridge.core.ong.entity;
 
+import br.com.buddybridge.core.endereco.entity.Endereco;
+import br.com.buddybridge.core.usuario.entity.Usuario;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Objects;
 
 @Entity
 @Table(name = "ong")
+@Getter
+@Setter
+@EqualsAndHashCode
 public class Ong {
 
     @Id
@@ -54,137 +63,14 @@ public class Ong {
     @Column(name = "linkedin_ong", length = 255)
     private String linkedinOng;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ong ong = (Ong) o;
-        return Objects.equals(idOng, ong.idOng);
-    }
+    @ManyToOne
+    @JoinColumn(name="ong_id", referencedColumnName="id")
+    private Usuario usuarioOng;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(idOng);
-    }
+    @Embedded
+    private Endereco OngEndereco;
 
-    public Long getIdOng() {
-        return idOng;
-    }
 
-    public void setIdOng(Long idOng) {
-        this.idOng = idOng;
-    }
 
-    public String getRazaoSocialOng() {
-        return razaoSocialOng;
-    }
-
-    public void setRazaoSocialOng(String razaoSocialOng) {
-        this.razaoSocialOng = razaoSocialOng;
-    }
-
-    public String getCnpjOng() {
-        return cnpjOng;
-    }
-
-    public void setCnpjOng(String cnpjOng) {
-        this.cnpjOng = cnpjOng;
-    }
-
-    public String getMissaoOng() {
-        return missaoOng;
-    }
-
-    public void setMissaoOng(String missaoOng) {
-        this.missaoOng = missaoOng;
-    }
-
-    public String getVaroresOng() {
-        return varoresOng;
-    }
-
-    public void setVaroresOng(String varoresOng) {
-        this.varoresOng = varoresOng;
-    }
-
-    public String getVisaoOng() {
-        return visaoOng;
-    }
-
-    public void setVisaoOng(String visaoOng) {
-        this.visaoOng = visaoOng;
-    }
-
-    public String getTelefoneOng() {
-        return telefoneOng;
-    }
-
-    public void setTelefoneOng(String telefoneOng) {
-        this.telefoneOng = telefoneOng;
-    }
-
-    public String getWhatsappOng() {
-        return whatsappOng;
-    }
-
-    public void setWhatsappOng(String whatsappOng) {
-        this.whatsappOng = whatsappOng;
-    }
-
-    public String getEmailFinanceiroOng() {
-        return emailFinanceiroOng;
-    }
-
-    public void setEmailFinanceiroOng(String emailFinanceiroOng) {
-        this.emailFinanceiroOng = emailFinanceiroOng;
-    }
-
-    public String getEmailContatoOng() {
-        return emailContatoOng;
-    }
-
-    public void setEmailContatoOng(String emailContatoOng) {
-        this.emailContatoOng = emailContatoOng;
-    }
-
-    public String getHistoriaOng() {
-        return historiaOng;
-    }
-
-    public void setHistoriaOng(String historiaOng) {
-        this.historiaOng = historiaOng;
-    }
-
-    public String getInstagramOng() {
-        return instagramOng;
-    }
-
-    public void setInstagramOng(String instagramOng) {
-        this.instagramOng = instagramOng;
-    }
-
-    public String getFacebookOng() {
-        return facebookOng;
-    }
-
-    public void setFacebookOng(String facebookOng) {
-        this.facebookOng = facebookOng;
-    }
-
-    public String getTwitterOng() {
-        return twitterOng;
-    }
-
-    public void setTwitterOng(String twitterOng) {
-        this.twitterOng = twitterOng;
-    }
-
-    public String getLinkedinOng() {
-        return linkedinOng;
-    }
-
-    public void setLinkedinOng(String linkedinOng) {
-        this.linkedinOng = linkedinOng;
-    }
 }
 

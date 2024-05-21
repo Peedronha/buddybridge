@@ -38,7 +38,6 @@
           <input type="text" pInputText formControlName="fullName" class="w-full" name="fullName" placeholder="Digite seu nome"/>
           <small *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)" class="block p-error">
             <div *ngIf="fullName.errors?.['required']">O nome é uma informação obrigatória.</div>
-            <div *ngIf="fullName.errors?.['pattern']">O nome não deve conter caracteres especiais</div>
           </small>
         </div>
         <div class="field">

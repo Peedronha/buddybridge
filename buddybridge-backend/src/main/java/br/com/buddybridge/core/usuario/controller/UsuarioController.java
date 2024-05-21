@@ -1,7 +1,7 @@
 package br.com.buddybridge.core.usuario.controller;
 
 
-import br.com.buddybridge.core.Employee.entity.EmployeeModel;
+import br.com.buddybridge.core.colaborador.entity.Colaborador;
 import br.com.buddybridge.core.usuario.entity.Usuario;
 import br.com.buddybridge.core.usuario.service.UsuarioService;
 import br.com.buddybridge.core.util.ExampleExeption;

@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { AccountRestrictService } from '../../../shared/account-restrict.service';
 import { AccountService } from '../../../../../../open/account/shared/account.service';
 import { passwordMatchValidator } from '../../../../../../open/account/shared/password-match.directive';
+import { UsuarioEndereco } from '../../../../../../open/account/model/usuarioEndereco.model';
 
 @Component({
   selector: 'app-account-form',
@@ -16,7 +17,7 @@ export class AccountFormComponent {
 
   registerForm = this.fb.group({
     id: [''],
-    fullName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+    fullName: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     telefone: ['']
   })
@@ -74,8 +75,8 @@ export class AccountFormComponent {
     usuario.confirmacaoEmail = false;
     usuario.token = '';
     usuario.telefone = this.registerForm.get('telefone')?.value + '';
-    usuario.usuarioIdendereco = undefined;
-    usuario.usuarioIdvoluntario = undefined;
+    usuario.usuarioEndereco = new UsuarioEndereco();
+
     if(usuario.id != undefined){
       this.accountRestrictService.update(usuario).subscribe(
         response => {

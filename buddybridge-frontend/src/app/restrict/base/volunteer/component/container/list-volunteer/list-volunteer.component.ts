@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MenuItem, MessageService} from "primeng/api";
-import {Volunteer} from "../../../model/volunteer.model";
+import {Colaborador} from "../../../model/colaborador";
 import {VolunteerService} from "../../../service/volunteer.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
 })
 export class ListVolunteerComponent {
 
-  @Input() volunteers!: Volunteer[];
+  @Input() volunteers!: Colaborador[];
   _specificVolunteer: any = {};
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
@@ -23,13 +23,13 @@ export class ListVolunteerComponent {
 
 
   editForm = this.fb.group({
-    nome_voluntario: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+    nome_colaborador: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     email: ['', [Validators.required, Validators.email]],
-    cpf_voluntario: [''/*, [Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]*/],
-    cnpj_voluntario: [''/*, [Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]*/],
-    cargo_voluntario: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
-    descricao_atividades_voluntario: [''],
-    pf_pj_voluntario: [''/*, [Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]*/]
+    cpf_colaborador: [''/*, [Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]*/],
+    cnpj_colaborador: [''/*, [Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]*/],
+    cargo_colaborador: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+    descricao_atividades_colaborador: [''],
+    pf_pj_colaborador: [''/*, [Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]*/]
   });
 
   loading: boolean = false;
@@ -44,7 +44,7 @@ export class ListVolunteerComponent {
 
 
   ngOnInit(): void {
-    this.volunteerService.getVolunteers().subscribe((data: Volunteer[]) => {
+    this.volunteerService.getVolunteers().subscribe((data: Colaborador[]) => {
       console.log(data)
       this.volunteers = data;
     });
@@ -54,32 +54,32 @@ export class ListVolunteerComponent {
     const searchTerm = event.target.value;
   }
 
-  updateEdit(idvoluntario: any){
-    this._specificVolunteer = this.volunteers.find(volunteer => volunteer.idvoluntario === idvoluntario) || null;
+  updateEdit(idcolaborador: any){
+    this._specificVolunteer = this.volunteers.find(volunteer => volunteer.idcolaborador === idcolaborador) || null;
 
     this.showHidden = !this.showHidden;
     this.showEdit = !this.showEdit;
     // this.router.navigateByUrl('/edit-volunteer')
   }
 
-  updateState(idvoluntario: any){
-    this._specificVolunteer = this.volunteers.find(volunteer => volunteer.idvoluntario === idvoluntario) || null;
+  updateState(idcolaborador: any){
+    this._specificVolunteer = this.volunteers.find(volunteer => volunteer.idcolaborador === idcolaborador) || null;
     this.showHidden = !this.showHidden;
   }
 
 
   updateValidator(cnpj: boolean){
     if (cnpj) {
-      this.editForm.get('cnpj_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]);
-      this.editForm.get('cpf_voluntario')?.clearValidators();
-      this.editForm.get('cpf_voluntario')?.disable();
+      this.editForm.get('cnpj_colaborador')?.setValidators([Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]);
+      this.editForm.get('cpf_colaborador')?.clearValidators();
+      this.editForm.get('cpf_colaborador')?.disable();
     } else {
-      this.editForm.get('cpf_voluntario')?.setValidators([Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]);
-      this.editForm.get('cnpj_voluntario')?.clearValidators();
-      this.editForm.get('cnpj_voluntario')?.disable();
+      this.editForm.get('cpf_colaborador')?.setValidators([Validators.required, Validators.pattern(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)]);
+      this.editForm.get('cnpj_colaborador')?.clearValidators();
+      this.editForm.get('cnpj_colaborador')?.disable();
     }
-    this.editForm.get('cpf_voluntario')?.updateValueAndValidity();
-    this.editForm.get('cnpj_voluntario')?.updateValueAndValidity();
+    this.editForm.get('cpf_colaborador')?.updateValueAndValidity();
+    this.editForm.get('cnpj_colaborador')?.updateValueAndValidity();
   }
 
 

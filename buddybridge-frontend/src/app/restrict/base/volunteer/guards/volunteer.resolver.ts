@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { User } from '../../../../open/account/model/user.model';
-import {Volunteer} from "../model/volunteer.model";
+import {Colaborador} from "../model/colaborador";
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +12,19 @@ export class volunteerResolver {
 
   constructor(private service: VolunteerService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Volunteer> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Colaborador> {
     if (route.params && route.params['id']) {
       return this.service.getVolunteersById(route.params['id']);
     }
     return of({
-      idvoluntario: parseFloat(''),
-      nome_voluntario: '',
-      cpf_voluntario: '',
-      cnpj_voluntario:'',
-      cargo_voluntario: '',
-      descricao_atividades_voluntario: '',
+      idcolaborador: parseFloat(''),
+      nome_colaborador: '',
+      cpf_colaborador: '',
+      cnpj_colaborador:'',
+      cargo_colaborador: '',
+      descricao_atividades_colaborador: '',
       email: '',
-      pf_pj_voluntario: ''
+      pf_pj_colaborador: ''
     });
   }
 }

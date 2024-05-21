@@ -5,13 +5,17 @@
   <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
     <i class="pi pi-ellipsis-v"></i>
   </button>
-  &nbsp;&nbsp;
-  <a class="layout-topbar-logo" routerLink="">
-    <img src="../../../assets/img/logo_buddyBridge_light.png" alt="logo">
-    |&nbsp;&nbsp;
+  <a class="layout-topbar-logo" routerLink="restrict/institucional">
     <img src="../../../assets/img/default-logo.png" alt="logo">
   </a>
   <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+    <div class="flex align-items-center gap-2">
+      <input type="text" pInputText placeholder="Pesquisar Animais" class="w-8rem sm:w-auto"/>
+    </div>
+    <button class="p-link layout-topbar-button" routerLink="/restrict/home">
+        <i class="pi pi-heart"></i>
+        <span>Quero adotar!</span>
+      </button>
       <button class="p-link layout-topbar-button" routerLink="/profile">
           <i class="pi pi-user"></i>
           <span>Minha conta</span>

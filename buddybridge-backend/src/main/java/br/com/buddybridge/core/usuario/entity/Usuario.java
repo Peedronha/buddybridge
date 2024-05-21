@@ -1,6 +1,6 @@
 package br.com.buddybridge.core.usuario.entity;
 
-import br.com.buddybridge.core.Employee.entity.EmployeeModel;
+import br.com.buddybridge.core.colaborador.entity.Colaborador;
 import br.com.buddybridge.core.endereco.entity.Endereco;
 import jakarta.persistence.*;
 import lombok.*;
@@ -44,16 +44,11 @@ public class Usuario implements UserDetails {
     @Column(name = "token", nullable = false, length = 45)
     private String token;
 
-    @Column(name = "telefone", nullable = false, length = 45)
+    @Column(name = "telefone", nullable = true, length = 45)
     private String telefone;
 
-    @ManyToOne
-    @JoinColumn(name="usuario_idendereco", referencedColumnName="idendereco")
-    private Endereco usuarioIdendereco;
-
-    @ManyToOne
-    @JoinColumn(name="usuario_idvoluntario", referencedColumnName="idvoluntario")
-    private EmployeeModel usuarioIdvoluntario;
+    @Embedded
+    private Endereco usuarioEndereco;
 
     @Override
     public boolean equals(Object o) {
@@ -104,9 +99,4 @@ public class Usuario implements UserDetails {
         return true;
     }
 
-    public Usuario(EmployeeModel employeeModel) {
-        this.nome = employeeModel.getNome_voluntario();
-        this.login = employeeModel.getEmail();
-        this.usuarioIdvoluntario = employeeModel;
-    }
 }

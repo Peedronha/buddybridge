@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { passwordMatchValidator } from '../../../../../open/account/shared/password-match.directive';
 import { User } from '../../../../../open/account/model/user.model';
+import { UsuarioEndereco } from '../../../../../open/account/model/usuarioEndereco.model';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +16,7 @@ import { User } from '../../../../../open/account/model/user.model';
 export class ProfileComponent {
   registerForm = this.fb.group({
     id: '',
-    fullName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+    fullName: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     telefone: [''],
     password: ['', [Validators.required, Validators.pattern(/(?=.*\d)(?=.*[a-zA-Z]).{8,}/)]],
@@ -80,8 +81,8 @@ export class ProfileComponent {
     usuario.confirmacaoEmail = false;
     usuario.token = '';
     usuario.telefone = this.registerForm.get('telefone')?.value + '';
-    usuario.usuarioIdendereco = undefined;
-    usuario.usuarioIdvoluntario = undefined;
+    usuario.usuarioEndereco = new UsuarioEndereco();
+
     this.accountRestrictService.update(usuario).subscribe(
       response => {
         console.log(response);

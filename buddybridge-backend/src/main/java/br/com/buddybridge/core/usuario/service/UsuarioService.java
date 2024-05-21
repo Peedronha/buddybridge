@@ -1,7 +1,7 @@
 package br.com.buddybridge.core.usuario.service;
 
 
-import br.com.buddybridge.core.Employee.entity.EmployeeModel;
+import br.com.buddybridge.core.colaborador.entity.Colaborador;
 import br.com.buddybridge.core.email.service.EmailService;
 import br.com.buddybridge.core.security.jwt.JwtService;
 import br.com.buddybridge.core.security.config.SecurityConfig;
@@ -35,7 +35,7 @@ public class UsuarioService {
     private UserTransaction utx;
 
 
-    public void salvar(Usuario usuario, Boolean voluntario) throws ExampleExeption, SystemException {
+    public Usuario salvar(Usuario usuario, Boolean colaborador) throws ExampleExeption, SystemException {
         if (usuario.getNome() == null || usuario.getNome().isEmpty()) {
             throw new ExampleExeption("O nome é uma informação obrigatória. ", "ERRO001");
         }
@@ -46,7 +46,7 @@ public class UsuarioService {
 
                 String message = "Seja bem vindo a BuddyBridge - para acessar o sistema usar o seguinte código OTP: " + usuario.getToken();
 
-                if (voluntario){
+                if (colaborador){
                    message = message.concat("\nSua senha inicial é: " + usuario.getSenha() +
                            "\n<a>http://localhost:4200/validatelogin</a>"+
                                        "\nVocê pode altera-la nas configurações de perfil.");
@@ -66,7 +66,7 @@ public class UsuarioService {
                 }
             }
 
-            usuarioRepository.save(usuario);
+            return usuarioRepository.save(usuario);
         } catch (Exception e) {
             throw new SystemException(String.valueOf(e));
         }
@@ -127,15 +127,6 @@ public class UsuarioService {
 
     public void excluir(Long id) {
         usuarioRepository.deleteById(id);
-    }
-
-
-    public Usuario buscarPorUsuario_idvoluntario(EmployeeModel employeeModel) {
-        return usuarioRepository.findByUsuarioIdvoluntario(employeeModel);
-    }
-
-    public void deletarPorUsuario_idvoluntario(EmployeeModel employeeModel) {
-        usuarioRepository.deleteByUsuarioIdvoluntario(employeeModel);
     }
 
     @Bean

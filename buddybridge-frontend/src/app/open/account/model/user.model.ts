@@ -1,3 +1,5 @@
+import { UsuarioEndereco } from "./usuarioEndereco.model";
+
 export class User {
   id: number | undefined;
   nome!: string;
@@ -7,7 +9,5 @@ export class User {
   confirmacaoEmail?: boolean;
   token?: string;
   telefone?: string;
-  usuarioIdendereco?: number | undefined;
-  usuarioIdvoluntario?: number | undefined;
-
+  usuarioEndereco?: UsuarioEndereco;
 }
