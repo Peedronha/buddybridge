@@ -1,0 +1,70 @@
+<div class="card">
+  <p-table #dt1 [value]="animals" selectionMode="single" [(selection)]="_specificAnimal" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
+           [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="id_animal" style="width:10%">Cod. <p-sortIcon field="id_animal"></p-sortIcon></th>
+        <th pSortableColumn="nome_voluntario" style="width:20%">Nome <p-sortIcon field="nome_animal"></p-sortIcon></th>
+        <th pSortableColumn="cpf_voluntario" style="width:20%">Idade <p-sortIcon field="idade"></p-sortIcon></th>
+        <th pSortableColumn="cnpj_voluntario" style="width:20%">Raça <p-sortIcon field="raca"></p-sortIcon></th>
+        <th pSortableColumn="cargo_voluntario" style="width:20%">Data de resgate <p-sortIcon field="data_resgate"></p-sortIcon></th>
+        <th pSortableColumn="Ações" style="width:15%">Ações</th>
+      </tr>
+      <tr>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'id_animal', 'contains')" [value]="$any(dt1.filters['id_animal'])?.value" placeholder="Filtrar Cod." class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'nome_animal', 'contains')" [value]="$any(dt1.filters['nome_animal'])?.value" placeholder="Filtrar Nome" class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'idade', 'contains')" [value]="$any(dt1.filters['idade'])?.value" placeholder="Filtrar Idade" class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'raca', 'contains')" [value]="$any(dt1.filters['raca'])?.value" placeholder="Filtrar Raca" class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'data_resgate', 'contains')" [value]="$any(dt1.filters['data_resgate'])?.value" placeholder="Filtrar Data de resgate" class="w-full">
+        </th>
+        <th>
+          <p-button label="Novo" icon="pi pi-plus" (click)="onAdd()" ></p-button>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-animal>
+      <tr [pSelectableRow]="animal">
+        <td>
+          <span class="p-column-title">Cod.</span>
+          {{animal.id_animal}}
+        </td>
+        <td>
+          <span class="p-column-title">Nome</span>
+          {{animal.nome_animal}}
+        </td>
+        <td>
+          <span class="p-column-title">Idade</span>
+          <span class="ml-1 vertical-align-middle">{{animal.idade}}</span>
+        </td>
+        <td>
+          <span class="p-column-title">Raça</span>
+          <span class="ml-1 vertical-align-middle">{{animal.raca}}</span>
+        </td>
+        <td>
+          <span class="p-column-title">Data de Resgate</span>
+          <span class="ml-1 vertical-align-middle">{{animal.data_resgate}}</span>
+        </td>
+        <td>
+          <div>
+            <button pButton pRipple label="Alterar " (click)='onEdit(animal.id_animal)' class="p-button mr-2" icon="pi pi-pencil" style="margin: 2px 0;"></button>
+            <button pButton pRipple label="Excluir" (click)='onDelete(animal.id_animal)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;"></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="5">Não foram encontrados registros.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
