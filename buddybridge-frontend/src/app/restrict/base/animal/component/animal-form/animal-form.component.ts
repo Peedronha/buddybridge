@@ -22,9 +22,11 @@ export class AnimalFormComponent {
     peso_animal: ['', Validators.required, Validators.pattern(/^\d{1,100}$/)],
     comprimento_animal: ['', [Validators.required, Validators.pattern(/^\d{1,2000}$/)]],
     data_resgate: ['', Validators.required],
+    tipo_animal:[''],
+    raca_animal:[''],
   })
 
-  showPj: boolean = true;
+  racas: Raca[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -39,6 +41,12 @@ export class AnimalFormComponent {
     this.accountService.validarSessao();
     const animal: AnimalModel = this.router.snapshot.data['animal'];
     console.log("ngOnInit: "+JSON.stringify(animal));
+
+    this.registerForm.get('tipo_animal')?.valueChanges.subscribe(type => {
+      this.onTypeChange(type);
+    });
+
+
     this.registerForm.setValue({
       id_animal: animal.id_animal +'',
       nome_animal: animal.nome_animal + '',
@@ -47,7 +55,14 @@ export class AnimalFormComponent {
       peso_animal: animal.peso_animal,
       comprimento_animal: animal.comprimento_animal,
       data_resgate: animal.data_resgate,
+      tipo_animal: animal.tipo_animal+'',
+      raca_animal: animal.raca_animal+''
     })
+  }
+  onTypeChange(type: string): void {
+    this.animalService.getRacesByType(type).subscribe(racas => {
+      this.racas = racas;
+    });
   }
 
   submitDetails() {
@@ -122,5 +137,10 @@ export class AnimalFormComponent {
   get comprimento_animal() {
     return this.registerForm.get('comprimento_animal');
   }
-
+  get tipo_animal() {
+    return this.registerForm.get('tipo_animal');
+  }
+  get raca_animal() {
+    return this.registerForm.get('raca_animal');
+  }
 }

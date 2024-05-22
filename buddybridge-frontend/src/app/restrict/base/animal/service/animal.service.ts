@@ -73,4 +73,20 @@ export class AnimalService {
         }
       ))
   }
+
+  getRacesByType(type: string):Observable<any> {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.http.get<Race[]>(`${this.apiUrl}/races?type=${type}`).pipe(
+      map((response) =>{
+          if (response)
+            return response;
+        },
+        (error:any) =>{
+          return error;
+        }
+      ))
+  }
 }
