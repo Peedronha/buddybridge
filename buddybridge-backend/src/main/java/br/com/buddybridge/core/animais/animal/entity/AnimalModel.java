@@ -1,8 +1,8 @@
 package br.com.buddybridge.core.animais.animal.entity;
 
 import br.com.buddybridge.core.animais.animal.model.AnimalDto;
-import br.com.buddybridge.core.animais.raca.model.RacaModel;
-import br.com.buddybridge.core.animais.tipo.model.TypeModel;
+import br.com.buddybridge.core.animais.raca.entity.RacaModel;
+import br.com.buddybridge.core.animais.tipo.entity.TypeModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,11 +43,11 @@ public class AnimalModel {
     private LocalDate data_resgate;
 
     @ManyToOne
-    @JoinColumn(name = "id_tipo")
+    @JoinColumn(name = "type_id")
     private TypeModel type;
 
     @ManyToOne
-    @JoinColumn(name = "id_raca")
+    @JoinColumn(name = "race_id")
     private RacaModel race;
 
 
