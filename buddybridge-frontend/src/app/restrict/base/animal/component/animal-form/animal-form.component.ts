@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AccountService} from "../../../../../open/account/shared/account.service";
 import {AnimalModel} from "../../model/animal.model";
 import {FormBuilder, Validators} from "@angular/forms";
+import {Raca} from "../../../raca/model/raca.model";
 
 
 @Component({
@@ -59,7 +60,7 @@ export class AnimalFormComponent {
       raca_animal: animal.raca_animal+''
     })
   }
-  onTypeChange(type: string): void {
+  onTypeChange(type: any): void {
     this.animalService.getRacesByType(type).subscribe(racas => {
       this.racas = racas;
     });
