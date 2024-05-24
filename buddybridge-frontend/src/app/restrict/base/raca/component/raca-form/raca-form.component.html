@@ -1,0 +1,147 @@
+<div class="card">
+  <form [formGroup]="registerForm" (ngSubmit)="submitDetails()">
+    <div class="surface-section py-2 md-3">
+      <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BASE</a></li>
+        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Cadastros Gerais</a></li>
+        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Animais</a></li>
+        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+        @if (id_animal?.value != null && id_animal?.value != 'N') {
+          <li><span class="text-900 line-height-3">Novo</span></li>
+          <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra os animais do
+            sistema!</a></li>
+        } @else {
+          <li><span class="text-900 line-height-3">Alterar </span></li>
+          <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você altera os animais do sistema!</a>
+          </li>
+        }
+      </ul>
+      <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
+        <div>
+          @if (id_animal?.value != null && id_animal?.value != 'undefined') {
+            <div class="font-medium text-3xl text-900">Novo Animal</div><br/><br/>
+          } @else {
+            <div class="font-medium text-3xl text-900">Alterar Animal</div><br/><br/>
+          }
+        </div>
+        <div class="mt-3 lg:mt-0">
+          <button pButton pRipple label="Voltar" class="p-button mr-2" icon="pi pi-chevron-left"
+                  routerLink="/animal"></button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="field">
+        <label for="nome_animal">Nome do Animal</label>
+        <input type="text" pInputText formControlName="nome_animal" class="w-full" name="nome_animal"
+               placeholder="Digite o nome do animal"/>
+        <small
+          *ngIf="registerForm.get('nome_animal')?.invalid && (registerForm.get('nome_animal')?.dirty || registerForm.get('nome_animal')?.touched)"
+          class="block p-error">
+          <div *ngIf="registerForm.get('nome_animal')?.errors?.['required']">O nome do animal é uma informação
+            obrigatória.
+          </div>
+          <div *ngIf="registerForm.get('nome_animal')?.errors?.['pattern']">O nome do animal não deve conter caracteres
+            especiais.
+          </div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="raca">Raça</label>
+        <input type="text" pInputText formControlName="raca" class="w-full" name="raca"
+               placeholder="Digite a raça do animal"/>
+        <small
+          *ngIf="registerForm.get('raca')?.invalid && (registerForm.get('raca')?.dirty || registerForm.get('raca')?.touched)"
+          class="block p-error">
+          <div *ngIf="registerForm.get('raca')?.errors?.['required']">A raça do animal é uma informação obrigatória.
+          </div>
+          <div *ngIf="registerForm.get('raca')?.errors?.['pattern']">O raça do animal não deve conter letras.</div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="idade">Idade</label>
+        <p-inputNumber type="text" inputId="idade" formControlName="idade" class="w-full" name="idade"
+                       placeholder="Digite a idade do animal"/>
+        <small
+          *ngIf="registerForm.get('idade')?.invalid && (registerForm.get('idade')?.dirty || registerForm.get('idade')?.touched)"
+          class="block p-error">
+          <div *ngIf="registerForm.get('idade')?.errors?.['required']">A idade do animal é uma informação obrigatória.
+          </div>
+          <div *ngIf="registerForm.get('idade')?.errors?.['pattern']">O idade do animal não deve conter letras.</div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="peso_animal">Peso em KG</label>
+        <p-inputNumber
+          mode="decimal"
+          locale="de-DE"
+          suffix=" KG" type="text" inputId="peso_animal" formControlName="peso_animal" class="w-full" name="peso_animal"
+          placeholder="Digite o peso do animal"/>
+        <small
+          *ngIf="registerForm.get('peso_animal')?.invalid && (registerForm.get('peso_animal')?.dirty || registerForm.get('peso_animal')?.touched)"
+          class="block p-error">
+          <div *ngIf="registerForm.get('peso_animal')?.errors?.['required']">O peso do animal é uma informação
+            obrigatória.
+          </div>
+          <div *ngIf="registerForm.get('peso_animal')?.errors?.['pattern']">O peso do animal deve conter apenas
+            números.
+          </div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="comprimento_animal">Comprimento em Centímetros</label>
+        <p-inputNumber
+          inputId="comprimento_animal"
+          mode="decimal"
+          locale="de-DE"
+          suffix=" cm" type="text" formControlName="comprimento_animal" class="w-full" name="comprimento_animal"
+          placeholder="Digite o comprimento do animal"/>
+        <small
+          *ngIf="registerForm.get('comprimento_animal')?.invalid && (registerForm.get('comprimento_animal')?.dirty || registerForm.get('comprimento_animal')?.touched)"
+          class="block p-error">
+          <div *ngIf="registerForm.get('comprimento_animal')?.errors?.['required']">O comprimento do animal é uma
+            informação obrigatória.
+          </div>
+          <div *ngIf="registerForm.get('comprimento_animal')?.errors?.['pattern']">O comprimento do animal deve conter
+            apenas números.
+          </div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="data_resgate">Data de Resgate</label>
+        <input type="date" pInputText formControlName="data_resgate" class="w-full" name="data_resgate"
+               placeholder="Selecione a data de resgate do animal"/>
+        <small
+          *ngIf="registerForm.get('data_resgate')?.invalid && (registerForm.get('data_resgate')?.dirty || registerForm.get('data_resgate')?.touched)"
+          class="block p-error">
+          <div *ngIf="registerForm.get('data_resgate')?.errors?.['required']">A data de resgate do animal é uma
+            informação obrigatória.
+          </div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="tipo_animal">Tipo de animal</label>
+        <p-dropdown
+          [options]="tipos"
+          optionLabel="name"
+          [showClear]="true"
+          formControlName="tipo_animal" class="w-full" name="tipo_animal"
+          placeholder="Selecione o tipo do animal"/>
+      </div>
+      <div class="field">
+        <label for="raca_animal">Raça do animal</label>
+        <p-dropdown
+          [options]="racas"
+          optionLabel="name"
+          [showClear]="true"
+          formControlName="raca_animal" class="w-full" name="raca_animal"
+          placeholder="Selecione a raca do animal"/>
+      </div>
+    </div>
+    <button pButton label="SALVAR" styleClass="w-full" type="submit"></button>
+  </form>
+</div>

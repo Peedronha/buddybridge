@@ -2,8 +2,6 @@ import {Tipo} from "../../tipo_animal/model/tipo.model";
 
 export class Raca {
   id!: number;
-
   name!: string;
-
-  type!: Tipo;
+  id_tipo!: string;
 }

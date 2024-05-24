@@ -1,25 +1,22 @@
 import { Injectable } from '@angular/core';
-import {map, Observable} from "rxjs";
+import {Raca} from "../model/raca.model";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {AnimalModel} from "../model/animal.model";
-import {Volunteer} from "../../volunteer/model/volunteer.model";
-import {Raca} from "../../raca/model/raca.model";
+import {map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AnimalService {
+export class RacaService {
+
   private getAuthorizationToken() {
     const token = window.localStorage.getItem('token');
     return token;
   }
 
-  private apiUrl = 'http://localhost:8080/animal';
+  private apiUrl = 'http://localhost:8080/raca';
+  constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient) {
-  }
-
-  getAnimalsById(id: any): Observable<any> {
+  getRacasById(id: any) {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
@@ -27,7 +24,7 @@ export class AnimalService {
     return this.http.get<any>(this.apiUrl + '/' + id,{headers: reqHeader})
   }
 
-  getAnimals() {
+  getRacas() {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
@@ -35,7 +32,7 @@ export class AnimalService {
     return this.http.get<any>(this.apiUrl,{headers: reqHeader})
   }
 
-  deleteAnimal(idUser: any) {
+  deleteRaca(idUser: any) {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
@@ -43,15 +40,15 @@ export class AnimalService {
     return this.http.delete<any>(this.apiUrl + '/' +idUser,{headers: reqHeader})
   }
 
-  updateanimal(animal: AnimalModel){
+  updateRaca(raca: Raca){
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.put<any>(this.apiUrl, animal, {headers: reqHeader});
+    return this.http.put<any>(this.apiUrl, raca, {headers: reqHeader});
   }
 
-  registerAnimal(postData1: AnimalModel): Observable<any> {
+  registerRaca(postData1: Raca): Observable<any> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
@@ -65,13 +62,5 @@ export class AnimalService {
           return error;
         }
       ))
-  }
-
-  getRacesByType(type: string):Observable<any> {
-    var reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.getAuthorizationToken()
-    });
-    return this.http.get<Raca[]>(`http://localhost:8080/raca?type=${type}`);
   }
 }

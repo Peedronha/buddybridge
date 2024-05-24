@@ -56,6 +56,9 @@ import { AnimalFormComponent } from './restrict/base/animal/component/animal-for
 import { AnimalComponent } from './restrict/base/animal/component/animal/animal.component';
 import { ListAnimalComponent } from './restrict/base/animal/component/list-animal/list-animal.component';
 import {InputNumberModule} from "primeng/inputnumber";
+import { RacaComponent } from './restrict/base/raca/component/raca/raca.component';
+import { RacaFormComponent } from './restrict/base/raca/component/raca-form/raca-form.component';
+import { ListRacaComponent } from './restrict/base/raca/component/list-raca/list-raca.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +83,10 @@ import {InputNumberModule} from "primeng/inputnumber";
       VolunteerFormComponent,
       AnimalFormComponent,
       AnimalComponent,
-      ListAnimalComponent
+      ListAnimalComponent,
+      RacaComponent,
+      RacaFormComponent,
+      ListRacaComponent
 
 
   ],
