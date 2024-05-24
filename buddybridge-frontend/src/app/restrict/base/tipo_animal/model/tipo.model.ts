@@ -1,7 +1,6 @@
 import {Raca} from "../../raca/model/raca.model";
 
 export class Tipo {
- id!: number;
+ id!: number | undefined;
  name!: string;
- races!: Raca;
 }

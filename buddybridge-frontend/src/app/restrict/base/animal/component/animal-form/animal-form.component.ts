@@ -6,6 +6,9 @@ import {AccountService} from "../../../../../open/account/shared/account.service
 import {AnimalModel} from "../../model/animal.model";
 import {FormBuilder, Validators} from "@angular/forms";
 import {Raca} from "../../../raca/model/raca.model";
+import {Tipo} from "../../../tipo_animal/model/tipo.model";
+import {TipoService} from "../../../tipo_animal/service/tipo.service";
+import {tipoResolver} from "../../../tipo_animal/guard/tipo.resolver.guard";
 
 
 @Component({
@@ -29,9 +32,11 @@ export class AnimalFormComponent {
 
   racas: Raca[] = [];
 
+  tipos: Tipo[] = []
   constructor(
     private fb: FormBuilder,
     private animalService: AnimalService,
+    private tipoService: TipoService,
     private messageService: MessageService,
     private router: ActivatedRoute,
     private route: Router,
@@ -47,6 +52,9 @@ export class AnimalFormComponent {
       this.onTypeChange(type);
     });
 
+  this.tipoService.getTipos().subscribe(tipos => {
+      this.tipos = tipos;
+    });
 
     this.registerForm.setValue({
       id_animal: animal.id_animal +'',

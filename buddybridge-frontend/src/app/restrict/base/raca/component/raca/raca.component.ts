@@ -43,7 +43,7 @@ export class RacaComponent {
     this.racaService.deleteRaca(idUser).subscribe(() =>{
       this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro excluido com sucesso' });
       window.location.reload();
-      this.router.navigateByUrl('/animal')
+      this.router.navigateByUrl('/raca')
     })
   }
 }

@@ -1,19 +1,20 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
+import {RacaService} from "../../../raca/service/raca.service";
 import {Router} from "@angular/router";
-import {Raca} from "../../model/raca.model";
-import {RacaService} from "../../service/raca.service";
+import {Tipo} from "../../model/tipo.model";
+import {TipoService} from "../../service/tipo.service";
 
 @Component({
-  selector: 'app-list-raca',
-  templateUrl: './list-raca.component.html',
-  styleUrl: './list-raca.component.scss'
+  selector: 'app-list-tipo',
+  templateUrl: './list-tipo.component.html',
+  styleUrl: './list-tipo.component.scss'
 })
-export class ListRacaComponent {
+export class ListTipoComponent {
 
-  @Input() racas!: Raca[];
-  _specificRaca: any = {};
+  @Input() tipos!: Tipo[];
+  _specificTipo: any = {};
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
   @Output() editPassword = new EventEmitter(false);
@@ -21,9 +22,8 @@ export class ListRacaComponent {
 
 
   editForm = this.fb.group({
-    id_raca: [''],
+    id_tipo: [''],
     nome_raca: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
-    id_tipo: ['']
   });
 
 
@@ -33,15 +33,15 @@ export class ListRacaComponent {
 
   showEdit: boolean = false;
 
-  constructor(private fb: FormBuilder, private messageService: MessageService, private racaService: RacaService, private router: Router) {
+  constructor(private fb: FormBuilder, private messageService: MessageService, private tipoService: TipoService, private router: Router) {
 
   }
 
 
   ngOnInit(): void {
-    this.racaService.getRacas().subscribe((data: Raca[]) => {
+    this.tipoService.getTipos().subscribe((data: Tipo[]) => {
       console.log(data)
-      this.racas = data;
+      this.tipos = data;
     });
   }
 
@@ -54,12 +54,12 @@ export class ListRacaComponent {
     this.add.emit(true);
   }
 
-  onEdit(id_raca: any) {
-    alert("id_raca: "+id_raca)
-    this.edit.emit(id_raca);
+  onEdit(id_tipo: any) {
+    alert("id_tipo: "+id_tipo)
+    this.edit.emit(id_tipo);
   }
 
-  onDelete(id_raca: any) {
-    this.remove.emit(id_raca);
+  onDelete(id_tipo: any) {
+    this.remove.emit(id_tipo);
   }
 }

@@ -1,0 +1,46 @@
+<div class="card">
+  <p-table #dt1 [value]="tipos" selectionMode="single" [(selection)]="_specificTipo" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
+           [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="id_tipo" style="width:10%">Cod. <p-sortIcon field="id_animal"></p-sortIcon></th>
+        <th pSortableColumn="nome_tipo" style="width:20%">Nome <p-sortIcon field="nome_animal"></p-sortIcon></th>
+        <th pSortableColumn="Ações" style="width:15%">Ações</th>
+      </tr>
+      <tr>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'id_tipo', 'contains')" [value]="$any(dt1.filters['id_tipo'])?.value" placeholder="Filtrar tipo" class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'nome_tipo', 'contains')" [value]="$any(dt1.filters['nome_tipo'])?.value" placeholder="Filtrar Nome" class="w-full">
+        </th>
+        <th>
+          <p-button label="Novo" icon="pi pi-plus" (click)="onAdd()" ></p-button>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-tipo>
+      <tr [pSelectableRow]="tipo">
+        <td>
+          <span class="p-column-title">Cod.</span>
+          {{tipo.id}}
+        </td>
+        <td>
+          <span class="p-column-title">Nome</span>
+          {{tipo.name}}
+        </td>
+        <td>
+          <div>
+            <button pButton pRipple label="Alterar " (click)='onEdit(tipo.id)' class="p-button mr-2" icon="pi pi-pencil" style="margin: 2px 0;"></button>
+            <button pButton pRipple label="Excluir" (click)='onDelete(tipo.id)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;"></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="5">Não foram encontrados registros.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

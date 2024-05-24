@@ -59,6 +59,10 @@ import {InputNumberModule} from "primeng/inputnumber";
 import { RacaComponent } from './restrict/base/raca/component/raca/raca.component';
 import { RacaFormComponent } from './restrict/base/raca/component/raca-form/raca-form.component';
 import { ListRacaComponent } from './restrict/base/raca/component/list-raca/list-raca.component';
+import {DropdownModule} from "primeng/dropdown";
+import { TipoComponent } from './restrict/base/tipo_animal/component/tipo/tipo.component';
+import { ListTipoComponent } from './restrict/base/tipo_animal/component/list-tipo/list-tipo.component';
+import { FormTipoComponent } from './restrict/base/tipo_animal/component/form-tipo/form-tipo.component';
 
 @NgModule({
   declarations: [
@@ -86,42 +90,46 @@ import { ListRacaComponent } from './restrict/base/raca/component/list-raca/list
       ListAnimalComponent,
       RacaComponent,
       RacaFormComponent,
-      ListRacaComponent
+      ListRacaComponent,
+      TipoComponent,
+      ListTipoComponent,
+      FormTipoComponent
 
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MenubarModule,
-        ButtonModule,
-        StyleClassModule,
-        BrowserAnimationsModule,
-        AppLayoutModule,
-        CommonModule,
-        DividerModule,
-        ChartModule,
-        PanelModule,
-        FormsModule,
-        PasswordModule,
-        InputTextModule,
-        CardModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        ToastModule,
-        InputOtpModule,
-        TableModule,
-        SplitButtonModule,
-        DialogModule,
-        CheckboxModule,
-        InputTextareaModule,
-        RippleModule,
-        SplitterModule,
-        AppConfigModule,
-        MessagesModule,
-        InputNumberModule
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MenubarModule,
+    ButtonModule,
+    StyleClassModule,
+    BrowserAnimationsModule,
+    AppLayoutModule,
+    CommonModule,
+    DividerModule,
+    ChartModule,
+    PanelModule,
+    FormsModule,
+    PasswordModule,
+    InputTextModule,
+    CardModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    ToastModule,
+    InputOtpModule,
+    TableModule,
+    SplitButtonModule,
+    DialogModule,
+    CheckboxModule,
+    InputTextareaModule,
+    RippleModule,
+    SplitterModule,
+    AppConfigModule,
+    MessagesModule,
+    InputNumberModule,
+    DropdownModule
 
-    ],
+  ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy },
     MessageService

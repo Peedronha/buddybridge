@@ -6,58 +6,49 @@
         <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
         <li><a class="text-500 no-underline line-height-3 cursor-pointer">Cadastros Gerais</a></li>
         <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Raças</a></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">tipos</a></li>
         <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-        @if (id_raca?.value != null && id_raca?.value != 'NaN') {
+        @if (id_tipo?.value != null && id_tipo?.value != 'NaN') {
           <li><span class="text-900 line-height-3">Novo</span></li>
           <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra as raças do
+          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra os tipos do
             sistema!</a></li>
         } @else {
           <li><span class="text-900 line-height-3">Alterar </span></li>
           <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você altera as raças do sistema!</a>
+          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você altera os tipos do sistema!</a>
           </li>
         }
       </ul>
       <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
         <div>
-          @if (id_raca?.value != null && id_raca?.value != 'undefined') {
-            <div class="font-medium text-3xl text-900">Nova Raça</div><br/><br/>
+          @if (id_tipo?.value != null && id_tipo?.value != 'undefined') {
+            <div class="font-medium text-3xl text-900">Novo tipo</div><br/><br/>
           } @else {
-            <div class="font-medium text-3xl text-900">Alterar Raça</div><br/><br/>
+            <div class="font-medium text-3xl text-900">Alterar tipo</div><br/><br/>
           }
         </div>
         <div class="mt-3 lg:mt-0">
           <button pButton pRipple label="Voltar" class="p-button mr-2" icon="pi pi-chevron-left"
-                  routerLink="/racas"></button>
+                  routerLink="/tipos"></button>
         </div>
       </div>
     </div>
     <div>
       <div class="field">
-        <label for="nome_raca">Nome da Raça</label>
-        <input type="text" pInputText formControlName="nome_raca" class="w-full" name="nome_raca"
+        <label for="nome_tipo">Nome do Tipo</label>
+        <input type="text" pInputText formControlName="nome_tipo" class="w-full" name="nome_tipo"
                placeholder="Digite o nome do animal"/>
         <small
-          *ngIf="registerForm.get('nome_raca')?.invalid && (registerForm.get('nome_raca')?.dirty || registerForm.get('nome_raca')?.touched)"
+          *ngIf="registerForm.get('nome_tipo')?.invalid && (registerForm.get('nome_tipo')?.dirty || registerForm.get('nome_tipo')?.touched)"
           class="block p-error">
-          <div *ngIf="registerForm.get('nome_raca')?.errors?.['required']">O nome da raça é uma informação
+          <div *ngIf="registerForm.get('nome_tipo')?.errors?.['required']">O nome é uma informação
             obrigatória.
           </div>
-          <div *ngIf="registerForm.get('nome_raca')?.errors?.['pattern']">O nome da raça não deve conter caracteres
+          <div *ngIf="registerForm.get('nome_tipo')?.errors?.['pattern']">O nome não deve conter caracteres
             especiais.
           </div>
         </small>
-      </div>
-      <div class="field">
-        <label for="id_tipo">Tipo de animal</label>
-        <p-dropdown
-          [options]="tipos"
-          optionLabel="name"
-          [showClear]="true"
-          formControlName="id_tipo" class="w-full" name="id_tipo"
-          placeholder="Selecione o tipo do animal"/>
       </div>
     </div>
     <button pButton label="SALVAR" styleClass="w-full" type="submit"></button>
