@@ -56,8 +56,8 @@ const routes: Routes = [
       { path: 'racas/editraca/:id', title: 'BuddyBridge - Alterar Raca', component: RacaFormComponent, resolve: {raca : racaResolver} },
 
       { path: 'tipos', title: 'BuddyBridge - Tipo', component: TipoComponent },
-      { path: 'tipos/addtipo', title: 'BuddyBridge - Novo Tipo', component: FormTipoComponent, resolve: {raca : tipoResolver} },
-      { path: 'tipos/edittipo/:id', title: 'BuddyBridge - Alterar Tipo', component: FormTipoComponent, resolve: {raca : tipoResolver} },
+      { path: 'tipos/addtipo', title: 'BuddyBridge - Novo Tipo', component: FormTipoComponent, resolve: {tipo : tipoResolver} },
+      { path: 'tipos/edittipo/:id', title: 'BuddyBridge - Alterar Tipo', component: FormTipoComponent, resolve: {tipo : tipoResolver} },
 
     ],
     canActivate: [AuthGuard]

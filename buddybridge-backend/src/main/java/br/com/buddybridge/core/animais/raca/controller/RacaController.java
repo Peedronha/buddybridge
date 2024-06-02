@@ -10,17 +10,35 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("raca")
 public class RacaController {
 
-    private RacaService service;
+    private RacaService racaService;
+
+    @GetMapping
+    public ResponseEntity<List<RacaModel>> getAll() {
+        List<RacaModel> models = new ArrayList<>(this.racaService.findAll());
+        if (models.isEmpty()) {
+            return new ResponseEntity<>(models, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(new ArrayList<>(models), HttpStatus.OK);
+    }
 
     @GetMapping("/{id}")
+    public ResponseEntity<RacaModel> getRaceById(@PathVariable Long id) {
+        Optional<RacaModel> racaModel = this.racaService.findRaceModelById(id);
+        return racaModel.map(model -> new ResponseEntity<>(model, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+    }
+
+
+    @GetMapping("/type/{id}")
     public ResponseEntity<List<RacaModel>> getAllByType(@PathVariable String type) {
-        List<RacaModel> models = new ArrayList<>(this.service.findAllByType(type));
+        List<RacaModel> models = new ArrayList<>(this.racaService.findAllByType(type));
         if (models.isEmpty()) {
             return new ResponseEntity<>(models, HttpStatus.NOT_FOUND);
         }
@@ -29,14 +47,14 @@ public class RacaController {
 
     @PostMapping
     public void CreateRace(@RequestBody RaceDTO raceDTO) {
-        this.service.createNewRace(raceDTO);
+        this.racaService.createNewRace(raceDTO);
     }
 
     @DeleteMapping
-    public ResponseEntity<Boolean> DeleteRace(@PathVariable Long id){
-        if (this.service.findRaceModelById(id).isPresent()){
+    public ResponseEntity<Boolean> DeleteRace(@PathVariable Long id) {
+        if (this.racaService.findRaceModelById(id).isPresent()) {
 
-            this.service.deleteRaceById(id);
+            this.racaService.deleteRaceById(id);
 
             return new ResponseEntity<>(true, HttpStatus.OK);
         }

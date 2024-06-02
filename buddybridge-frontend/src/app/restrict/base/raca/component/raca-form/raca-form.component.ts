@@ -22,6 +22,7 @@ export class RacaFormComponent {
   })
 
   tipos: Tipo[] = [];
+  selectTipo?: Tipo;
 
   constructor(
     private fb: FormBuilder,
@@ -58,7 +59,7 @@ export class RacaFormComponent {
     var id = this.registerForm.get('id_raca')?.value+'';
     raca.id = parseInt(id);
     raca.name = this.registerForm.get('nome_raca')?.value+'';
-    raca.id_tipo = this.registerForm.get('id_tipo')?.value+'';
+    raca.id_tipo = this.selectTipo?.name;
 
     console.log(raca);
 

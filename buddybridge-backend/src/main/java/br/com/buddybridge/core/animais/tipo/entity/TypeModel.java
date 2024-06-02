@@ -2,6 +2,7 @@ package br.com.buddybridge.core.animais.tipo.entity;
 
 import br.com.buddybridge.core.animais.raca.entity.RacaModel;
 import br.com.buddybridge.core.animais.tipo.model.TypeDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +24,7 @@ public class TypeModel {
 
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "type", cascade = CascadeType.ALL)
     private List<RacaModel> races;
 

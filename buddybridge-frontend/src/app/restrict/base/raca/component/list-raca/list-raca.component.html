@@ -27,20 +27,20 @@
       <tr [pSelectableRow]="raca">
         <td>
           <span class="p-column-title">Cod.</span>
-          {{raca.id_raca}}
+          {{raca.id}}
         </td>
         <td>
           <span class="p-column-title">Nome</span>
-          {{raca.nome_raca}}
+          {{raca.name}}
         </td>
         <td>
           <span class="p-column-title">Tipo</span>
-          <span class="ml-1 vertical-align-middle">{{raca.id_tipo}}</span>
+          <span class="ml-1 vertical-align-middle">{{raca.type.name}}</span>
         </td>
         <td>
           <div>
-            <button pButton pRipple label="Alterar " (click)='onEdit(raca.id_raca)' class="p-button mr-2" icon="pi pi-pencil" style="margin: 2px 0;"></button>
-            <button pButton pRipple label="Excluir" (click)='onDelete(raca.id_raca)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;"></button>
+            <button pButton pRipple label="Alterar " (click)='onEdit(raca.id)' class="p-button mr-2" icon="pi pi-pencil" style="margin: 2px 0;"></button>
+            <button pButton pRipple label="Excluir" (click)='onDelete(raca.id)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;"></button>
           </div>
         </td>
       </tr>

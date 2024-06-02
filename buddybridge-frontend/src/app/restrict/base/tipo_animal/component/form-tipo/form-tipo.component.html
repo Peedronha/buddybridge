@@ -8,7 +8,7 @@
         <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
         <li><a class="text-500 no-underline line-height-3 cursor-pointer">tipos</a></li>
         <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-        @if (id_tipo?.value != null && id_tipo?.value != 'NaN') {
+        @if (id_tipo?.value != null && id_tipo?.value == 'NaN') {
           <li><span class="text-900 line-height-3">Novo</span></li>
           <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
           <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra os tipos do
@@ -22,7 +22,7 @@
       </ul>
       <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
         <div>
-          @if (id_tipo?.value != null && id_tipo?.value != 'undefined') {
+          @if (id_tipo?.value != null && id_tipo?.value == 'NaN') {
             <div class="font-medium text-3xl text-900">Novo tipo</div><br/><br/>
           } @else {
             <div class="font-medium text-3xl text-900">Alterar tipo</div><br/><br/>

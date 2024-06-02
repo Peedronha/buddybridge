@@ -18,6 +18,10 @@ public class RacaService {
     private RacaRepository racaRepository;
     private TypeRepository tipoRepository;
 
+    public List<RacaModel> findAll() {
+        return racaRepository.findAll();
+    }
+
     public List<RacaModel> findAllByType(String type) {
         return racaRepository.findByTypeName(type);
     }
