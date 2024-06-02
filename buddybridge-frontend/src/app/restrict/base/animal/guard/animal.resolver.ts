@@ -1,3 +1,4 @@
+import {Colaborador} from "../../volunteer/model/colaborador";
 import { Injectable } from '@angular/core';
 import {AnimalService} from "../service/animal.service";
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
