@@ -1,60 +1,67 @@
-import { AccountService } from '../../open/account/shared/account.service';
-import { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
-import { LayoutService } from './service/app.layout.service';
+import {AccountService} from '../../open/account/shared/account.service';
+import {OnInit} from '@angular/core';
+import {Component} from '@angular/core';
+import {LayoutService} from './service/app.layout.service';
 
 @Component({
-    selector: 'app-menu',
-    templateUrl: './app.menu.component.html'
+  selector: 'app-menu',
+  templateUrl: './app.menu.component.html'
 })
 export class AppMenuComponent implements OnInit {
 
-    model: any[] = [];
+  model: any[] = [];
 
-    constructor(public layoutService: LayoutService) { }
+  constructor(public layoutService: LayoutService) {
+  }
 
-    ngOnInit() {
-        this.model = [
-            {
-                label: 'Home',
-                items: [
-                    { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] },
-                    { label: 'Minhas adoções', icon: 'pi pi-fw pi-desktop', routerLink: ['/'] }
-                ]
-            },
-            {
-                label: 'Buddy Base',
-                items: [
-                  {
-                    label: 'Cadastros Gerais',
-                    icon: 'pi pi-fw pi-user',
-                    items: [
-                        {
-                          label: 'Usuários', icon: 'pi pi-fw pi-id-card', routerLink: ['/account']
-                        },
-                        {
-                          label: 'Voluntários', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/volunteer']
-                        },
-                        {
-                          label: 'Animais', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/animal']
-                        }
-                    ]
-                  },
-                  {
-                    label: 'Configurações',
-                    icon: 'pi pi-fw pi-cog',
-                    items: [
-                        {
-                          label: 'Ong', icon: 'pi pi-fw pi-bookmark', routerLink: ['/uikit/floatlabel']
-                        },
-                        {
-                          label: 'Opções de Sistema', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/floatlabel']
-                        }
-                    ]
-                  },
-                  /*{ label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }*/
-                ]
-            },
+  ngOnInit() {
+    this.model = [
+      {
+        label: 'Home',
+        items: [
+          {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']}
+        ]
+      },
+      {
+        label: 'Buddy Base',
+        items: [
+          {
+            label: 'Cadastros Gerais',
+            icon: 'pi pi-fw pi-user',
+            items: [
+              {
+                label: 'Usuários', icon: 'pi pi-fw pi-id-card', routerLink: ['/account']
+              },
+              {
+                label: 'Voluntários', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/volunteer']
+              },
+              {
+                label: 'Animais', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/animal']
+              },
+              {
+                label: 'Raças', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/racas']
+              }
+              ,
+              {
+                label: 'Tipos', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/tipos']
+              }
+            ]
+          },
+          /*{
+            label: 'Configurações',
+            icon: 'pi pi-fw pi-cog',
+            items: [
+                {
+                  label: 'Ong', icon: 'pi pi-fw pi-bookmark', routerLink: ['/uikit/floatlabel']
+                },
+                {
+                  label: 'Opções de Sistema', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/floatlabel']
+                }
+            ]
+          },
+          { label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }*/
+        ]
+      }/*,
             {
                 label: 'Buddy Animais',
                 items: [
@@ -68,10 +75,10 @@ export class AppMenuComponent implements OnInit {
                           }
                       ]
                     },
-                    //{ label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }
+                    { label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }
                 ]
             },
-            /*{
+            {
                 label: 'Buddy Financeiro',
                 icon: 'pi pi-fw pi-briefcase',
                 items: [
@@ -88,6 +95,6 @@ export class AppMenuComponent implements OnInit {
                 ]
             },*/
 
-        ];
-    }
+    ];
+  }
 }

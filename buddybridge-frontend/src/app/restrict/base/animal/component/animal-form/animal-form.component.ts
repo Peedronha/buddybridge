@@ -5,6 +5,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AccountService} from "../../../../../open/account/shared/account.service";
 import {AnimalModel} from "../../model/animal.model";
 import {FormBuilder, Validators} from "@angular/forms";
+import {Raca} from "../../../raca/model/raca.model";
+import {Tipo} from "../../../tipo_animal/model/tipo.model";
+import {TipoService} from "../../../tipo_animal/service/tipo.service";
+import {tipoResolver} from "../../../tipo_animal/guard/tipo.resolver.guard";
 
 
 @Component({
@@ -22,13 +26,17 @@ export class AnimalFormComponent {
     peso_animal: ['', Validators.required, Validators.pattern(/^\d{1,100}$/)],
     comprimento_animal: ['', [Validators.required, Validators.pattern(/^\d{1,2000}$/)]],
     data_resgate: ['', Validators.required],
+    tipo_animal:[''],
+    raca_animal:[''],
   })
 
-  showPj: boolean = true;
+  racas: Raca[] = [];
 
+  tipos: Tipo[] = []
   constructor(
     private fb: FormBuilder,
     private animalService: AnimalService,
+    private tipoService: TipoService,
     private messageService: MessageService,
     private router: ActivatedRoute,
     private route: Router,
@@ -39,6 +47,15 @@ export class AnimalFormComponent {
     this.accountService.validarSessao();
     const animal: AnimalModel = this.router.snapshot.data['animal'];
     console.log("ngOnInit: "+JSON.stringify(animal));
+
+    this.registerForm.get('tipo_animal')?.valueChanges.subscribe(type => {
+      this.onTypeChange(type);
+    });
+
+  this.tipoService.getTipos().subscribe(tipos => {
+      this.tipos = tipos;
+    });
+
     this.registerForm.setValue({
       id_animal: animal.id_animal +'',
       nome_animal: animal.nome_animal + '',
@@ -47,7 +64,14 @@ export class AnimalFormComponent {
       peso_animal: animal.peso_animal,
       comprimento_animal: animal.comprimento_animal,
       data_resgate: animal.data_resgate,
+      tipo_animal: animal.tipo_animal+'',
+      raca_animal: animal.raca_animal+''
     })
+  }
+  onTypeChange(type: any): void {
+    this.animalService.getRacesByType(type).subscribe(racas => {
+      this.racas = racas;
+    });
   }
 
   submitDetails() {
@@ -122,5 +146,10 @@ export class AnimalFormComponent {
   get comprimento_animal() {
     return this.registerForm.get('comprimento_animal');
   }
-
+  get tipo_animal() {
+    return this.registerForm.get('tipo_animal');
+  }
+  get raca_animal() {
+    return this.registerForm.get('raca_animal');
+  }
 }

@@ -1,6 +1,5 @@
 import { MessagesModule } from 'primeng/messages';
 import { NgModule } from '@angular/core';
-
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
@@ -9,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './open/home/home.component';
+import { DashboardComponent } from './restrict/dashboard/dashboard.component';
 import { AppLayoutComponent } from './restrict/layout/app.layout.component';
 import { LoginComponent } from './open/account/login/login.component';
 import { RegisterComponent } from './open/account/register/register.component';
@@ -52,6 +52,13 @@ import { AnimalFormComponent } from './restrict/base/animal/component/animal-for
 import { AnimalComponent } from './restrict/base/animal/component/animal/animal.component';
 import { ListAnimalComponent } from './restrict/base/animal/component/list-animal/list-animal.component';
 import {InputNumberModule} from "primeng/inputnumber";
+import { RacaComponent } from './restrict/base/raca/component/raca/raca.component';
+import { RacaFormComponent } from './restrict/base/raca/component/raca-form/raca-form.component';
+import { ListRacaComponent } from './restrict/base/raca/component/list-raca/list-raca.component';
+import {DropdownModule} from "primeng/dropdown";
+import { TipoComponent } from './restrict/base/tipo_animal/component/tipo/tipo.component';
+import { ListTipoComponent } from './restrict/base/tipo_animal/component/list-tipo/list-tipo.component';
+import { FormTipoComponent } from './restrict/base/tipo_animal/component/form-tipo/form-tipo.component';
 import { OngComponent } from './restrict/base/ong/component/ong/ong.component';
 import { DashboardComponent } from './restrict/dashboard/dashboard.component';
 import { MenuModule } from 'primeng/menu';
@@ -81,41 +88,50 @@ import { MenuModule } from 'primeng/menu';
       ListAnimalComponent,
       OngComponent,
       DashboardComponent,
+      ListAnimalComponent,
+      RacaComponent,
+      RacaFormComponent,
+      ListRacaComponent,
+      TipoComponent,
+      ListTipoComponent,
+      FormTipoComponent
+
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MenubarModule,
-        ButtonModule,
-        StyleClassModule,
-        BrowserAnimationsModule,
-        AppLayoutModule,
-        CommonModule,
-        DividerModule,
-        ChartModule,
-        PanelModule,
-        FormsModule,
-        PasswordModule,
-        InputTextModule,
-        CardModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        ToastModule,
-        InputOtpModule,
-        TableModule,
-        SplitButtonModule,
-        DialogModule,
-        CheckboxModule,
-        InputTextareaModule,
-        RippleModule,
-        SplitterModule,
-        AppConfigModule,
-        MessagesModule,
-        InputNumberModule,
-        MenuModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MenubarModule,
+    ButtonModule,
+    StyleClassModule,
+    BrowserAnimationsModule,
+    AppLayoutModule,
+    CommonModule,
+    DividerModule,
+    ChartModule,
+    PanelModule,
+    FormsModule,
+    PasswordModule,
+    InputTextModule,
+    CardModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    ToastModule,
+    InputOtpModule,
+    TableModule,
+    SplitButtonModule,
+    DialogModule,
+    CheckboxModule,
+    InputTextareaModule,
+    RippleModule,
+    SplitterModule,
+    AppConfigModule,
+    MessagesModule,
+    InputNumberModule,
+    DropdownModule,
+    MenuModule,
 
-    ],
+  ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy },
     MessageService

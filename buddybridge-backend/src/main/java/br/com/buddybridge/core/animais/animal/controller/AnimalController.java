@@ -1,9 +1,8 @@
-package br.com.buddybridge.core.animais.controller;
+package br.com.buddybridge.core.animais.animal.controller;
 
-import br.com.buddybridge.core.animais.entity.AnimalModel;
-import br.com.buddybridge.core.animais.model.AnimalDto;
-import br.com.buddybridge.core.animais.service.AnimalService;
-import br.com.buddybridge.core.usuario.service.UsuarioService;
+import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
+import br.com.buddybridge.core.animais.animal.model.AnimalDto;
+import br.com.buddybridge.core.animais.animal.service.AnimalService;
 import br.com.buddybridge.core.util.ExampleExeption;
 import jakarta.transaction.SystemException;
 import lombok.AllArgsConstructor;

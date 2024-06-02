@@ -1,4 +1,3 @@
-import {Colaborador} from "../../volunteer/model/colaborador";
 import { Injectable } from '@angular/core';
 import {AnimalService} from "../service/animal.service";
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
@@ -22,7 +21,9 @@ export class animalResolver{
       idade: '',
       peso_animal: '',
       comprimento_animal: '',
-      data_resgate: ''
+      data_resgate: '',
+      tipo_animal: '',
+      raca_animal: '',
     });
   }
 }

@@ -1,6 +1,8 @@
-package br.com.buddybridge.core.animais.entity;
+package br.com.buddybridge.core.animais.animal.entity;
 
-import br.com.buddybridge.core.animais.model.AnimalDto;
+import br.com.buddybridge.core.animais.animal.model.AnimalDto;
+import br.com.buddybridge.core.animais.raca.entity.RacaModel;
+import br.com.buddybridge.core.animais.tipo.entity.TypeModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,6 +41,15 @@ public class AnimalModel {
 
     @Column(name = "data_resgate", nullable = false)
     private LocalDate data_resgate;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private TypeModel type;
+
+    @ManyToOne
+    @JoinColumn(name = "race_id")
+    private RacaModel race;
+
 
     public AnimalModel(AnimalDto animalDto) {
         this.nome_animal = animalDto.getNome_animal();

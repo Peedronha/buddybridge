@@ -22,6 +22,12 @@ import { LoginGuard } from './open/account/shared/login.guard';
 import { AnimalComponent } from "./restrict/base/animal/component/animal/animal.component";
 import { AnimalFormComponent } from "./restrict/base/animal/component/animal-form/animal-form.component";
 import { animalResolver } from "./restrict/base/animal/guard/animal.resolver";
+import {RacaComponent} from "./restrict/base/raca/component/raca/raca.component";
+import {RacaFormComponent} from "./restrict/base/raca/component/raca-form/raca-form.component";
+import {racaResolver} from "./restrict/base/raca/guard/raca.resolver.guard";
+import {TipoComponent} from "./restrict/base/tipo_animal/component/tipo/tipo.component";
+import {FormTipoComponent} from "./restrict/base/tipo_animal/component/form-tipo/form-tipo.component";
+import {tipoResolver} from "./restrict/base/tipo_animal/guard/tipo.resolver.guard";
 
 const routes: Routes = [
   {
@@ -48,6 +54,14 @@ const routes: Routes = [
       { path: 'animal', title: 'BuddyBridge - Animais', component: AnimalComponent },
       { path: 'animal/addanimal', title: 'BuddyBridge - Novo Animal', component: AnimalFormComponent, resolve: {animal : animalResolver} },
       { path: 'animal/editanimal/:id', title: 'BuddyBridge - Alterar Animal', component: AnimalFormComponent, resolve: {animal : animalResolver} },
+
+      { path: 'racas', title: 'BuddyBridge - Raca', component: RacaComponent },
+      { path: 'racas/addraca', title: 'BuddyBridge - Novo Raca', component: RacaFormComponent, resolve: {raca : racaResolver} },
+      { path: 'racas/editraca/:id', title: 'BuddyBridge - Alterar Raca', component: RacaFormComponent, resolve: {raca : racaResolver} },
+
+      { path: 'tipos', title: 'BuddyBridge - Tipo', component: TipoComponent },
+      { path: 'tipos/addtipo', title: 'BuddyBridge - Novo Tipo', component: FormTipoComponent, resolve: {raca : tipoResolver} },
+      { path: 'tipos/edittipo/:id', title: 'BuddyBridge - Alterar Tipo', component: FormTipoComponent, resolve: {raca : tipoResolver} },
 
     ],
     canActivate: [AuthGuard]

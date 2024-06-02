@@ -1,6 +1,6 @@
-package br.com.buddybridge.core.animais.repository;
+package br.com.buddybridge.core.animais.animal.repository;
 
-import br.com.buddybridge.core.animais.entity.AnimalModel;
+import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
