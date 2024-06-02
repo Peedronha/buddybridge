@@ -19,7 +19,8 @@ export class AppMenuComponent implements OnInit {
       {
         label: 'Home',
         items: [
-          {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']}
+          {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']},
+          {label: 'Minhas Adoções', icon: 'pi pi-fw pi-desktop', routerLink: ['/']}
         ]
       },
       {
@@ -35,19 +36,9 @@ export class AppMenuComponent implements OnInit {
               {
                 label: 'Voluntários', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/volunteer']
               },
-              {
-                label: 'Animais', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/animal']
-              },
-              {
-                label: 'Raças', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/racas']
-              }
-              ,
-              {
-                label: 'Tipos', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/tipos']
-              }
             ]
           },
-          /*{
+          {
             label: 'Configurações',
             icon: 'pi pi-fw pi-cog',
             items: [
@@ -56,29 +47,35 @@ export class AppMenuComponent implements OnInit {
                 },
                 {
                   label: 'Opções de Sistema', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/floatlabel']
-                }
+                },
             ]
           },
-          { label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }*/
+          /*{ label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }*/
         ]
-      }/*,
+      },
             {
                 label: 'Buddy Animais',
                 items: [
-                    { label: 'Animais', icon: 'pi pi-fw pi-heart', routerLink: ['/utilities/icons'] },
+                    { label: 'Animais', icon: 'pi pi-fw pi-heart', routerLink: ['/animal'] },
                     {
                       label: 'Configurações',
                       icon: 'pi pi-fw pi-cog',
                       items: [
-                          {
-                            label: 'Opções de Sistema', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/floatlabel']
-                          }
+                        {
+                          label: 'Cadastro de Raças', icon: 'pi  pi-fw pi-folder-open', routerLink: ['/racas']
+                        },
+                        {
+                          label: 'Cadastro de Espécies', icon: 'pi  pi-fw pi-folder-open', routerLink: ['/tipos']
+                        },
+                        {
+                          label: 'Opções de Sistema', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/floatlabel']
+                        }
                       ]
                     },
-                    { label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }
+                    /*{ label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }*/
                 ]
             },
-            {
+            /*{
                 label: 'Buddy Financeiro',
                 icon: 'pi pi-fw pi-briefcase',
                 items: [

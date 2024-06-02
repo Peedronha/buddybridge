@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="Analicts - ONG" />
+    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="Analicts - ONG">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.menu.component.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -271,7 +274,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717342516779</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Analicts - ONG">
+      <option name="closed" value="true" />
+      <created>1717342616793</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1717342616793</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
