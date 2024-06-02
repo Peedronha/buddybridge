@@ -10,7 +10,7 @@ import {MenuItem, MessageService} from "primeng/api";
   styleUrl: './volunteer.component.scss'
 })
 export class VolunteerComponent {
-  volunteers!: Colaborador[]
+  colaboradores!: Colaborador[]
 
   constructor(
     private volunteerService: VolunteerService,
@@ -26,7 +26,7 @@ export class VolunteerComponent {
 
   refresh() {
     this.volunteerService.getVolunteers().subscribe((data: Colaborador[]) => {
-      this.volunteers! = data;
+      this.colaboradores! = data;
     });
   }
 

@@ -15,15 +15,13 @@ import { AccountFormComponent } from './restrict/base/account/component/containe
 import { accountResolver } from './restrict/base/account/guards/account.resolver';
 import { ValidateloginComponent } from './open/account/validatelogin/validatelogin.component';
 import { AccountFormSenhaComponent } from './restrict/base/account/component/container/account-form-senha/account-form-senha.component';
-import {
-  VolunteerFormComponent
-} from "./restrict/base/volunteer/component/container/volunteer-form/volunteer-form.component";
-import {VolunteerComponent} from "./restrict/base/volunteer/component/container/volunteer/volunteer.component";
-import {volunteerResolver} from "./restrict/base/volunteer/guards/volunteer.resolver";
+import { VolunteerFormComponent } from "./restrict/base/volunteer/component/container/volunteer-form/volunteer-form.component";
+import { VolunteerComponent } from "./restrict/base/volunteer/component/container/volunteer/volunteer.component";
+import { volunteerResolver } from "./restrict/base/volunteer/guards/volunteer.resolver";
 import { LoginGuard } from './open/account/shared/login.guard';
-import {AnimalComponent} from "./restrict/base/animal/component/animal/animal.component";
-import {AnimalFormComponent} from "./restrict/base/animal/component/animal-form/animal-form.component";
-import {animalResolver} from "./restrict/base/animal/guard/animal.resolver";
+import { AnimalComponent } from "./restrict/base/animal/component/animal/animal.component";
+import { AnimalFormComponent } from "./restrict/base/animal/component/animal-form/animal-form.component";
+import { animalResolver } from "./restrict/base/animal/guard/animal.resolver";
 
 const routes: Routes = [
   {
@@ -38,6 +36,7 @@ const routes: Routes = [
       { path: 'dashboard', title: 'BuddyBridge - DashBoard', component: DashboardComponent },
       { path: 'profile', title: 'BuddyBridge - Meu Perfil', component: ProfileComponent },
       { path: 'account', title: 'BuddyBridge - Usuários', component: AccountComponent },
+
       { path: 'account/addaccount', title: 'BuddyBridge - Novo Usuário', component: AccountFormComponent, resolve: {account : accountResolver} },
       { path: 'account/editaccount/:id', title: 'BuddyBridge - Alterar Usuário', component: AccountFormComponent, resolve: {account : accountResolver} },
       { path: 'account/editpassword/:id', title: 'BuddyBridge - Alterar Usuário', component: AccountFormSenhaComponent, resolve: {account : accountResolver} },

@@ -68,7 +68,7 @@ public class Ong {
     private Usuario usuarioOng;
 
     @Embedded
-    private Endereco OngEndereco;
+    private Endereco ongEndereco;
 
 
 

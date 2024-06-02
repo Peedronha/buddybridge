@@ -1,5 +1,6 @@
 import { MessagesModule } from 'primeng/messages';
 import { NgModule } from '@angular/core';
+
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
@@ -8,7 +9,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './open/home/home.component';
-import { DashboardComponent } from './restrict/dashboard/dashboard.component';
 import { AppLayoutComponent } from './restrict/layout/app.layout.component';
 import { LoginComponent } from './open/account/login/login.component';
 import { RegisterComponent } from './open/account/register/register.component';
@@ -36,7 +36,7 @@ import {DialogModule} from "primeng/dialog";
 import {CheckboxModule} from "primeng/checkbox";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {RippleModule} from "primeng/ripple";
-import {SplitterModule} from "primeng/splitter";
+import { SplitterModule} from "primeng/splitter";
 import { AppConfigModule } from './restrict/layout/config/config.module';
 import { ProfileComponent } from './restrict/base/account/component/profile/profile.component';
 import { AccountListComponent } from './restrict/base/account/component/account-list/account-list.component';
@@ -44,18 +44,17 @@ import { AccountFormComponent } from './restrict/base/account/component/containe
 import { AccountComponent } from './restrict/base/account/component/container/account/account.component';
 import { ValidateloginComponent } from './open/account/validatelogin/validatelogin.component';
 import { AccountFormSenhaComponent } from './restrict/base/account/component/container/account-form-senha/account-form-senha.component';
-import {
-  RegisterVolunteerComponent
-} from "./restrict/base/volunteer/component/container/register-volunteer/register-volunteer.component";
-import {
-  ListVolunteerComponent
-} from "./restrict/base/volunteer/component/container/list-volunteer/list-volunteer.component";
+import { RegisterVolunteerComponent } from "./restrict/base/volunteer/component/container/register-volunteer/register-volunteer.component";
+import { ListVolunteerComponent } from "./restrict/base/volunteer/component/container/list-volunteer/list-volunteer.component";
 import { VolunteerComponent } from './restrict/base/volunteer/component/container/volunteer/volunteer.component';
 import {VolunteerFormComponent} from "./restrict/base/volunteer/component/container/volunteer-form/volunteer-form.component";
 import { AnimalFormComponent } from './restrict/base/animal/component/animal-form/animal-form.component';
 import { AnimalComponent } from './restrict/base/animal/component/animal/animal.component';
 import { ListAnimalComponent } from './restrict/base/animal/component/list-animal/list-animal.component';
 import {InputNumberModule} from "primeng/inputnumber";
+import { OngComponent } from './restrict/base/ong/component/ong/ong.component';
+import { DashboardComponent } from './restrict/dashboard/dashboard.component';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [
@@ -68,7 +67,6 @@ import {InputNumberModule} from "primeng/inputnumber";
       InsitucionalComponent,
       RegisterVolunteerComponent,
       ListVolunteerComponent,
-      DashboardComponent,
       InsitucionalComponent,
       ProfileComponent,
       AccountListComponent,
@@ -80,8 +78,9 @@ import {InputNumberModule} from "primeng/inputnumber";
       VolunteerFormComponent,
       AnimalFormComponent,
       AnimalComponent,
-      ListAnimalComponent
-
+      ListAnimalComponent,
+      OngComponent,
+      DashboardComponent,
 
   ],
     imports: [
@@ -113,7 +112,8 @@ import {InputNumberModule} from "primeng/inputnumber";
         SplitterModule,
         AppConfigModule,
         MessagesModule,
-        InputNumberModule
+        InputNumberModule,
+        MenuModule,
 
     ],
   providers: [

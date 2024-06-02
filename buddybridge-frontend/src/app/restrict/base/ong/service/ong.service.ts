@@ -1,24 +1,23 @@
+import { Ong } from './../model/ong';
 import { Injectable } from '@angular/core';
 import {map, Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {AnimalModel} from "../model/animal.model";
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class AnimalService {
+export class OngService {
   private getAuthorizationToken() {
     const token = window.localStorage.getItem('token');
     return token;
   }
 
-  private apiUrl = 'http://localhost:8080/animal';
+  private apiUrl = 'http://localhost:8080/ongcontrol';
 
   constructor(private http: HttpClient) {
   }
 
-  getAnimalsById(id: any): Observable<any> {
+  getOngsById(id: any): Observable<any> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
@@ -26,28 +25,12 @@ export class AnimalService {
     return this.http.get<any>(this.apiUrl + '/' + id,{headers: reqHeader})
   }
 
-  getAnimals() {
+  updateOng(Ong: Ong){
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.get<any>(this.apiUrl,{headers: reqHeader})
-  }
-
-  deleteAnimal(idUser: any) {
-    var reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.getAuthorizationToken()
-    });
-    return this.http.delete<any>(this.apiUrl + '/' +idUser,{headers: reqHeader})
-  }
-
-  updateanimal(animal: AnimalModel){
-    var reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.getAuthorizationToken()
-    });
-    return this.http.put<any>(this.apiUrl, animal, {headers: reqHeader}).pipe(
+    return this.http.put<any>(this.apiUrl, Ong, {headers: reqHeader}).pipe(
       map((response) =>{
           if (response)
             return response;
@@ -58,7 +41,7 @@ export class AnimalService {
       ))
   }
 
-  registerAnimal(postData1: AnimalModel): Observable<any> {
+  registerOng(postData1: Ong): Observable<any> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()

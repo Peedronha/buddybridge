@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
 })
 export class ListVolunteerComponent {
 
-  @Input() volunteers!: Colaborador[];
+  @Input() colaboradores!: Colaborador[];
   _specificVolunteer: any = {};
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
@@ -46,7 +46,7 @@ export class ListVolunteerComponent {
   ngOnInit(): void {
     this.volunteerService.getVolunteers().subscribe((data: Colaborador[]) => {
       console.log(data)
-      this.volunteers = data;
+      this.colaboradores = data;
     });
   }
 
@@ -55,7 +55,7 @@ export class ListVolunteerComponent {
   }
 
   updateEdit(idcolaborador: any){
-    this._specificVolunteer = this.volunteers.find(volunteer => volunteer.idcolaborador === idcolaborador) || null;
+    this._specificVolunteer = this.colaboradores.find(volunteer => volunteer.idcolaborador === idcolaborador) || null;
 
     this.showHidden = !this.showHidden;
     this.showEdit = !this.showEdit;
@@ -63,7 +63,7 @@ export class ListVolunteerComponent {
   }
 
   updateState(idcolaborador: any){
-    this._specificVolunteer = this.volunteers.find(volunteer => volunteer.idcolaborador === idcolaborador) || null;
+    this._specificVolunteer = this.colaboradores.find(volunteer => volunteer.idcolaborador === idcolaborador) || null;
     this.showHidden = !this.showHidden;
   }
 

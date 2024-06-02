@@ -18,7 +18,8 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Home',
                 items: [
-                    { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
+                    { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] },
+                    { label: 'Minhas adoções', icon: 'pi pi-fw pi-desktop', routerLink: ['/'] }
                 ]
             },
             {
@@ -58,7 +59,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Buddy Animais',
                 items: [
                     { label: 'Animais', icon: 'pi pi-fw pi-heart', routerLink: ['/utilities/icons'] },
-                    /*{
+                    {
                       label: 'Configurações',
                       icon: 'pi pi-fw pi-cog',
                       items: [
@@ -67,7 +68,7 @@ export class AppMenuComponent implements OnInit {
                           }
                       ]
                     },
-                    { label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }*/
+                    //{ label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }
                 ]
             },
             /*{

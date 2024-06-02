@@ -36,17 +36,17 @@ export class VolunteerFormComponent {
 
   ngOnInit(): void {
     this.accountService.validarSessao();
-    const volunteer: Colaborador = this.router.snapshot.data['volunteer'];
-    console.log(volunteer);
+    const colaborador: Colaborador = this.router.snapshot.data['volunteer'];
+    console.log(colaborador);
     this.registerForm.setValue({
-      idcolaborador: volunteer.idcolaborador +'',
-      nome_colaborador: volunteer.nome_colaborador,
-      email: volunteer.email,
-      cpf_colaborador: volunteer.cpf_colaborador,
-      cnpj_colaborador: volunteer.cnpj_colaborador,
-      cargo_colaborador: volunteer.cargo_colaborador,
-      descricao_atividades_colaborador: volunteer.descricao_atividades_colaborador,
-      pf_pj_colaborador: volunteer.pf_pj_colaborador,
+      idcolaborador: colaborador.idcolaborador +'',
+      nome_colaborador: colaborador.nome_colaborador,
+      email: colaborador.email,
+      cpf_colaborador: colaborador.cpf_colaborador,
+      cnpj_colaborador: colaborador.cnpj_colaborador,
+      cargo_colaborador: colaborador.cargo_colaborador,
+      descricao_atividades_colaborador: colaborador.descricao_atividades_colaborador,
+      pf_pj_colaborador: colaborador.pf_pj_colaborador,
     })
   }
 

@@ -5,24 +5,35 @@
   <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
     <i class="pi pi-ellipsis-v"></i>
   </button>
-  <a class="layout-topbar-logo" routerLink="restrict/institucional">
-    <img src="../../../assets/img/default-logo.png" alt="logo">
+  <a class="layout-topbar-logo" href="/restrict/home">
+    <img src="../../../../assets/img/default-logo.png" alt="Logo da ong" height="50" class="mr-0 lg:mr-2">
   </a>
   <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-    <div class="flex align-items-center gap-2">
-      <input type="text" pInputText placeholder="Pesquisar Animais" class="w-8rem sm:w-auto"/>
-    </div>
-    <button class="p-link layout-topbar-button" routerLink="/restrict/home">
-        <i class="pi pi-heart"></i>
-        <span>Quero adotar!</span>
-      </button>
-      <button class="p-link layout-topbar-button" routerLink="/profile">
-          <i class="pi pi-user"></i>
-          <span>Minha conta</span>
-      </button>
-      <button class="p-link layout-topbar-button" (click)="sair()">
-          <i class="pi pi-sign-out"></i>
-          <span>Sair</span>
-      </button>
+    <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer">
+      <li>
+        <a href="/restrict/home" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+           <span>Home</span>
+        </a>
+      </li>
+      <li>
+        <a href="/restrict/institucional" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+            <span>Institucional</span>
+        </a>
+      </li>
+      <li>
+        <a href="/restrict/home" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+            <span>Quero adotar!</span>
+        </a>
+      </li>
+    </ul>
+    <hr/>
+    <button class="p-link layout-topbar-button" routerLink="/profile">
+        <i class="pi pi-user"></i>
+        <span>Minha conta</span>
+    </button>
+    <button class="p-link layout-topbar-button" (click)="sair()">
+        <i class="pi pi-sign-out"></i>
+        <span>Sair</span>
+    </button>
   </div>
 </div>
