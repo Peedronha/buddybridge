@@ -8,6 +8,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {Raca} from "../../../raca/model/raca.model";
 import {Tipo} from "../../../tipo_animal/model/tipo.model";
 import {TipoService} from "../../../tipo_animal/service/tipo.service";
+import {RacaService} from "../../../raca/service/raca.service";
 
 @Component({
   selector: 'app-animal-form',
@@ -36,6 +37,7 @@ export class AnimalFormComponent {
     private fb: FormBuilder,
     private animalService: AnimalService,
     private tipoService: TipoService,
+    private racaService: RacaService,
     private messageService: MessageService,
     private router: ActivatedRoute,
     private route: Router,
@@ -47,17 +49,19 @@ export class AnimalFormComponent {
     const animal: AnimalModel = this.router.snapshot.data['animal'];
     console.log("ngOnInit: "+JSON.stringify(animal));
 
-    this.registerForm.get('tipo_animal')?.valueChanges.subscribe(value => {
-      if (value) {
-        this.loadRacas(value);
-      } else {
-        this.racas = [];
-      }
-    });
-
     this.tipoService.getTipos().subscribe(tipos => {
         this.tipos = tipos;
-      });
+      }); //Popular as raças
+
+    //Event listener para mudar as raças quando selecionar um tipo de animal
+    // this.registerForm.get('tipo_animal')?.valueChanges.subscribe(value => {
+    //   alert("ngOnInit tipo: "+JSON.stringify(value))
+    //   if (value) {
+    //     this.loadRacas(value);
+    //   } else {
+    //     this.racas = [];
+    //   }
+    // });
 
     this.registerForm.setValue({
       id_animal: animal.id_animal +'',
@@ -73,7 +77,8 @@ export class AnimalFormComponent {
   }
 
   loadRacas(tipoId: any): void {
-    this.animalService.getRacesByType(tipoId).subscribe(
+    alert("load "+ JSON.stringify(tipoId))
+    this.racaService.getRacesByType(tipoId).subscribe(
       data => {
         this.racas = data;
       },
@@ -85,9 +90,10 @@ export class AnimalFormComponent {
 
 
   onTipoAnimalChange(event: any): void {
+    alert("onTipoAnimalChange tipo: "+JSON.stringify(event))
     const tipoId = event.value;
     if (tipoId) {
-      this.loadRacas(tipoId);
+      this.loadRacas(tipoId.name);
     } else {
       this.racas = [];
     }

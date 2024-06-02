@@ -36,7 +36,7 @@ public class RacaController {
     }
 
 
-    @GetMapping("/type/{id}")
+    @GetMapping("/type/{type}")
     public ResponseEntity<List<RacaModel>> getAllByType(@PathVariable String type) {
         List<RacaModel> models = new ArrayList<>(this.racaService.findAllByType(type));
         if (models.isEmpty()) {
