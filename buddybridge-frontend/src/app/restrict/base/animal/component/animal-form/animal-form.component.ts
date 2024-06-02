@@ -8,8 +8,6 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {Raca} from "../../../raca/model/raca.model";
 import {Tipo} from "../../../tipo_animal/model/tipo.model";
 import {TipoService} from "../../../tipo_animal/service/tipo.service";
-import {tipoResolver} from "../../../tipo_animal/guard/tipo.resolver.guard";
-
 
 @Component({
   selector: 'app-animal-form',
@@ -32,7 +30,8 @@ export class AnimalFormComponent {
 
   racas: Raca[] = [];
 
-  tipos: Tipo[] = []
+  tipos: Tipo[] = [];
+
   constructor(
     private fb: FormBuilder,
     private animalService: AnimalService,
@@ -48,13 +47,17 @@ export class AnimalFormComponent {
     const animal: AnimalModel = this.router.snapshot.data['animal'];
     console.log("ngOnInit: "+JSON.stringify(animal));
 
-    this.registerForm.get('tipo_animal')?.valueChanges.subscribe(type => {
-      this.onTypeChange(type);
+    this.registerForm.get('tipo_animal')?.valueChanges.subscribe(value => {
+      if (value) {
+        this.loadRacas(value);
+      } else {
+        this.racas = [];
+      }
     });
 
-  this.tipoService.getTipos().subscribe(tipos => {
-      this.tipos = tipos;
-    });
+    this.tipoService.getTipos().subscribe(tipos => {
+        this.tipos = tipos;
+      });
 
     this.registerForm.setValue({
       id_animal: animal.id_animal +'',
@@ -68,10 +71,26 @@ export class AnimalFormComponent {
       raca_animal: animal.raca_animal+''
     })
   }
-  onTypeChange(type: any): void {
-    this.animalService.getRacesByType(type).subscribe(racas => {
-      this.racas = racas;
-    });
+
+  loadRacas(tipoId: any): void {
+    this.animalService.getRacesByType(tipoId).subscribe(
+      data => {
+        this.racas = data;
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
+
+
+  onTipoAnimalChange(event: any): void {
+    const tipoId = event.value;
+    if (tipoId) {
+      this.loadRacas(tipoId);
+    } else {
+      this.racas = [];
+    }
   }
 
   submitDetails() {

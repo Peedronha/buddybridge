@@ -130,7 +130,8 @@
           optionLabel="name"
           [showClear]="true"
           formControlName="tipo_animal" class="w-full" name="tipo_animal"
-          placeholder="Selecione o tipo do animal"/>
+          placeholder="Selecione o tipo do animal"
+          (onChange)="onTipoAnimalChange($event)"/>
       </div>
       <div class="field">
         <label for="raca_animal">Raça do animal</label>
