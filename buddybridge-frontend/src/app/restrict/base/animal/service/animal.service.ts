@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {map, Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AnimalModel} from "../model/animal.model";
-import {Volunteer} from "../../volunteer/model/volunteer.model";
 import {Raca} from "../../raca/model/raca.model";
 
 @Injectable({

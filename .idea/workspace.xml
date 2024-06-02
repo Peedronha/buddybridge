@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="MERGE CRUD-ANIMAIS" />
+    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="Analicts - ONG" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -263,7 +263,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716332836453</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Analicts - ONG">
+      <option name="closed" value="true" />
+      <created>1717342516779</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1717342516779</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -303,7 +311,8 @@
     <MESSAGE value="Commit Crud Voluntarios" />
     <MESSAGE value="Commit ajustes de tableas usuário e colaboradores" />
     <MESSAGE value="MERGE CRUD-ANIMAIS" />
-    <option name="LAST_COMMIT_MESSAGE" value="MERGE CRUD-ANIMAIS" />
+    <MESSAGE value="Analicts - ONG" />
+    <option name="LAST_COMMIT_MESSAGE" value="Analicts - ONG" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
