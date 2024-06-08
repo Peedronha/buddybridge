@@ -32,7 +32,7 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-animal>
-      <tr [pSelectableRow]="animal">
+      <tr [pSelectableRow]="animals">
         <td>
           <span class="p-column-title">Cod.</span>
           {{animal.id_animal}}
@@ -47,7 +47,7 @@
         </td>
         <td>
           <span class="p-column-title">Raça</span>
-          <span class="ml-1 vertical-align-middle">{{animal.raca}}</span>
+          <span class="ml-1 vertical-align-middle">{{animal.raca_animal}}</span>
         </td>
         <td>
           <span class="p-column-title">Data de Resgate</span>

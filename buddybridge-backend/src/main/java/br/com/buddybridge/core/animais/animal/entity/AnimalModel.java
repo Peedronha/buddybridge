@@ -27,12 +27,6 @@ public class AnimalModel {
     @Column(name = "nome_animal", nullable = false)
     private String nome_animal;
 
-    @Column(name = "raca", nullable = false)
-    private String raca;
-
-    @Column(name = "idade")
-    private Integer idade;
-
     @Column(name = "peso_animal")
     private Double peso_animal;
 
@@ -41,6 +35,9 @@ public class AnimalModel {
 
     @Column(name = "data_resgate", nullable = false)
     private LocalDate data_resgate;
+
+    @Column(name = "data_nascimento", nullable = false)
+    private LocalDate data_nascimento;
 
     @ManyToOne
     @JoinColumn(name = "type_id")
@@ -52,11 +49,11 @@ public class AnimalModel {
 
 
     public AnimalModel(AnimalDto animalDto) {
+        this.id_animal = animalDto.getId_animal();
         this.nome_animal = animalDto.getNome_animal();
-        this.raca = animalDto.getRaca();
-        this.idade = animalDto.getIdade();
         this.peso_animal = animalDto.getPeso_animal();
         this.comprimento_animal = animalDto.getComprimento_animal();
         this.data_resgate = LocalDate.parse(animalDto.getData_resgate());
+        this.data_nascimento = LocalDate.parse(animalDto.getData_nascimento());
     }
 }

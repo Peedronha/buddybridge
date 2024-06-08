@@ -68,6 +68,6 @@ export class RacaService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.get<Raca[]>(`http://localhost:8080/raca/type/` + type);
+    return this.http.get<Raca[]>(`http://localhost:8080/raca/type/` + type, {headers: reqHeader});
   }
 }

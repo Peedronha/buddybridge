@@ -28,8 +28,8 @@ public class RacaService {
 
     public void createNewRace(RaceDTO raceDTO) {
         RacaModel model = new RacaModel();
-        if (tipoRepository.findById(raceDTO.getTypeID()).isPresent()) {
-            Optional<TypeModel> typeModel = tipoRepository.findById(raceDTO.getTypeID());
+        if (tipoRepository.findById(raceDTO.getId_tipo()).isPresent()) {
+            Optional<TypeModel> typeModel = tipoRepository.findById(raceDTO.getId_tipo());
             model.setType(typeModel.get());
             model.setName(raceDTO.getName());
 

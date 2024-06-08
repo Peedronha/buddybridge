@@ -51,14 +51,19 @@
         </small>
       </div>
       <div class="field">
-        <label for="id_tipo">Tipo de animal</label>
+        <p>
+          <label for="id_tipo">Tipo de animal</label>
+        </p>
         <p-dropdown
           [options]="tipos"
           optionLabel="name"
-          [ngModel]="selectTipo"
+          [(ngModel)]="selectTipo"
           [showClear]="true"
-          formControlName="id_tipo" class="w-full" name="id_tipo"
-          placeholder="Selecione o tipo do animal"/>
+          formControlName="id_tipo"
+          class="w-full"
+          name="id_tipo"
+          placeholder="Selecione o tipo do animal"
+        />
       </div>
     </div>
     <button pButton label="SALVAR" styleClass="w-full" type="submit"></button>
