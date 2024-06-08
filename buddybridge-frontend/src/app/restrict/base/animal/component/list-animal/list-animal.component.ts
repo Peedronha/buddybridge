@@ -1,45 +1,61 @@
-import {Component, EventEmitter, Input, Output, signal} from '@angular/core';
-import {AnimalModel} from "../../model/animal.model";
-import {FormBuilder, Validators} from "@angular/forms";
-import {MessageService} from "primeng/api";
-import {Router} from "@angular/router";
-import {AnimalService} from "../../service/animal.service";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, Validators } from "@angular/forms";
+import { MessageService } from "primeng/api";
+import { Router } from "@angular/router";
+import { AnimalModel } from "../../model/animal.model";
+import { AnimalService } from "../../service/animal.service";
 
 @Component({
   selector: 'app-list-animal',
   templateUrl: './list-animal.component.html',
-  styleUrl: './list-animal.component.scss'
+  styleUrls: ['./list-animal.component.scss']
 })
 export class ListAnimalComponent {
 
   @Input() animals!: AnimalModel[];
   _specificAnimal: any = {};
-  @Output() add = new EventEmitter(false);
-  @Output() edit = new EventEmitter(false);
-  @Output() editPassword = new EventEmitter(false);
-  @Output() remove = new EventEmitter(false);
-
+  @Output() add = new EventEmitter<boolean>();
+  @Output() edit = new EventEmitter<number>();
+  @Output() remove = new EventEmitter<number>();
 
   editForm = this.fb.group({
     nome_animal: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     raca: ['', Validators.required],
     idade: ['', Validators.required],
     peso_animal: ['', Validators.required],
-    comprimento_animal: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+    comprimento_animal: ['', [Validators.required, Validators.pattern(/^\d{1,2000}$/)]],
     data_resgate: ['', Validators.required],
   });
 
-
   loading: boolean = false;
+  displayDeleteDialog: boolean = false;
 
-  showHidden: boolean = false;
+  constructor(private fb: FormBuilder,
+              private messageService: MessageService,
+              private animalService: AnimalService,
+              private router: Router) {}
 
-  showEdit: boolean = false;
 
-  constructor(private fb: FormBuilder, private messageService: MessageService, private animalService: AnimalService, private router: Router) {
-
+  showDeleteDialog(animal: AnimalModel) {
+    this._specificAnimal = animal;
+    this.displayDeleteDialog = true;
   }
 
+  onCancelDelete() {
+    this._specificAnimal = null;
+    this.displayDeleteDialog = false;
+  }
+
+  confirmDelete() {
+    if (this._specificAnimal) {
+      this.onDelete(this._specificAnimal.id_animal);
+
+        this._specificAnimal = null;
+
+        this.displayDeleteDialog = false;
+
+    }
+  }
 
   ngOnInit(): void {
     this.animalService.getAnimals().subscribe((data: AnimalModel[]) => {
@@ -48,21 +64,21 @@ export class ListAnimalComponent {
     });
   }
 
-
   onSearch(event: any) {
     const searchTerm = event.target.value;
+    // Implement search functionality
   }
 
   onAdd() {
     this.add.emit(true);
   }
 
-  onEdit(idAnimal: any) {
-    alert("IdAnimal: "+idAnimal)
+  onEdit(idAnimal: number) {
+    alert("IdAnimal: " + idAnimal);
     this.edit.emit(idAnimal);
   }
 
-  onDelete(idUser: any) {
-    this.remove.emit(idUser);
+  onDelete(idAnimal: number) {
+    this.remove.emit(idAnimal);
   }
 }
