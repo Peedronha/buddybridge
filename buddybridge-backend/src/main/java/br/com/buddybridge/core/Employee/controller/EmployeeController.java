@@ -75,7 +75,8 @@ public class EmployeeController {
 
             EmployeeModel model = optionalEmployeeModel.orElseThrow(() -> new NoSuchElementException("Voluntario not found"));
 
-            Usuario u = this.usuarioService.buscarPorUsuario_idvoluntario(model);
+            Usuario u = this.usuarioService.buscarPorUsuario_idvoluntario(model).orElseThrow(() -> new NoSuchElementException("Voluntario not found"));
+
 
             this.usuarioService.excluir(u.getId());
 

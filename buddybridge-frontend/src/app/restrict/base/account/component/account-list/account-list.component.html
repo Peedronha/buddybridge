@@ -1,5 +1,5 @@
 <div class="card">
-  <p-table #dt1 [value]="users" selectionMode="single" [(selection)]="_specificUser" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
+  <p-table #dt1 [value]="users" selectionMode="single" [(selection)]="_specificEntity" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
   [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session">
       <ng-template pTemplate="header">
           <tr>
@@ -68,4 +68,13 @@
           </tr>
       </ng-template>
   </p-table>
+  <p-dialog header="Confirmar Exclusão" [(visible)]="displayDeleteDialog" modal="modal" [closable]="false"
+            [dismissableMask]="true" [baseZIndex]="10000"
+            [draggable]="false" [resizable]="false">
+    <p class="m-0">Tem certeza de que deseja excluir esta conta?</p>
+    <ng-template pTemplate="footer">
+      <button pButton label="Cancelar" icon="pi pi-times" (click)="onCancelDelete()"></button>
+      <button pButton severity="danger" label="Confirmar" icon="pi pi-check" (click)="confirmDelete()"></button>
+    </ng-template>
+  </p-dialog>
 </div>

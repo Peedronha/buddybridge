@@ -5,6 +5,7 @@ import {RacaService} from "../../../raca/service/raca.service";
 import {Router} from "@angular/router";
 import {Tipo} from "../../model/tipo.model";
 import {TipoService} from "../../service/tipo.service";
+import {Raca} from "../../../raca/model/raca.model";
 
 @Component({
   selector: 'app-list-tipo',
@@ -14,7 +15,7 @@ import {TipoService} from "../../service/tipo.service";
 export class ListTipoComponent {
 
   @Input() tipos!: Tipo[];
-  _specificTipo: any = {};
+  _specificEntity: any = {};
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
   @Output() editPassword = new EventEmitter(false);
@@ -29,9 +30,7 @@ export class ListTipoComponent {
 
   loading: boolean = false;
 
-  showHidden: boolean = false;
-
-  showEdit: boolean = false;
+  displayDeleteDialog: boolean = false;
 
   constructor(private fb: FormBuilder, private messageService: MessageService, private tipoService: TipoService, private router: Router) {
 
@@ -61,5 +60,25 @@ export class ListTipoComponent {
 
   onDelete(id_tipo: any) {
     this.remove.emit(id_tipo);
+  }
+
+  showDeleteDialog(entity: Tipo) {
+    this._specificEntity = entity;
+    this.displayDeleteDialog = true;
+  }
+
+  onCancelDelete() {
+    this._specificEntity = null;
+    this.displayDeleteDialog = false;
+  }
+
+  confirmDelete() {
+    if (this._specificEntity) {
+      this.onDelete(this._specificEntity.id);
+
+      this._specificEntity = null;
+
+      this.displayDeleteDialog = false;
+    }
   }
 }

@@ -4,6 +4,7 @@ import {Volunteer} from "../../../model/volunteer.model";
 import {VolunteerService} from "../../../service/volunteer.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {Tipo} from "../../../../tipo_animal/model/tipo.model";
 
 
 @Component({
@@ -14,7 +15,7 @@ import {Router} from "@angular/router";
 export class ListVolunteerComponent {
 
   @Input() volunteers!: Volunteer[];
-  _specificVolunteer: any = {};
+  _specificEntity: any = {};
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
   @Output() editPassword = new EventEmitter(false);
@@ -38,6 +39,7 @@ export class ListVolunteerComponent {
 
   showEdit: boolean = false;
 
+  displayDeleteDialog: boolean = false;
   constructor(private fb: FormBuilder, private messageService: MessageService, private volunteerService: VolunteerService, private router: Router) {
 
   }
@@ -55,7 +57,7 @@ export class ListVolunteerComponent {
   }
 
   updateEdit(idvoluntario: any){
-    this._specificVolunteer = this.volunteers.find(volunteer => volunteer.idvoluntario === idvoluntario) || null;
+    this._specificEntity = this.volunteers.find(volunteer => volunteer.idvoluntario === idvoluntario) || null;
 
     this.showHidden = !this.showHidden;
     this.showEdit = !this.showEdit;
@@ -63,7 +65,7 @@ export class ListVolunteerComponent {
   }
 
   updateState(idvoluntario: any){
-    this._specificVolunteer = this.volunteers.find(volunteer => volunteer.idvoluntario === idvoluntario) || null;
+    this._specificEntity = this.volunteers.find(volunteer => volunteer.idvoluntario === idvoluntario) || null;
     this.showHidden = !this.showHidden;
   }
 
@@ -97,5 +99,25 @@ export class ListVolunteerComponent {
 
   onEditPassword(idUser: any) {
     this.editPassword.emit(idUser);
+  }
+
+  showDeleteDialog(entity: Volunteer) {
+    this._specificEntity = entity;
+    this.displayDeleteDialog = true;
+  }
+
+  onCancelDelete() {
+    this._specificEntity = null;
+    this.displayDeleteDialog = false;
+  }
+
+  confirmDelete() {
+    if (this._specificEntity) {
+      this.onDelete(this._specificEntity.idvoluntario);
+
+      this._specificEntity = null;
+
+      this.displayDeleteDialog = false;
+    }
   }
 }

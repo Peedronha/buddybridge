@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from '../../../../../open/account/model/user.model';
+import {Tipo} from "../../../tipo_animal/model/tipo.model";
 
 @Component({
   selector: 'app-account-list',
@@ -9,7 +10,7 @@ import { User } from '../../../../../open/account/model/user.model';
 export class AccountListComponent {
 
   @Input() users!: User[];
-  _specificUser!: User;
+  _specificEntity: any = {} ;
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
   @Output() editPassword = new EventEmitter(false);
@@ -17,6 +18,7 @@ export class AccountListComponent {
 
 
   constructor() { }
+  displayDeleteDialog: boolean = false;
 
   ngOnInit(): void { }
 
@@ -35,5 +37,24 @@ export class AccountListComponent {
   onEditPassword(idUser: any) {
     this.editPassword.emit(idUser);
   }
+  showDeleteDialog(entity: User) {
+    this._specificEntity = entity;
+    this.displayDeleteDialog = true;
+  }
 
+  onCancelDelete() {
+    this._specificEntity = null;
+    this.displayDeleteDialog = false;
+  }
+
+  confirmDelete() {
+    if (this._specificEntity) {
+      this.onDelete(this._specificEntity.id);
+
+      this._specificEntity = null;
+
+      this.displayDeleteDialog = false;
+
+    }
+  }
 }

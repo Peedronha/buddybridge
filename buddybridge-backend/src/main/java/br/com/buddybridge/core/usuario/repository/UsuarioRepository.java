@@ -17,5 +17,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
 
     void deleteByUsuarioIdvoluntario(EmployeeModel usuarioIdvoluntario);
 
-    Usuario findByUsuarioIdvoluntario(EmployeeModel employeeModel);
+    Optional<Usuario> findByUsuarioIdvoluntario(EmployeeModel employeeModel);
 }

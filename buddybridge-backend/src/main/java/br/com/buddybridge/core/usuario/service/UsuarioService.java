@@ -130,7 +130,7 @@ public class UsuarioService {
     }
 
 
-    public Usuario buscarPorUsuario_idvoluntario(EmployeeModel employeeModel) {
+    public Optional<Usuario> buscarPorUsuario_idvoluntario(EmployeeModel employeeModel) {
         return usuarioRepository.findByUsuarioIdvoluntario(employeeModel);
     }
 
