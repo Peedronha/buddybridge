@@ -96,7 +96,6 @@ import { MenuModule } from 'primeng/menu';
       FormTipoComponent,
 
 
-
   ],
   imports: [
     BrowserModule,
