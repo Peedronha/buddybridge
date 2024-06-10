@@ -19,9 +19,10 @@ export class animalResolver{
       nome_animal: '',
       raca: '',
       idade: '',
-      peso_animal: '',
+      peso_animal: parseInt(''),
       comprimento_animal: '',
       data_resgate: '',
+      data_nascimento: '',
       tipo_animal: '',
       raca_animal: '',
     });

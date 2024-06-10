@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RaceDTO {
-    Long TypeID;
+    Long id_tipo;
     String name;
 }

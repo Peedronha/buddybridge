@@ -63,4 +63,11 @@ export class RacaService {
         }
       ))
   }
+  getRacesByType(type: string):Observable<any> {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.http.get<Raca[]>(`http://localhost:8080/raca/type/` + type, {headers: reqHeader});
+  }
 }

@@ -2,6 +2,7 @@ package br.com.buddybridge.core.animais.animal.controller;
 
 import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
 import br.com.buddybridge.core.animais.animal.model.AnimalDto;
+import br.com.buddybridge.core.animais.animal.model.GetAnimalDTO;
 import br.com.buddybridge.core.animais.animal.service.AnimalService;
 import br.com.buddybridge.core.util.ExampleExeption;
 import jakarta.transaction.SystemException;
@@ -24,8 +25,8 @@ public class AnimalController {
     private AnimalService animalService;
 
     @GetMapping
-    public ResponseEntity<List<AnimalModel>> getALlAnimalModels(){
-        List<AnimalModel> animalModels = new ArrayList<>(this.animalService.findAll());
+    public ResponseEntity<List<GetAnimalDTO>> getALlAnimalModels(){
+        List<GetAnimalDTO> animalModels = new ArrayList<>(this.animalService.findAll());
         if (animalModels.isEmpty()) {
             return new ResponseEntity<>(animalModels, HttpStatus.NOT_FOUND);
         }
@@ -35,7 +36,7 @@ public class AnimalController {
     @PostMapping
     public ResponseEntity<AnimalModel> insertAnimalModel(@RequestBody AnimalDto animalDto){
         try {
-            AnimalModel animal = this.animalService.saveAnimalModel(new AnimalModel(animalDto));
+            AnimalModel animal = this.animalService.saveAnimalModel(animalDto);
             return new ResponseEntity<>(animal, HttpStatus.CREATED);
         }
         catch (Exception e){
@@ -51,10 +52,10 @@ public class AnimalController {
     }
 
     @PutMapping
-    public ResponseEntity<AnimalModel> updateAnimalModel(@RequestBody AnimalModel animalModel) throws SystemException, ExampleExeption {
-        if(this.animalService.findAnimalModelById(animalModel.getId_animal()).isPresent()) {
-            this.animalService.saveAnimalModel(animalModel);
-            return new ResponseEntity<>(animalModel, HttpStatus.OK);
+    public ResponseEntity<AnimalDto> updateAnimalModel(@RequestBody AnimalDto animalDto) throws SystemException, ExampleExeption {
+        if(this.animalService.findAnimalModelById(animalDto.getId_animal()).isPresent()) {
+            this.animalService.saveAnimalModel(animalDto);
+            return new ResponseEntity<>(animalDto, HttpStatus.OK);
         }
         else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

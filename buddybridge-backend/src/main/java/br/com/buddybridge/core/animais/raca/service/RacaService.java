@@ -18,14 +18,18 @@ public class RacaService {
     private RacaRepository racaRepository;
     private TypeRepository tipoRepository;
 
+    public List<RacaModel> findAll() {
+        return racaRepository.findAll();
+    }
+
     public List<RacaModel> findAllByType(String type) {
         return racaRepository.findByTypeName(type);
     }
 
     public void createNewRace(RaceDTO raceDTO) {
         RacaModel model = new RacaModel();
-        if (tipoRepository.findById(raceDTO.getTypeID()).isPresent()) {
-            Optional<TypeModel> typeModel = tipoRepository.findById(raceDTO.getTypeID());
+        if (tipoRepository.findById(raceDTO.getId_tipo()).isPresent()) {
+            Optional<TypeModel> typeModel = tipoRepository.findById(raceDTO.getId_tipo());
             model.setType(typeModel.get());
             model.setName(raceDTO.getName());
 

@@ -60,14 +60,14 @@ export class FormTipoComponent {
 
     console.log(tipo.id);
 
-    if (this.registerForm.get('id_tipo')?.value + '' != 'NaN'){
+    if (this.registerForm.get('id_tipo')?.value + '' == 'NaN'){
       tipo.id = undefined
       this.tipoService.registerTipo(tipo).subscribe(
         response => {
           console.log(response);
           this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso!'});
           this.registerForm.reset();
-          this.route.navigateByUrl('/tipo')
+          this.route.navigateByUrl('/tipos')
         },
         error => {
           this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Já existe um usuário cadastrado no sistema com este email.'});
@@ -79,7 +79,7 @@ export class FormTipoComponent {
           console.log(response);
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso' });
           this.registerForm.reset();
-          this.route.navigateByUrl('/tipo')
+          this.route.navigateByUrl('/tipos')
         },
         error => {
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Já existe um usuário com este CPF / Email cadastrado no sistema' });
