@@ -35,7 +35,9 @@ public class SecurityConfig {
                         authorizeRequests
                                 //.requestMatchers(HttpMethod.GET).permitAll()
                                 //.requestMatchers(HttpMethod.OPTIONS).permitAll()
-                                .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
+                                .requestMatchers(HttpMethod.POST,  "/auth/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,  "/auth/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,  "/ongcontrol/**").permitAll()
                                 .requestMatchers(
                                         "/v3/api-docs/**",
                                         "/configuration/ui",

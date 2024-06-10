@@ -1,3 +1,4 @@
+import { TokenService } from './../../../../open/account/shared/token.service';
 import { Ong } from './../model/ong';
 import { Injectable } from '@angular/core';
 import {map, Observable} from "rxjs";
@@ -8,21 +9,20 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class OngService {
   private getAuthorizationToken() {
-    const token = window.localStorage.getItem('token');
+    const token = this.tokenService.getToken();
     return token;
   }
 
   private apiUrl = 'http://localhost:8080/ongcontrol';
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService
+  ) {
   }
 
-  getOngsById(id: any): Observable<any> {
-    var reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.getAuthorizationToken()
-    });
-    return this.http.get<any>(this.apiUrl + '/' + id,{headers: reqHeader})
+  getOngById(id: any): Observable<any> {
+    return this.http.get<any>(this.apiUrl + '/' + id)
   }
 
   updateOng(Ong: Ong){
@@ -46,7 +46,7 @@ export class OngService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.post<any>(this.apiUrl, postData1,{headers: reqHeader}).pipe(
+    return this.http.post<any>(this.apiUrl+"/salvar", postData1,{headers: reqHeader}).pipe(
       map((response) =>{
           if (response)
             return response;

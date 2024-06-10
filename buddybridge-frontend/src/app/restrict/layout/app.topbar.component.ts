@@ -22,6 +22,8 @@ export class AppTopBarComponent {
       window.localStorage.removeItem('token');
       window.localStorage.removeItem('idUser');
       window.localStorage.removeItem('login');
+      window.localStorage.removeItem('valid');
+      window.localStorage.removeItem('validarEmail');
       window.location.href = '/login';
     }
 

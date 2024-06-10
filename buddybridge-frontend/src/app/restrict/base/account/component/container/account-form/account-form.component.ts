@@ -4,8 +4,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AccountRestrictService } from '../../../shared/account-restrict.service';
-import { AccountService } from '../../../../../../open/account/shared/account.service';
-import { passwordMatchValidator } from '../../../../../../open/account/shared/password-match.directive';
 import { UsuarioEndereco } from '../../../../../../open/account/model/usuarioEndereco.model';
 
 @Component({
@@ -25,14 +23,12 @@ export class AccountFormComponent {
   constructor(
     private fb: FormBuilder,
     private accountRestrictService: AccountRestrictService,
-    private accountService:AccountService,
     private messageService: MessageService,
     private router: ActivatedRoute,
     private route: Router
   ) { }
 
   ngOnInit(): void {
-    this.accountService.validarSessao();
     const user: User = this.router.snapshot.data['account']
     console.log(user);
     this.registerForm.setValue({

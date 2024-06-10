@@ -1,9 +1,11 @@
+import { User } from '../../../../open/account/model/user.model';
 import { UsuarioEndereco } from './../../../../open/account/model/usuarioEndereco.model';
 export class Ong {
+  idOng!: number | undefined;
   razaoSocialOng!: string;
   cnpjOng!: string;
   missaoOng?: string;
-  varoresOng?: string;
+  valoresOng?: string;
   visaoOng?: string;
   telefoneOng!: string;
   whatsappOng!: string;
@@ -14,6 +16,6 @@ export class Ong {
   facebookOng?: string;
   twitterOng?: string;
   linkedinOng?: string;
-  usuarioOng!: number | undefined;
+  usuarioOng?: User;
   ongEndereco?: UsuarioEndereco;
 }

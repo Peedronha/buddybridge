@@ -14,7 +14,6 @@ export class VolunteerComponent {
 
   constructor(
     private volunteerService: VolunteerService,
-    private accountService: AccountService,
     private router: Router,
     private route: ActivatedRoute,
     private messageService: MessageService
@@ -22,7 +21,7 @@ export class VolunteerComponent {
     this.refresh();
   }
 
-  ngOnInit(): void { this.accountService.validarSessao(); }
+  ngOnInit(): void {}
 
   refresh() {
     this.volunteerService.getVolunteers().subscribe((data: Colaborador[]) => {

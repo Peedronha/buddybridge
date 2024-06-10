@@ -4,7 +4,6 @@ import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import {VolunteerService} from "../../../service/volunteer.service";
 import {Colaborador} from "../../../model/colaborador";
-import {AccountService} from "../../../../../../open/account/shared/account.service";
 
 
 
@@ -28,14 +27,12 @@ export class RegisterVolunteerComponent {
   showPj: boolean = true;
 
   constructor(
-    private accountService: AccountService,
     private fb: FormBuilder,
     private volunteerService: VolunteerService,
     private messageService: MessageService,
     private router: Router
   ) {}
   ngOnInit(): void {
-    this.accountService.validarSessao();
   }
 
   get nome_colaborador() {

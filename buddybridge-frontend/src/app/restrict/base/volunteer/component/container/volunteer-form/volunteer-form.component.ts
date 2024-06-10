@@ -31,11 +31,9 @@ export class VolunteerFormComponent {
     private messageService: MessageService,
     private router: ActivatedRoute,
     private route: Router,
-    private accountService : AccountService
   ) { }
 
   ngOnInit(): void {
-    this.accountService.validarSessao();
     const colaborador: Colaborador = this.router.snapshot.data['volunteer'];
     console.log(colaborador);
     this.registerForm.setValue({

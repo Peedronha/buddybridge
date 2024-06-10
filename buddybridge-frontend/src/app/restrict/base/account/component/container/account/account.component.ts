@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from '../../../../../../open/account/model/user.model';
-import { Observable, of } from 'rxjs';
 import { AccountRestrictService } from '../../../shared/account-restrict.service';
-import { AccountService } from '../../../../../../open/account/shared/account.service';
 import {MenuItem, MessageService} from "primeng/api";
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -16,7 +14,6 @@ export class AccountComponent {
 
   constructor(
     private accountRestrictService: AccountRestrictService,
-    private accountService: AccountService,
     private router: Router,
     private route: ActivatedRoute,
     private messageService: MessageService
@@ -24,7 +21,7 @@ export class AccountComponent {
     this.refresh();
   }
 
-  ngOnInit(): void { this.accountService.validarSessao(); }
+  ngOnInit(): void { }
 
   refresh() {
     this.accountRestrictService.listar().subscribe((data: User[]) => {

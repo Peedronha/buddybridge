@@ -25,41 +25,55 @@ public class AuthService {
 
     public AuthResponse login(LoginRequest request){
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        UserDetails user = userRepository.findByLogin(request.getUsername()).orElseThrow();
-        Usuario usuario = userRepository.findByLogin(request.getUsername()).orElseThrow();
-        String token = jwtService.getToken(user);
 
+        Usuario usuario = userRepository.findByLogin(request.getUsername()).orElseThrow();
+        boolean gerarLogin = true;
         if(request.getOtp() != null && request.getOtp() != ""){
             if(usuario.getToken().equals(request.getOtp())){
                 usuario.setConfirmacaoEmail(false);
                 usuario = userRepository.save(usuario);
+            } else {
+                gerarLogin = false;
             }
         }
-
+        //Crio o retorno
         AuthResponse response = new AuthResponse();
-        response.setToken(token);
+
+        if(gerarLogin) {
+            UserDetails user = userRepository.findByLogin(request.getUsername()).orElseThrow();
+            String token = jwtService.getToken(user);
+            response.setToken(token);
+            response.setValid(true);
+        } else {
+            response.setToken(null);
+            response.setValid(false);
+        }
         response.setIdUser(usuario.getId().toString());
         response.setLogin(usuario.getLogin());
-        response.setValid(true);
         response.setValidarEmail(usuario.getConfirmacaoEmail());
         return response;
     }
 
-    public AuthResponse isTokenValid(AuthRequest authRequest) {
-        UserDetails user = userRepository.findByLogin(authRequest.getLogin()).orElseThrow();
-        Usuario usuario = userRepository.findByLogin(authRequest.getLogin()).orElseThrow();
+    public AuthResponse isTokenValid(Long id, String token) {
+        Usuario usuario = userRepository.getById(id);
+        UserDetails user = userRepository.findByLogin(usuario.getLogin()).orElseThrow();
+
         AuthResponse response = new AuthResponse();
 
         response.setIdUser(usuario.getId().toString());
         response.setLogin(usuario.getLogin());
-        if (jwtService.isTokenValid(authRequest.getToken(), user)){
-            response.setToken(authRequest.getToken());
-            System.out.println("é valido");
+        if (jwtService.isTokenValid(token, user)){
+            response.setToken(token);
+            response.setIdUser(usuario.getId().toString());
+            response.setLogin(usuario.getLogin());
             response.setValid(true);
+            response.setValidarEmail(usuario.getConfirmacaoEmail());
         } else {
-            System.out.println("não é valido");
-            response.setToken("");
+            response.setToken(null);
+            response.setIdUser(null);
+            response.setLogin(null);
             response.setValid(false);
+            response.setValidarEmail(usuario.getConfirmacaoEmail());
         }
         return response;
     }

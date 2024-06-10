@@ -6,6 +6,7 @@ export class UsuarioEndereco {
   paisEndereco?: string;
   cepEndereco?: string;
   bairroEndereco?: string;
+  complementoEndereco?: string;
 }
 
 

@@ -30,8 +30,8 @@ public class Ong {
     @Column(name = "missao_ong")
     private String missaoOng;
 
-    @Column(name = "varores_ong")
-    private String varoresOng;
+    @Column(name = "valores_ong")
+    private String valoresOng;
 
     @Column(name = "visaoOng")
     private String visaoOng;
@@ -64,12 +64,11 @@ public class Ong {
     private String linkedinOng;
 
     @ManyToOne
-    @JoinColumn(name="ong_id", referencedColumnName="id")
+    @JoinColumn(name="usuario_id", referencedColumnName="id")
     private Usuario usuarioOng;
 
     @Embedded
     private Endereco ongEndereco;
-
 
 
 }

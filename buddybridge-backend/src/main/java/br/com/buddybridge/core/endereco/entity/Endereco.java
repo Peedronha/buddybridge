@@ -35,6 +35,6 @@ public class Endereco {
     private String bairroEndereco;
 
     @Column(name = "complemento_endereco", nullable = true, length = 255)
-    private String complemento_endereco;
+    private String complementoEndereco;
 
 }

@@ -93,7 +93,8 @@ import { MenuModule } from 'primeng/menu';
       ListRacaComponent,
       TipoComponent,
       ListTipoComponent,
-      FormTipoComponent
+      FormTipoComponent,
+
 
 
   ],

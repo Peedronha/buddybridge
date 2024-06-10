@@ -45,7 +45,7 @@ public class Colaborador {
     private String pf_pj_colaborador;
 
     @ManyToOne
-    @JoinColumn(name="colaborador_id", referencedColumnName="id")
+    @JoinColumn(name="usuario_id", referencedColumnName="id")
     private Usuario usuarioColaborador;
 
     public Colaborador(ColaboradorDto colaboradorDto) {

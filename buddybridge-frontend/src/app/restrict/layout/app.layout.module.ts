@@ -17,6 +17,7 @@ import { AppMenuitemComponent } from './app.menuitem.component';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppTopBarComponent } from './app.topbar.component';
 import { AppConfigModule } from './config/config.module';
+import { ErrorComponent } from './error/error/error.component';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { AppConfigModule } from './config/config.module';
         AppMenuComponent,
         AppSidebarComponent,
         AppLayoutComponent,
+        ErrorComponent,
     ],
     imports: [
         BrowserModule,

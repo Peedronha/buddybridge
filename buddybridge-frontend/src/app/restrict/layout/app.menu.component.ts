@@ -20,7 +20,7 @@ export class AppMenuComponent implements OnInit {
         label: 'Home',
         items: [
           {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']},
-          {label: 'Minhas Adoções', icon: 'pi pi-fw pi-desktop', routerLink: ['/']}
+          //{label: 'Minhas Adoções', icon: 'pi pi-fw pi-desktop', routerLink: ['/']}
         ]
       },
       {
@@ -34,7 +34,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Usuários', icon: 'pi pi-fw pi-id-card', routerLink: ['/account']
               },
               {
-                label: 'Voluntários', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/volunteer']
+                label: 'Colaboradores', icon: 'pi  pi-fw pi-share-alt', routerLink: ['/volunteer']
               },
             ]
           },
@@ -43,11 +43,11 @@ export class AppMenuComponent implements OnInit {
             icon: 'pi pi-fw pi-cog',
             items: [
                 {
-                  label: 'Ong', icon: 'pi pi-fw pi-bookmark', routerLink: ['/uikit/floatlabel']
+                  label: 'Dados da Ong', icon: 'pi pi-fw pi-bookmark', routerLink: ['/ong']
                 },
-                {
+                /*{
                   label: 'Opções de Sistema', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/floatlabel']
-                },
+                },*/
             ]
           },
           /*{ label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }*/
@@ -67,9 +67,9 @@ export class AppMenuComponent implements OnInit {
                         {
                           label: 'Cadastro de Espécies', icon: 'pi  pi-fw pi-folder-open', routerLink: ['/tipos']
                         },
-                        {
+                        /*{
                           label: 'Opções de Sistema', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/floatlabel']
-                        }
+                        }*/
                       ]
                     },
                     /*{ label: 'Relatórios Gerenciais', icon: 'pi pi-fw pi-print', routerLink: ['/utilities/icons'] }*/

@@ -2,6 +2,7 @@ package br.com.buddybridge.core.ong.controller;
 
 import br.com.buddybridge.core.ong.entity.Ong;
 import br.com.buddybridge.core.ong.service.OngService;
+import br.com.buddybridge.core.usuario.entity.Usuario;
 import br.com.buddybridge.core.util.ExampleExeption;
 import jakarta.transaction.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,16 @@ public class OngController {
     public void excluir(@PathVariable("id") Long id) {
         ongService.excluir(id);
     }
-    
+
+    @PutMapping
+    public ResponseEntity<Ong> updateOng(@RequestBody Ong ong) throws SystemException, ExampleExeption {
+        if(this.ongService.buscarPorId(ong.getIdOng()) != null) {
+            this.ongService.salvar(ong);
+            return new ResponseEntity<>(ong, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

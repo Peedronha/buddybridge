@@ -40,7 +40,6 @@ export class AccountFormSenhaComponent {
   ) { }
 
   ngOnInit(): void {
-    this.accountService.validarSessao();
     const user: User = this.router.snapshot.data['account']
     console.log(user);
     this.registerForm.setValue({

@@ -43,19 +43,13 @@ public class UsuarioService {
             if (usuario.getId() == null) {
                 usuario.setConfirmacaoEmail(true);
                 usuario.setToken(gerarNumeroSeisDigitos());
-
                 String message = "Seja bem vindo a BuddyBridge - para acessar o sistema usar o seguinte código OTP: " + usuario.getToken();
-
                 if (colaborador){
-                   message = message.concat("\nSua senha inicial é: " + usuario.getSenha() +
-                           "\n<a>http://localhost:4200/validatelogin</a>"+
-                                       "\nVocê pode altera-la nas configurações de perfil.");
+                    message = message.concat("\nSua senha inicial é: " + usuario.getSenha()+"\n<a>http://localhost:4200/validatelogin</a>"+ "\nVocê pode altera-la nas configurações de perfil.");
                 }
-
-                emailService.enviarEmailTexto(usuario.getLogin(),
-                        "BuddyBridge - Token de Acesso ao Sistema", message);
+                emailService.enviarEmailTexto(usuario.getLogin(),"BuddyBridge - Token de Acesso ao Sistema", message);
             }
-
+            //Criptografando a senha
             if (usuario.getSenha() != null && !usuario.getSenha().isEmpty()) {
                 String senhaHash = this.bCryptPasswordEncoder().encode(usuario.getSenha());
                 usuario.setSenha(senhaHash);
@@ -65,7 +59,6 @@ public class UsuarioService {
                     usuario.setSenha(origin.getSenha());
                 }
             }
-
             return usuarioRepository.save(usuario);
         } catch (Exception e) {
             throw new SystemException(String.valueOf(e));
@@ -75,15 +68,12 @@ public class UsuarioService {
     public void recuperarSenha(String email){
         Usuario usuario = usuarioRepository.findByLogin(email).orElseThrow();
         if(usuario != null) {
-
             String newPassword = generatePassword(8);
             String senhaHash = this.bCryptPasswordEncoder().encode(newPassword);
             usuario.setSenha(senhaHash);
             usuario.setConfirmacaoEmail(true);
             usuario.setToken(gerarNumeroSeisDigitos());
-
             usuarioRepository.save(usuario);
-
             emailService.enviarEmailTexto(usuario.getLogin(),
                     "BuddyBridge - Recuperação de Senha",
                     "Para acessar o sistema usar as seguinte informações: Senha:" + newPassword  + ", Código OTP: "+usuario.getToken());

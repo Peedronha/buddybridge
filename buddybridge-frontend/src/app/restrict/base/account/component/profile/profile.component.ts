@@ -34,7 +34,6 @@ export class ProfileComponent {
   ) { }
 
   ngOnInit(): void {
-    this.accountService.validarSessao();
     var id = window.localStorage.getItem('idUser');
     this.accountRestrictService.loadById(id+'').subscribe();
 

@@ -2,16 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../../../../open/account/model/user.model';
 import { Observable } from 'rxjs';
-
+import { TokenService } from './../../../../open/account/shared/token.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AccountRestrictService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private tokenService: TokenService
+  ) { }
 
   public getAuthorizationToken() {
-    const token = window.localStorage.getItem('token');
+    const token = this.tokenService.getToken();
     return token;
   }
 
@@ -49,6 +52,24 @@ export class AccountRestrictService {
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
     return this.httpClient.get<User>("http://localhost:8080/usuario/" + id, { headers: reqHeader });
+  }
+
+
+  loadUserById(id: string): Observable<User> {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.httpClient.get<User>("http://localhost:8080/usuario/" + id, { headers: reqHeader });
+  }
+
+  getUsuarioLogado(): Observable<User> {
+    const id = localStorage.getItem('idUser');
+    if (id) {
+      return this.loadUserById(id);
+    } else {
+      throw new Error('User ID not found in local storage');
+    }
   }
 
 }

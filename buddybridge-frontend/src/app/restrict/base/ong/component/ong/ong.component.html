@@ -1,1 +1,166 @@
-<p>ong works!</p>
+
+<div class="card">
+  <div class="surface-section py-2 md-3">
+    <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BRIDGE</a></li>
+        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Configurações</a></li>
+        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+        <li><span class="text-900 line-height-3">Dados da Ong</span></li>
+        <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia os dados da ong!</a></li>
+    </ul>
+    <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
+        <div>
+            <div class="font-medium text-3xl text-900">Dados da Ong</div>
+        </div>
+        <div class="mt-3 lg:mt-0">
+        <button pButton pRipple label="Página institucional" class="p-button-success p-button mr-2" icon="pi pi-chevron-right" routerLink="/restrict/institucional"></button>        </div>
+    </div>
+    <p-messages></p-messages>
+    <br/>
+    <form [formGroup]="registerForm" (ngSubmit)="submitDetails()">
+      <div class="surface-card p-4 shadow-2 border-round w-12 lg:w-12">
+        <h5>Dados da instituição:</h5>
+        <hr/>
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-12 md:col-12">
+            <label for="razaoSocialOng">Razão social:</label>
+            <input type="text" maxlength="255" pInputText formControlName="razaoSocialOng" class="w-12" name="razaoSocialOng" placeholder="Digite a razão social"/>
+            <small *ngIf="razaoSocialOng?.invalid && (razaoSocialOng?.dirty || razaoSocialOng?.touched)" class="block p-error">
+              <div *ngIf="razaoSocialOng?.errors?.['required']">A razão social é uma informação obrigatória.</div>
+            </small>
+          </div>
+        </div>
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-6 md:col-6">
+            <label for="cnpjOng">CNPJ:</label>
+            <input type="text" maxlength="14" pInputText formControlName="cnpjOng" class="w-full" name="cnpjOng" placeholder="Digite o CNPJ do coluntário"/>
+            <small *ngIf="registerForm.get('cnpjOng')?.invalid && (registerForm.get('cnpjOng')?.dirty || registerForm.get('cnpjOng')?.touched)" class="block p-error">
+              <div *ngIf="registerForm.get('cnpjOng')?.errors?.['required']">O CNPJ do coluntário é uma informação obrigatória.</div>
+              <div *ngIf="registerForm.get('cnpjOng')?.errors?.['pattern']">O CNPJ não deve conter caracteres especiais</div>
+            </small>
+          </div>
+          <div class="field col-6 md:col-6">
+            <label for="email">Email de contato:</label>
+            <input type="text" maxlength="255" pInputText formControlName="emailContatoOng" class="w-full" name="emailContatoOng" placeholder="Digite o email de contato da Ong" />
+            <small *ngIf="emailContatoOng?.invalid && (emailContatoOng?.dirty || emailContatoOng?.touched)" class="block p-error">
+              <div *ngIf="emailContatoOng?.errors?.['required']">O email é uma informação obrigatória.</div>
+              <div *ngIf="emailContatoOng?.errors?.['email']">Email invalido</div>
+            </small>
+          </div>
+        </div>
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-6 md:col-6">
+            <label for="email">Email Financeiro:</label>
+            <input type="text" maxlength="255" pInputText formControlName="emailFinanceiroOng" class="w-full" name="emailFinanceiroOng" placeholder="Digite o email financeiro da Ong" />
+            <small *ngIf="emailFinanceiroOng?.invalid && (emailFinanceiroOng?.dirty || emailFinanceiroOng?.touched)" class="block p-error">
+              <div *ngIf="emailFinanceiroOng?.errors?.['required']">O email é uma informação obrigatória.</div>
+              <div *ngIf="emailFinanceiroOng?.errors?.['email']">Email invalido</div>
+            </small>
+          </div>
+          <div class="field col-3 md:col-3">
+            <label for="telefoneOng">Telefone de contato:</label>
+            <input type="text" maxlength="45" pInputText formControlName="telefoneOng" class="w-full" name="telefoneOng" placeholder="Digite o telefone de contato da ong" />
+            <small *ngIf="whatsappOng?.invalid && (whatsappOng?.dirty || whatsappOng?.touched)" class="block p-error">
+              <div *ngIf="whatsappOng?.errors?.['required']">O telefone é uma informação obrigatória.</div>
+            </small>
+          </div>
+          <div class="field col-3 md:col-3">
+            <label for="whatsappOng">Whatsapp:</label>
+            <input type="text" maxlength="45" pInputText formControlName="whatsappOng" class="w-full" name="whatsappOng" placeholder="Digite o whatsapp da ong" />
+            <small *ngIf="whatsappOng?.invalid && (whatsappOng?.dirty || whatsappOng?.touched)" class="block p-error">
+              <div *ngIf="whatsappOng?.errors?.['required']">O whatsapp é uma informação obrigatória.</div>
+            </small>
+          </div>
+        </div>
+        <h5>Identidade institucional:</h5>
+        <hr/>
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-6 md:col-6">
+            <label htmlFor="historiaOng">História da Ong:</label>
+            <textarea maxlength="255" pInputTextarea formControlName="historiaOng" class="w-full" name="historiaOng" placeholder="Digite a história da instituição." rows="8" cols="30">
+            </textarea>
+          </div>
+          <div class="field col-6 md:col-6">
+            <label htmlFor="missaoOng">Missão:</label>
+            <textarea  maxlength="255" pInputTextarea formControlName="missaoOng" class="w-full" name="missaoOng" placeholder="Digite a missão da instituição." rows="8" cols="30">
+            </textarea>
+          </div>
+        </div>
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-6 md:col-6">
+            <label htmlFor="visaoOng">Visão:</label>
+            <textarea  maxlength="255" pInputTextarea formControlName="visaoOng" class="w-full" name="visaoOng" placeholder="Digite a visão da instituição." rows="8" cols="30">
+            </textarea>
+          </div>
+          <div class="field col-6 md:col-6">
+            <label htmlFor="valoresOng">Valores:</label>
+            <textarea  maxlength="255" pInputTextarea formControlName="valoresOng" class="w-full" name="valoresOng" placeholder="Digite os valores da instituição." rows="8" cols="30">
+            </textarea>
+          </div>
+        </div>
+        <h5>Redes sociais:</h5>
+        <hr/>
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-6 md:col-6">
+            <label for="instagramOng">Instagram:</label>
+            <input type="text"  maxlength="255" pInputText formControlName="instagramOng" class="w-full" name="instagramOng" placeholder="Digite a URL da página do Instagram da instituição" />
+          </div>
+          <div class="field col-6 md:col-6">
+            <label for="facebookOng">Facebook:</label>
+            <input type="text"  maxlength="255" pInputText formControlName="facebookOng" class="w-full" name="facebookOng" placeholder="Digite a URL da página do facebook da instituição" />
+          </div>
+        </div>
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-6 md:col-6">
+            <label for="twitterOng">Twitter (X):</label>
+            <input type="text" pInputText formControlName="twitterOng" class="w-full" name="twitterOng" placeholder="Digite a URL da página do Twitter da instituição" />
+          </div>
+          <div class="field col-6 md:col-6">
+            <label for="linkedinOng">Linkedin:</label>
+            <input type="text"  maxlength="255" pInputText formControlName="linkedinOng" class="w-full" name="linkedinOng" placeholder="Digite a URL da página do Linkedin da instituição" />
+          </div>
+        </div>
+        <h5>Endereço da instituição:</h5>
+        <hr/>
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-4 md:col-4">
+            <label for="cepEndereco">CEP:</label>
+            <input type="text"  maxlength="45" pInputText formControlName="cepEndereco" class="w-full" name="cepEndereco" placeholder="Digite o número do CEP" />
+          </div>
+          <div class="field col-6 md:col-6">
+            <label for="logradouroEndereco">Logradouro:</label>
+            <input type="text"  maxlength="255" pInputText formControlName="logradouroEndereco" class="w-full" name="logradouroEndereco" placeholder="Digite logradouro instituição" />
+          </div>
+          <div class="field col-2 md:col-2">
+            <label for="numeroEndereco">Número:</label>
+            <input type="text"  maxlength="45" pInputText formControlName="numeroEndereco" class="w-full" name="numeroEndereco" placeholder="Digite número predial" />
+          </div>
+        </div>
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-3 md:col-3">
+            <label for="bairroEndereco">Bairro:</label>
+            <input type="text"  maxlength="255" pInputText formControlName="bairroEndereco" class="w-full" name="bairroEndereco" placeholder="Digite o nome do bairro" />
+          </div>
+          <div class="field col-3 md:col-3">
+            <label for="cidadeEndereco">Cidade:</label>
+            <input type="text" pInputText formControlName="cidadeEndereco" class="w-full" name="cidadeEndereco" placeholder="Digite a cidade" />
+          </div>
+          <div class="field col-3 md:col-3">
+            <label for="estadoEndereco">Estado:</label>
+            <input type="text"  maxlength="255" pInputText formControlName="estadoEndereco" class="w-full" name="estadoEndereco" placeholder="Digito estado" />
+          </div>
+          <div class="field col-3 md:col-3">
+            <label for="paisEndereco">País:</label>
+            <input type="text"  maxlength="255" pInputText formControlName="paisEndereco" class="w-full" name="paisEndereco" placeholder="Digite o país" />
+          </div>
+        </div>
+        <hr/>
+        <p-button label="SALVAR" styleClass="w-full" [disabled]="registerForm.invalid" type="submit"></p-button>
+      </div>
+    </form>
+  </div>
+</div>
+
+

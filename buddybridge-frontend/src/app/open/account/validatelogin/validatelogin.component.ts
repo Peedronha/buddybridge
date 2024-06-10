@@ -41,7 +41,6 @@ export class ValidateloginComponent {
   }
 
   ngOnInit(): void {
-
   }
 
   async onSubmit() {
@@ -52,8 +51,10 @@ export class ValidateloginComponent {
       autenticacao.otp = this.loginForm.get('otp')?.value + '';
       const result = await this.accountService.login(autenticacao);
 
-      if(window.localStorage.getItem('email')){
-        this.router.navigate(['validatelogin'])
+      var solicitarToken = window.localStorage.getItem('validarEmail') + '';
+      if(solicitarToken == 'true'){
+        this.messageService.add({ severity: 'error', summary: 'Login Inválido', detail: 'As informações digitadas são inválidas' });
+        window.location.href='/validatelogin';
       }
 
       this.router.navigate(['']);
@@ -62,4 +63,5 @@ export class ValidateloginComponent {
       console.error(error);
     }
   }
+
 }

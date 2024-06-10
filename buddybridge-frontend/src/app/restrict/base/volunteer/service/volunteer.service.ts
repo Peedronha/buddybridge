@@ -3,20 +3,23 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 import {Colaborador} from "../model/colaborador";
 import {error} from "@angular/compiler-cli/src/transformers/util";
-
+import { TokenService } from './../../../../open/account/shared/token.service';
 @Injectable({
   providedIn: 'root'
 })
 export class VolunteerService {
 
   private getAuthorizationToken() {
-    const token = window.localStorage.getItem('token');
+    const token = this.tokenService.getToken();
     return token;
   }
 
   private apiUrl = 'http://localhost:8080/colaborador';
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService
+  ) {
   }
 
   getVolunteers(): Observable<any> {

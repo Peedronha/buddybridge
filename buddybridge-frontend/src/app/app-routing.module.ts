@@ -28,8 +28,10 @@ import {racaResolver} from "./restrict/base/raca/guard/raca.resolver.guard";
 import {TipoComponent} from "./restrict/base/tipo_animal/component/tipo/tipo.component";
 import {FormTipoComponent} from "./restrict/base/tipo_animal/component/form-tipo/form-tipo.component";
 import {tipoResolver} from "./restrict/base/tipo_animal/guard/tipo.resolver.guard";
-
+import { OngComponent } from './restrict/base/ong/component/ong/ong.component';
+import { ErrorComponent } from './restrict/layout/error/error/error.component';
 const routes: Routes = [
+  { path: 'errorBuddyBridge', title: 'BuddyBridge - Erro', component: ErrorComponent },
   {
     path: '',
     component: AppLayoutComponent,
@@ -63,6 +65,7 @@ const routes: Routes = [
       { path: 'tipos/addtipo', title: 'BuddyBridge - Novo Tipo', component: FormTipoComponent, resolve: {raca : tipoResolver} },
       { path: 'tipos/edittipo/:id', title: 'BuddyBridge - Alterar Tipo', component: FormTipoComponent, resolve: {raca : tipoResolver} },
 
+      { path: 'ong', title: 'BuddyBridge - Institucional', component: OngComponent },
     ],
     canActivate: [AuthGuard]
   },

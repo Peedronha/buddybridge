@@ -1,4 +1,4 @@
-import { Auth } from './../model/auth.model';
+import { Observable, Subscription } from 'rxjs';
 import { AccountService } from './account.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, Router } from '@angular/router';
@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     this.accountService.validarSessao();
-    const token = window.localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if (token) {
       return true;
     } else {
