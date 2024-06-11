@@ -3,19 +3,20 @@ import {map, Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AnimalModel} from "../model/animal.model";
 import {Raca} from "../../raca/model/raca.model";
+import {TokenService} from "../../../../open/account/shared/token.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnimalService {
   private getAuthorizationToken() {
-    const token = window.localStorage.getItem('token');
+    const token = this.tokenService.getToken();
     return token;
   }
 
   private apiUrl = 'http://localhost:8080/animal';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private tokenService: TokenService) {
   }
 
   getAnimalsById(id: any): Observable<any> {

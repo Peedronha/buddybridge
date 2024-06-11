@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {Tipo} from "../model/tipo.model";
+import {TokenService} from "../../../../open/account/shared/token.service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,12 @@ import {Tipo} from "../model/tipo.model";
 export class TipoService {
 
   private getAuthorizationToken() {
-    const token = window.localStorage.getItem('token');
+    const token = this.tokenService.getToken();
     return token;
   }
 
   private apiUrl = 'http://localhost:8080/tipo';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private tokenService: TokenService) { }
 
   getTiposById(id: any) {
     var reqHeader = new HttpHeaders({

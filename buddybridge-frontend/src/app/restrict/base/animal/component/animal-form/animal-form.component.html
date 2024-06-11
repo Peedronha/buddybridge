@@ -135,9 +135,18 @@
 
       <div class="field">
         <label for="caracteristicas_animal">Características do animal</label>
-        <input type="text" pInputText formControlName="caracteristicas_animal" class="w-full"
-               name="caracteristicas_animal"
-               placeholder="Digite as características do animal"/>
+<!--        <input type="text" pInputTextArea formControlName="caracteristicas_animal" class="w-full"-->
+<!--               name="caracteristicas_animal"-->
+<!--               placeholder="Digite as características do animal"/>-->
+        <textarea
+          rows="5"
+          cols="30"
+          pInputTextarea
+          name="caracteristicas_animal"
+          formControlName="caracteristicas_animal"
+          class="w-full">
+        </textarea>
+
         <small
           *ngIf="registerForm.get('caracteristicas_animal')?.invalid && (registerForm.get('caracteristicas_animal')?.dirty || registerForm.get('caracteristicas_animal')?.touched)"
           class="block p-error">
