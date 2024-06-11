@@ -37,13 +37,7 @@ export class LoginComponent  implements OnInit {
       autenticacao.username = this.loginForm.get('login')?.value + '';
       autenticacao.password = this.loginForm.get('senha')?.value + '';
       const result = await this.accountService.login(autenticacao);
-
-      var solicitarToken = window.localStorage.getItem('validarEmail') + '';
-      if(solicitarToken == 'true'){
-        window.location.href='/validatelogin';
-      }
-
-      window.location.href='/login'
+      this.router.navigate(['']);
     } catch (error) {
       this.messageService.add({ severity: 'error', summary: 'Login Inválido', detail: 'Senha e/ou Email digitados inválidos' });
       console.error(error);

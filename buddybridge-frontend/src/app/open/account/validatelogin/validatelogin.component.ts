@@ -57,6 +57,7 @@ export class ValidateloginComponent {
         window.location.href='/validatelogin';
       }
 
+
       this.router.navigate(['']);
     } catch (error) {
       this.messageService.add({ severity: 'error', summary: 'Login Inválido', detail: 'Senha e/ou Email digitados inválidos' });
