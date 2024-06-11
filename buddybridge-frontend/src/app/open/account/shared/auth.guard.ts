@@ -14,13 +14,17 @@ export class AuthGuard implements CanActivate {
     private accountService: AccountService
   ) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    this.accountService.validarSessao();
-    const token = localStorage.getItem('token');
-    if (token) {
+  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    const result = await this.accountService.validarSessao();
+    if (result) {
       return true;
     } else {
-      this.router.navigate(['/login']);
+      var solicitarToken = window.localStorage.getItem('validarEmail') + '';
+      if(solicitarToken == 'true'){
+        this.router.navigate(['/validatelogin']);
+      } else {
+        this.router.navigate(['/login']);
+      }
       return false;
     }
   }
