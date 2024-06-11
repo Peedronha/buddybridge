@@ -32,7 +32,7 @@ export class AnimalFormComponent implements OnInit {
   racas: Raca[] = [];
   tipos: Tipo[] = [];
   tipoId: any;
-  tipoRaca: Raca | undefined;
+  tipoRaca: any;
 
   constructor(
     private fb: FormBuilder,
@@ -99,10 +99,10 @@ export class AnimalFormComponent implements OnInit {
     animal.id_animal = parseInt(id);
     animal.nome_animal = this.registerForm.get('nome_animal')?.value + '';
     animal.comprimento_animal = this.registerForm.get('comprimento_animal')?.value + '';
-    animal.peso_animal = Number(this.registerForm.get('peso_animal')?.value);
+    animal.peso_animal = this.registerForm.get('peso_animal')?.value + '';
     animal.data_nascimento = this.registerForm.get('data_nascimento')?.value + '';
     animal.data_resgate = this.registerForm.get('data_resgate')?.value + '';
-    animal.raca_animal = this.tipoRaca?.id?.toString() || '';
+    animal.raca_animal = this.tipoRaca.id || '';
     animal.tipo_animal = this.tipoId.id || '';
 
     if (this.registerForm.get('id_animal')?.value + '' != 'NaN') {

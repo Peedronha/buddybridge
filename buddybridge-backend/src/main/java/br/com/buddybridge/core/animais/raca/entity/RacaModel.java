@@ -1,5 +1,6 @@
 package br.com.buddybridge.core.animais.raca.entity;
 
+import br.com.buddybridge.core.animais.raca.model.RaceDTO;
 import br.com.buddybridge.core.animais.tipo.entity.TypeModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,4 +25,9 @@ public class RacaModel {
     @ManyToOne
     @JoinColumn(name = "type_id")
     private TypeModel type;
+
+    public RacaModel(RaceDTO raceDTO) {
+        this.id = raceDTO.getId();
+        this.name = raceDTO.getName();
+    }
 }

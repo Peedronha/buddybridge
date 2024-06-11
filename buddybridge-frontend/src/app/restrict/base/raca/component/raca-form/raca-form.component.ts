@@ -71,7 +71,7 @@ export class RacaFormComponent {
           console.log(response);
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso' });
           this.registerForm.reset();
-          this.route.navigateByUrl('/raca')
+          this.route.navigateByUrl('/racas')
         },
         error => {
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Já existe um usuário com este CPF / Email cadastrado no sistema' });
@@ -84,7 +84,7 @@ export class RacaFormComponent {
           console.log(response);
           this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso!'});
           this.registerForm.reset();
-          this.route.navigateByUrl('/raca')
+          this.route.navigateByUrl('/racas')
         },
         error => {
           this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Já existe um usuário cadastrado no sistema com este email.'});
