@@ -15,7 +15,7 @@ export class FormTipoComponent {
 
   registerForm = this.fb.group({
     id_tipo:[''],
-    nome_tipo: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+    nome_tipo: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/)]],
     // id_raca: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
   })
 

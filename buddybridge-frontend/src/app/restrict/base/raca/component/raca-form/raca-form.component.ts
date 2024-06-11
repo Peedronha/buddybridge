@@ -17,8 +17,8 @@ export class RacaFormComponent {
 
   registerForm = this.fb.group({
     id_raca:[''],
-    nome_raca: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
-    id_tipo: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+    nome_raca: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/)]],
+    id_tipo: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/)]],
   })
 
   tipos: Tipo[] = [];

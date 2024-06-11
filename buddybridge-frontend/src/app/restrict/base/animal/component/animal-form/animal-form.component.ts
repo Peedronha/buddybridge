@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { AnimalService } from "../../service/animal.service";
-import { MessageService } from "primeng/api";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AccountService } from "../../../../../open/account/shared/account.service";
-import { AnimalModel } from "../../model/animal.model";
-import { FormBuilder, Validators } from "@angular/forms";
-import { Raca } from "../../../raca/model/raca.model";
-import { Tipo } from "../../../tipo_animal/model/tipo.model";
-import { TipoService } from "../../../tipo_animal/service/tipo.service";
-import { RacaService } from "../../../raca/service/raca.service";
+import {Component, OnInit} from '@angular/core';
+import {AnimalService} from "../../service/animal.service";
+import {MessageService} from "primeng/api";
+import {ActivatedRoute, Router} from "@angular/router";
+import {AccountService} from "../../../../../open/account/shared/account.service";
+import {AnimalModel} from "../../model/animal.model";
+import {FormBuilder, Validators} from "@angular/forms";
+import {Raca} from "../../../raca/model/raca.model";
+import {Tipo} from "../../../tipo_animal/model/tipo.model";
+import {TipoService} from "../../../tipo_animal/service/tipo.service";
+import {RacaService} from "../../../raca/service/raca.service";
 
 @Component({
   selector: 'app-animal-form',
@@ -19,14 +19,32 @@ export class AnimalFormComponent implements OnInit {
 
   registerForm = this.fb.group({
     id_animal: [''],
-    nome_animal: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
-    idade: ['', [Validators.required, Validators.pattern(/^\d{1,20}$/)]],
-    peso_animal: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]], // Update the pattern to match numbers
-    comprimento_animal: ['', [Validators.required, Validators.pattern(/^\d{1,2000}$/)]],
+    nome_animal: ['', [
+      Validators.required,
+      Validators.pattern(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/)
+    ]],
+    idade: ['', [
+      Validators.required,
+      Validators.pattern(/^\d{1,2}$/)
+    ]],
+    peso_animal: ['', [
+      Validators.required,
+      Validators.pattern(/^\d+(\.\d{1,2})?$/)
+    ]],
+    comprimento_animal: ['', [
+      Validators.required,
+      Validators.pattern(/^\d{1,4}$/)
+    ]],
     data_resgate: ['', Validators.required],
     data_nascimento: ['', Validators.required],
-    tipo_animal: [''],
-    raca_animal: [''],
+    tipo_animal: ['', Validators.required],
+    raca_animal: ['', Validators.required],
+    caracteristicas_animal: ['',
+      Validators.pattern(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/)
+    ],
+    localizacao_animal:['',
+      Validators.pattern(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/)
+    ],
   });
 
   racas: Raca[] = [];
@@ -43,7 +61,8 @@ export class AnimalFormComponent implements OnInit {
     private router: ActivatedRoute,
     private route: Router,
     private accountService: AccountService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.accountService.validarSessao();
@@ -63,7 +82,9 @@ export class AnimalFormComponent implements OnInit {
       data_resgate: animal.data_resgate,
       data_nascimento: animal.data_nascimento,
       tipo_animal: animal.tipo_animal + '',
-      raca_animal: animal.raca_animal + ''
+      raca_animal: animal.raca_animal + '',
+      caracteristicas_animal: animal.caracteristicas_animal + '',
+      localizacao_animal: animal.localizacao_animal + '',
     });
   }
 
@@ -104,17 +125,23 @@ export class AnimalFormComponent implements OnInit {
     animal.data_resgate = this.registerForm.get('data_resgate')?.value + '';
     animal.raca_animal = this.tipoRaca.id || '';
     animal.tipo_animal = this.tipoId.id || '';
+    animal.caracteristicas_animal = this.registerForm.get('caracteristicas_animal')?.value + '';
+    animal.localizacao_animal = this.registerForm.get('localizacao_animal')?.value + '';
 
     if (this.registerForm.get('id_animal')?.value + '' != 'NaN') {
       this.animalService.updateanimal(animal).subscribe(
         response => {
           console.log(response);
-          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso' });
+          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso'});
           this.registerForm.reset();
           this.route.navigateByUrl('/animal');
         },
         error => {
-          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Já existe um usuário com este CPF / Email cadastrado no sistema' });
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro',
+            detail: 'Já existe um usuário com este CPF / Email cadastrado no sistema'
+          });
         }
       );
     } else {
@@ -122,12 +149,16 @@ export class AnimalFormComponent implements OnInit {
       this.animalService.registerAnimal(animal).subscribe(
         response => {
           console.log(response);
-          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso!' });
+          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso!'});
           this.registerForm.reset();
           this.route.navigateByUrl('/animal');
         },
         error => {
-          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Já existe um usuário cadastrado no sistema com este email.' });
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro',
+            detail: 'Já existe um usuário cadastrado no sistema com este email.'
+          });
         }
       );
     }

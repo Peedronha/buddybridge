@@ -2,9 +2,12 @@ package br.com.buddybridge.core.animais.animal.model;
 
 
 import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @Getter
@@ -19,6 +22,9 @@ public class AnimalDto {
     private String data_nascimento;
     private String raca_animal;
     private String tipo_animal;
+    private String caracteristicas_animal;
+    private String localizacao_animal;
+
     public AnimalDto(AnimalModel animalModel) {
         this.id_animal = animalModel.getId_animal();
         this.nome_animal = animalModel.getNome_animal();
@@ -26,5 +32,7 @@ public class AnimalDto {
         this.comprimento_animal = animalModel.getComprimento_animal();
         this.data_resgate = animalModel.getData_resgate().toString();
         this.data_nascimento = animalModel.getData_nascimento().toString();
+        this.localizacao_animal = animalModel.getLocalizacao_animal();
+        this.caracteristicas_animal = animalModel.getCaracteristicas_animal();
     }
 }
