@@ -27,12 +27,11 @@ public class RacaService {
     }
 
     public void createNewRace(RaceDTO raceDTO) {
-        RacaModel model = new RacaModel();
-        if (tipoRepository.findById(raceDTO.getId_tipo()).isPresent()) {
-            Optional<TypeModel> typeModel = tipoRepository.findById(raceDTO.getId_tipo());
-            model.setType(typeModel.get());
-            model.setName(raceDTO.getName());
+        RacaModel model = new RacaModel(raceDTO);
 
+        Optional<TypeModel> typeModel = tipoRepository.findById(raceDTO.getId_tipo());
+        if (typeModel.isPresent()) {
+            model.setType(typeModel.get());
             racaRepository.save(model);
         }
     }

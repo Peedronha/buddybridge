@@ -15,6 +15,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -46,18 +48,22 @@ public class AnimalService {
         }
     }
 
-    private AnimalModel createAnimal(@NotNull AnimalDto animalDto) {
+    private AnimalModel createAnimal(AnimalDto animalDto) throws Exception{
         AnimalModel model = new AnimalModel(animalDto);
-        if (tipoRepository.existsById(Long.valueOf(animalDto.getTipo_animal()))
-                && racaRepository.existsById(Long.valueOf(animalDto.getRaca_animal()))) {
-            Optional<TypeModel> typeModel = tipoRepository.findById(Long.valueOf(animalDto.getTipo_animal()));
-            Optional<RacaModel> racaModel = racaRepository.findById(Long.valueOf(animalDto.getRaca_animal()));
+
+        Optional<TypeModel> typeModel = tipoRepository.findById(Long.valueOf(animalDto.getTipo_animal()));
+        Optional<RacaModel> racaModel = racaRepository.findById(Long.valueOf(animalDto.getRaca_animal()));
+
+        if (typeModel.isPresent() && racaModel.isPresent()) {
             model.setType(typeModel.get());
             model.setRace(racaModel.get());
 
-           return model;
+            model.setIdade(Period.between(model.getData_nascimento(), LocalDate.now()).getYears());
+
+            return model;
+        } else {
+            throw new Exception("Tipo or Raca not found");
         }
-        return null;
     }
 
     @Transactional

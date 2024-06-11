@@ -50,6 +50,11 @@ public class RacaController {
         this.racaService.createNewRace(raceDTO);
     }
 
+    @PutMapping
+    public void UpdateRace(@RequestBody RaceDTO raceDTO) {
+        this.racaService.createNewRace(raceDTO);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> DeleteRace(@PathVariable Long id) {
         if (this.racaService.findRaceModelById(id).isPresent()) {
