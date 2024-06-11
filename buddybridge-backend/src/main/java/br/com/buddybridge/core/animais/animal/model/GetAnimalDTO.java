@@ -22,11 +22,17 @@ public class GetAnimalDTO {
     private String data_nascimento;
     private String raca_animal;
     private String tipo_animal;
+    private String caracteristicas_animal;
+    private String localizacao_animal;
+
     public GetAnimalDTO(AnimalModel animalModel) {
         this.id_animal = animalModel.getId_animal();
         this.nome_animal = animalModel.getNome_animal();
         this.peso_animal = animalModel.getPeso_animal();
         this.comprimento_animal = animalModel.getComprimento_animal();
+        this.localizacao_animal = animalModel.getLocalizacao_animal();
+        this.caracteristicas_animal = animalModel.getCaracteristicas_animal();
+
 
         this.data_resgate = formatLocalDate(animalModel.getData_resgate());
         this.data_nascimento = formatLocalDate(animalModel.getData_nascimento());

@@ -42,6 +42,12 @@ public class AnimalModel {
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate data_nascimento;
 
+    @Column(name = "caracteristicas_animal", nullable = false)
+    private String caracteristicas_animal;
+
+    @Column(name = "localizacao_animal", nullable = false)
+    private String localizacao_animal;
+
     @ManyToOne
     @JoinColumn(name = "type_id")
     private TypeModel type;
@@ -56,6 +62,8 @@ public class AnimalModel {
         this.nome_animal = animalDto.getNome_animal();
         this.peso_animal = animalDto.getPeso_animal();
         this.comprimento_animal = animalDto.getComprimento_animal();
+        this.caracteristicas_animal = animalDto.getCaracteristicas_animal();
+        this.localizacao_animal = animalDto.getLocalizacao_animal();
         this.data_resgate = LocalDate.parse(animalDto.getData_resgate());
         this.data_nascimento = LocalDate.parse(animalDto.getData_nascimento());
     }

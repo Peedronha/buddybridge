@@ -8,4 +8,6 @@ export class AnimalModel {
   tipo_animal!: string;
   raca_animal!: string;
   data_nascimento!: string;
+  caracteristicas_animal!: string;
+  localizacao_animal!:string;
 }

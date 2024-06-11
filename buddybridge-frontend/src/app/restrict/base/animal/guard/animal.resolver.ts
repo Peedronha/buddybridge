@@ -25,6 +25,8 @@ export class animalResolver{
       data_nascimento: '',
       tipo_animal: '',
       raca_animal: '',
+      caracteristicas_animal: '',
+      localizacao_animal:'',
     });
   }
 }
