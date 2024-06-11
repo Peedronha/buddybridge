@@ -62,7 +62,7 @@ export class RegisterComponent {
       response => {
         console.log(response);
         this.messageService.add({ severity: 'success', summary: 'Cadastro efetuado com sucesso.', detail: 'Agora você pode fazer login no sistema!' });
-
+        this.registerForm.reset();
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Não é possível continuar: ', detail: 'Já existe um conta para o endereço de email fornecido' });

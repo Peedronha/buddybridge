@@ -39,6 +39,9 @@ public class UsuarioService {
         if (usuario.getNome() == null || usuario.getNome().isEmpty()) {
             throw new ExampleExeption("O nome é uma informação obrigatória. ", "ERRO001");
         }
+        if(usuarioRepository.findByLogin(usuario.getLogin()).isPresent()){
+            throw new ExampleExeption("O email informado já possui uma conta no sistema. ", "ERRO001");
+        }
         try {
             if (usuario.getId() == null) {
                 usuario.setConfirmacaoEmail(true);
