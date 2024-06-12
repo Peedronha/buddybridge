@@ -51,7 +51,6 @@ export class ListAnimalComponent {
   }
 
   onEdit(idAnimal: number) {
-    alert("IdAnimal: " + idAnimal);
     this.edit.emit(idAnimal);
   }
 

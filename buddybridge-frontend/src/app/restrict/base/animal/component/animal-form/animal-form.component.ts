@@ -125,7 +125,7 @@ export class AnimalFormComponent implements OnInit {
     if (this.registerForm.get('id_animal')?.value + '' != 'NaN') {
       this.animalService.updateanimal(animal).subscribe(
         response => {
-          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso'});
+          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Animal registrado'});
           this.registerForm.reset();
           this.route.navigateByUrl('/animal');
         },
@@ -133,7 +133,7 @@ export class AnimalFormComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary: 'Erro',
-            detail: 'Já existe um usuário com este CPF / Email cadastrado no sistema'
+            detail: 'Erro ao atualizar o animal'
           });
         }
       );
@@ -143,13 +143,13 @@ export class AnimalFormComponent implements OnInit {
         response => {
           this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso!'});
           this.registerForm.reset();
-          this.route.navigateByUrl('/animal');
+          // this.route.navigateByUrl('/animal');
         },
         error => {
           this.messageService.add({
             severity: 'error',
             summary: 'Erro',
-            detail: 'Já existe um usuário cadastrado no sistema com este email.'
+            detail: 'Erro ao validar o animal.'
           });
         }
       );
