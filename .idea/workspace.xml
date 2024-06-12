@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="Crud ong + controle de sessao - back inativo">
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/shared/account.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/shared/account.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="AjusteSessao" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -387,7 +387,8 @@
     <MESSAGE value="Analicts - ONG" />
     <MESSAGE value="Merge" />
     <MESSAGE value="Crud ong + controle de sessao - back inativo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Crud ong + controle de sessao - back inativo" />
+    <MESSAGE value="Ajuste sessão" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajuste sessão" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
