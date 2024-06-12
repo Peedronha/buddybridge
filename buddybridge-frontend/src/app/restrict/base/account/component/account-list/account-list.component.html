@@ -57,7 +57,7 @@
               <div>
                 <button pButton pRipple label="Alterar " (click)='onEdit(user.id)' class="p-button mr-2" icon="pi pi-pencil" style="margin: 2px 0;"></button>
                 <button pButton pRipple label="Senha " (click)='onEditPassword(user.id)' class="p-button mr-2" icon="pi pi-key" style="margin: 2px 0;"></button>
-                <button pButton pRipple label="Excluir" (click)='onDelete(user.id)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;"></button>
+                <button pButton pRipple label="Excluir" (click)='showDeleteDialog(user)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;"></button>
               </div>
             </td>
           </tr>

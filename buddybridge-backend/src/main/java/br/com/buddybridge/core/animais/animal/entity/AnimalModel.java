@@ -30,9 +30,6 @@ public class AnimalModel {
     @Column(name = "peso_animal")
     private Double peso_animal;
 
-    @Column(name = "idade")
-    private Integer idade;
-
     @Column(name = "comprimento_animal")
     private Double comprimento_animal;
 
