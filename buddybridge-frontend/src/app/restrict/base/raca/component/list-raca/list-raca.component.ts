@@ -38,7 +38,6 @@ export class ListRacaComponent {
 
   ngOnInit(): void {
     this.racaService.getRacas().subscribe((data: Raca[]) => {
-      console.log(data)
       this.racas = data;
     });
   }

@@ -47,7 +47,7 @@ export class TipoComponent {
     this.tipoService.deleteTipo(idUser).subscribe(() =>{
       this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro excluido com sucesso' });
       window.location.reload();
-      this.router.navigateByUrl('/tipo');
+      this.router.navigateByUrl('/tipos');
     });
   }
 }

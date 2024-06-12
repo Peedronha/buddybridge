@@ -53,8 +53,9 @@
 
       <div class="field">
         <label for="peso_animal">Peso em KG</label>
-        <p-inputNumber mode="decimal" locale="de-DE" [minFractionDigits]="0" [maxFractionDigits]="2" suffix=" KG"
+        <p-inputNumber mode="decimal" locale="de-DE" [minFractionDigits]="0" [maxFractionDigits]="2"
                        inputId="peso_animal"
+                       maxlength="5"
                        formControlName="peso_animal" class="w-full" name="peso_animal"
                        placeholder="Digite o peso do animal"/>
         <small
@@ -69,9 +70,10 @@
       </div>
 
       <div class="field">
-        <label for="comprimento_animal">Comprimento em Centímetros</label>
+        <label for="comprimento_animal">Comprimento em metros</label>
         <p-inputNumber inputId="comprimento_animal" mode="decimal" [minFractionDigits]="0" [maxFractionDigits]="2"
-                       locale="de-DE" suffix=" cm"
+                       locale="de-DE"
+                       maxlength="5"
                        formControlName="comprimento_animal" class="w-full" name="comprimento_animal"
                        placeholder="Digite o comprimento do animal"/>
         <small

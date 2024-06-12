@@ -39,7 +39,6 @@ export class ListTipoComponent {
 
   ngOnInit(): void {
     this.tipoService.getTipos().subscribe((data: Tipo[]) => {
-      console.log(data)
       this.tipos = data;
     });
   }

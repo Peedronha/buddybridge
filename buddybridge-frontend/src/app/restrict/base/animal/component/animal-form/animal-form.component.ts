@@ -33,7 +33,7 @@ export class AnimalFormComponent implements OnInit {
     ]],
     comprimento_animal: ['', [
       Validators.required,
-      Validators.pattern(/^\d{1,4}$/)
+      Validators.pattern(/^\d{1,5}$/)
     ]],
     data_resgate: ['', Validators.required],
     data_nascimento: ['', Validators.required],
@@ -67,7 +67,6 @@ export class AnimalFormComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.validarSessao();
     const animal: AnimalModel = this.router.snapshot.data['animal'];
-    alert("ngOnInit: " + JSON.stringify(animal));
 
     this.tipoService.getTipos().subscribe(tipos => {
       this.tipos = tipos;
@@ -89,7 +88,6 @@ export class AnimalFormComponent implements OnInit {
   }
 
   loadRacas(tipoId: any): void {
-    alert("load " + JSON.stringify(tipoId));
     this.racaService.getRacesByType(tipoId).subscribe(
       data => {
         this.racas = data;
@@ -101,7 +99,6 @@ export class AnimalFormComponent implements OnInit {
   }
 
   onTipoAnimalChange(event: any): void {
-    alert("onTipoAnimalChange tipo: " + JSON.stringify(event));
     this.tipoId = event.value;
     if (this.tipoId) {
       this.loadRacas(this.tipoId.name);
@@ -111,9 +108,6 @@ export class AnimalFormComponent implements OnInit {
   }
 
   submitDetails() {
-    alert(this.registerForm.get('id_animal')?.value + '');
-
-    alert(this.tipoRaca?.name);
     let animal = new AnimalModel();
 
     var id = this.registerForm.get('id_animal')?.value + '';
@@ -131,7 +125,6 @@ export class AnimalFormComponent implements OnInit {
     if (this.registerForm.get('id_animal')?.value + '' != 'NaN') {
       this.animalService.updateanimal(animal).subscribe(
         response => {
-          console.log(response);
           this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso'});
           this.registerForm.reset();
           this.route.navigateByUrl('/animal');
@@ -148,7 +141,6 @@ export class AnimalFormComponent implements OnInit {
       animal.id_animal = undefined;
       this.animalService.registerAnimal(animal).subscribe(
         response => {
-          console.log(response);
           this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso!'});
           this.registerForm.reset();
           this.route.navigateByUrl('/animal');
