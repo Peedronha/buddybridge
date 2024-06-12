@@ -14,7 +14,7 @@ import {Router} from "@angular/router";
 export class ListVolunteerComponent {
 
   @Input() colaboradores!: Colaborador[];
-  _specificVolunteer: any = {};
+  _specificEntity: any = {};
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
   @Output() editPassword = new EventEmitter(false);
@@ -38,6 +38,7 @@ export class ListVolunteerComponent {
 
   showEdit: boolean = false;
 
+  displayDeleteDialog: boolean = false
   constructor(private fb: FormBuilder, private messageService: MessageService, private volunteerService: VolunteerService, private router: Router) {
 
   }
@@ -55,7 +56,7 @@ export class ListVolunteerComponent {
   }
 
   updateEdit(idcolaborador: any){
-    this._specificVolunteer = this.colaboradores.find(volunteer => volunteer.idcolaborador === idcolaborador) || null;
+    this._specificEntity = this.colaboradores.find(volunteer => volunteer.idcolaborador === idcolaborador) || null;
 
     this.showHidden = !this.showHidden;
     this.showEdit = !this.showEdit;
@@ -63,7 +64,7 @@ export class ListVolunteerComponent {
   }
 
   updateState(idcolaborador: any){
-    this._specificVolunteer = this.colaboradores.find(volunteer => volunteer.idcolaborador === idcolaborador) || null;
+    this._specificEntity = this.colaboradores.find(volunteer => volunteer.idcolaborador === idcolaborador) || null;
     this.showHidden = !this.showHidden;
   }
 
@@ -97,5 +98,27 @@ export class ListVolunteerComponent {
 
   onEditPassword(idUser: any) {
     this.editPassword.emit(idUser);
+  }
+
+
+  showDeleteDialog(entity: Colaborador) {
+    this._specificEntity = entity;
+    this.displayDeleteDialog = true;
+  }
+
+  onCancelDelete() {
+    this._specificEntity = null;
+    this.displayDeleteDialog = false;
+  }
+
+  confirmDelete() {
+    if (this._specificEntity) {
+      this.onDelete(this._specificEntity.idcolaborador);
+
+      this._specificEntity = null;
+
+      this.displayDeleteDialog = false;
+
+    }
   }
 }
