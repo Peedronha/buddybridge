@@ -58,8 +58,6 @@ public class AnimalService {
             model.setType(typeModel.get());
             model.setRace(racaModel.get());
 
-            model.setIdade(Period.between(model.getData_nascimento(), LocalDate.now()).getYears());
-
             return model;
         } else {
             throw new Exception("Tipo or Raca not found");
