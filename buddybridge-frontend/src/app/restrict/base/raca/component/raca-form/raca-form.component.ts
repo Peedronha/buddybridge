@@ -37,13 +37,16 @@ export class RacaFormComponent {
   ngOnInit(): void {
     this.accountService.validarSessao();
     const raca: Raca = this.router.snapshot.data['raca'];
-    console.log("ngOnInit: "+JSON.stringify(raca));
 
     this.registerForm.setValue({
       id_raca: raca.id +'',
       nome_raca: raca.name + '',
       id_tipo: raca.id_tipo+'',
     })
+    this.tipoService.getTipos().subscribe(tipos => {
+      this.tipos = tipos;
+      this.selectTipo = this.tipos.find(tipo => tipo.id === raca.id_tipo);
+    });
 
     this.registerForm.get('id_tipo')?.valueChanges.subscribe(type => {
       this.onTypeChange(type);
@@ -52,9 +55,6 @@ export class RacaFormComponent {
   }
 
   submitDetails() {
-    alert(this.registerForm.get('id_raca')?.value+'');
-
-    alert(this.selectTipo?.name);
     let raca = new Raca();
 
     var id = this.registerForm.get('id_raca')?.value+'';
@@ -63,12 +63,9 @@ export class RacaFormComponent {
 
     raca.id_tipo = this.selectTipo?.id?.toString() || '';
 
-    console.log(raca);
-
     if (this.registerForm.get('id_raca')?.value + '' != 'NaN'){
       this.racaService.updateRaca(raca).subscribe(
         response => {
-          console.log(response);
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso' });
           this.registerForm.reset();
           this.route.navigateByUrl('/racas')
@@ -81,7 +78,6 @@ export class RacaFormComponent {
       raca.id = undefined
       this.racaService.registerRaca(raca).subscribe(
         response => {
-          console.log(response);
           this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso!'});
           this.registerForm.reset();
           this.route.navigateByUrl('/racas')

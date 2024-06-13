@@ -1,6 +1,9 @@
 package br.com.buddybridge.core.animais.animal.model;
 
 import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
+import br.com.buddybridge.core.animais.raca.entity.RacaModel;
+import br.com.buddybridge.core.animais.raca.model.RaceDTO;
+import br.com.buddybridge.core.animais.tipo.entity.TypeModel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,8 +23,8 @@ public class GetAnimalDTO {
     private String idade;
     private String data_resgate;
     private String data_nascimento;
-    private String raca_animal;
-    private String tipo_animal;
+    private RaceDTO raca_animal;
+    private TypeModel tipo_animal;
     private String caracteristicas_animal;
     private String localizacao_animal;
 
@@ -38,8 +41,8 @@ public class GetAnimalDTO {
         this.data_nascimento = formatLocalDate(animalModel.getData_nascimento());
         this.idade = setIdadeAnimal(animalModel.getData_nascimento());
 
-        this.raca_animal = animalModel.getRace().getName();
-        this.tipo_animal = animalModel.getType().getName();
+        this.raca_animal = new RaceDTO(animalModel.getRace());
+        this.tipo_animal = animalModel.getType();
     }
     public String setIdadeAnimal(LocalDate dataNascimento) {
         if ((dataNascimento != null)) {

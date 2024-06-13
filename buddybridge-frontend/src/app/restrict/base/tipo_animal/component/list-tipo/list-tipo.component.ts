@@ -39,7 +39,6 @@ export class ListTipoComponent {
 
   ngOnInit(): void {
     this.tipoService.getTipos().subscribe((data: Tipo[]) => {
-      console.log(data)
       this.tipos = data;
     });
   }
@@ -54,7 +53,6 @@ export class ListTipoComponent {
   }
 
   onEdit(id_tipo: any) {
-    alert("id_tipo: "+id_tipo)
     this.edit.emit(id_tipo);
   }
 

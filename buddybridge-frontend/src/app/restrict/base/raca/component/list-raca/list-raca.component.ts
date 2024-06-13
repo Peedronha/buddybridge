@@ -38,7 +38,6 @@ export class ListRacaComponent {
 
   ngOnInit(): void {
     this.racaService.getRacas().subscribe((data: Raca[]) => {
-      console.log(data)
       this.racas = data;
     });
   }
@@ -53,7 +52,6 @@ export class ListRacaComponent {
   }
 
   onEdit(id_raca: any) {
-    alert("id_raca: "+id_raca)
     this.edit.emit(id_raca);
   }
 

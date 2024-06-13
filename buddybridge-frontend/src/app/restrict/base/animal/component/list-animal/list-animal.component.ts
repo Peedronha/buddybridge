@@ -37,7 +37,6 @@ export class ListAnimalComponent {
 
   ngOnInit(): void {
     this.animalService.getAnimals().subscribe((data: AnimalModel[]) => {
-      console.log(data)
       this.animals = data;
     });
   }
@@ -52,7 +51,6 @@ export class ListAnimalComponent {
   }
 
   onEdit(idAnimal: number) {
-    alert("IdAnimal: " + idAnimal);
     this.edit.emit(idAnimal);
   }
 

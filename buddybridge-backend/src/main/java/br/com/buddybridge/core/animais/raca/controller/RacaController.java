@@ -1,5 +1,6 @@
 package br.com.buddybridge.core.animais.raca.controller;
 
+import br.com.buddybridge.core.animais.animal.model.GetAnimalDTO;
 import br.com.buddybridge.core.animais.raca.entity.RacaModel;
 import br.com.buddybridge.core.animais.raca.model.RaceDTO;
 import br.com.buddybridge.core.animais.raca.service.RacaService;
@@ -29,9 +30,9 @@ public class RacaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RacaModel> getRaceById(@PathVariable Long id) {
+    public ResponseEntity<RaceDTO> getRaceById(@PathVariable Long id) {
         Optional<RacaModel> racaModel = this.racaService.findRaceModelById(id);
-        return racaModel.map(model -> new ResponseEntity<>(model, HttpStatus.OK))
+        return racaModel.map(model -> new ResponseEntity<>(new RaceDTO(racaModel.get()), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
