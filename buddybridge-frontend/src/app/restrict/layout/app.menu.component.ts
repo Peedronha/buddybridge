@@ -1,7 +1,10 @@
-import {AccountService} from '../../open/account/shared/account.service';
+import { AccountRestrictService } from './../base/account/shared/account-restrict.service';
 import {OnInit} from '@angular/core';
 import {Component} from '@angular/core';
 import {LayoutService} from './service/app.layout.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { User } from '../../open/account/model/user.model';
+
 
 @Component({
   selector: 'app-menu',
@@ -9,17 +12,26 @@ import {LayoutService} from './service/app.layout.service';
 })
 export class AppMenuComponent implements OnInit {
 
+  nome: any = '';
   model: any[] = [];
 
-  constructor(public layoutService: LayoutService) {
-  }
+  constructor(
+    public layoutService: LayoutService,
+    public fb: FormBuilder,
+    public accountRestrictService : AccountRestrictService
+  ) { }
+
 
   ngOnInit() {
+    this.accountRestrictService.getUsuarioLogado().subscribe((data: User) => {
+      console.log(data);
+      this.nome = data.nome;
+    });
     this.model = [
       {
-        label: 'Home',
+        label: 'Inicio',
         items: [
-          {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']},
+          {label: 'Painel de controle', icon: 'pi pi-fw pi-home', routerLink: ['/']},
           //{label: 'Minhas Adoções', icon: 'pi pi-fw pi-desktop', routerLink: ['/']}
         ]
       },

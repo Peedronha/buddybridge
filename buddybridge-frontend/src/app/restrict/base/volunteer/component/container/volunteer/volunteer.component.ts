@@ -38,8 +38,8 @@ export class VolunteerComponent {
   }
 
   onRemove(idUser: any) {
-    this.volunteerService.deleteVolunteer(idUser).subscribe(() =>{
-      this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro excluido com sucesso' });
+    this.volunteerService.inativarVolunteer(idUser).subscribe(() =>{
+      this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro inativado com sucesso' });
       window.location.reload();
       this.router.navigateByUrl('/volunteer')
     })

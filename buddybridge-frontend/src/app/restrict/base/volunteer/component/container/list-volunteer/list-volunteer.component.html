@@ -56,7 +56,8 @@
         <td>
           <div>
             <button pButton pRipple label="Alterar " (click)='onEdit(volunteer.idcolaborador)' class="p-button mr-2" icon="pi pi-pencil" style="margin: 2px 0;"></button>
-            <button pButton pRipple label="Excluir" (click)='showDeleteDialog(volunteer)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;"></button>
+            <!--button pButton pRipple label="Excluir" (click)='showDeleteDialog(volunteer)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;"></button-->
+            <button pButton pRipple label="Inativar" (click)='showDeleteDialog(volunteer)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;"></button>
           </div>
         </td>
       </tr>
@@ -70,7 +71,7 @@
   <p-dialog header="Confirmar Exclusão" [(visible)]="displayDeleteDialog" modal="modal" [closable]="false"
             [dismissableMask]="true" [baseZIndex]="10000"
             [draggable]="false" [resizable]="false">
-    <p class="m-0">Tem certeza de que deseja excluir esta conta?</p>
+    <p class="m-0">Tem certeza de que deseja inativar esta conta?</p>
     <ng-template pTemplate="footer">
       <button pButton label="Cancelar" icon="pi pi-times" (click)="onCancelDelete()"></button>
       <button pButton severity="danger" label="Confirmar" icon="pi pi-check" (click)="confirmDelete()"></button>

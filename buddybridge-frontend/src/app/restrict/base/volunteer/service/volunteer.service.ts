@@ -30,7 +30,7 @@ export class VolunteerService {
     return this.http.get(this.apiUrl,{headers: reqHeader});
   }
 
-  deleteVolunteer(idvoluntario: any): Observable<any> {
+  inativarVolunteer(idvoluntario: any): Observable<any> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
@@ -53,6 +53,7 @@ export class VolunteerService {
           }
       ))
   }
+
   updateVolunteer(postData1: Colaborador): Observable<any> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',

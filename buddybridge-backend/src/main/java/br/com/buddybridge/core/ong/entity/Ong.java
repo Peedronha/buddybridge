@@ -24,7 +24,7 @@ public class Ong {
     @Column(name = "razao_social_ong", nullable = false, length = 255)
     private String razaoSocialOng;
 
-    @Column(name = "cnpj_ong", nullable = false, length = 14)
+    @Column(name = "cnpj_ong", nullable = false, length = 35)
     private String cnpjOng;
 
     @Column(name = "missao_ong")

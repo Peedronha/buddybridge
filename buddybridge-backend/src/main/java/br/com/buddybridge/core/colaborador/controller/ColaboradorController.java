@@ -24,6 +24,7 @@ public class ColaboradorController {
     private ColaboradorService colaboradorService;
 
     private UsuarioService usuarioService;
+
     @GetMapping
     public ResponseEntity<List<Colaborador>> getALlColaboradors(){
         List<Colaborador> Colaboradors = new ArrayList<>(this.colaboradorService.findAll());
@@ -36,7 +37,6 @@ public class ColaboradorController {
     @PostMapping
     public ResponseEntity<Colaborador> insertColaborador(@RequestBody ColaboradorDto colaboradorDto){
         try{
-            System.out.println("entrei"+colaboradorDto.getNome_colaborador());
 
             if (colaboradorService.existsByEmail(colaboradorDto.getEmail())) {
                 return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -73,14 +73,21 @@ public class ColaboradorController {
     @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteColaborador(@PathVariable Long id){
+        System.out.println("entrei");
         if (this.colaboradorService.findColaboradorById(id).isPresent()){
             Optional<Colaborador> optionalColaborador = this.colaboradorService.findColaboradorById(id);
 
             Colaborador model = optionalColaborador.orElseThrow(() -> new NoSuchElementException("colaborador not found"));
 
-            this.usuarioService.excluir(model.getUsuarioColaborador().getId());
+            //this.usuarioService.excluir(model.getUsuarioColaborador().getId());
 
-            this.colaboradorService.deleteColaborador(id);
+            Usuario user = model.getUsuarioColaborador();
+            if(user != null) {
+                user.setConfirmacaoEmail(true);
+                Usuario usuario = this.usuarioService.inativarUser(user);
+            }
+
+            //this.colaboradorService.deleteColaborador(id);
 
             return new ResponseEntity<>(true, HttpStatus.OK);
         }

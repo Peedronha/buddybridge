@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="merge" />
+    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="merge">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/colaborador/controller/ColaboradorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/colaborador/controller/ColaboradorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/ong/entity/Ong.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/ong/entity/Ong.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/service/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/service/UsuarioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/component/container/list-volunteer/list-volunteer.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/component/container/list-volunteer/list-volunteer.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/component/container/volunteer/volunteer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/component/container/volunteer/volunteer.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/service/volunteer.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/service/volunteer.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.menu.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.menu.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.menu.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.menu.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/layout/app.menu.service.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -350,7 +363,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718152206737</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="merge">
+      <option name="closed" value="true" />
+      <created>1718152347534</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1718152347534</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

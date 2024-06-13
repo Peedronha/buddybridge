@@ -34,6 +34,11 @@ public class UsuarioService {
     @Resource
     private UserTransaction utx;
 
+    public Usuario inativarUser(Usuario usuario) {
+        System.out.println("entreiiiiiii");
+        usuario.setConfirmacaoEmail(true);
+        return usuarioRepository.save(usuario);
+    }
 
     public Usuario salvar(Usuario usuario, Boolean colaborador) throws ExampleExeption, SystemException {
         if (usuario.getNome() == null || usuario.getNome().isEmpty()) {

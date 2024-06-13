@@ -69,7 +69,7 @@ public class AuthService {
             response.setValid(true);
             response.setValidarEmail(usuario.getConfirmacaoEmail());
         } else {
-            response.setToken(null);
+            response.setToken(token);
             response.setIdUser(null);
             response.setLogin(null);
             response.setValid(false);
