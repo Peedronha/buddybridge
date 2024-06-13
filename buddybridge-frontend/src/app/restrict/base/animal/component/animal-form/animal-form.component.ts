@@ -30,7 +30,7 @@ export class AnimalFormComponent implements OnInit {
     ]],
     comprimento_animal: ['', [
       Validators.required,
-      Validators.pattern(/^\d{1,5}$/)
+      Validators.pattern(/^\d+(\.\d{1,2})?$/)
     ]],
     data_resgate: ['', Validators.required],
     data_nascimento: ['', Validators.required],
