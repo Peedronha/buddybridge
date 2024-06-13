@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="merge">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/colaborador/controller/ColaboradorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/colaborador/controller/ColaboradorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/colaborador/service/ColaboradorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/colaborador/service/ColaboradorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/security/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/account/register/register.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/ong/component/ong/ong.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/ong/component/ong/ong.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/component/container/list-volunteer/list-volunteer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/component/container/list-volunteer/list-volunteer.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/service/volunteer.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/volunteer/service/volunteer.service.ts" afterDir="false" />
-    </list>
+    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="merge" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -368,7 +358,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718152347534</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="merge">
+      <option name="closed" value="true" />
+      <created>1718316343016</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1718316343016</updated>
+    </task>
+    <task id="LOCAL-00030" summary="merge">
+      <option name="closed" value="true" />
+      <created>1718316687973</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1718316687973</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -412,9 +418,9 @@
     <MESSAGE value="Merge" />
     <MESSAGE value="Crud ong + controle de sessao - back inativo" />
     <MESSAGE value="Ajuste sessão" />
-    <MESSAGE value="merge" />
     <MESSAGE value="ajustes colaborador" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes colaborador" />
+    <MESSAGE value="merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
