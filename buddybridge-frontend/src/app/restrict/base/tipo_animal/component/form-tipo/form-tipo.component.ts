@@ -47,7 +47,7 @@ export class FormTipoComponent {
 
     var id = this.registerForm.get('id_tipo')?.value+'';
     tipo.id = parseInt(id);
-    tipo.name = this.registerForm.get('nome_tipo')?.value+'';
+    tipo.name = this.registerForm.get('nome_tipo')?.value+''.trim();
 
     if (this.registerForm.get('id_tipo')?.value + '' == 'NaN'){
       tipo.id = undefined
