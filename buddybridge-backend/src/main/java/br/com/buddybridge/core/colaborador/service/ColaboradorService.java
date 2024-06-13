@@ -22,7 +22,6 @@ import static br.com.buddybridge.core.security.config.PasswordGenerator.generate
 public class ColaboradorService {
     private ColaboradorRepository colaboradorRepository;
     private UsuarioRepository usuarioRepository;
-
     private UsuarioService usuarioService;
 
     @Transactional(readOnly = true)
@@ -30,6 +29,13 @@ public class ColaboradorService {
         return colaboradorRepository.findAll();
     }
 
+    public Colaborador inativarColaborador(Colaborador colaborador) {
+        System.out.println("to aqui");
+        String nomeColaborador = colaborador.getNome_colaborador() + " [INATIVO]";
+        colaborador.setNome_colaborador(nomeColaborador);
+        colaborador.getUsuarioColaborador().setConfirmacaoEmail(true);
+        return colaboradorRepository.save(colaborador);
+    }
 
     public Colaborador saveColaborador(Colaborador colaborador) throws SystemException, ExampleExeption {
         try {
@@ -42,13 +48,14 @@ public class ColaboradorService {
                 user.setSenha(PasswordGenerator.generatePassword(8));
                 Usuario persisted = usuarioService.salvar(user, true);
                 colaborador.setUsuarioColaborador(persisted);
-                colaborador = colaboradorRepository.save(colaborador);
+                return colaboradorRepository.save(colaborador);
             }
             return colaborador;
         } catch (Exception e) {
             throw new SystemException(String.valueOf(e));
         }
     }
+
     @Transactional
     public Optional<Colaborador> findColaboradorById(Long id) {
         return colaboradorRepository.findById(id);

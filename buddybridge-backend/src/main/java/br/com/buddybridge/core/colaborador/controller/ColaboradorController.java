@@ -70,7 +70,19 @@ public class ColaboradorController {
         }
     }
 
-    @Transactional
+
+    @PostMapping("/{id}")
+    public ResponseEntity<Colaborador> inativarColaborador(@PathVariable Long id)  {
+        Optional<Colaborador> optionalColaborador = this.colaboradorService.findColaboradorById(id);
+        Colaborador model = optionalColaborador.orElseThrow(() -> new NoSuchElementException("colaborador not found"));
+        if(model != null){
+            model = this.colaboradorService.inativarColaborador(model);
+            return new ResponseEntity<>(model, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteColaborador(@PathVariable Long id){
         System.out.println("entrei");
@@ -79,15 +91,8 @@ public class ColaboradorController {
 
             Colaborador model = optionalColaborador.orElseThrow(() -> new NoSuchElementException("colaborador not found"));
 
-            //this.usuarioService.excluir(model.getUsuarioColaborador().getId());
-
-            Usuario user = model.getUsuarioColaborador();
-            if(user != null) {
-                user.setConfirmacaoEmail(true);
-                Usuario usuario = this.usuarioService.inativarUser(user);
-            }
-
-            //this.colaboradorService.deleteColaborador(id);
+            this.usuarioService.excluir(model.getUsuarioColaborador().getId());
+            this.colaboradorService.deleteColaborador(id);
 
             return new ResponseEntity<>(true, HttpStatus.OK);
         }

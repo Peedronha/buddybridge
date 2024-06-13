@@ -28,18 +28,13 @@
             </small>
           </div>
           <div class="field">
-            <label for="senha">Senha</label>
+            <label for="senha">Senha <button type="button" pButton icon="{{passwordFieldIcon}}" (click)="togglePasswordVisibility('password')" style="magin: 0; padding: 0;" class="p-button-text"></button></label>
             <input [type]="passwordFieldType" pInputText formControlName="senha" class="w-full" name="senha"
                    placeholder="Digite sua senha"/>
-            <button type="button" pButton icon="{{passwordFieldIcon}}" (click)="togglePasswordVisibility('password')"
-                    class="p-button-text"></button>
+
             <small
               *ngIf="loginForm.get('senha')?.invalid && (loginForm.get('senha')?.dirty || loginForm.get('senha')?.touched)"
               class="block p-error">
-              <div *ngIf="loginForm.get('senha')?.errors?.['required']">A senha é uma informação obrigatória.</div>
-              <div *ngIf="loginForm.get('senha')?.errors?.['pattern']">A senha deve possuir números, letras e ao menos 8
-                caracteres.
-              </div>
               <small *ngIf="loginForm.get('senha')?.invalid && (loginForm.get('senha')?.dirty || loginForm.get('senha')?.touched)" class="block p-error">
                 <div *ngIf="loginForm.get('senha')?.errors?.['required']">A senha é uma informação obrigatória.</div>
                 <div *ngIf="loginForm.get('senha')?.errors?.['minlength']">A senha deve possuir ao menos 8 caracteres.</div>
@@ -49,6 +44,7 @@
                 <div *ngIf="loginForm.get('senha')?.errors?.['specialChar']">A senha deve conter ao menos um caractere especial ($!%*?&).</div>
               </small>
             </small>
+            <br/>
             <p-button label="Login" styleClass="w-full" type="submit"></p-button>
             <div class="mt-2">Esqueceu sua senha? <a routerLink="/recovery">Clique aqui</a></div>
           </div>

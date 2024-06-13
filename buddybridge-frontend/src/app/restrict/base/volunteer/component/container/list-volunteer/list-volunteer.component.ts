@@ -68,7 +68,6 @@ export class ListVolunteerComponent {
     this.showHidden = !this.showHidden;
   }
 
-
   updateValidator(cnpj: boolean){
     if (cnpj) {
       this.editForm.get('cnpj_colaborador')?.setValidators([Validators.required, Validators.pattern(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)]);

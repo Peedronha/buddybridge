@@ -35,7 +35,15 @@ export class VolunteerService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.delete(this.apiUrl + '/' + idvoluntario, {headers: reqHeader});
+    return this.http.post<any>('http://localhost:8080/colaborador/'+idvoluntario,{headers: reqHeader}).pipe(
+      map((response) =>{
+          if (response)
+            return response;
+        },
+        (error:any) =>{
+          return error;
+        }
+      ))
   }
 
   registerVolunteer(postData1: Colaborador): Observable<any> {

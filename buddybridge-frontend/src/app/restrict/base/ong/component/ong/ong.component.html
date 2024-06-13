@@ -35,7 +35,7 @@
         <div class="p-fluid p-formgrid grid">
           <div class="field col-6 md:col-6">
             <label for="cnpjOng">CNPJ:</label>
-            <input type="text" maxlength="14" pInputText formControlName="cnpjOng" class="w-full" name="cnpjOng" placeholder="Digite o CNPJ do coluntário"/>
+            <input type="text" maxlength="18" pInputText formControlName="cnpjOng" class="w-full" name="cnpjOng" placeholder="Digite o CNPJ do coluntário"/>
             <small *ngIf="registerForm.get('cnpjOng')?.invalid && (registerForm.get('cnpjOng')?.dirty || registerForm.get('cnpjOng')?.touched)" class="block p-error">
               <div *ngIf="registerForm.get('cnpjOng')?.errors?.['required']">O CNPJ do coluntário é uma informação obrigatória.</div>
               <div *ngIf="registerForm.get('cnpjOng')?.errors?.['pattern']">O CNPJ não deve conter caracteres especiais</div>
