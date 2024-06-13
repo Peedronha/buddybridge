@@ -9,6 +9,7 @@ import {Raca} from "../../../raca/model/raca.model";
 import {Tipo} from "../../../tipo_animal/model/tipo.model";
 import {TipoService} from "../../../tipo_animal/service/tipo.service";
 import {RacaService} from "../../../raca/service/raca.service";
+import {waitForAsync} from "@angular/core/testing";
 
 @Component({
   selector: 'app-animal-form',
@@ -22,10 +23,6 @@ export class AnimalFormComponent implements OnInit {
     nome_animal: ['', [
       Validators.required,
       Validators.pattern(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/)
-    ]],
-    idade: ['', [
-      Validators.required,
-      Validators.pattern(/^\d{1,2}$/)
     ]],
     peso_animal: ['', [
       Validators.required,
@@ -42,13 +39,14 @@ export class AnimalFormComponent implements OnInit {
     caracteristicas_animal: ['',
       Validators.pattern(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/)
     ],
-    localizacao_animal:['',
+    localizacao_animal: ['',
       Validators.pattern(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/)
     ],
   });
 
   racas: Raca[] = [];
   tipos: Tipo[] = [];
+
   tipoId: any;
   tipoRaca: any;
 
@@ -61,8 +59,7 @@ export class AnimalFormComponent implements OnInit {
     private router: ActivatedRoute,
     private route: Router,
     private accountService: AccountService
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     this.accountService.validarSessao();
@@ -75,16 +72,20 @@ export class AnimalFormComponent implements OnInit {
     this.registerForm.setValue({
       id_animal: animal.id_animal + '',
       nome_animal: animal.nome_animal + '',
-      idade: animal.idade + '',
       peso_animal: animal.peso_animal + '',
       comprimento_animal: animal.comprimento_animal,
-      data_resgate: animal.data_resgate,
-      data_nascimento: animal.data_nascimento,
+      data_resgate: this.formatDate(animal.data_resgate),
+      data_nascimento: this.formatDate(animal.data_nascimento),
       tipo_animal: animal.tipo_animal + '',
       raca_animal: animal.raca_animal + '',
       caracteristicas_animal: animal.caracteristicas_animal + '',
       localizacao_animal: animal.localizacao_animal + '',
     });
+    if (animal.raca_animal != ''){
+      this.tipoId = animal.tipo_animal;
+      this.loadRacas(this.tipoId.name)
+      this.tipoRaca = animal.raca_animal;
+    }
   }
 
   loadRacas(tipoId: any): void {
@@ -97,7 +98,11 @@ export class AnimalFormComponent implements OnInit {
       }
     );
   }
-
+  formatDate(dateString: string): string {
+    const parts = dateString.split('/');
+    const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+    return formattedDate;
+  }
   onTipoAnimalChange(event: any): void {
     this.tipoId = event.value;
     if (this.tipoId) {
@@ -125,7 +130,7 @@ export class AnimalFormComponent implements OnInit {
     if (this.registerForm.get('id_animal')?.value + '' != 'NaN') {
       this.animalService.updateanimal(animal).subscribe(
         response => {
-          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Animal registrado'});
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Animal atualizado!' });
           this.registerForm.reset();
           this.route.navigateByUrl('/animal');
         },
@@ -141,9 +146,9 @@ export class AnimalFormComponent implements OnInit {
       animal.id_animal = undefined;
       this.animalService.registerAnimal(animal).subscribe(
         response => {
-          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso!'});
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Animal registrado!' });
           this.registerForm.reset();
-          // this.route.navigateByUrl('/animal');
+          this.route.navigateByUrl('/animal');
         },
         error => {
           this.messageService.add({
@@ -164,24 +169,20 @@ export class AnimalFormComponent implements OnInit {
     return this.registerForm.get('nome_animal');
   }
 
-  get idade() {
-    return this.registerForm.get('idade');
-  }
-
-  get raca() {
-    return this.registerForm.get('raca');
-  }
-
-  get data_resgate() {
-    return this.registerForm.get('data_resgate');
-  }
-
   get peso_animal() {
     return this.registerForm.get('peso_animal');
   }
 
   get comprimento_animal() {
     return this.registerForm.get('comprimento_animal');
+  }
+
+  get data_resgate() {
+    return this.registerForm.get('data_resgate');
+  }
+
+  get data_nascimento() {
+    return this.registerForm.get('data_nascimento');
   }
 
   get tipo_animal() {

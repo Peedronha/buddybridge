@@ -52,7 +52,6 @@ export class ListRacaComponent {
   }
 
   onEdit(id_raca: any) {
-    alert("id_raca: "+id_raca)
     this.edit.emit(id_raca);
   }
 

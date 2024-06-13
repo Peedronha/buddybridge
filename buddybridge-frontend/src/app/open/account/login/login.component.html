@@ -1,38 +1,59 @@
-
 <div class="grid grid-nogutter surface-section text-800"
      style="background: linear-gradient(0deg, var(--primary-color), rgba(40, 2, 255, 0.2)),
-                        radial-gradient(77.36% 256.97% at 77.36% 57.52%, #3b82f6 0%, #C3E3FA 100%); clip-path: ellipse(150% 87% at 93% 13%);">
-  <div class="col-12 md:col-6 p-6 text-center md:text-left ">
-      <section>
-          <span class="block text-6xl font-bold mb-1">LOGIN</span>
-          <div class="mt-2">Não tem uma conta? <a routerLink="/register" style="color: white;">Clique aqui</a></div>
-      </section>
+                        radial-gradient(77.36% 256.97% at 77.36% 57.52%, #3b82f6 0%, #C3E3FA 100%);
+            clip-path: ellipse(150% 87% at 93% 13%);">
+  <div class="col-12 md:col-6 p-6 text-center md:text-left">
+    <section>
+      <span class="block text-6xl font-bold mb-1">LOGIN</span>
+      <div class="mt-2">Não tem uma conta? <a routerLink="/register" style="color: white;">Clique aqui</a></div>
+    </section>
   </div>
   <div class="col-12 md:col-6 p-6 text-center md:text-left">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class=" surface-card py-8 px-4 sm:px-8" style="border-radius: 35px">
+      <div class="surface-card py-8 px-4 sm:px-8" style="border-radius: 35px;">
         <p-messages></p-messages>
-        <div class="text-center"><div class="text-900 text-3xl font-medium mb-3">LOGIN</div></div>
+        <div class="text-center">
+          <div class="text-900 text-3xl font-medium mb-3">LOGIN</div>
+        </div>
         <div>
           <div class="field">
-            <label for="email">Email</label>
-            <input type="text" pInputText formControlName="login" class="w-full" name="email" placeholder="Digite seu email" />
-            <small *ngIf="login.invalid && (login.dirty || login.touched)" class="block p-error">
-              <div *ngIf="login.errors?.['required']">O email é uma informação obrigatória.</div>
-              <div *ngIf="login.errors?.['email']">Email invalido</div>
+            <label for="login">Email</label>
+            <input type="text" pInputText formControlName="login" class="w-full" name="login"
+                   placeholder="Digite seu email"/>
+            <small
+              *ngIf="loginForm.get('login')?.invalid && (loginForm.get('login')?.dirty || loginForm.get('login')?.touched)"
+              class="block p-error">
+              <div *ngIf="loginForm.get('email')?.errors?.['required']">O email é uma informação obrigatória.</div>
+              <div *ngIf="loginForm.get('email')?.errors?.['email']">Email inválido.</div>
             </small>
           </div>
           <div class="field">
-            <label for="password">Senha</label>
-            <input type="password" pInputText formControlName="senha" class="w-full" name="password" placeholder="Digite sua senha"/>
+            <label for="senha">Senha</label>
+            <input [type]="passwordFieldType" pInputText formControlName="senha" class="w-full" name="senha"
+                   placeholder="Digite sua senha"/>
+            <button type="button" pButton icon="{{passwordFieldIcon}}" (click)="togglePasswordVisibility('password')"
+                    class="p-button-text"></button>
+            <small
+              *ngIf="loginForm.get('senha')?.invalid && (loginForm.get('senha')?.dirty || loginForm.get('senha')?.touched)"
+              class="block p-error">
+              <div *ngIf="loginForm.get('senha')?.errors?.['required']">A senha é uma informação obrigatória.</div>
+              <div *ngIf="loginForm.get('senha')?.errors?.['pattern']">A senha deve possuir números, letras e ao menos 8
+                caracteres.
+              </div>
+              <small *ngIf="loginForm.get('senha')?.invalid && (loginForm.get('senha')?.dirty || loginForm.get('senha')?.touched)" class="block p-error">
+                <div *ngIf="loginForm.get('senha')?.errors?.['required']">A senha é uma informação obrigatória.</div>
+                <div *ngIf="loginForm.get('senha')?.errors?.['minlength']">A senha deve possuir ao menos 8 caracteres.</div>
+                <div *ngIf="loginForm.get('senha')?.errors?.['uppercase']">A senha deve conter ao menos uma letra maiúscula.</div>
+                <div *ngIf="loginForm.get('senha')?.errors?.['lowercase']">A senha deve conter ao menos uma letra minúscula.</div>
+                <div *ngIf="loginForm.get('senha')?.errors?.['number']">A senha deve conter ao menos um número.</div>
+                <div *ngIf="loginForm.get('senha')?.errors?.['specialChar']">A senha deve conter ao menos um caractere especial ($!%*?&).</div>
+              </small>
+            </small>
+            <p-button label="Login" styleClass="w-full" type="submit"></p-button>
+            <div class="mt-2">Esqueceu sua senha? <a routerLink="/recovery">Clique aqui</a></div>
           </div>
-          <p-button label="Login" styleClass="w-full" [disabled]="loginForm.invalid" type="submit"></p-button>
-          <div class="mt-2">Esqueceu sua senha? <a routerLink="/recovery">Clique aqui</a></div>
         </div>
       </div>
     </form>
-    <br/>
-    <br/>
-    <br/>
   </div>
 </div>

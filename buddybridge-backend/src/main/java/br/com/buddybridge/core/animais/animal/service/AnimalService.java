@@ -12,6 +12,8 @@ import br.com.buddybridge.core.util.ExampleExeption;
 import jakarta.transaction.SystemException;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,8 +67,10 @@ public class AnimalService {
     }
 
     @Transactional
-    public Optional<AnimalModel> findAnimalModelById(Long id) {
-        return animalRepository.findById(id);
+    public GetAnimalDTO findAnimalModelById(Long id) throws Exception {
+        Optional<AnimalModel> animalModel = this.animalRepository.findById(id);
+        return animalModel.map(GetAnimalDTO::new)
+                .orElseThrow(Exception::new);
     }
 
     @Transactional

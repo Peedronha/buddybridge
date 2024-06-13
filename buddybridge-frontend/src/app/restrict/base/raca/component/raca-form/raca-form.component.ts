@@ -43,6 +43,10 @@ export class RacaFormComponent {
       nome_raca: raca.name + '',
       id_tipo: raca.id_tipo+'',
     })
+    this.tipoService.getTipos().subscribe(tipos => {
+      this.tipos = tipos;
+      this.selectTipo = this.tipos.find(tipo => tipo.id === raca.id_tipo);
+    });
 
     this.registerForm.get('id_tipo')?.valueChanges.subscribe(type => {
       this.onTypeChange(type);

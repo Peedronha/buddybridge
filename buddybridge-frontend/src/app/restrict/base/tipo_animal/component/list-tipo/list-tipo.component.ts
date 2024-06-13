@@ -53,7 +53,6 @@ export class ListTipoComponent {
   }
 
   onEdit(id_tipo: any) {
-    alert("id_tipo: "+id_tipo)
     this.edit.emit(id_tipo);
   }
 

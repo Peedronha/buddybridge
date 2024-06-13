@@ -15,4 +15,9 @@ public class RaceDTO {
     Long id_tipo;
     String name;
 
+    public RaceDTO(RacaModel racaModel) {
+        this.id = racaModel.getId();
+        this.id_tipo = racaModel.getType().getId();
+        this.name = racaModel.getName();
+    }
 }

@@ -45,15 +45,19 @@ public class AnimalController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AnimalModel> getAnimalModelById(@PathVariable Long id){
-        Optional<AnimalModel> animalModel = this.animalService.findAnimalModelById(id);
-        return animalModel.map(model -> new ResponseEntity<>(model, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(null,HttpStatus.NOT_FOUND));
+    public ResponseEntity<GetAnimalDTO> getAnimalModelById(@PathVariable Long id) throws Exception {
+        try {
+            GetAnimalDTO model = this.animalService.findAnimalModelById(id);
+            return new ResponseEntity<>(model, HttpStatus.OK);
+        }
+         catch (Exception e){
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+         }
     }
 
     @PutMapping
     public ResponseEntity<AnimalDto> updateAnimalModel(@RequestBody AnimalDto animalDto) throws SystemException, ExampleExeption {
-        if(this.animalService.findAnimalModelById(animalDto.getId_animal()).isPresent()) {
+        if(this.animalService.existsByIdAnimal(animalDto.getId_animal())) {
             this.animalService.saveAnimalModel(animalDto);
             return new ResponseEntity<>(animalDto, HttpStatus.OK);
         }
@@ -65,7 +69,7 @@ public class AnimalController {
     @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteAnimalModel(@PathVariable Long id){
-        if (this.animalService.findAnimalModelById(id).isPresent()){
+        if (this.animalService.existsByIdAnimal(id)){
 
             this.animalService.deleteAnimalModel(id);
 
