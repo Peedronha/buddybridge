@@ -24,8 +24,21 @@
             </small>
           </div>
           <div class="field">
-            <label for="password">Senha</label>
-            <input type="password" pInputText formControlName="senha" class="w-full" name="password" placeholder="Digite sua senha"/>
+            <label for="password">Senha <button type="button" pButton icon="{{passwordFieldIcon}}" (click)="togglePasswordVisibility('password')" style="magin: 0; padding: 0;" class="p-button-text"></button></label>
+            <input [type]="passwordFieldType" pInputText formControlName="senha" class="w-full" name="senha"
+                   placeholder="Digite sua senha"/>
+            <small
+              *ngIf="loginForm.get('senha')?.invalid && (loginForm.get('senha')?.dirty || loginForm.get('senha')?.touched)"
+              class="block p-error">
+              <small *ngIf="loginForm.get('senha')?.invalid && (loginForm.get('senha')?.dirty || loginForm.get('senha')?.touched)" class="block p-error">
+                <div *ngIf="loginForm.get('senha')?.errors?.['required']">A senha é uma informação obrigatória.</div>
+                <div *ngIf="loginForm.get('senha')?.errors?.['minlength']">A senha deve possuir ao menos 8 caracteres.</div>
+                <div *ngIf="loginForm.get('senha')?.errors?.['uppercase']">A senha deve conter ao menos uma letra maiúscula.</div>
+                <div *ngIf="loginForm.get('senha')?.errors?.['lowercase']">A senha deve conter ao menos uma letra minúscula.</div>
+                <div *ngIf="loginForm.get('senha')?.errors?.['number']">A senha deve conter ao menos um número.</div>
+                <div *ngIf="loginForm.get('senha')?.errors?.['specialChar']">A senha deve conter ao menos um caractere especial ($!%*?&).</div>
+              </small>
+            </small>
           </div>
           <div class="field">
             <label for="otp"><b>Código OTP requerido</b></label>

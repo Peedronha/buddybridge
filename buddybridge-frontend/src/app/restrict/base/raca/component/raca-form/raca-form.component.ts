@@ -59,7 +59,7 @@ export class RacaFormComponent {
 
     var id = this.registerForm.get('id_raca')?.value+'';
     raca.id = parseInt(id);
-    raca.name = this.registerForm.get('nome_raca')?.value+'';
+    raca.name = this.registerForm.get('nome_raca')?.value+''.trim();
 
     raca.id_tipo = this.selectTipo?.id?.toString() || '';
 

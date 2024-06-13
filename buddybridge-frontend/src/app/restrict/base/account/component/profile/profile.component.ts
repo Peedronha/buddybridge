@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AccountRestrictService } from '../../shared/account-restrict.service';
 import { AccountService } from '../../../../../open/account/shared/account.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { passwordMatchValidator } from '../../../../../open/account/shared/password-match.directive';
@@ -19,8 +19,22 @@ export class ProfileComponent {
     fullName: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     telefone: [''],
-    password: ['', [Validators.required, Validators.pattern(/(?=.*\d)(?=.*[a-zA-Z]).{8,}/)]],
-    confirmPassword: ['', [Validators.required, Validators.pattern(/(?=.*\d)(?=.*[a-zA-Z]).{8,}/)]]
+    password: ['',  [
+      Validators.required,
+      Validators.minLength(8),
+      this.uppercaseValidator,
+      this.lowercaseValidator,
+      this.numberValidator,
+      this.specialCharValidator
+    ]],
+    confirmPassword: ['', [
+      Validators.required,
+      Validators.minLength(8),
+      this.uppercaseValidator,
+      this.lowercaseValidator,
+      this.numberValidator,
+      this.specialCharValidator
+    ]]
   }, {
     validators: passwordMatchValidator
   })
@@ -92,5 +106,40 @@ export class ProfileComponent {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Erro ao realizar o cadastro' });
       }
     )
+  }
+
+  passwordFieldType: string = 'password';
+  confirmPasswordFieldType: string = 'password';
+  passwordFieldIcon: string = 'pi pi-eye';
+  confirmPasswordFieldIcon: string = 'pi pi-eye';
+
+  togglePasswordVisibility(field: string) {
+    if (field === 'password') {
+      this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+      this.passwordFieldIcon = this.passwordFieldIcon === 'pi pi-eye' ? 'pi pi-eye-slash' : 'pi pi-eye';
+    } else {
+      this.confirmPasswordFieldType = this.confirmPasswordFieldType === 'password' ? 'text' : 'password';
+      this.confirmPasswordFieldIcon = this.confirmPasswordFieldIcon === 'pi pi-eye' ? 'pi pi-eye-slash' : 'pi pi-eye';
+    }
+  }
+
+  uppercaseValidator(control: AbstractControl) {
+    const hasUppercase = /[A-Z]/.test(control.value);
+    return hasUppercase ? null : { uppercase: true };
+  }
+
+  lowercaseValidator(control: AbstractControl) {
+    const hasLowercase = /[a-z]/.test(control.value);
+    return hasLowercase ? null : { lowercase: true };
+  }
+
+  numberValidator(control: AbstractControl) {
+    const hasNumber = /\d/.test(control.value);
+    return hasNumber ? null : { number: true };
+  }
+
+  specialCharValidator(control: AbstractControl) {
+    const hasSpecialChar = /[@$!%*?&]/.test(control.value);
+    return hasSpecialChar ? null : { specialChar: true };
   }
 }
