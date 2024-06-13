@@ -15,8 +15,7 @@ export class FormTipoComponent {
 
   registerForm = this.fb.group({
     id_tipo:[''],
-    nome_tipo: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/)]],
-    // id_raca: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
+    nome_tipo: ['', Validators.required],
   })
 
   tipos: Tipo[] = [];
@@ -39,13 +38,7 @@ export class FormTipoComponent {
     this.registerForm.setValue({
       id_tipo: tipo.id +'',
       nome_tipo: tipo.name + '',
-      // id_raca: tipo.races+'',
     })
-
-    // this.registerForm.get('id_raca')?.valueChanges.subscribe(id_tipo => {
-    //   this.onTypeChange(id_tipo);
-    // });
-
   }
 
   submitDetails() {
@@ -55,31 +48,30 @@ export class FormTipoComponent {
     var id = this.registerForm.get('id_tipo')?.value+'';
     tipo.id = parseInt(id);
     tipo.name = this.registerForm.get('nome_tipo')?.value+'';
-    // tipo.races = this.registerForm.get('id_raca')?.value+'';
 
     if (this.registerForm.get('id_tipo')?.value + '' == 'NaN'){
       tipo.id = undefined
       this.tipoService.registerTipo(tipo).subscribe(
         response => {
           console.log(response);
-          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso!'});
+          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Tipo registrado com sucesso!'});
           this.registerForm.reset();
           this.route.navigateByUrl('/tipos')
         },
         error => {
-          this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Já existe um usuário cadastrado no sistema com este email.'});
+          this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Erro validar o tipo de animal'});
         },
       )
     } else {
       this.tipoService.updateTipo(tipo).subscribe(
         response => {
           console.log(response);
-          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso' });
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Tipo registrado!' });
           this.registerForm.reset();
           this.route.navigateByUrl('/tipos')
         },
         error => {
-          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Já existe um usuário com este CPF / Email cadastrado no sistema' });
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro validar o tipo' });
         },
       )
     }
