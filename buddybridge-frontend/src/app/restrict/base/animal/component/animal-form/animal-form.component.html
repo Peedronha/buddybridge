@@ -8,7 +8,7 @@
         <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
         <li><a class="text-500 no-underline line-height-3 cursor-pointer">Animais</a></li>
         <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-        @if (id_animal?.value != null && id_animal?.value != 'NaN') {
+        @if (id_animal?.value != null && id_animal?.value == 'NaN') {
           <li><span class="text-900 line-height-3">Novo</span></li>
           <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
           <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra os animais do
@@ -42,7 +42,7 @@
                placeholder="Digite o nome do animal" maxlength="50"/>
         <small *ngIf="registerForm.get('nome_animal')?.invalid && (registerForm.get('nome_animal')?.dirty || registerForm.get('nome_animal')?.touched)" class="block p-error">
           <div *ngIf="registerForm.get('nome_animal')?.errors?.['required']">O nome do animal é uma informação obrigatória.</div>
-          <div *ngIf="registerForm.get('nome_animal')?.errors?.['pattern']">O nome do animal não deve conter caracteres especiais.</div>
+          <div *ngIf="registerForm.get('nome_animal')?.errors?.['pattern']">O nome do animal não deve conter carácteres especiais.</div>
         </small>
       </div>
 
@@ -94,6 +94,9 @@
                       (onChange)="onTipoAnimalChange($event)">
           </p-dropdown>
         </p>
+        <small *ngIf="registerForm.get('tipo_animal')?.invalid && (registerForm.get('tipo_animal')?.dirty || registerForm.get('tipo_animal')?.touched)" class="block p-error">
+          <div *ngIf="registerForm.get('tipo_animal')?.errors?.['required']">O tipo de animal é uma informação obrigatória.</div>
+        </small>
       </div>
 
       <div class="field">
@@ -103,6 +106,9 @@
                       formControlName="raca_animal" class="w-full" name="raca_animal" placeholder="Selecione a raça do animal">
           </p-dropdown>
         </p>
+        <small *ngIf="registerForm.get('raca_animal')?.invalid && (registerForm.get('raca_animal')?.dirty || registerForm.get('raca_animal')?.touched)" class="block p-error">
+          <div *ngIf="registerForm.get('raca_animal')?.errors?.['required']">A seleção da raça de animal é uma informação obrigatória.</div>
+        </small>
       </div>
 
       <div class="field">

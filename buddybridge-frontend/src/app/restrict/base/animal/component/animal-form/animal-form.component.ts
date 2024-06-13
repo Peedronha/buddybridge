@@ -22,7 +22,7 @@ export class AnimalFormComponent implements OnInit {
     id_animal: [''],
     nome_animal: ['', [
       Validators.required,
-      Validators.pattern(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/)
+      Validators.pattern(/^[a-zA-ZÀ-ÖØ-öø-ÿ]+(?: [a-zA-ZÀ-ÖØ-öø-ÿ]+)*$/)
     ]],
     peso_animal: ['', [
       Validators.required,
@@ -36,12 +36,8 @@ export class AnimalFormComponent implements OnInit {
     data_nascimento: ['', Validators.required],
     tipo_animal: ['', Validators.required],
     raca_animal: ['', Validators.required],
-    caracteristicas_animal: ['',
-      Validators.pattern(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/)
-    ],
-    localizacao_animal: ['',
-      Validators.pattern(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/)
-    ],
+    caracteristicas_animal: [''],
+    localizacao_animal: [''],
   });
 
   racas: Raca[] = [];
