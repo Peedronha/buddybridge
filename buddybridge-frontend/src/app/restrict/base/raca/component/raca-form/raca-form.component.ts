@@ -17,8 +17,8 @@ export class RacaFormComponent {
 
   registerForm = this.fb.group({
     id_raca:[''],
-    nome_raca: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/)]],
-    id_tipo: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/)]],
+    nome_raca: ['',Validators.required],
+    id_tipo: ['', Validators.required],
   })
 
   tipos: Tipo[] = [];
@@ -66,24 +66,24 @@ export class RacaFormComponent {
     if (this.registerForm.get('id_raca')?.value + '' != 'NaN'){
       this.racaService.updateRaca(raca).subscribe(
         response => {
-          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso' });
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Raça registrada com sucesso' });
           this.registerForm.reset();
           this.route.navigateByUrl('/racas')
         },
         error => {
-          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Já existe um usuário com este CPF / Email cadastrado no sistema' });
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao validar a raça' });
         },
       )
     } else {
       raca.id = undefined
       this.racaService.registerRaca(raca).subscribe(
         response => {
-          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso!'});
+          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Raça registrada com sucesso!'});
           this.registerForm.reset();
           this.route.navigateByUrl('/racas')
         },
         error => {
-          this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Já existe um usuário cadastrado no sistema com este email.'});
+          this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Erro ao cadastrar a raça'});
         },
       )
     }
