@@ -75,7 +75,6 @@ export class ListAnimalComponent {
       this._specificEntity = null;
 
       this.displayDeleteDialog = false;
-
     }
   }
 }

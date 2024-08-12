@@ -1,5 +1,6 @@
 package br.com.buddybridge.core.animais.animal.model;
 
+import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
 import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
 import br.com.buddybridge.core.animais.raca.entity.RacaModel;
 import br.com.buddybridge.core.animais.raca.model.RaceDTO;
@@ -44,6 +45,8 @@ public class GetAnimalDTO {
         this.raca_animal = new RaceDTO(animalModel.getRace());
         this.tipo_animal = animalModel.getType();
     }
+
+
     public String setIdadeAnimal(LocalDate dataNascimento) {
         if ((dataNascimento != null)) {
             Period period = Period.between(dataNascimento, LocalDate.now());

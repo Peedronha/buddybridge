@@ -30,6 +30,9 @@ import { volunteerResolver } from "./restrict/base/volunteer/guards/volunteer.re
 import { DashboardComponent } from './restrict/dashboard/dashboard.component';
 import { AppLayoutComponent } from './restrict/layout/app.layout.component';
 import { ErrorComponent } from './restrict/layout/error/error/error.component';
+import {AdoptionComponent} from "./restrict/base/adoption/component/adoption/adoption.component";
+import {AdoptionFormComponent} from "./restrict/base/adoption/component/adoption-form/adoption-form.component";
+import {adoptionResolverGuard} from "./restrict/base/adoption/guards/adoption.resolver.guard";
 const routes: Routes = [
   { path: 'errorBuddyBridge', title: 'BuddyBridge - Erro', component: ErrorComponent },
   {
@@ -60,6 +63,10 @@ const routes: Routes = [
       { path: 'racas', title: 'BuddyBridge - Raca', component: RacaComponent },
       { path: 'racas/addraca', title: 'BuddyBridge - Novo Raca', component: RacaFormComponent, resolve: {raca : racaResolver} },
       { path: 'racas/editraca/:id', title: 'BuddyBridge - Alterar Raca', component: RacaFormComponent, resolve: {raca : racaResolver} },
+
+      { path: 'adocao', title: 'BuddyBridge - Adoção', component: AdoptionComponent },
+      { path: 'adocao/addadoption', title: 'BuddyBridge - Novo Adoção', component: AdoptionFormComponent, resolve: {adoption : adoptionResolver} },
+      { path: 'adocao/editadoption/:id', title: 'BuddyBridge - Alterar Adoção', component: AdoptionFormComponent, resolve: {adoption : adoptionResolver} },
 
       { path: 'tipos', title: 'BuddyBridge - Tipo', component: TipoComponent },
       { path: 'tipos/addtipo', title: 'BuddyBridge - Novo Tipo', component: FormTipoComponent, resolve: {tipo : tipoResolver} },

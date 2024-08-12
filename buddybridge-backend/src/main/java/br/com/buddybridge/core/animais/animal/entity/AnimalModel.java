@@ -1,5 +1,6 @@
 package br.com.buddybridge.core.animais.animal.entity;
 
+import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
 import br.com.buddybridge.core.animais.animal.model.AnimalDto;
 import br.com.buddybridge.core.animais.raca.entity.RacaModel;
 import br.com.buddybridge.core.animais.tipo.entity.TypeModel;
@@ -10,6 +11,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "animais")
@@ -64,4 +67,7 @@ public class AnimalModel {
         this.data_resgate = LocalDate.parse(animalDto.getData_resgate());
         this.data_nascimento = LocalDate.parse(animalDto.getData_nascimento());
     }
+
+    @OneToMany(mappedBy = "id_animal")
+    private List<AdoptionProfileModel> adoptionProfile;
 }
