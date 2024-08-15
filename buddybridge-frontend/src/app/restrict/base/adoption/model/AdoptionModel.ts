@@ -6,6 +6,6 @@ export class AdoptionModel {
   telefone!: string;
   email!: string;
   descricao_experiencia!: string;
-  status_adocao!: boolean;
+  status_adocao!: string;
   data_submissao!: string;
 }

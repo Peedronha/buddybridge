@@ -27,6 +27,7 @@ export class animalResolver{
       raca_animal: '',
       caracteristicas_animal: '',
       localizacao_animal:'',
+      genero:'',
     });
   }
 }

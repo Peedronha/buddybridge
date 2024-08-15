@@ -122,6 +122,7 @@ export class AnimalFormComponent implements OnInit {
     animal.tipo_animal = this.tipoId.id || '';
     animal.caracteristicas_animal = this.registerForm.get('caracteristicas_animal')?.value + '';
     animal.localizacao_animal = this.registerForm.get('localizacao_animal')?.value + '';
+    animal.genero = 'Neutro'
 
     if (this.registerForm.get('id_animal')?.value + '' != 'NaN') {
       this.animalService.updateanimal(animal).subscribe(

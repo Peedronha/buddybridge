@@ -10,4 +10,5 @@ export class AnimalModel {
   data_nascimento!: string;
   caracteristicas_animal!: string;
   localizacao_animal!:string;
+  genero!: string;
 }

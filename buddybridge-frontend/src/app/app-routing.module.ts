@@ -32,7 +32,8 @@ import { AppLayoutComponent } from './restrict/layout/app.layout.component';
 import { ErrorComponent } from './restrict/layout/error/error/error.component';
 import {AdoptionComponent} from "./restrict/base/adoption/component/adoption/adoption.component";
 import {AdoptionFormComponent} from "./restrict/base/adoption/component/adoption-form/adoption-form.component";
-import {adoptionResolverGuard} from "./restrict/base/adoption/guards/adoption.resolver.guard";
+import {adoptionResolver} from "./restrict/base/adoption/guards/adoption.resolver.guard";
+import {AdoptionGridComponent} from "./restrict/base/adoption/component/adoption-grid/adoption-grid.component";
 const routes: Routes = [
   { path: 'errorBuddyBridge', title: 'BuddyBridge - Erro', component: ErrorComponent },
   {
@@ -64,7 +65,7 @@ const routes: Routes = [
       { path: 'racas/addraca', title: 'BuddyBridge - Novo Raca', component: RacaFormComponent, resolve: {raca : racaResolver} },
       { path: 'racas/editraca/:id', title: 'BuddyBridge - Alterar Raca', component: RacaFormComponent, resolve: {raca : racaResolver} },
 
-      { path: 'adocao', title: 'BuddyBridge - Adoção', component: AdoptionComponent },
+      { path: 'adocao-1', title: 'BuddyBridge - Adoção', component: AdoptionComponent },
       { path: 'adocao/addadoption', title: 'BuddyBridge - Novo Adoção', component: AdoptionFormComponent, resolve: {adoption : adoptionResolver} },
       { path: 'adocao/editadoption/:id', title: 'BuddyBridge - Alterar Adoção', component: AdoptionFormComponent, resolve: {adoption : adoptionResolver} },
 
@@ -87,6 +88,7 @@ const routes: Routes = [
       { path: 'login', title: 'BuddyBridge - Login', component: LoginComponent, canActivate: [LoginGuard] },
       { path: 'recovery', title: 'BuddyBridge - Recovery', component: RecoveryComponent, canActivate: [LoginGuard] },
       { path: 'validatelogin', title: 'BuddyBridge - Validar código OTP', component: ValidateloginComponent, canActivate: [LoginGuard] },
+      { path: 'adocao', title: 'BuddyBridge - Quero Adotar', component: AdoptionGridComponent, resolve: {adoption : animalResolver} },
     ]
   },
   { path: '', redirectTo: 'home', pathMatch: 'full'},

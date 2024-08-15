@@ -35,7 +35,7 @@ public class AdocaoController {
     }
 
     @PostMapping
-    public ResponseEntity<AdoptionProfileModel> insertAnimalModel(@RequestBody AdoptionDTO adoptionDTO){
+    public ResponseEntity<AdoptionProfileModel> insertAdoptionModel(@RequestBody AdoptionDTO adoptionDTO){
         try {
             AdoptionProfileModel adoption = this.adoptionService.saveAdoptionRequest(adoptionDTO);
             return new ResponseEntity<>(adoption, HttpStatus.CREATED);
@@ -46,7 +46,7 @@ public class AdocaoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetAdoptionDTO> getAnimalModelById(@PathVariable Long id) throws Exception {
+    public ResponseEntity<GetAdoptionDTO> getAdoptionModelById(@PathVariable Long id) throws Exception {
         try {
             GetAdoptionDTO model = this.adoptionService.findAdoptionProfileModelById(id);
             return new ResponseEntity<>(model, HttpStatus.OK);
@@ -57,7 +57,7 @@ public class AdocaoController {
     }
 
     @PutMapping
-    public ResponseEntity<AdoptionDTO> updateAnimalModel(@RequestBody AdoptionDTO adoptionDTO) throws SystemException, ExampleExeption {
+    public ResponseEntity<AdoptionDTO> updateAdoptionModel(@RequestBody AdoptionDTO adoptionDTO) throws SystemException, ExampleExeption {
         if(this.adoptionService.existsByIdAdocao(adoptionDTO.getId_adocao())) {
             this.adoptionService.saveAdoptionRequest(adoptionDTO);
             return new ResponseEntity<>(adoptionDTO, HttpStatus.OK);

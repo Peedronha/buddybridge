@@ -19,6 +19,7 @@ public class AnimalDto {
     private Double peso_animal;
     private Double comprimento_animal;
     private String data_resgate;
+    private String genero;
     private String data_nascimento;
     private String raca_animal;
     private String tipo_animal;
@@ -34,5 +35,6 @@ public class AnimalDto {
         this.data_nascimento = animalModel.getData_nascimento().toString();
         this.localizacao_animal = animalModel.getLocalizacao_animal();
         this.caracteristicas_animal = animalModel.getCaracteristicas_animal();
+        this.genero = animalModel.getGenero();
     }
 }

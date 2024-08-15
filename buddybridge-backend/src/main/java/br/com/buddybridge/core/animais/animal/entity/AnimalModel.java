@@ -30,6 +30,9 @@ public class AnimalModel {
     @Column(name = "nome_animal", nullable = false)
     private String nome_animal;
 
+    @Column(name = "genero", nullable = false)
+    private String genero;
+
     @Column(name = "peso_animal")
     private Double peso_animal;
 
@@ -66,6 +69,7 @@ public class AnimalModel {
         this.localizacao_animal = animalDto.getLocalizacao_animal();
         this.data_resgate = LocalDate.parse(animalDto.getData_resgate());
         this.data_nascimento = LocalDate.parse(animalDto.getData_nascimento());
+        this.genero = animalDto.getGenero();
     }
 
     @OneToMany(mappedBy = "id_animal")

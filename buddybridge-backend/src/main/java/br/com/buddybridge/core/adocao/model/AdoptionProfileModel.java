@@ -41,7 +41,8 @@ public class AdoptionProfileModel {
     private String descricao_experiencia;
 
     @Column(name = "status")
-    private Boolean status_adocao;
+    @Enumerated(EnumType.STRING)
+    private AdoptionStatus status;
 
     @Column(name = "data_submissao")
     private LocalDateTime data_submissao;

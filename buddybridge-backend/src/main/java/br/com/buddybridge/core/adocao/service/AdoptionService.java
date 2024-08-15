@@ -4,7 +4,6 @@ import br.com.buddybridge.core.adocao.entity.AdoptionDTO;
 import br.com.buddybridge.core.adocao.entity.GetAdoptionDTO;
 import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
 import br.com.buddybridge.core.adocao.repository.AdoptionRepository;
-import br.com.buddybridge.core.animais.animal.model.GetAnimalDTO;
 import jakarta.transaction.SystemException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

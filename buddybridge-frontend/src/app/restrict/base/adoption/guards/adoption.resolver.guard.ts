@@ -7,7 +7,7 @@ import {AdoptionModel} from "../model/AdoptionModel";
 @Injectable({
   providedIn: 'root'
 })
-export class animalResolver {
+export class adoptionResolver {
 
   constructor(private service: AdoptionService) {
   }
@@ -24,7 +24,7 @@ export class animalResolver {
       telefone: '',
       email: '',
       descricao_experiencia: '',
-      status_adocao: ,
+      status_adocao: '',
       data_submissao: '',
     });
   }
