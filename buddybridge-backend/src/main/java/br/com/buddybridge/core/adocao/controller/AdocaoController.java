@@ -25,7 +25,7 @@ public class AdocaoController {
     private AnimalService animalService;
     private AdoptionService adoptionService;
 
-    @GetMapping
+    @GetMapping("/profiles")
     public ResponseEntity<List<GetAdoptionDTO>> getALlAdoptionProfileModels(){
         List<GetAdoptionDTO> adoptionProfiles = new ArrayList<>(this.adoptionService.findAll());
         if (adoptionProfiles.isEmpty()) {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CardModule} from "primeng/card";
 import {DatePipe, NgClass, NgForOf} from "@angular/common";
 import {ButtonModule} from "primeng/button";
@@ -30,7 +30,9 @@ import {FormsModule} from "@angular/forms";
   styleUrl: './adoption-grid.component.scss'
 })
 export class AdoptionGridComponent {
-  animals?: AnimalModel[]
+  @Input() animals?: AnimalModel[]
+  @Output() add = new EventEmitter<number>();
+  @Output() edit = new EventEmitter<number>();
 
   constructor(
     private animalService: AnimalService,
@@ -53,8 +55,12 @@ export class AdoptionGridComponent {
 
   }
 
-  adoptAnimal(id_animal: number | undefined) {
-    console.log('Animal '+ id_animal+ ' adotado')
+  onAdd(idAnimal: number) {
+    this.add.emit(idAnimal);
+  }
+
+  onEdit(idAnimal: number) {
+    this.edit.emit(idAnimal);
   }
 
   sortOptions = [

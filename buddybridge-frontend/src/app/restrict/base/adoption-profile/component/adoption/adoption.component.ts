@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import {AdoptionListComponent} from "../adoption-list/adoption-list.component";
+import {AdoptionProfileListComponent} from "../adoption-list/adoption-profile-list.component";
 import {AccountService} from "../../../../../open/account/shared/account.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MessageService} from "primeng/api";
-import {AdoptionModel} from "../../model/AdoptionModel";
+import {AdoptionModel} from "../../model/AdoptionProfileModel";
 import {AdoptionService} from "../../shared/adoption.service";
 
 @Component({
   selector: 'app-adoption',
   standalone: true,
   imports: [
-    AdoptionListComponent
+    AdoptionProfileListComponent
   ],
   templateUrl: './adoption.component.html',
   styleUrl: './adoption.component.scss'

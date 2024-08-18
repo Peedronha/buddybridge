@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "perfil_adocao")
 public class AdoptionProfileModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_adocao")
