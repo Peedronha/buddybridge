@@ -79,6 +79,9 @@ export class AppMenuComponent implements OnInit {
                         {
                           label: 'Cadastro de Espécies', icon: 'pi  pi-fw pi-folder-open', routerLink: ['/tipos']
                         },
+                        {
+                          label: 'Cadastro de Perfis de Adoção', icon: 'pi  pi-fw pi-folder-open', routerLink: ['/perfil-adocao']
+                        },
                         /*{
                           label: 'Opções de Sistema', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/floatlabel']
                         }*/

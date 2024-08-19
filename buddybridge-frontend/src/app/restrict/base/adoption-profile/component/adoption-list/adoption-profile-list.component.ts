@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {AdoptionModel} from "../../../adoption/model/AdoptionModel";
 import {FormBuilder, Validators} from "@angular/forms";
 import {MessageService, SharedModule} from "primeng/api";
 import {Router} from "@angular/router";
@@ -12,7 +11,7 @@ import {TableModule} from "primeng/table";
 import {AdoptionProfileModel} from "../../model/AdoptionProfileModel";
 
 @Component({
-  selector: 'app-adoption-list',
+  selector: 'app-adoption-profile-list',
   standalone: true,
   imports: [
     ButtonModule,

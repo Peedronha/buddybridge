@@ -3,20 +3,20 @@ import {AdoptionProfileListComponent} from "../adoption-list/adoption-profile-li
 import {AccountService} from "../../../../../open/account/shared/account.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MessageService} from "primeng/api";
-import {AdoptionModel} from "../../model/AdoptionProfileModel";
 import {AdoptionService} from "../../shared/adoption.service";
+import {AdoptionProfileModel} from "../../model/AdoptionProfileModel";
 
 @Component({
-  selector: 'app-adoption',
+  selector: 'app-adoption-profile',
   standalone: true,
   imports: [
     AdoptionProfileListComponent
   ],
-  templateUrl: './adoption.component.html',
-  styleUrl: './adoption.component.scss'
+  templateUrl: './adoption-profile.component.html',
+  styleUrl: './adoption-profile.component.scss'
 })
-export class AdoptionComponent {
-  adoptions!: AdoptionModel[]
+export class AdoptionProfileComponent {
+  profiles!: AdoptionProfileModel[]
 
   constructor(
     private adoptionService: AdoptionService,
@@ -31,24 +31,24 @@ export class AdoptionComponent {
   ngOnInit(): void { this.accountService.validarSessao(); }
 
   refresh() {
-    this.adoptionService.getAdoptions().subscribe((data: AdoptionModel[]) => {
-      this.adoptions! = data;
+    this.adoptionService.getAdoptionsProfiles().subscribe((data: AdoptionProfileModel[]) => {
+      this.profiles! = data;
     });
   }
 
-  onAdd(idAnimal: number) {
-    this.router.navigate(['addadoption', idAnimal], { relativeTo: this.route });
+  onAdd() {
+    this.router.navigate(['addperfil'], { relativeTo: this.route });
   }
 
   onEdit(idUser: any) {
-    this.router.navigate(['editadoption', idUser], { relativeTo: this.route });
+    this.router.navigate(['editperfil', idUser], { relativeTo: this.route });
   }
 
   onRemove(idUser: any) {
     this.adoptionService.deleteAdoption(idUser).subscribe(() =>{
       this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro excluido com sucesso' });
       window.location.reload();
-      this.router.navigateByUrl('/adocao')
+      this.router.navigateByUrl('/perfil-adocao')
     })
   }
 }

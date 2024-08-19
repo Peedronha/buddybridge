@@ -1,5 +1,5 @@
 export class AnimalModel {
-  id_animal!: number ;
+  id_animal!: number | undefined;
   nome_animal!: string;
   idade: string | undefined;
   peso_animal!: string;

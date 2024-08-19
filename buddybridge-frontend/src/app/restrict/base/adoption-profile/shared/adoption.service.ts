@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {TokenService} from "../../../../open/account/shared/token.service";
 import {map, Observable} from "rxjs";
 import {AnimalModel} from "../../animal/model/animal.model";
-import {AdoptionModel} from "../../adoption/model/AdoptionModel";
+import {AdoptionProfileModel} from "../model/AdoptionProfileModel";
 
 @Injectable({
   providedIn: 'root'
@@ -37,20 +37,42 @@ export class AdoptionService {
     return this.http.delete<any>(this.apiUrl,{headers: reqHeader})
   }
 
-  updateAdoption(adoption: AdoptionModel): Observable<any> {
-    var reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.getAuthorizationToken()
-    });
-    return this.http.put<any>(this.apiUrl, adoption, {headers: reqHeader});
-  }
-
-  registerAdoption(adoption: AdoptionModel): Observable<any> {
+  // updateAdoption(adoption: AdoptionModel): Observable<any> {
+  //   var reqHeader = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Authorization': 'Bearer ' + this.getAuthorizationToken()
+  //   });
+  //   return this.http.put<any>(this.apiUrl, adoption, {headers: reqHeader});
+  // }
+  // updateAdoptionProfile(profile: AdoptionProfileModel): Observable<any> {
+  //   var reqHeader = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Authorization': 'Bearer ' + this.getAuthorizationToken()
+  //   });
+  //   return this.http.put<any>(this.apiUrl+'/adocao', profile, {headers: reqHeader});
+  // }
+  //
+  // registerAdoption(adoption: AdoptionModel): Observable<any> {
+  //     var reqHeader = new HttpHeaders({
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer ' + this.getAuthorizationToken()
+  //     });
+  //     return this.http.post<any>(this.apiUrl, adoption,{headers: reqHeader}).pipe(
+  //       map((response) =>{
+  //           if (response)
+  //             return response;
+  //         },
+  //         (error:any) =>{
+  //           return error;
+  //         }
+  //       ))
+  // }
+  registerAdoptionProfile(adoption: AdoptionProfileModel): Observable<any> {
       var reqHeader = new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + this.getAuthorizationToken()
       });
-      return this.http.post<any>(this.apiUrl, adoption,{headers: reqHeader}).pipe(
+      return this.http.post<any>(this.apiUrl+'/profiles', adoption,{headers: reqHeader}).pipe(
         map((response) =>{
             if (response)
               return response;
@@ -74,4 +96,28 @@ export class AdoptionService {
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
     return this.http.get<any>(this.apiUrl+'/profiles',{headers: reqHeader})  }
+
+
+  getAdoptionsProfileById(param: any) {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.http.get<any>(this.apiUrl+'/'+param,{headers: reqHeader})  }
+
+  updateAdoptionProfile(adoption: AdoptionProfileModel) {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.http.put<any>(this.apiUrl+'/profiles', adoption,{headers: reqHeader}).pipe(
+      map((response) =>{
+          if (response)
+            return response;
+        },
+        (error:any) =>{
+          return error;
+        }
+      ))
+  }
 }

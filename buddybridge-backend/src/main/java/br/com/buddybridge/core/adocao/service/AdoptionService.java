@@ -1,7 +1,7 @@
 package br.com.buddybridge.core.adocao.service;
 
 import br.com.buddybridge.core.adocao.entity.AdoptionDTO;
-import br.com.buddybridge.core.adocao.entity.GetAdoptionDTO;
+import br.com.buddybridge.core.adocao.entity.GetAdoptionProfileDTO;
 import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
 import br.com.buddybridge.core.adocao.repository.AdoptionRepository;
 import jakarta.transaction.SystemException;
@@ -16,9 +16,9 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AdoptionService {
     private AdoptionRepository adoptionRepository;
-    public GetAdoptionDTO findAdoptionProfileModelById(Long id) throws Exception {
+    public GetAdoptionProfileDTO findAdoptionProfileModelById(Long id) throws Exception {
         Optional<AdoptionProfileModel> profileModel = this.adoptionRepository.findById(id);
-        return profileModel.map(GetAdoptionDTO::new)
+        return profileModel.map(GetAdoptionProfileDTO::new)
                 .orElseThrow(Exception::new);
     }
 
@@ -38,11 +38,11 @@ public class AdoptionService {
         return adoptionRepository.existsById(id);
     }
 
-    public List<GetAdoptionDTO> findAll() {
-        List<GetAdoptionDTO> dtos = new ArrayList<>();
+    public List<GetAdoptionProfileDTO> findAll() {
+        List<GetAdoptionProfileDTO> dtos = new ArrayList<>();
         for (AdoptionProfileModel model: adoptionRepository.findAll())
         {
-            dtos.add(new GetAdoptionDTO(model));
+            dtos.add(new GetAdoptionProfileDTO(model));
         };
         return dtos;
     }

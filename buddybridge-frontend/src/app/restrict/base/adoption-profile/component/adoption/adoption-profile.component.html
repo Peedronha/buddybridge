@@ -7,12 +7,12 @@
       <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
       <li><span class="text-900 line-height-3">Adoções</span></li>
       <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia os pedidos de adoção do sistema!</a></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia os perfis de adoção  do sistema!</a></li>
     </ul>
     <div class="flex align-items-start flex-column lg:flex-row">
-      <div class="font-medium text-3xl text-900">Adoções cadastradas no sistema</div><br/><br/><br/>
+      <div class="font-medium text-3xl text-900">Perfis de adoção cadastradas no sistema</div><br/><br/><br/>
     </div>
   </div>
-  <app-adoption-list [adoptions]="adoptions" (add)="onAdd()" (edit)="onEdit($event)" (remove)="onRemove($event)">
-  </app-adoption-list>
+  <app-adoption-profile-list [profiles]="profiles" (add)="onAdd()" (edit)="onEdit($event)" (remove)="onRemove($event)">
+  </app-adoption-profile-list>
 </div>

@@ -2,7 +2,7 @@ package br.com.buddybridge.core.adocao.controller;
 
 
 import br.com.buddybridge.core.adocao.entity.AdoptionDTO;
-import br.com.buddybridge.core.adocao.entity.GetAdoptionDTO;
+import br.com.buddybridge.core.adocao.entity.GetAdoptionProfileDTO;
 import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
 import br.com.buddybridge.core.adocao.service.AdoptionService;
 import br.com.buddybridge.core.animais.animal.service.AnimalService;
@@ -26,15 +26,15 @@ public class AdocaoController {
     private AdoptionService adoptionService;
 
     @GetMapping("/profiles")
-    public ResponseEntity<List<GetAdoptionDTO>> getALlAdoptionProfileModels(){
-        List<GetAdoptionDTO> adoptionProfiles = new ArrayList<>(this.adoptionService.findAll());
+    public ResponseEntity<List<GetAdoptionProfileDTO>> getALlAdoptionProfileModels(){
+        List<GetAdoptionProfileDTO> adoptionProfiles = new ArrayList<>(this.adoptionService.findAll());
         if (adoptionProfiles.isEmpty()) {
             return new ResponseEntity<>(adoptionProfiles, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(new ArrayList<> (adoptionProfiles), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/profiles")
     public ResponseEntity<AdoptionProfileModel> insertAdoptionModel(@RequestBody AdoptionDTO adoptionDTO){
         try {
             AdoptionProfileModel adoption = this.adoptionService.saveAdoptionRequest(adoptionDTO);
@@ -45,10 +45,10 @@ public class AdocaoController {
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<GetAdoptionDTO> getAdoptionModelById(@PathVariable Long id) throws Exception {
+    @GetMapping("/profiles/{id}")
+    public ResponseEntity<GetAdoptionProfileDTO> getAdoptionModelById(@PathVariable Long id) throws Exception {
         try {
-            GetAdoptionDTO model = this.adoptionService.findAdoptionProfileModelById(id);
+            GetAdoptionProfileDTO model = this.adoptionService.findAdoptionProfileModelById(id);
             return new ResponseEntity<>(model, HttpStatus.OK);
         }
         catch (Exception e){
@@ -56,7 +56,7 @@ public class AdocaoController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/profiles")
     public ResponseEntity<AdoptionDTO> updateAdoptionModel(@RequestBody AdoptionDTO adoptionDTO) throws SystemException, ExampleExeption {
         if(this.adoptionService.existsByIdAdocao(adoptionDTO.getId_adocao())) {
             this.adoptionService.saveAdoptionRequest(adoptionDTO);
@@ -68,7 +68,7 @@ public class AdocaoController {
     }
 
     @Transactional
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/profiles/{id}")
     public ResponseEntity<Boolean> deleteAdoption(@PathVariable Long id){
         if (this.adoptionService.existsByIdAdocao(id)){
 

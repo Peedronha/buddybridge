@@ -24,6 +24,7 @@ public class AdoptionProfileModel {
     private Long id_adocao;
 
     @ManyToOne
+    @JoinColumn(name = "id_animal", nullable = false)
     private AnimalModel id_animal;
 
     @Column(name = "nome_adotante", nullable = false)
@@ -44,6 +45,15 @@ public class AdoptionProfileModel {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private AdoptionStatus status;
+
+    @Column(name = "priority")
+    private Integer priority;
+
+    @Column(name = "medical_necessities")
+    private String medical_necessities;
+
+    @Column(name = "image")
+    private String image;
 
     @Column(name = "data_submissao")
     private LocalDateTime data_submissao;
