@@ -39,10 +39,10 @@ export class AdoptionProfileFormComponent {
   adoptionForm: FormGroup;
   animals: AnimalModel[] = [];
   statusOptions = [
-    { label: 'Pending', value: 'PENDING' },
-    { label: 'Approved', value: 'APPROVED' },
-    { label: 'Rejected', value: 'REJECTED' },
-    { label: 'Completed', value: 'COMPLETED' }
+    { label: 'Pendente', value: 'PENDING' },
+    { label: 'Aprovada', value: 'APPROVED' },
+    { label: 'Rejeitada', value: 'REJECTED' },
+    { label: 'Finalizada', value: 'COMPLETED' }
   ];
   selectAnimal: AnimalModel | undefined;
 
@@ -90,7 +90,7 @@ export class AdoptionProfileFormComponent {
   submitDetails(): void {
     if (this.adoptionForm.valid) {
       const adoption = this.adoptionForm.value as AdoptionProfileModel;
-
+      adoption.id_animal = this.selectAnimal?.id_animal || null;
       if (adoption.id_adocao) {
         this.adoptionService.updateAdoptionProfile(adoption).subscribe(
           response => {

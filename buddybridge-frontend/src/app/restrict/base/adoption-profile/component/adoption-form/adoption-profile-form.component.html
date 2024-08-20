@@ -23,7 +23,7 @@
     <div>
       <div class="field">
         <label for="id_animal">Animal *</label>
-        <p-dropdown [options]="animals" [(ngModel)]="selectAnimal" optionLabel="name" formControlName="id_animal" class="w-full" name="id_animal"
+        <p-dropdown [options]="animals" [(ngModel)]="selectAnimal" optionLabel="nome_animal" formControlName="id_animal" class="w-full" name="id_animal"
                     placeholder="Selecione o animal"></p-dropdown>
         <small *ngIf="adoptionForm.get('id_animal')?.invalid && (adoptionForm.get('id_animal')?.dirty || adoptionForm.get('id_animal')?.touched)" class="block p-error">
           <div *ngIf="adoptionForm.get('id_animal')?.errors?.['required']">O animal é uma informação obrigatória.</div>
@@ -38,7 +38,7 @@
 
       <div class="field">
         <label for="status">Status *</label>
-        <p-dropdown [options]="statusOptions" optionLabel="name" formControlName="status" class="w-full" name="status"
+        <p-dropdown [options]="statusOptions" optionLabel="label" formControlName="status" class="w-full" name="status"
                     [showClear]="true"
                     placeholder="Selecione o status"></p-dropdown>
         <small *ngIf="adoptionForm.get('status')?.invalid && (adoptionForm.get('status')?.dirty || adoptionForm.get('status')?.touched)" class="block p-error">
