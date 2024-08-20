@@ -3,6 +3,7 @@ package br.com.buddybridge.core.adocao.controller;
 
 import br.com.buddybridge.core.adocao.entity.AdoptionDTO;
 import br.com.buddybridge.core.adocao.entity.GetAdoptionProfileDTO;
+import br.com.buddybridge.core.adocao.entity.PostAdoptionProfileDTO;
 import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
 import br.com.buddybridge.core.adocao.service.AdoptionService;
 import br.com.buddybridge.core.animais.animal.service.AnimalService;
@@ -35,10 +36,10 @@ public class AdocaoController {
     }
 
     @PostMapping("/profiles")
-    public ResponseEntity<AdoptionProfileModel> insertAdoptionModel(@RequestBody AdoptionDTO adoptionDTO){
+    public ResponseEntity<GetAdoptionProfileDTO> insertAdoptionModel(@RequestBody PostAdoptionProfileDTO adoptionDTO){
         try {
-            AdoptionProfileModel adoption = this.adoptionService.saveAdoptionRequest(adoptionDTO);
-            return new ResponseEntity<>(adoption, HttpStatus.CREATED);
+            AdoptionProfileModel adoption = this.adoptionService.saveAdoptionProfileRequest(adoptionDTO);
+            return new ResponseEntity<>(new GetAdoptionProfileDTO(adoption), HttpStatus.CREATED);
         }
         catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.OK);
@@ -58,7 +59,7 @@ public class AdocaoController {
 
     @PutMapping("/profiles")
     public ResponseEntity<AdoptionDTO> updateAdoptionModel(@RequestBody AdoptionDTO adoptionDTO) throws SystemException, ExampleExeption {
-        if(this.adoptionService.existsByIdAdocao(adoptionDTO.getId_adocao())) {
+        if(this.adoptionService.existsByIdAdocao(Long.valueOf(adoptionDTO.getId_adocao()))) {
             this.adoptionService.saveAdoptionRequest(adoptionDTO);
             return new ResponseEntity<>(adoptionDTO, HttpStatus.OK);
         }

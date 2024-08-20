@@ -12,7 +12,7 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {MessageService} from "primeng/api";
 import {AccountService} from "../../../../../open/account/shared/account.service";
 import {AdoptionService} from "../../shared/adoption.service";
-import {AdoptionProfileModel} from "../../model/AdoptionProfileModel";
+import {AdoptionProfileModel, AdoptionStatus} from "../../model/AdoptionProfileModel";
 import {AnimalService} from "../../../animal/service/animal.service";
 import {Tipo} from "../../../tipo_animal/model/tipo.model";
 import {AnimalModel} from "../../../animal/model/animal.model";
@@ -45,6 +45,7 @@ export class AdoptionProfileFormComponent {
     { label: 'Finalizada', value: 'COMPLETED' }
   ];
   selectAnimal: AnimalModel | undefined;
+  selectStatus: { label: string, value: string } | undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -90,7 +91,11 @@ export class AdoptionProfileFormComponent {
   submitDetails(): void {
     if (this.adoptionForm.valid) {
       const adoption = this.adoptionForm.value as AdoptionProfileModel;
-      adoption.id_animal = this.selectAnimal?.id_animal || null;
+
+      adoption.id_animal = this.selectAnimal?.id_animal?.toString() || '';
+      adoption.status = this.selectStatus?.value;
+
+      alert(JSON.stringify(adoption));console.log(JSON.stringify(adoption));
       if (adoption.id_adocao) {
         this.adoptionService.updateAdoptionProfile(adoption).subscribe(
           response => {

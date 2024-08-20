@@ -8,14 +8,14 @@ export enum AdoptionStatus {
 }
 
 export interface AdoptionProfileModel {
-  id_adocao?: number;
-  id_animal: number;
+  id_adocao?: string;
+  id_animal: string;
   nome_adotante: string;
   endereco?: string;
   telefone?: string;
   email?: string;
   descricao_experiencia?: string;
-  status?: AdoptionStatus;
+  status?: string;
   data_submissao?: string;
   priority?: string;
   medical_necessities?: string;

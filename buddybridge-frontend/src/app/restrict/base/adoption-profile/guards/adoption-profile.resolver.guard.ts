@@ -17,18 +17,18 @@ export class adoptionProfileResolver {
       return this.service.getAdoptionsProfileById(route.params['id']);
     }
     return of({
-      id_adocao: parseInt(''), // This would result in NaN, likely needs correction
-      id_animal: parseInt(''),
+      id_adocao: '',
+      id_animal: '',
       nome_adotante: '',
       endereco: '',
       telefone: '',
       email: '',
       descricao_experiencia: '',
-      status: '' as AdoptionStatus, // You can cast an empty string to AdoptionStatus, but this needs correction
+      status: '',
       data_submissao: '',
-      priority: '', // Assuming priority is a string
-      medical_necessities: '', // Assuming medical_necessities is a string
-      image: '', // Assuming image is a string (URL or path)
+      priority: '',
+      medical_necessities: '',
+      image: '',
     });
   }
 }

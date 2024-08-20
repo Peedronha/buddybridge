@@ -2,6 +2,7 @@ package br.com.buddybridge.core.adocao.service;
 
 import br.com.buddybridge.core.adocao.entity.AdoptionDTO;
 import br.com.buddybridge.core.adocao.entity.GetAdoptionProfileDTO;
+import br.com.buddybridge.core.adocao.entity.PostAdoptionProfileDTO;
 import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
 import br.com.buddybridge.core.adocao.repository.AdoptionRepository;
 import jakarta.transaction.SystemException;
@@ -45,5 +46,13 @@ public class AdoptionService {
             dtos.add(new GetAdoptionProfileDTO(model));
         };
         return dtos;
+    }
+
+    public AdoptionProfileModel saveAdoptionProfileRequest(PostAdoptionProfileDTO adoptionDTO) throws SystemException {
+        try {
+            return adoptionRepository.save(new AdoptionProfileModel(adoptionDTO));
+        } catch (Exception e) {
+            throw new SystemException(String.valueOf(e));
+        }
     }
 }

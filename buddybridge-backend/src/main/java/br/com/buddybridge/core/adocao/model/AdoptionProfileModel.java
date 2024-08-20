@@ -1,6 +1,7 @@
 package br.com.buddybridge.core.adocao.model;
 
 import br.com.buddybridge.core.adocao.entity.AdoptionDTO;
+import br.com.buddybridge.core.adocao.entity.PostAdoptionProfileDTO;
 import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -59,5 +60,20 @@ public class AdoptionProfileModel {
     private LocalDateTime data_submissao;
 
     public AdoptionProfileModel(AdoptionDTO adoptionDTO) {
+        this.nome_adotante = adoptionDTO.getNome_adotante();
+        this.endereco = adoptionDTO.getEndereco();
+        this.telefone = adoptionDTO.getTelefone();
+        this.email = adoptionDTO.getEmail();
+        this.descricao_experiencia = adoptionDTO.getDescricao_experiencia();
+        this.status = AdoptionStatus.valueOf(adoptionDTO.getStatus_adocao());
+        this.medical_necessities = adoptionDTO.getMedical_necessities();
+        this.image = adoptionDTO.getImage();
+    }
+
+    public AdoptionProfileModel(PostAdoptionProfileDTO adoptionDTO) {
+        this.descricao_experiencia = adoptionDTO.getDescricao_experiencia();
+        this.status = AdoptionStatus.valueOf(adoptionDTO.getStatus_adocao());
+        this.medical_necessities = adoptionDTO.getMedical_necessities();
+        this.image = adoptionDTO.getImage();
     }
 }
