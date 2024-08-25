@@ -38,6 +38,7 @@ export class AnimalFormComponent implements OnInit {
     raca_animal: ['', Validators.required],
     caracteristicas_animal: [''],
     localizacao_animal: [''],
+    genero_animal:['', Validators.required]
   });
 
   racas: Raca[] = [];
@@ -46,6 +47,13 @@ export class AnimalFormComponent implements OnInit {
   tipoId: any;
   tipoRaca: any;
 
+
+  genero = [
+    { label: 'Fêmea', value: 'Female' },
+    { label: 'Macho', value: 'Male' },
+  ];
+
+  tipoGenero: { label: string, value: string } | undefined;
   constructor(
     private fb: FormBuilder,
     private animalService: AnimalService,
@@ -76,11 +84,13 @@ export class AnimalFormComponent implements OnInit {
       raca_animal: animal.raca_animal + '',
       caracteristicas_animal: animal.caracteristicas_animal + '',
       localizacao_animal: animal.localizacao_animal + '',
+      genero_animal: animal.genero_animal +'',
     });
     if (animal.raca_animal != ''){
       this.tipoId = animal.tipo_animal;
       this.loadRacas(this.tipoId.name)
       this.tipoRaca = animal.raca_animal;
+      this.tipoGenero = this.genero.find((genero) => genero.value == animal.genero_animal)
     }
   }
 
@@ -118,11 +128,11 @@ export class AnimalFormComponent implements OnInit {
     animal.peso_animal = this.registerForm.get('peso_animal')?.value + '';
     animal.data_nascimento = this.registerForm.get('data_nascimento')?.value + '';
     animal.data_resgate = this.registerForm.get('data_resgate')?.value + '';
+    animal.genero_animal = this.tipoGenero?.value;
     animal.raca_animal = this.tipoRaca.id || '';
     animal.tipo_animal = this.tipoId.id || '';
     animal.caracteristicas_animal = this.registerForm.get('caracteristicas_animal')?.value + '';
     animal.localizacao_animal = this.registerForm.get('localizacao_animal')?.value + '';
-    animal.genero = 'Neutro'
 
     if (this.registerForm.get('id_animal')?.value + '' != 'NaN') {
       this.animalService.updateanimal(animal).subscribe(
