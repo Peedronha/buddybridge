@@ -35,6 +35,7 @@ import {
   AdoptionProfileFormComponent
 } from "./restrict/base/adoption-profile/component/adoption-form/adoption-profile-form.component";
 import {adoptionProfileResolver} from "./restrict/base/adoption-profile/guards/adoption-profile.resolver.guard";
+import {AdoptionComponent} from "./open/adoption/components/adoption-header/adoption.component";
 
 const routes: Routes = [
   { path: 'errorBuddyBridge', title: 'BuddyBridge - Erro', component: ErrorComponent },
@@ -46,6 +47,7 @@ const routes: Routes = [
 
       { path: 'restrict/home', title: 'BuddyBridge - Home', component: HomeComponent },
       { path: 'restrict/institucional', title: 'BuddyBridge - Institucional', component: InsitucionalComponent },
+      { path: 'restrict/adocao', title: 'BuddyBridge - Adocao', component: AdoptionComponent },
 
       { path: 'dashboard', title: 'BuddyBridge - DashBoard', component: DashboardComponent },
       { path: 'profile', title: 'BuddyBridge - Meu Perfil', component: ProfileComponent },
@@ -76,6 +78,7 @@ const routes: Routes = [
       { path: 'perfil-adocao/editperfil/:id', title: 'BuddyBridge - Alterar Perfil de Adoção', component: AdoptionProfileFormComponent, resolve: {perfil : adoptionProfileResolver} },
 
       { path: 'ong', title: 'BuddyBridge - Institucional', component: OngComponent },
+
     ],
     canActivate: [AuthGuard]
   },
@@ -84,6 +87,7 @@ const routes: Routes = [
     component: TopMenuOpenComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full'},
+      { path: 'adocao', title: 'BuddyBridge - Quero Adotar', component: AdoptionComponent, canActivate: [LoginGuard] },
       { path: 'home', title: 'BuddyBridge - Home', component: HomeComponent, canActivate: [LoginGuard] },
       { path: 'institucional', title: 'BuddyBridge - Institucional', component: InsitucionalComponent, canActivate: [LoginGuard] },
       { path: 'register', title: 'BuddyBridge - Criar Conta', component: RegisterComponent, canActivate: [LoginGuard] },
