@@ -112,6 +112,18 @@
       </div>
 
       <div class="field">
+        <label for="genero_animal">Raça do animal *</label>
+        <p>
+          <p-dropdown [options]="genero" optionLabel="label" [(ngModel)]="tipoGenero" [showClear]="true"
+                      formControlName="genero_animal" class="w-full" name="genero_animal" placeholder="Selecione o genero do animal">
+          </p-dropdown>
+        </p>
+        <small *ngIf="registerForm.get('genero_animal')?.invalid && (registerForm.get('genero_animal')?.dirty || registerForm.get('genero_animal')?.touched)" class="block p-error">
+          <div *ngIf="registerForm.get('genero_animal')?.errors?.['required']">A seleção do genero de animal é uma informação obrigatória.</div>
+        </small>
+      </div>
+
+      <div class="field">
         <label for="caracteristicas_animal">Características do animal</label>
         <textarea rows="5" cols="30" pInputTextarea name="caracteristicas_animal" formControlName="caracteristicas_animal"
                   class="w-full" maxlength="255"></textarea>

@@ -28,7 +28,7 @@ public class GetAnimalDTO {
     private TypeModel tipo_animal;
     private String caracteristicas_animal;
     private String localizacao_animal;
-    private String genero;
+    private String genero_animal;
 
     public GetAnimalDTO(AnimalModel animalModel) {
         this.id_animal = animalModel.getId_animal();
@@ -37,7 +37,7 @@ public class GetAnimalDTO {
         this.comprimento_animal = animalModel.getComprimento_animal();
         this.localizacao_animal = animalModel.getLocalizacao_animal();
         this.caracteristicas_animal = animalModel.getCaracteristicas_animal();
-        this.genero = animalModel.getGenero();
+        this.genero_animal = animalModel.getGenero_animal();
 
 
         this.data_resgate = formatLocalDate(animalModel.getData_resgate());
