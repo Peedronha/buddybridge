@@ -8,7 +8,7 @@ export enum AdoptionStatus {
 }
 
 export interface AdoptionProfileModel {
-  id_adocao?: string;
+  id_adocao?: number | undefined;
   id_animal: string;
   nome_adotante: string;
   endereco?: string;

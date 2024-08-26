@@ -28,7 +28,7 @@ public class AdoptionProfileModel {
     @JoinColumn(name = "id_animal", nullable = false)
     private AnimalModel id_animal;
 
-    @Column(name = "nome_adotante", nullable = false)
+    @Column(name = "nome_adotante")
     private String nome_adotante;
 
     @Column(name = "endereco")

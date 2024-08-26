@@ -6,6 +6,7 @@ import {AnimalModel} from "../../../../restrict/base/animal/model/animal.model";
 import {AnimalService} from "../../../../restrict/base/animal/service/animal.service";
 import {NgClass, NgForOf} from "@angular/common";
 import {AdoptionProfileModel} from "../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
+import {AdoptionService} from "../../../../restrict/base/adoption-profile/shared/adoption.service";
 
 @Component({
   selector: 'app-adoption-grid',
@@ -21,18 +22,21 @@ import {AdoptionProfileModel} from "../../../../restrict/base/adoption-profile/m
   styleUrl: './adoption-grid.component.scss'
 })
 export class AdoptionGridComponent {
-  @Input() animals!: AdoptionProfileModel[];
+  @Input() profiles!: AdoptionProfileModel[];
   _specificEntity: any = {};
   @Output() add = new EventEmitter<boolean>();
   @Output() edit = new EventEmitter<number>();
   @Output() remove = new EventEmitter<number>();
   layout: string = 'list';
-   // animals!: AnimalModel[];
 
-  constructor(private animalService: AnimalService) {}
+   animals!: AnimalModel[];
+
+  constructor(private animalService: AnimalService, private adoptionService: AdoptionService) {}
 
   ngOnInit() {
-    // this.animalService.getAnimals().((data) => (this.animals = data.slice(0, 12)));
+    this.adoptionService.getAnimalsByProfileStatus().subscribe((data: AnimalModel[]) => {
+      this.animals = data;
+    });
   }
 
   getStatusSeverity(animal:any) {
@@ -49,33 +53,5 @@ export class AdoptionGridComponent {
         return null;
     }
   }
-  // animals = [
-  //   {
-  //     name: 'Nairobi',
-  //     imageUrl: 'https://via.placeholder.com/300x200.png',
-  //     gender: 'Female',
-  //     size: 'Médio',
-  //     age: 0.3,
-  //     location: 'São Paulo / SP',
-  //     shelter: 'Canto da Terra'
-  //   },
-  //   {
-  //     name: 'Ximena',
-  //     imageUrl: 'https://via.placeholder.com/300x200.png',
-  //     gender: 'Female',
-  //     size: 'Médio',
-  //     age: 0.3,
-  //     location: 'São Paulo / SP',
-  //     shelter: 'Canto da Terra'
-  //   },
-  //   {
-  //     name: 'Why can',
-  //     imageUrl: 'https://via.placeholder.com/300x200.png',
-  //     gender: 'Male',
-  //     size: 'Médio',
-  //     age: 0.3,
-  //     location: 'São Paulo / SP',
-  //     shelter: 'Canto da Terra'
-  //   }
-  // ];
+
 }

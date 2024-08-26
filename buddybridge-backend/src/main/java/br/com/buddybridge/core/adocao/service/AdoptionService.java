@@ -5,6 +5,9 @@ import br.com.buddybridge.core.adocao.entity.GetAdoptionProfileDTO;
 import br.com.buddybridge.core.adocao.entity.PostAdoptionProfileDTO;
 import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
 import br.com.buddybridge.core.adocao.repository.AdoptionRepository;
+import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
+import br.com.buddybridge.core.animais.animal.model.GetAnimalDTO;
+import br.com.buddybridge.core.animais.animal.repository.AnimalRepository;
 import jakarta.transaction.SystemException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AdoptionService {
     private AdoptionRepository adoptionRepository;
+    private AnimalRepository animalRepository;
     public GetAdoptionProfileDTO findAdoptionProfileModelById(Long id) throws Exception {
         Optional<AdoptionProfileModel> profileModel = this.adoptionRepository.findById(id);
         return profileModel.map(GetAdoptionProfileDTO::new)
@@ -48,11 +52,32 @@ public class AdoptionService {
         return dtos;
     }
 
-    public AdoptionProfileModel saveAdoptionProfileRequest(PostAdoptionProfileDTO adoptionDTO) throws SystemException {
+    public AdoptionProfileModel saveAdoptionProfileRequest(PostAdoptionProfileDTO adoptionDTO) throws SystemException, NumberFormatException {
         try {
-            return adoptionRepository.save(new AdoptionProfileModel(adoptionDTO));
+            AdoptionProfileModel model = new AdoptionProfileModel(adoptionDTO);
+
+            Optional<AnimalModel> animalModelOptional = animalRepository.findById(Long.valueOf(adoptionDTO.getId_animal()));
+
+            if (animalModelOptional.isPresent()) {
+                model.setId_animal(animalModelOptional.get());
+            } else {
+                throw new SystemException("AnimalModel with ID " + adoptionDTO.getId_animal() + " not found.");
+            }
+
+            return adoptionRepository.save(model);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Invalid animal ID format: " + adoptionDTO.getId_animal());
         } catch (Exception e) {
-            throw new SystemException(String.valueOf(e));
+            throw new SystemException("An error occurred while saving the adoption profile: " + e.getMessage());
         }
+    }
+
+    public GetAnimalDTO AnimalsByProfileStatus() {
+        List<GetAnimalDTO> dtos = new ArrayList<>();
+        for (AnimalModel model: adoptionRepository.findAllByPendingAdoption())
+        {
+            dtos.add(new GetAnimalDTO(model));
+        };
+        return (GetAnimalDTO) dtos;
     }
 }

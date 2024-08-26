@@ -6,6 +6,7 @@ import br.com.buddybridge.core.adocao.entity.GetAdoptionProfileDTO;
 import br.com.buddybridge.core.adocao.entity.PostAdoptionProfileDTO;
 import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
 import br.com.buddybridge.core.adocao.service.AdoptionService;
+import br.com.buddybridge.core.animais.animal.model.GetAnimalDTO;
 import br.com.buddybridge.core.animais.animal.service.AnimalService;
 import br.com.buddybridge.core.util.ExampleExeption;
 import jakarta.transaction.SystemException;
@@ -50,6 +51,16 @@ public class AdocaoController {
     public ResponseEntity<GetAdoptionProfileDTO> getAdoptionModelById(@PathVariable Long id) throws Exception {
         try {
             GetAdoptionProfileDTO model = this.adoptionService.findAdoptionProfileModelById(id);
+            return new ResponseEntity<>(model, HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+        }
+    }
+    @GetMapping("/profiles/PENDING")
+    public ResponseEntity<GetAnimalDTO> getAnimalsByProfileStatus() throws Exception {
+        try {
+            GetAnimalDTO model = this.adoptionService.AnimalsByProfileStatus();
             return new ResponseEntity<>(model, HttpStatus.OK);
         }
         catch (Exception e){

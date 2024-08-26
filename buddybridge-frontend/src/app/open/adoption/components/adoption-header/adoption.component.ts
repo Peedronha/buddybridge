@@ -20,7 +20,7 @@ import {MessageService} from "primeng/api";
   styleUrl: './adoption.component.scss'
 })
 export class AdoptionComponent {
-  animals!: AdoptionProfileModel[]
+  profiles!: AdoptionProfileModel[]
 
   constructor(
     private adoptionService: AdoptionService,
@@ -36,7 +36,7 @@ export class AdoptionComponent {
 
   refresh() {
     this.adoptionService.getAdoptionsProfiles().subscribe((data: AdoptionProfileModel[]) => {
-      this.animals! = data;
+      this.profiles! = data;
     });
   }
 

@@ -120,4 +120,11 @@ export class AdoptionService {
         }
       ))
   }
+
+  getAnimalsByProfileStatus() {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.http.get<any>(this.apiUrl+'/profiles/PENDING',{headers: reqHeader})  }
 }
