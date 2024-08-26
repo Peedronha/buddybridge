@@ -4,9 +4,14 @@ import br.com.buddybridge.core.adocao.entity.AdoptionDTO;
 import br.com.buddybridge.core.adocao.entity.GetAdoptionProfileDTO;
 import br.com.buddybridge.core.adocao.entity.PostAdoptionProfileDTO;
 import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
+import br.com.buddybridge.core.adocao.model.AdoptionStatus;
 import br.com.buddybridge.core.adocao.repository.AdoptionRepository;
+import br.com.buddybridge.core.animais.animal.repository.AnimalRepository;
+import br.com.buddybridge.core.animais.animal.service.AnimalService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.SystemException;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,6 +22,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AdoptionService {
     private AdoptionRepository adoptionRepository;
+    private AnimalRepository animalRepository;
     public GetAdoptionProfileDTO findAdoptionProfileModelById(Long id) throws Exception {
         Optional<AdoptionProfileModel> profileModel = this.adoptionRepository.findById(id);
         return profileModel.map(GetAdoptionProfileDTO::new)
@@ -50,9 +56,20 @@ public class AdoptionService {
 
     public AdoptionProfileModel saveAdoptionProfileRequest(PostAdoptionProfileDTO adoptionDTO) throws SystemException {
         try {
-            return adoptionRepository.save(new AdoptionProfileModel(adoptionDTO));
+            AdoptionProfileModel model = new AdoptionProfileModel(adoptionDTO);
+
+            model.setId_animal(this.animalRepository
+                    .getReferenceById(Long.valueOf(adoptionDTO.getId_animal())));
+
+            model.setStatus_adocao(AdoptionStatus.valueOf(adoptionDTO.getStatus_adocao()));
+
+            return adoptionRepository.save(model);
+        } catch (DataIntegrityViolationException e) {
+            throw new SystemException("Data integrity violation: " + e.getMessage());
+        } catch (EntityNotFoundException e) {
+            throw new SystemException("Animal not found with id: " + adoptionDTO.getId_animal());
         } catch (Exception e) {
-            throw new SystemException(String.valueOf(e));
+            throw new SystemException("An unexpected error occurred: " + e.getMessage());
         }
     }
 }

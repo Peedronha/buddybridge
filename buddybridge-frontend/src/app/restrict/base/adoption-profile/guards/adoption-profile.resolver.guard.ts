@@ -24,7 +24,7 @@ export class adoptionProfileResolver {
       telefone: '',
       email: '',
       descricao_experiencia: '',
-      status: '',
+      status_adocao: '',
       data_submissao: '',
       priority: '',
       medical_necessities: '',

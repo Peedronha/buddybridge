@@ -23,7 +23,7 @@ public class AdoptionDTO {
         this.telefone = model.getTelefone();
         this.email = model.getEmail();
         this.descricao_experiencia = model.getDescricao_experiencia();
-        this.status_adocao = String.valueOf(model.getStatus());
+        this.status_adocao = String.valueOf(model.getStatus_adocao());
         this.medical_necessities = model.getMedical_necessities();
         this.image = model.getImage();
     }

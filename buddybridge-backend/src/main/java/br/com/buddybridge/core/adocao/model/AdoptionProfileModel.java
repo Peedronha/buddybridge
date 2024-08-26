@@ -28,7 +28,7 @@ public class AdoptionProfileModel {
     @JoinColumn(name = "id_animal", nullable = false)
     private AnimalModel id_animal;
 
-    @Column(name = "nome_adotante", nullable = false)
+    @Column(name = "nome_adotante")
     private String nome_adotante;
 
     @Column(name = "endereco")
@@ -43,9 +43,9 @@ public class AdoptionProfileModel {
     @Column(name = "descricao_experiencia")
     private String descricao_experiencia;
 
-    @Column(name = "status")
+    @Column(name = "status_adocao")
     @Enumerated(EnumType.STRING)
-    private AdoptionStatus status;
+    private AdoptionStatus status_adocao;
 
     @Column(name = "priority")
     private Integer priority;
@@ -65,14 +65,14 @@ public class AdoptionProfileModel {
         this.telefone = adoptionDTO.getTelefone();
         this.email = adoptionDTO.getEmail();
         this.descricao_experiencia = adoptionDTO.getDescricao_experiencia();
-        this.status = AdoptionStatus.valueOf(adoptionDTO.getStatus_adocao());
+        this.status_adocao = AdoptionStatus.valueOf(adoptionDTO.getStatus_adocao());
         this.medical_necessities = adoptionDTO.getMedical_necessities();
         this.image = adoptionDTO.getImage();
     }
 
     public AdoptionProfileModel(PostAdoptionProfileDTO adoptionDTO) {
         this.descricao_experiencia = adoptionDTO.getDescricao_experiencia();
-        this.status = AdoptionStatus.valueOf(adoptionDTO.getStatus_adocao());
+        this.status_adocao = AdoptionStatus.valueOf(adoptionDTO.getStatus_adocao());
         this.medical_necessities = adoptionDTO.getMedical_necessities();
         this.image = adoptionDTO.getImage();
     }

@@ -10,11 +10,9 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {RippleModule} from "primeng/ripple";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {MessageService} from "primeng/api";
-import {AccountService} from "../../../../../open/account/shared/account.service";
 import {AdoptionService} from "../../shared/adoption.service";
 import {AdoptionProfileModel, AdoptionStatus} from "../../model/AdoptionProfileModel";
 import {AnimalService} from "../../../animal/service/animal.service";
-import {Tipo} from "../../../tipo_animal/model/tipo.model";
 import {AnimalModel} from "../../../animal/model/animal.model";
 
 @Component({
@@ -59,7 +57,7 @@ export class AdoptionProfileFormComponent {
       id_adocao: [''],
       id_animal: ['', Validators.required],
       descricao_experiencia: [''],
-      status: ['', Validators.required],
+      status_adocao: ['', Validators.required],
       priority: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
       medical_necessities: [''],
       image: [null],
@@ -73,7 +71,7 @@ export class AdoptionProfileFormComponent {
       id_adocao: adoption.id_adocao,
       id_animal: adoption.id_animal,
       descricao_experiencia: adoption.descricao_experiencia,
-      status: adoption.status,
+      status_adocao: adoption.status_adocao,
       priority: adoption.priority,
       medical_necessities: adoption.medical_necessities,
       image: adoption.image,
@@ -93,9 +91,7 @@ export class AdoptionProfileFormComponent {
       const adoption = this.adoptionForm.value as AdoptionProfileModel;
 
       adoption.id_animal = this.selectAnimal?.id_animal?.toString() || '';
-      adoption.status = this.selectStatus?.value;
-
-      alert(JSON.stringify(adoption));console.log(JSON.stringify(adoption));
+      adoption.status_adocao = this.selectStatus?.value;
       if (adoption.id_adocao) {
         this.adoptionService.updateAdoptionProfile(adoption).subscribe(
           response => {
@@ -121,4 +117,57 @@ export class AdoptionProfileFormComponent {
       }
     }
   }
+  get id_adocao() {
+    return this.adoptionForm.get('id_adocao');
+  }
+
+  get id_animal() {
+    return this.adoptionForm.get('id_animal');
+  }
+
+  get nome_adotante() {
+    return this.adoptionForm.get('nome_adotante');
+  }
+
+  get endereco() {
+    return this.adoptionForm.get('endereco');
+  }
+
+  get telefone() {
+    return this.adoptionForm.get('telefone');
+  }
+
+  get email() {
+    return this.adoptionForm.get('email');
+  }
+
+  get descricao_experiencia() {
+    return this.adoptionForm.get('descricao_experiencia');
+  }
+
+  get status_adocao() {
+    return this.adoptionForm.get('status_adocao');
+  }
+
+  get data_submissao() {
+    return this.adoptionForm.get('data_submissao');
+  }
+
+  get priority() {
+    return this.adoptionForm.get('priority');
+  }
+
+  get medical_necessities() {
+    return this.adoptionForm.get('medical_necessities');
+  }
+
+  get image() {
+    return this.adoptionForm.get('image');
+  }
+
+  get peso_animal() {
+    return this.adoptionForm.get('peso_animal');
+  }
 }
+
+

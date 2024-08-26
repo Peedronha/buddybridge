@@ -45,7 +45,7 @@ export class AdoptionProfileComponent {
   }
 
   onRemove(idUser: any) {
-    this.adoptionService.deleteAdoption(idUser).subscribe(() =>{
+    this.adoptionService.deleteAdoptionProfile(idUser).subscribe(() =>{
       this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro excluido com sucesso' });
       window.location.reload();
       this.router.navigateByUrl('/perfil-adocao')

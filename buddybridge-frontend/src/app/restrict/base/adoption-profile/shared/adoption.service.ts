@@ -103,7 +103,7 @@ export class AdoptionService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.get<any>(this.apiUrl+'/'+param,{headers: reqHeader})  }
+    return this.http.get<any>(this.apiUrl+'/profiles/'+param,{headers: reqHeader})  }
 
   updateAdoptionProfile(adoption: AdoptionProfileModel) {
     var reqHeader = new HttpHeaders({
@@ -120,4 +120,11 @@ export class AdoptionService {
         }
       ))
   }
+  deleteAdoptionProfile(idUser: number) {
+      var reqHeader = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.getAuthorizationToken()
+      });
+      return this.http.delete<any>(this.apiUrl+'/profiles/'+idUser,{headers: reqHeader})
+    }
 }

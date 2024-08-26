@@ -10,6 +10,7 @@ import br.com.buddybridge.core.animais.animal.service.AnimalService;
 import br.com.buddybridge.core.util.ExampleExeption;
 import jakarta.transaction.SystemException;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,13 +37,18 @@ public class AdocaoController {
     }
 
     @PostMapping("/profiles")
-    public ResponseEntity<GetAdoptionProfileDTO> insertAdoptionModel(@RequestBody PostAdoptionProfileDTO adoptionDTO){
+    public ResponseEntity<?> insertAdoptionModel(@RequestBody PostAdoptionProfileDTO adoptionDTO){
         try {
             AdoptionProfileModel adoption = this.adoptionService.saveAdoptionProfileRequest(adoptionDTO);
-            return new ResponseEntity<>(new GetAdoptionProfileDTO(adoption), HttpStatus.CREATED);
-        }
-        catch (Exception e){
-            return new ResponseEntity<>(null, HttpStatus.OK);
+
+            GetAdoptionProfileDTO responseDTO = new GetAdoptionProfileDTO(adoption);
+
+            return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+        } catch (DataIntegrityViolationException e) {
+            return new ResponseEntity<>("Invalid data: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            // Handle other exceptions
+            return new ResponseEntity<>("An error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -70,7 +76,7 @@ public class AdocaoController {
 
     @Transactional
     @DeleteMapping("/profiles/{id}")
-    public ResponseEntity<Boolean> deleteAdoption(@PathVariable Long id){
+    public ResponseEntity<Boolean> deleteAdoptionProfile(@PathVariable Long id){
         if (this.adoptionService.existsByIdAdocao(id)){
 
             this.adoptionService.deleteAdoption(id);

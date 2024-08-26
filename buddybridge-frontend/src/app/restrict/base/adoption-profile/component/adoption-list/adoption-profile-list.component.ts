@@ -80,7 +80,7 @@ export class AdoptionProfileListComponent {
 
   confirmDelete() {
     if (this._specificEntity) {
-      this.onDelete(this._specificEntity.id_perfil);
+      this.onDelete(this._specificEntity.id_adocao);
 
       this._specificEntity = null;
 

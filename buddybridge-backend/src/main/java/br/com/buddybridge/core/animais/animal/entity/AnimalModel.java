@@ -50,6 +50,9 @@ public class AnimalModel {
 
     @Column(name = "localizacao_animal", nullable = false)
     private String localizacao_animal;
+//
+//    @Column(name = "genero_animal", nullable = false)
+//    private String genero_animal;
 
     @ManyToOne
     @JoinColumn(name = "type_id")

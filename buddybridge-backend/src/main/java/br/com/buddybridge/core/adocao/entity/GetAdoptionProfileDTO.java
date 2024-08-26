@@ -29,7 +29,7 @@ public class GetAdoptionProfileDTO {
         this.telefone = model.getTelefone();
         this.email = model.getEmail();
         this.descricao_experiencia = model.getDescricao_experiencia();
-        this.status = model.getStatus() != null ? model.getStatus().name() : null;
+        this.status = model.getStatus_adocao() != null ? model.getStatus_adocao().name() : null;
         this.priority = model.getPriority();
         this.medical_necessities = model.getMedical_necessities();
         this.image = model.getImage();
