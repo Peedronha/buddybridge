@@ -4,14 +4,12 @@ import br.com.buddybridge.core.adocao.entity.AdoptionDTO;
 import br.com.buddybridge.core.adocao.entity.GetAdoptionProfileDTO;
 import br.com.buddybridge.core.adocao.entity.PostAdoptionProfileDTO;
 import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
-import br.com.buddybridge.core.adocao.model.AdoptionStatus;
 import br.com.buddybridge.core.adocao.repository.AdoptionRepository;
+import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
+import br.com.buddybridge.core.animais.animal.model.GetAnimalDTO;
 import br.com.buddybridge.core.animais.animal.repository.AnimalRepository;
-import br.com.buddybridge.core.animais.animal.service.AnimalService;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.SystemException;
 import lombok.AllArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -54,22 +52,32 @@ public class AdoptionService {
         return dtos;
     }
 
-    public AdoptionProfileModel saveAdoptionProfileRequest(PostAdoptionProfileDTO adoptionDTO) throws SystemException {
+    public AdoptionProfileModel saveAdoptionProfileRequest(PostAdoptionProfileDTO adoptionDTO) throws SystemException, NumberFormatException {
         try {
             AdoptionProfileModel model = new AdoptionProfileModel(adoptionDTO);
 
-            model.setId_animal(this.animalRepository
-                    .getReferenceById(Long.valueOf(adoptionDTO.getId_animal())));
+            Optional<AnimalModel> animalModelOptional = animalRepository.findById(Long.valueOf(adoptionDTO.getId_animal()));
 
-            model.setStatus_adocao(AdoptionStatus.valueOf(adoptionDTO.getStatus_adocao()));
+            if (animalModelOptional.isPresent()) {
+                model.setId_animal(animalModelOptional.get());
+            } else {
+                throw new SystemException("AnimalModel with ID " + adoptionDTO.getId_animal() + " not found.");
+            }
 
             return adoptionRepository.save(model);
-        } catch (DataIntegrityViolationException e) {
-            throw new SystemException("Data integrity violation: " + e.getMessage());
-        } catch (EntityNotFoundException e) {
-            throw new SystemException("Animal not found with id: " + adoptionDTO.getId_animal());
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Invalid animal ID format: " + adoptionDTO.getId_animal());
         } catch (Exception e) {
-            throw new SystemException("An unexpected error occurred: " + e.getMessage());
+            throw new SystemException("An error occurred while saving the adoption profile: " + e.getMessage());
         }
+    }
+
+    public GetAnimalDTO AnimalsByProfileStatus() {
+        List<GetAnimalDTO> dtos = new ArrayList<>();
+        for (AnimalModel model: adoptionRepository.findAllByPendingAdoption())
+        {
+            dtos.add(new GetAnimalDTO(model));
+        };
+        return (GetAnimalDTO) dtos;
     }
 }

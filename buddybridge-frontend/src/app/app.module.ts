@@ -61,6 +61,8 @@ import { ListTipoComponent } from './restrict/base/tipo_animal/component/list-ti
 import { FormTipoComponent } from './restrict/base/tipo_animal/component/form-tipo/form-tipo.component';
 import { OngComponent } from './restrict/base/ong/component/ong/ong.component';
 import { MenuModule } from 'primeng/menu';
+import {AdoptionComponent} from "./open/adoption/components/adoption-header/adoption.component";
+import {AdoptionGridComponent} from "./open/adoption/components/adoption-grid/adoption-grid.component";
 
 @NgModule({
   declarations: [
@@ -93,9 +95,7 @@ import { MenuModule } from 'primeng/menu';
       ListRacaComponent,
       TipoComponent,
       ListTipoComponent,
-      FormTipoComponent,
-
-
+      FormTipoComponent
   ],
   imports: [
     BrowserModule,
@@ -129,6 +129,8 @@ import { MenuModule } from 'primeng/menu';
     InputNumberModule,
     DropdownModule,
     MenuModule,
+    AdoptionGridComponent,
+    AdoptionComponent,
 
   ],
   providers: [

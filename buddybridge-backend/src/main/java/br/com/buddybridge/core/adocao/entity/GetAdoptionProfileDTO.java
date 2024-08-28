@@ -1,7 +1,7 @@
 package br.com.buddybridge.core.adocao.entity;
 
 import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
-import br.com.buddybridge.core.adocao.model.AdoptionStatus;
+import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
 import lombok.Data;
 import java.time.LocalDateTime;
 
