@@ -40,8 +40,6 @@ export class AdoptionGridComponent {
   }
 
   getStatusSeverity(animal:any) {
-    // Adjust this method to reflect relevant information for the animal,
-    // such as health status, urgency, or availability for adoption
     switch (animal.status) {
       case 'AVAILABLE':
         return 'success';

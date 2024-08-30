@@ -3,6 +3,7 @@ package br.com.buddybridge.core.adocao.service;
 import br.com.buddybridge.core.adocao.entity.AdoptionDTO;
 import br.com.buddybridge.core.adocao.entity.GetAdoptionProfileDTO;
 import br.com.buddybridge.core.adocao.entity.PostAdoptionProfileDTO;
+import br.com.buddybridge.core.adocao.entity.ProfileDTO;
 import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
 import br.com.buddybridge.core.adocao.repository.AdoptionRepository;
 import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
@@ -10,6 +11,7 @@ import br.com.buddybridge.core.animais.animal.model.GetAnimalDTO;
 import br.com.buddybridge.core.animais.animal.repository.AnimalRepository;
 import jakarta.transaction.SystemException;
 import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -72,12 +74,18 @@ public class AdoptionService {
         }
     }
 
-    public GetAnimalDTO AnimalsByProfileStatus() {
-        List<GetAnimalDTO> dtos = new ArrayList<>();
+    public List<ProfileDTO> AnimalsByProfileStatus() {
+        List<ProfileDTO> dtos = new ArrayList<>();
         for (AnimalModel model: adoptionRepository.findAllByPendingAdoption())
         {
-            dtos.add(new GetAnimalDTO(model));
+            AdoptionProfileModel profileModel = adoptionRepository.findAdoptionProfilesByAnimalId(model.getId_animal());
+
+            ProfileDTO dto = new ProfileDTO(model);
+            dto.setImage(profileModel.getImage());
+            dto.setMedical_necessities(profileModel.getMedical_necessities());
+            dto.setPriority(profileModel.getPriority());
+            dtos.add(dto);
         };
-        return (GetAnimalDTO) dtos;
+        return  dtos;
     }
 }

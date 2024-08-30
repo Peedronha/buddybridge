@@ -4,6 +4,7 @@ package br.com.buddybridge.core.adocao.controller;
 import br.com.buddybridge.core.adocao.entity.AdoptionDTO;
 import br.com.buddybridge.core.adocao.entity.GetAdoptionProfileDTO;
 import br.com.buddybridge.core.adocao.entity.PostAdoptionProfileDTO;
+import br.com.buddybridge.core.adocao.entity.ProfileDTO;
 import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
 import br.com.buddybridge.core.adocao.service.AdoptionService;
 import br.com.buddybridge.core.animais.animal.model.GetAnimalDTO;
@@ -64,9 +65,9 @@ public class AdocaoController {
         }
     }
     @GetMapping("/profiles/PENDING")
-    public ResponseEntity<GetAnimalDTO> getAnimalsByProfileStatus() throws Exception {
+    public ResponseEntity<List<ProfileDTO>> getAnimalsByProfileStatus() throws Exception {
         try {
-            GetAnimalDTO model = this.adoptionService.AnimalsByProfileStatus();
+            List<ProfileDTO> model = this.adoptionService.AnimalsByProfileStatus();
             return new ResponseEntity<>(model, HttpStatus.OK);
         }
         catch (Exception e){
