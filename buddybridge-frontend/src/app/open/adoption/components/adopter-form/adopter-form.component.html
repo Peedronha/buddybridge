@@ -1,0 +1,75 @@
+<div class="card">
+<form [formGroup]="adopterForm" (ngSubmit)="onSubmit()">
+  <div class="surface-section py-2 md-3">
+    <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BASE</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Cadastros Gerais</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Adoções</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><span class="text-900 line-height-3">Cadastro de interesse para Adoção</span></li>
+    </ul>
+    <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
+      <div>
+        <div class="font-medium text-3xl text-900">Cadastro de interesse para Adoção</div><br/><br/>
+      </div>
+      <div class="mt-3 lg:mt-0">
+        <button pButton pRipple label="Voltar" class="p-button mr-2" icon="pi pi-chevron-left" routerLink="/adocao"></button>
+      </div>
+    </div>
+  </div>
+  <p-messages></p-messages>
+  <div class="p-fluid">
+    <div class="field">
+      <label for="nomeCompleto">Nome Completo *</label>
+      <input id="nomeCompleto" formControlName="nomeCompleto" type="text" pInputText />
+    </div>
+    <div class="field">
+      <label for="dataNascimento">Data de Nascimento *</label>
+      <p-calendar id="dataNascimento" formControlName="dataNascimento" [showIcon]="true"></p-calendar>
+    </div>
+    <div class="field">
+      <label for="cpf">CPF *</label>
+      <input id="cpf" formControlName="cpf" type="text" pInputText />
+    </div>
+    <div class="field">
+      <label for="telefone">Telefone *</label>
+      <input id="telefone" formControlName="telefone" type="text" pInputText />
+    </div>
+    <div class="field">
+      <label for="email">Email *</label>
+      <input id="email" formControlName="email" type="email" pInputText />
+    </div>
+    <div class="field">
+      <label for="cep">CEP *</label>
+      <input id="cep" formControlName="cep" type="text" pInputText />
+    </div>
+    <div class="field">
+      <label for="endereco">Endereço *</label>
+      <input id="endereco" formControlName="endereco" type="text" pInputText />
+    </div>
+    <div class="field">
+      <label for="numero">Número *</label>
+      <input id="numero" formControlName="numero" type="text" pInputText />
+    </div>
+    <div class="field">
+      <label for="bairro">Bairro *</label>
+      <input id="bairro" formControlName="bairro" type="text" pInputText />
+    </div>
+    <div class="field">
+      <label for="cidade">Cidade *</label>
+      <input id="cidade" formControlName="cidade" type="text" pInputText />
+    </div>
+    <div class="field">
+      <label for="estado">Estado *</label>
+      <input id="estado" formControlName="estado" type="text" pInputText />
+    </div>
+    <div class="field">
+      <label for="complemento">Complemento</label>
+      <input id="complemento" formControlName="complemento" type="text" pInputText />
+    </div>
+    <p-button label="Cadastrar" icon="pi pi-check" type="submit"></p-button>
+  </div>
+</form>
+</div>

@@ -29,7 +29,7 @@ export class AdoptionGridComponent {
   @Output() remove = new EventEmitter<number>();
   layout: string = 'list';
 
-   animals!: AnimalModel[];
+  animals!: AnimalModel[];
 
   constructor(private animalService: AnimalService, private adoptionService: AdoptionService) {}
 
