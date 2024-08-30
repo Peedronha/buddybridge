@@ -1,5 +1,6 @@
 package br.com.buddybridge.core.animais.animal.service;
 
+import br.com.buddybridge.core.adocao.model.AdoptionStatus;
 import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
 import br.com.buddybridge.core.animais.animal.model.AnimalDto;
 import br.com.buddybridge.core.animais.animal.model.GetAnimalDTO;
@@ -55,6 +56,8 @@ public class AnimalService {
 
         Optional<TypeModel> typeModel = tipoRepository.findById(Long.valueOf(animalDto.getTipo_animal()));
         Optional<RacaModel> racaModel = racaRepository.findById(Long.valueOf(animalDto.getRaca_animal()));
+
+        model.setStatus_adocao(AdoptionStatus.PENDING.name());
 
         if (typeModel.isPresent() && racaModel.isPresent()) {
             model.setType(typeModel.get());

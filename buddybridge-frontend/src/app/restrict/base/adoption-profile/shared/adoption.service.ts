@@ -127,4 +127,11 @@ export class AdoptionService {
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
     return this.http.get<any>(this.apiUrl+'/profiles/PENDING',{headers: reqHeader})  }
+
+  deleteAdoptionProfile(idUser: any) {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.http.delete<any>(this.apiUrl+'/profiles/'+ idUser,{headers: reqHeader})  }
 }

@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface AdoptionRepository extends JpaRepository<AdoptionProfileModel, Long> {
-    @Query("SELECT a FROM AnimalModel a JOIN a.adoptionProfile ap WHERE ap.status = 'PENDING'")
+    @Query("SELECT a FROM AnimalModel a JOIN a.adoptionProfile ap WHERE ap.status_adocao = 'PENDING'")
     List<AnimalModel> findAllByPendingAdoption();
 }

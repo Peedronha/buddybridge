@@ -15,7 +15,7 @@ export interface AdoptionProfileModel {
   telefone?: string;
   email?: string;
   descricao_experiencia?: string;
-  status?: string;
+  status_adocao?: string;
   data_submissao?: string;
   priority?: string;
   medical_necessities?: string;
