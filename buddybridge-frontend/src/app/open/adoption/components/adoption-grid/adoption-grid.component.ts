@@ -7,6 +7,7 @@ import {AnimalService} from "../../../../restrict/base/animal/service/animal.ser
 import {NgClass, NgForOf} from "@angular/common";
 import {AdoptionProfileModel} from "../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
 import {AdoptionService} from "../../../../restrict/base/adoption-profile/shared/adoption.service";
+import {AnimalCard} from "../../../../restrict/base/adoption-profile/model/AnimalCard";
 
 @Component({
   selector: 'app-adoption-grid',
@@ -29,12 +30,18 @@ export class AdoptionGridComponent {
   @Output() remove = new EventEmitter<number>();
   layout: string = 'list';
 
-   animals!: AnimalModel[];
+   animals!: AnimalCard[];
+
+  genero = [
+    { label: 'Fêmea', value: 'Female' },
+    { label: 'Macho', value: 'Male' },
+  ];
+
 
   constructor(private animalService: AnimalService, private adoptionService: AdoptionService) {}
 
   ngOnInit() {
-    this.adoptionService.getAnimalsByProfileStatus().subscribe((data: AnimalModel[]) => {
+    this.adoptionService.getAnimalsByProfileStatus().subscribe((data: AnimalCard[]) => {
       this.animals = data;
     });
   }

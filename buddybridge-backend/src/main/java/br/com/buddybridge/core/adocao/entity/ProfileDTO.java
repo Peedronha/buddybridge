@@ -8,6 +8,8 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 public class ProfileDTO {
@@ -17,8 +19,8 @@ public class ProfileDTO {
     private Double peso_animal;
     private Double comprimento_animal;
     private String idade;
-    private RaceDTO raca_animal;
-    private TypeModel tipo_animal;
+    private String raca_animal;
+    private String tipo_animal;
     private String genero_animal;
     private String localizacao_animal;
     private Integer priority;
@@ -31,11 +33,14 @@ public class ProfileDTO {
         this.peso_animal = model.getPeso_animal();
         this.comprimento_animal = model.getComprimento_animal();
         this.idade = setIdadeAnimal(model.getData_nascimento());
-        this.raca_animal = new RaceDTO(model.getRace());
-        this.tipo_animal = model.getType();
-        this.genero_animal = getGenero_animal();
+        this.raca_animal = model.getRace().getName();
+        this.tipo_animal = model.getType().getName();
+        this.genero_animal = formatGender(model.getGenero_animal());
         this.localizacao_animal = model.getLocalizacao_animal();
     }
+
+    private static final Map<String, String> genderMap = new HashMap<>();
+
     public String setIdadeAnimal(LocalDate dataNascimento) {
         if ((dataNascimento != null)) {
             Period period = Period.between(dataNascimento, LocalDate.now());
@@ -49,5 +54,14 @@ public class ProfileDTO {
     public String formatLocalDate(LocalDate localDate){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return localDate.format(formatter);
+    }
+
+    static {
+        genderMap.put("Female", "Fêmea");
+        genderMap.put("Male", "Macho");
+    }
+
+    public String formatGender(String genero_animal) {
+        return genderMap.getOrDefault(genero_animal, "Unknown");
     }
 }

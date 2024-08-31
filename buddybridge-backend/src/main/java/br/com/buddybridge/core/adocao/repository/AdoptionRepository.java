@@ -15,6 +15,7 @@ public interface AdoptionRepository extends JpaRepository<AdoptionProfileModel, 
     @Query("SELECT a FROM AnimalModel a JOIN a.adoptionProfile ap WHERE ap.status_adocao = 'PENDING'")
     List<AnimalModel> findAllByPendingAdoption();
 
-    @Query("SELECT ap FROM AdoptionProfileModel ap WHERE ap.id_animal = :idAnimal")
-    AdoptionProfileModel findAdoptionProfilesByAnimalId(Long idAnimal);
+    @Query("SELECT ap FROM AdoptionProfileModel ap WHERE ap.id_animal.id_animal = :idAnimal")
+    AdoptionProfileModel findAdoptionProfilesByAnimalId(@Param("idAnimal") Long idAnimal);
+
 }
