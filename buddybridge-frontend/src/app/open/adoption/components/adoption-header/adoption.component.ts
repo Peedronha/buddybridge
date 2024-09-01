@@ -40,15 +40,8 @@ export class AdoptionComponent {
     });
   }
 
-  onAdd() {
-    this.router.navigate(['addadocao'], { relativeTo: this.route });
+  onAdd(idUser: any) {
+    this.router.navigate(['addadocao', idUser], { relativeTo: this.route });
   }
 
-  // onRemove(idUser: any) {
-  //   this.adoptionService.deleteAdoption(idUser).subscribe(() => {
-  //     this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registro excluido com sucesso'});
-  //     window.location.reload();
-  //     this.router.navigateByUrl('/adocao')
-  //   })
-  // }
 }

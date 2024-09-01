@@ -13,9 +13,10 @@
     }
     <p class="animal-details"><strong>Localização:</strong> {{animal.localizacao_animal}}</p>
     <div class="flex flex-row-reverse md:flex-row gap-2">
-      <button class="adopt-button">
+      <button class="adopt-button" (click)="onAdd(animal.id_animal)">
         <i class="pi pi-heart"></i> Quero adotar!
       </button>
     </div>
   </div>
 </div>
+

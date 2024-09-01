@@ -3,7 +3,7 @@ import { Login } from './../model/login.model';
 import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../model/user.model';
-import { catchError, of} from 'rxjs';
+import {catchError, Observable, of} from 'rxjs';
 import { AuthResponse } from '../model/authResponse.model';
 import { pipe } from 'rxjs';
 @Injectable({
@@ -102,5 +102,9 @@ export class AccountService {
     //window.localStorage.removeItem('validarEmail');
   }
 
+  private apiUrl = 'https://viacep.com.br/ws/';
+  getAddress(cep: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.apiUrl}${cep}/json/`);
+  }
 
 }

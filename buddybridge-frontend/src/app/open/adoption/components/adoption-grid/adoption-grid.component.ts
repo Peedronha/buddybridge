@@ -8,6 +8,10 @@ import {NgClass, NgForOf} from "@angular/common";
 import {AdoptionProfileModel} from "../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
 import {AdoptionService} from "../../../../restrict/base/adoption-profile/shared/adoption.service";
 import {AnimalCard} from "../../../../restrict/base/adoption-profile/model/AnimalCard";
+import {AdoptionSubmissionFormComponent} from "../adoption-submission-form/adoption-submission-form.component";
+import _default from "chart.js/dist/plugins/plugin.tooltip";
+import numbers = _default.defaults.animations.numbers;
+import id = _default.id;
 
 @Component({
   selector: 'app-adoption-grid',
@@ -17,7 +21,8 @@ import {AnimalCard} from "../../../../restrict/base/adoption-profile/model/Anima
     ButtonModule,
     DataViewModule,
     NgClass,
-    NgForOf
+    NgForOf,
+    AdoptionSubmissionFormComponent
   ],
   templateUrl: './adoption-grid.component.html',
   styleUrl: './adoption-grid.component.scss'
@@ -25,12 +30,14 @@ import {AnimalCard} from "../../../../restrict/base/adoption-profile/model/Anima
 export class AdoptionGridComponent {
   @Input() profiles!: AdoptionProfileModel[];
   _specificEntity: any = {};
-  @Output() add = new EventEmitter<boolean>();
+  @Output() add = new EventEmitter<number>();
   @Output() edit = new EventEmitter<number>();
   @Output() remove = new EventEmitter<number>();
   layout: string = 'list';
 
-   animals!: AnimalCard[];
+  formVisible: boolean = false;
+
+  animals!: AnimalCard[];
 
   genero = [
     { label: 'Fêmea', value: 'Female' },
@@ -59,4 +66,7 @@ export class AdoptionGridComponent {
     }
   }
 
+  onAdd(idAnimal: number | undefined) {
+    this.add.emit(idAnimal);
+  }
 }

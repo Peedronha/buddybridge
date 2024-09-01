@@ -1,0 +1,142 @@
+<div class="card">
+  <form [formGroup]="adoptionForm" (ngSubmit)="submitDetails()">
+    <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BASE</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Cadastros Gerais</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Animais</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      @if (id_adocao?.value != null && id_adocao?.value == 'NaN') {
+        <li><span class="text-900 line-height-3">Novo</span></li>
+        <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra os perfis do adoção do sistema!</a></li>
+      } @else {
+        <li><span class="text-900 line-height-3">Alterar</span></li>
+        <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você altera os perfis do adoção  do sistema!</a></li>
+      }
+    </ul>
+    <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
+      <div>
+        @if (id_adocao?.value != null && id_adocao?.value == 'NaN') {
+          <div class="font-medium text-3xl text-900">Novo Perfil de Adoção</div><br/><br/>
+        } @else {
+          <div class="font-medium text-3xl text-900">Alterar Perfil de Adoção</div><br/><br/>
+        }
+      </div>
+      <div class="mt-3 lg:mt-0">
+        <button pButton pRipple label="Voltar" class="p-button mr-2" icon="pi pi-chevron-left" routerLink="/adocao"></button>
+      </div>
+    </div>
+    <!-- nome_adotante -->
+    <div class="field">
+      <label for="nome_adotante">Nome Adotante*</label>
+      <input id="nome_adotante" formControlName="nome_adotante" pInputText class="w-full" type="text" />
+      <small *ngIf="adoptionForm.get('nome_adotante')?.invalid && (adoptionForm.get('nome_adotante')?.dirty || adoptionForm.get('nome_adotante')?.touched)" class="block p-error">
+        <div *ngIf="adoptionForm.get('nome_adotante')?.errors?.['required']">O nome do adotante é uma informação obrigatória.</div>
+      </small>
+    </div>
+
+    <!-- data_nascimento -->
+    <div class="field">
+      <label for="data_nascimento">Data de Nascimento*</label>
+      <br>
+      <input id="data_nascimento" formControlName="data_nascimento" pInputText class="p-calendar-w-btn" type="date" />
+      <small *ngIf="adoptionForm.get('data_nascimento')?.invalid && (adoptionForm.get('data_nascimento')?.dirty || adoptionForm.get('data_nascimento')?.touched)" class="block p-error">
+        <div *ngIf="adoptionForm.get('data_nascimento')?.errors?.['required']">A data de nascimento é uma informação obrigatória.</div>
+      </small>
+    </div>
+
+    <!-- CPF -->
+    <div class="field">
+      <label for="CPF">CPF*</label>
+      <input id="CPF" formControlName="CPF" pInputText class="w-full" type="text" />
+      <small *ngIf="adoptionForm.get('CPF')?.invalid && (adoptionForm.get('CPF')?.dirty || adoptionForm.get('CPF')?.touched)" class="block p-error">
+        <div *ngIf="adoptionForm.get('CPF')?.errors?.['required']">O CPF é uma informação obrigatória.</div>
+        <div *ngIf="adoptionForm.get('CPF')?.errors?.['pattern']">CPF inválido. Deve conter 11 dígitos numéricos.</div>
+      </small>
+    </div>
+
+    <!-- telefone -->
+    <div class="field">
+      <label for="telefone">Telefone*</label>
+      <input id="telefone" formControlName="telefone" pInputText class="w-full" type="text" />
+      <small *ngIf="adoptionForm.get('telefone')?.invalid && (adoptionForm.get('telefone')?.dirty || adoptionForm.get('telefone')?.touched)" class="block p-error">
+        <div *ngIf="adoptionForm.get('telefone')?.errors?.['required']">O telefone é uma informação obrigatória.</div>
+      </small>
+    </div>
+
+    <!-- email -->
+    <div class="field">
+      <label for="email">Email*</label>
+      <input id="email" formControlName="email" pInputText class="w-full" type="email" />
+      <small *ngIf="adoptionForm.get('email')?.invalid && (adoptionForm.get('email')?.dirty || adoptionForm.get('email')?.touched)" class="block p-error">
+        <div *ngIf="adoptionForm.get('email')?.errors?.['required']">O email é uma informação obrigatória.</div>
+        <div *ngIf="adoptionForm.get('email')?.errors?.['email']">Formato de email inválido.</div>
+      </small>
+    </div>
+
+    <!-- endereco -->
+    <div class="field">
+      <label for="endereco">Endereço*</label>
+      <input id="endereco" formControlName="endereco" pInputText class="w-full" type="text" />
+      <small *ngIf="adoptionForm.get('endereco')?.invalid && (adoptionForm.get('endereco')?.dirty || adoptionForm.get('endereco')?.touched)" class="block p-error">
+        <div *ngIf="adoptionForm.get('endereco')?.errors?.['required']">O endereço é uma informação obrigatória.</div>
+      </small>
+    </div>
+
+    <!-- CEP -->
+    <div class="field">
+      <label for="CEP">CEP*</label>
+      <input id="CEP" formControlName="CEP" pInputText class="w-full" type="text" />
+      <small *ngIf="adoptionForm.get('CEP')?.invalid && (adoptionForm.get('CEP')?.dirty || adoptionForm.get('CEP')?.touched)" class="block p-error">
+        <div *ngIf="adoptionForm.get('CEP')?.errors?.['required']">O CEP é uma informação obrigatória.</div>
+        <div *ngIf="adoptionForm.get('CEP')?.errors?.['pattern']">Formato de CEP inválido.</div>
+      </small>
+    </div>
+
+    <!-- numero -->
+    <div class="field">
+      <label for="numero">Número*</label>
+      <input id="numero" formControlName="numero" pInputText class="w-full" type="text" />
+      <small *ngIf="adoptionForm.get('numero')?.invalid && (adoptionForm.get('numero')?.dirty || adoptionForm.get('numero')?.touched)" class="block p-error">
+        <div *ngIf="adoptionForm.get('numero')?.errors?.['required']">O número é uma informação obrigatória.</div>
+      </small>
+    </div>
+
+    <!-- Complemento -->
+    <div class="field">
+      <label for="Complemento">Complemento</label>
+      <input id="Complemento" formControlName="Complemento" pInputText class="w-full" type="text" />
+    </div>
+
+    <!-- Bairro -->
+    <div class="field">
+      <label for="Bairro">Bairro*</label>
+      <input id="Bairro" formControlName="Bairro" pInputText class="w-full" type="text" />
+      <small *ngIf="adoptionForm.get('Bairro')?.invalid && (adoptionForm.get('Bairro')?.dirty || adoptionForm.get('Bairro')?.touched)" class="block p-error">
+        <div *ngIf="adoptionForm.get('Bairro')?.errors?.['required']">O bairro é uma informação obrigatória.</div>
+      </small>
+    </div>
+
+    <!-- Estado -->
+    <div class="field">
+      <label for="Estado">Estado*</label>
+      <input id="Estado" formControlName="Estado" pInputText class="w-full" type="text" />
+      <small *ngIf="adoptionForm.get('Estado')?.invalid && (adoptionForm.get('Estado')?.dirty || adoptionForm.get('Estado')?.touched)" class="block p-error">
+        <div *ngIf="adoptionForm.get('Estado')?.errors?.['required']">O estado é uma informação obrigatória.</div>
+      </small>
+    </div>
+
+    <!-- Cidade -->
+    <div class="field">
+      <label for="Cidade">Cidade*</label>
+      <input id="Cidade" formControlName="Cidade" pInputText class="w-full" type="text" />
+      <small *ngIf="adoptionForm.get('Cidade')?.invalid && (adoptionForm.get('Cidade')?.dirty || adoptionForm.get('Cidade')?.touched)" class="block p-error">
+        <div *ngIf="adoptionForm.get('Cidade')?.errors?.['required']">A cidade é uma informação obrigatória.</div>
+      </small>
+    </div>
+    <button pButton label="ENVIAR" stylepInputText class="w-full" type="submit"></button>
+  </form>
+</div>

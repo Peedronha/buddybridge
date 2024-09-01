@@ -36,6 +36,9 @@ import {
 } from "./restrict/base/adoption-profile/component/adoption-form/adoption-profile-form.component";
 import {adoptionProfileResolver} from "./restrict/base/adoption-profile/guards/adoption-profile.resolver.guard";
 import {AdoptionComponent} from "./open/adoption/components/adoption-header/adoption.component";
+import {
+  AdoptionSubmissionFormComponent
+} from "./open/adoption/components/adoption-submission-form/adoption-submission-form.component";
 
 const routes: Routes = [
   { path: 'errorBuddyBridge', title: 'BuddyBridge - Erro', component: ErrorComponent },
@@ -47,7 +50,10 @@ const routes: Routes = [
 
       { path: 'restrict/home', title: 'BuddyBridge - Home', component: HomeComponent },
       { path: 'restrict/institucional', title: 'BuddyBridge - Institucional', component: InsitucionalComponent },
+
       { path: 'restrict/adocao', title: 'BuddyBridge - Adocao', component: AdoptionComponent },
+      { path: 'restrict/adocao/addadocao/:id', title: 'BuddyBridge - Adocao', component: AdoptionSubmissionFormComponent, resolve: {adocao : adoptionProfileResolver} },
+
 
       { path: 'dashboard', title: 'BuddyBridge - DashBoard', component: DashboardComponent },
       { path: 'profile', title: 'BuddyBridge - Meu Perfil', component: ProfileComponent },
