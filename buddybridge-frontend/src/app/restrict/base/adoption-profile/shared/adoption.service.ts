@@ -4,6 +4,7 @@ import {TokenService} from "../../../../open/account/shared/token.service";
 import {map, Observable} from "rxjs";
 import {AnimalModel} from "../../animal/model/animal.model";
 import {AdoptionProfileModel} from "../model/AdoptionProfileModel";
+import {AdoptionFormModel} from "../../../../open/adoption/models/AdoptionFormModel";
 
 @Injectable({
   providedIn: 'root'
@@ -81,6 +82,21 @@ export class AdoptionService {
             return error;
           }
         ))
+  }
+  registerAdoptionIntention(adoption: AdoptionFormModel): Observable<any> {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.http.post<any>('http://localhost:8080/adoption/add/', adoption,{headers: reqHeader}).pipe(
+      map((response) =>{
+          if (response)
+            return response;
+        },
+        (error:any) =>{
+          return error;
+        }
+      ))
   }
 
   getAdoptionsById(param: number) {

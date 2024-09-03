@@ -1,25 +1,18 @@
 package br.com.buddybridge.core.animais.animal.entity;
 
-import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
 import br.com.buddybridge.core.animais.animal.model.AnimalDto;
 import br.com.buddybridge.core.animais.raca.entity.RacaModel;
 import br.com.buddybridge.core.animais.tipo.entity.TypeModel;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "animais")
-@Setter
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class AnimalModel {
 
     @Id
@@ -51,9 +44,6 @@ public class AnimalModel {
     @Column(name = "localizacao_animal", nullable = false)
     private String localizacao_animal;
 
-    @Column(name = "status_adocao", nullable = false)
-    private String status_adocao;
-
     @ManyToOne
     @JoinColumn(name = "type_id")
     private TypeModel type;
@@ -61,7 +51,6 @@ public class AnimalModel {
     @ManyToOne
     @JoinColumn(name = "race_id")
     private RacaModel race;
-
 
     public AnimalModel(AnimalDto animalDto) {
         this.id_animal = animalDto.getId_animal();
@@ -74,7 +63,4 @@ public class AnimalModel {
         this.data_nascimento = LocalDate.parse(animalDto.getData_nascimento());
         this.genero_animal = animalDto.getGenero_animal();
     }
-
-    @OneToMany(mappedBy = "id_animal")
-    private List<AdoptionProfileModel> adoptionProfile;
 }

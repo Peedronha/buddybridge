@@ -1,8 +1,6 @@
 package br.com.buddybridge.core.animais.animal.model;
 
-import br.com.buddybridge.core.adocao.model.AdoptionProfileModel;
 import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
-import br.com.buddybridge.core.animais.raca.entity.RacaModel;
 import br.com.buddybridge.core.animais.raca.model.RaceDTO;
 import br.com.buddybridge.core.animais.tipo.entity.TypeModel;
 import lombok.Getter;

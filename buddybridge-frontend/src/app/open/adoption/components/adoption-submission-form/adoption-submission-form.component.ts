@@ -14,6 +14,7 @@ import {MessagesModule} from "primeng/messages";
 import {NgIf} from "@angular/common";
 import {RippleModule} from "primeng/ripple";
 import {AccountService} from "../../../account/shared/account.service";
+import {AdoptionFormModel} from "../../models/AdoptionFormModel";
 
 @Component({
   selector: 'app-adoption-submission-form',
@@ -82,11 +83,9 @@ export class AdoptionSubmissionFormComponent {
     const adoption: AdoptionProfileModel = this.router.snapshot.data['adocao'];
   }
 
-
-
   submitDetails(): void {
     if (this.adoptionForm.valid) {
-      const adoption = this.adoptionForm.value as AdoptionProfileModel;
+      const adoption = this.adoptionForm.value as AdoptionFormModel;
         this.adoptionService.registerAdoptionProfile(adoption).subscribe(
           response => {
             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção registrada!' });

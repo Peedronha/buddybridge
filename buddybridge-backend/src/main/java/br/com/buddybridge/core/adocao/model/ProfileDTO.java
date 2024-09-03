@@ -1,4 +1,4 @@
-package br.com.buddybridge.core.adocao.entity;
+package br.com.buddybridge.core.adocao.model;
 
 import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
 import br.com.buddybridge.core.animais.raca.model.RaceDTO;

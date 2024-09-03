@@ -1,4 +1,4 @@
-package br.com.buddybridge.core.adocao.model;
+package br.com.buddybridge.core.adocao.entity;
 
 
 public enum AdoptionStatus {
