@@ -1,4 +1,3 @@
-import {AnimalModel} from "../../animal/model/animal.model";
 
 export enum AdoptionStatus {
   PENDING = 'PENDING',
@@ -8,16 +7,18 @@ export enum AdoptionStatus {
 }
 
 export interface AdoptionProfileModel {
+
+  id_perfil_adocao?: number | undefined;
   id_adocao?: number | undefined;
-  id_animal: string;
-  nome_adotante: string;
-  endereco?: string;
-  telefone?: string;
-  email?: string;
-  descricao_experiencia?: string;
-  status_adocao?: string;
-  data_submissao?: string;
+  id_animal?: string;
   priority?: string;
+  idade?: string;
+  data_criacao?: string;
+  data_submissao?: string;
+
   medical_necessities?: string;
   image?: string;
+
+  status_adocao?: string;
+
 }

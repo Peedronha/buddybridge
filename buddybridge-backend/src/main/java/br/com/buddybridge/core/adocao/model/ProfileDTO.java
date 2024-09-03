@@ -1,43 +1,50 @@
 package br.com.buddybridge.core.adocao.model;
 
+import br.com.buddybridge.core.adocao.entity.AdoptionProfileModel;
 import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
 import br.com.buddybridge.core.animais.raca.model.RaceDTO;
 import br.com.buddybridge.core.animais.tipo.entity.TypeModel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProfileDTO {
+    private Long id_perfil_adocao;
     private Long id_adocao;
-    private Long id_animal;
-    private String nome_animal;
-    private Double peso_animal;
-    private Double comprimento_animal;
-    private String idade;
-    private String raca_animal;
-    private String tipo_animal;
-    private String genero_animal;
-    private String localizacao_animal;
+    private String id_animal;
     private Integer priority;
-    private String image;
+    private String idade;
     private String medical_necessities;
-
-    public ProfileDTO(AnimalModel model) {
-        this.id_animal = model.getId_animal();
-        this.nome_animal = model.getNome_animal();
-        this.peso_animal = model.getPeso_animal();
-        this.comprimento_animal = model.getComprimento_animal();
-        this.idade = setIdadeAnimal(model.getData_nascimento());
-        this.raca_animal = model.getRace().getName();
-        this.tipo_animal = model.getType().getName();
-        this.genero_animal = formatGender(model.getGenero_animal());
-        this.localizacao_animal = model.getLocalizacao_animal();
+    private String image;
+    private LocalDateTime data_criacao;
+/*data_criacao:""V
+id_adocao:nullV
+id_animal:"1"V
+id_perfil_adocao:nullV
+image:""V
+medical_necessities:"Teste"V
+priority:10 V*/
+    public ProfileDTO(AdoptionProfileModel model) {
+        this.id_perfil_adocao = model.getId_perfil_adocao();
+        this.id_adocao = model.getAdocao() != null ? model.getAdocao().getId_adocao() : null;
+        this.id_animal = model.getAnimal() != null ? model.getAnimal().getId_animal().toString() : null;
+        this.idade = setIdadeAnimal(model.getAnimal().getData_nascimento());
+        this.priority = model.getPriority();
+        this.medical_necessities = model.getMedical_necessities();
+        this.image = model.getImage();
+        this.data_criacao = model.getData_criacao();
     }
+
 
     private static final Map<String, String> genderMap = new HashMap<>();
 

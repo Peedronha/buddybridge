@@ -84,19 +84,19 @@ export class AdoptionSubmissionFormComponent {
   }
 
   submitDetails(): void {
-    if (this.adoptionForm.valid) {
-      const adoption = this.adoptionForm.value as AdoptionFormModel;
-        this.adoptionService.registerAdoptionProfile(adoption).subscribe(
-          response => {
-            this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção registrada!' });
-            this.adoptionForm.reset();
-            this.route.navigateByUrl('/perfil-adocao');
-          },
-          error => {
-            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao registrar a adoção.' });
-          }
-        );
-      }
+    // if (this.adoptionForm.valid) {
+    //   const adoption = this.adoptionForm.value as AdoptionFormModel;
+    //     this.adoptionService.registerAdoptionProfile(adoption).subscribe(
+    //       response => {
+    //         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção registrada!' });
+    //         this.adoptionForm.reset();
+    //         this.route.navigateByUrl('/perfil-adocao');
+    //       },
+    //       error => {
+    //         this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao registrar a adoção.' });
+    //       }
+    //     );
+    //   }
   }
   get id_adocao() {
     return this.adoptionForm.get('id_adocao');

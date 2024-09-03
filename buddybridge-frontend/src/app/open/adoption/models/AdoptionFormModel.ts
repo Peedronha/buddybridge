@@ -1,9 +1,12 @@
 export interface AdoptionFormModel{
-  id_adocao?: string;
+  id_perfil_adocao:number;
+  id_adocao: number;
   id_animal?: string;
   nome_adotante: string;
   data_nascimento: string;
   CPF: string;
+  idade:string;
+  data_criacao:string;
   telefone: string;
   email: string;
   data_submissao?: string;

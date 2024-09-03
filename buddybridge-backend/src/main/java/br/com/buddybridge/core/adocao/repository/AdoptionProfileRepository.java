@@ -9,10 +9,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface AdoptionProfileRepository extends JpaRepository<AdoptionProfileModel, Long> {
-    @Query("SELECT a FROM AnimalModel a JOIN a.adoptionProfile ap WHERE ap.status_adocao = 'PENDING'")
-    List<AnimalModel> findAllByPendingAdoption();
-
-    @Query("SELECT ap FROM AdoptionProfileModel ap WHERE ap.id_animal.id_animal = :idAnimal")
-    AdoptionProfileModel findAdoptionProfilesByAnimalId(@Param("idAnimal") Long idAnimal);
+//    @Query("SELECT a FROM AnimalModel a JOIN a.adoptionProfile ap WHERE ap.status_adocao = 'PENDING'")
+//    List<AnimalModel> findAllByPendingAdoption();
+//
+//    @Query("SELECT ap FROM AdoptionProfileModel ap WHERE ap.id_animal.id_animal = :idAnimal")
+//    AdoptionProfileModel findAdoptionProfilesByAnimalId(@Param("idAnimal") Long idAnimal);
 
 }

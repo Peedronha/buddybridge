@@ -1,7 +1,6 @@
 package br.com.buddybridge.core.adocao.controller;
 
 import br.com.buddybridge.core.adocao.model.AdoptionSubmissionDTO;
-import br.com.buddybridge.core.adocao.model.GetAdoptionProfileDTO;
 import br.com.buddybridge.core.adocao.model.ProfileDTO;
 import br.com.buddybridge.core.adocao.entity.AdoptionProfileModel;
 import br.com.buddybridge.core.adocao.service.AdoptionService;
@@ -19,7 +18,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("adoption")
+@RequestMapping("adocao")
 public class AdoptionController {
 
     private final AnimalService animalService;
@@ -27,11 +26,10 @@ public class AdoptionController {
 
     // Endpoint to create a new adoption profile
     @PostMapping("/profiles")
-    public ResponseEntity<?> insertAdoptionProfile(@RequestBody PostAdoptionProfileDTO adoptionDTO) {
+    public ResponseEntity<?> insertAdoptionProfile(@RequestBody ProfileDTO adoptionDTO) {
         try {
             AdoptionProfileModel adoption = adoptionService.saveAdoptionProfileRequest(adoptionDTO);
-            GetAdoptionProfileDTO responseDTO = new GetAdoptionProfileDTO(adoption);
-            return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(new ProfileDTO(adoption));
         } catch (DataIntegrityViolationException e) {
             return buildErrorResponse("Invalid data: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
@@ -41,8 +39,8 @@ public class AdoptionController {
 
     // Endpoint to update an existing adoption profile
     @PutMapping("/profiles")
-    public ResponseEntity<?> updateAdoptionProfile(@RequestBody PostAdoptionProfileDTO adoptionDTO) throws SystemException {
-        if (adoptionService.existsByIdPerfilAdocao(adoptionDTO.getId_Perfil_Adocao())) {
+    public ResponseEntity<?> updateAdoptionProfile(@RequestBody ProfileDTO adoptionDTO) throws SystemException {
+        if (adoptionService.existsByIdPerfilAdocao(adoptionDTO.getId_perfil_adocao())) {
             adoptionService.saveAdoptionProfileRequest(adoptionDTO);
             return ResponseEntity.ok(adoptionDTO);
         }
@@ -52,7 +50,7 @@ public class AdoptionController {
     // Endpoint to get all adoption profiles
     @GetMapping("/profiles")
     public ResponseEntity<?> getAllAdoptionProfiles() {
-        List<GetAdoptionProfileDTO> adoptionProfiles = adoptionService.findAll();
+        List<ProfileDTO> adoptionProfiles = adoptionService.findAllAdoptionProfiles();
         if (adoptionProfiles.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -63,7 +61,7 @@ public class AdoptionController {
     @GetMapping("/profiles/{id}")
     public ResponseEntity<?> getAdoptionProfileById(@PathVariable Long id) {
         try {
-            GetAdoptionProfileDTO model = adoptionService.findAdoptionProfileModelById(id);
+            ProfileDTO model = adoptionService.findAdoptionProfileModelById(id);
             return ResponseEntity.ok(model);
         } catch (Exception e) {
             return buildErrorResponse("Adoption profile not found: " + e.getMessage(), HttpStatus.NOT_FOUND);
@@ -71,15 +69,15 @@ public class AdoptionController {
     }
 
     // Endpoint to get adoption profiles with a status of PENDING
-    @GetMapping("/profiles/PENDING")
-    public ResponseEntity<?> getProfilesByStatusPending() {
-        try {
-            List<ProfileDTO> model = adoptionService.AnimalsByAdoptionPendingStatus();
-            return ResponseEntity.ok(model);
-        } catch (Exception e) {
-            return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.NOT_FOUND);
-        }
-    }
+//    @GetMapping("/profiles/PENDING")
+//    public ResponseEntity<?> getProfilesByStatusPending() {
+//        try {
+//            List<ProfileDTO> model = adoptionService.AnimalsByAdoptionPendingStatus();
+//            return ResponseEntity.ok(model);
+//        } catch (Exception e) {
+//            return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.NOT_FOUND);
+//        }
+//    }
 
     // Endpoint to delete an adoption profile
     @Transactional
@@ -91,32 +89,32 @@ public class AdoptionController {
         }
         return buildErrorResponse("Adoption profile not found", HttpStatus.NOT_FOUND);
     }
-
-    // Endpoint to create an adoption request
-    @PostMapping("/add")
-    public ResponseEntity<?> createAdoptionIntention(@RequestBody AdoptionSubmissionDTO adoptionDTO) {
-        try {
-            Boolean adoption = adoptionService.saveAdoptionRequest(adoptionDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(adoption);
-        } catch (DataIntegrityViolationException e) {
-            return buildErrorResponse("Invalid data: " + e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    // Endpoint to update an adoption request
-    @PutMapping("/change/{id}")
-    public ResponseEntity<?> updateAdoptionIntention(@RequestBody AdoptionSubmissionDTO adoptionDTO, @PathVariable String id) {
-        try {
-            Boolean adoption = adoptionService.updateAdoptionRequest(adoptionDTO, id);
-            return ResponseEntity.ok(adoption);
-        } catch (DataIntegrityViolationException e) {
-            return buildErrorResponse("Invalid data: " + e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//
+//    // Endpoint to create an adoption request
+//    @PostMapping("/add")
+//    public ResponseEntity<?> createAdoptionIntention(@RequestBody AdoptionSubmissionDTO adoptionDTO) {
+//        try {
+//            Boolean adoption = adoptionService.saveAdoptionRequest(adoptionDTO);
+//            return ResponseEntity.status(HttpStatus.CREATED).body(adoption);
+//        } catch (DataIntegrityViolationException e) {
+//            return buildErrorResponse("Invalid data: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+//        } catch (Exception e) {
+//            return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+//
+//    // Endpoint to update an adoption request
+//    @PutMapping("/change/{id}")
+//    public ResponseEntity<?> updateAdoptionIntention(@RequestBody AdoptionSubmissionDTO adoptionDTO, @PathVariable String id) {
+//        try {
+//            Boolean adoption = adoptionService.updateAdoptionRequest(adoptionDTO, id);
+//            return ResponseEntity.ok(adoption);
+//        } catch (DataIntegrityViolationException e) {
+//            return buildErrorResponse("Invalid data: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+//        } catch (Exception e) {
+//            return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
 
     // Common error response builder

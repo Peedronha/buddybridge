@@ -1,5 +1,6 @@
 package br.com.buddybridge.core.animais.animal.entity;
 
+import br.com.buddybridge.core.adocao.entity.AdoptionProfileModel;
 import br.com.buddybridge.core.animais.animal.model.AnimalDto;
 import br.com.buddybridge.core.animais.raca.entity.RacaModel;
 import br.com.buddybridge.core.animais.tipo.entity.TypeModel;
@@ -7,12 +8,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
-@Entity
-@Table(name = "animais")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Entity
+@Table(name = "animais")
 public class AnimalModel {
 
     @Id
@@ -43,6 +45,9 @@ public class AnimalModel {
 
     @Column(name = "localizacao_animal", nullable = false)
     private String localizacao_animal;
+
+    @OneToMany(mappedBy = "animal")
+    private List<AdoptionProfileModel> profiles;
 
     @ManyToOne
     @JoinColumn(name = "type_id")

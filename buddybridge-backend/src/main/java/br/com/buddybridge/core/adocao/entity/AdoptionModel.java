@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,13 +20,14 @@ public class AdoptionModel {
     @Column(name = "id_adocao")
     private Long id_adocao;
 
-    @OneToOne
-    private AnimalModel id_animal;
+    @OneToMany(mappedBy = "adocao")
+    private List<AdoptionProfileModel> profiles;
 
     @ManyToOne
     @JoinColumn(name = "id_adotante")
     private AdopterModel adopter;
 
+    @Column(name = "data_submissao")
     private LocalDateTime data_submissao;
 
     @Embedded
@@ -47,3 +49,4 @@ public class AdoptionModel {
     @Column(name = "data_criacao")
     private LocalDateTime data_criacao;
 }
+

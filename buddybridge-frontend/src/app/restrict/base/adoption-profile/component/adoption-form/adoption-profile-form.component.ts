@@ -36,13 +36,15 @@ import {AnimalModel} from "../../../animal/model/animal.model";
 export class AdoptionProfileFormComponent {
   adoptionForm: FormGroup;
   animals: AnimalModel[] = [];
+
+  selectAnimal: AnimalModel | undefined;
+
   statusOptions = [
     { label: 'Pendente', value: 'PENDING' },
     { label: 'Aprovada', value: 'APPROVED' },
     { label: 'Rejeitada', value: 'REJECTED' },
     { label: 'Finalizada', value: 'COMPLETED' }
   ];
-  selectAnimal: AnimalModel | undefined;
   selectStatus: { label: string, value: string } | undefined;
 
   constructor(
@@ -54,33 +56,36 @@ export class AdoptionProfileFormComponent {
     private animalService: AnimalService
   ) {
     this.adoptionForm = this.fb.group({
-      id_adocao: [''],
+      id_perfil_adocao: [''],
+      id_adocao:[''],
       id_animal: ['', Validators.required],
-      descricao_experiencia: [''],
-      status_adocao: ['', Validators.required],
+      medical_necessities:[''],
+      status_adocao: [''],
       priority: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
-      medical_necessities: [''],
       image: [null],
+
+      data_criacao: ['']
     });
   }
 
   ngOnInit(): void {
     const adoption: AdoptionProfileModel = this.router.snapshot.data['perfil'];
-
+    alert(JSON.stringify(adoption))
     this.adoptionForm.setValue({
+      id_perfil_adocao: adoption.id_perfil_adocao,
       id_adocao: adoption.id_adocao,
       id_animal: adoption.id_animal,
-      descricao_experiencia: adoption.descricao_experiencia,
       status_adocao: adoption.status_adocao,
-      priority: adoption.priority,
       medical_necessities: adoption.medical_necessities,
+      data_criacao: adoption.data_criacao,
+      priority: adoption.priority,
       image: adoption.image,
     });
-
     this.loadDropdownOptions();
   }
 
   loadDropdownOptions(): void {
+    alert('loading dropdown')
     this.animalService.getAnimals().subscribe(animals => {
       this.animals = animals;
     });
@@ -92,7 +97,7 @@ export class AdoptionProfileFormComponent {
 
       adoption.id_animal = this.selectAnimal?.id_animal?.toString() || '';
       adoption.status_adocao = this.selectStatus?.value;
-      if (adoption.id_adocao) {
+      if (adoption.id_perfil_adocao) {
         this.adoptionService.updateAdoptionProfile(adoption).subscribe(
           response => {
             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção atualizada!' });
@@ -117,8 +122,8 @@ export class AdoptionProfileFormComponent {
       }
     }
   }
-  get id_adocao() {
-    return this.adoptionForm.get('id_adocao');
+  get id_perfil_adocao() {
+    return this.adoptionForm.get('id_perfil_adocao');
   }
 
   get id_animal() {

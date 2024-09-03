@@ -52,7 +52,7 @@ public class AnimalService {
         Optional<TypeModel> typeModel = tipoRepository.findById(Long.valueOf(animalDto.getTipo_animal()));
         Optional<RacaModel> racaModel = racaRepository.findById(Long.valueOf(animalDto.getRaca_animal()));
 
-        model.setStatus_adocao(AdoptionStatus.PENDING.name());
+//        model.setStatus_adocao(AdoptionStatus.PENDING.name());
 
         if (typeModel.isPresent() && racaModel.isPresent()) {
             model.setType(typeModel.get());

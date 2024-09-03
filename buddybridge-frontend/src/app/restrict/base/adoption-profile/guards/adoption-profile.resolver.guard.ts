@@ -17,13 +17,11 @@ export class adoptionProfileResolver {
       return this.service.getAdoptionsProfileById(route.params['id']);
     }
     return of({
+      id_perfil_adocao:parseInt(''),
       id_adocao: parseInt(''),
       id_animal: '',
-      nome_adotante: '',
-      endereco: '',
-      telefone: '',
-      email: '',
-      descricao_experiencia: '',
+      idade: '',
+      data_criacao: '',
       status_adocao: '',
       data_submissao: '',
       priority: '',
@@ -31,4 +29,5 @@ export class adoptionProfileResolver {
       image: '',
     });
   }
+
 }

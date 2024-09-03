@@ -33,10 +33,7 @@ export class AdoptionProfileListComponent {
 
   editForm = this.fb.group({
     nome_adotante: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
-    raca: ['', Validators.required],
-    endereco: ['', Validators.required],
-    telefone: ['', Validators.required],
-    email: ['', [Validators.required, Validators.pattern(/^\d{1,2000}$/)]],
+    priority:[''],
     descricao_experiencia: ['', Validators.required],
     status_adocao: ['', Validators.required],
     data_submissao: ['', Validators.required],
