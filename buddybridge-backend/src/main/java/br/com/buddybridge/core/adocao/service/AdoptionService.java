@@ -1,5 +1,6 @@
 package br.com.buddybridge.core.adocao.service;
 
+import br.com.buddybridge.core.adocao.entity.AdoptionStatus;
 import br.com.buddybridge.core.adocao.model.AdoptionSubmissionDTO;
 import br.com.buddybridge.core.adocao.model.ProfileDTO;
 import br.com.buddybridge.core.adocao.entity.AdoptionModel;
@@ -29,12 +30,11 @@ public class AdoptionService {
 
             AdoptionProfileModel model = new AdoptionProfileModel(adoptionDTO);
 
-//            if(adoptionRepository.findById(adoptionDTO.getId_adocao()).isPresent()) {
-//                model.setAdocao(adoptionRepository.findById(adoptionDTO.getId_adocao()).get());
-//            }
-//            else {
-//                throw new SystemException("AdocaoModel with ID " + adoptionDTO.getId_adocao() + " not found.");
-//            }
+            if(adoptionRepository.findById(adoptionDTO.getId_adocao()).isEmpty()) {
+                AdoptionModel adoptionModel = new AdoptionModel();
+                adoptionModel.setStatus_adocao(AdoptionStatus.PENDING);
+                model.setAdocao(adoptionModel);
+            }
 
             Optional<AnimalModel> animalModelOptional = animalRepository.findById(Long.valueOf(adoptionDTO.getId_animal()));
 
@@ -84,19 +84,19 @@ public class AdoptionService {
                 .orElseThrow(Exception::new);
     }
 
-//    public List<ProfileDTO> AnimalsByAdoptionPendingStatus() {
-//        List<ProfileDTO> dtos = new ArrayList<>();
-//        for (AnimalModel model: adoptionProfileRepository.findAllByPendingAdoption()) {
-//            AdoptionProfileModel profileModel = adoptionProfileRepository.findAdoptionProfilesByAnimalId(model.getId_animal());
-//
-//            ProfileDTO dto = new ProfileDTO(model);
-//            dto.setImage(profileModel.getImage());
-//            dto.setMedical_necessities(profileModel.getMedical_necessities());
-//            dto.setPriority(profileModel.getPriority());
-//            dtos.add(dto);
-//        }
-//        return dtos;
-//    }
+    public List<ProfileDTO> AnimalsByAdoptionPendingStatus() throws SystemException {
+        try {
+            List<ProfileDTO> dtos = new ArrayList<>();
+            for (AdoptionProfileModel model: adoptionProfileRepository.findAllByPendingAdoption()){
+                dtos.add(new ProfileDTO(model));
+            };
+            return dtos;
+
+        } catch (Exception e) {
+            throw new SystemException(String.valueOf(e));
+        }
+
+    }
 
 //    public Boolean updateAdoptionRequest(AdoptionSubmissionDTO adoptionDTO, String id) {
 //        if (adoptionRepository.existsById(Long.valueOf(id))) {

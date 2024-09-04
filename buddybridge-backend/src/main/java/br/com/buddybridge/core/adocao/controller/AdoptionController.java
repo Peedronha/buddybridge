@@ -69,15 +69,15 @@ public class AdoptionController {
     }
 
     // Endpoint to get adoption profiles with a status of PENDING
-//    @GetMapping("/profiles/PENDING")
-//    public ResponseEntity<?> getProfilesByStatusPending() {
-//        try {
-//            List<ProfileDTO> model = adoptionService.AnimalsByAdoptionPendingStatus();
-//            return ResponseEntity.ok(model);
-//        } catch (Exception e) {
-//            return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.NOT_FOUND);
-//        }
-//    }
+    @GetMapping("/profiles/PENDING")
+    public ResponseEntity<?> getProfilesByStatusPending() {
+        try {
+            List<ProfileDTO> model = adoptionService.AnimalsByAdoptionPendingStatus();
+            return ResponseEntity.ok(model);
+        } catch (Exception e) {
+            return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
 
     // Endpoint to delete an adoption profile
     @Transactional
