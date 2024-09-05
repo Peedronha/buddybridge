@@ -48,5 +48,9 @@ public class AdoptionModel {
 
     @Column(name = "data_criacao")
     private LocalDateTime data_criacao;
+
+    public AdoptionModel(AdoptionStatus status_adocao) {
+        this.status_adocao = status_adocao;
+    }
 }
 

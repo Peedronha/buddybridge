@@ -2,6 +2,7 @@ import {Raca} from "../../raca/model/raca.model";
 import {Tipo} from "../../tipo_animal/model/tipo.model";
 
 export interface AnimalCard {
+  id_perfil_adocao?: number;
   id_adocao?: number;
   id_animal?: number;
   nome_animal?: string;

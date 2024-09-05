@@ -17,8 +17,8 @@ export class adoptionProfileResolver {
       return this.service.getAdoptionsProfileById(route.params['id']);
     }
     return of({
-      id_perfil_adocao:parseInt(''),
-      id_adocao: parseInt(''),
+      id_perfil_adocao: '',
+      id_adocao: '',
       id_animal: '',
       idade: '',
       data_criacao: '',

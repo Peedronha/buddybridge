@@ -15,6 +15,8 @@ import {NgIf} from "@angular/common";
 import {RippleModule} from "primeng/ripple";
 import {AccountService} from "../../../account/shared/account.service";
 import {AdoptionFormModel} from "../../models/AdoptionFormModel";
+import {AccountRestrictService} from "../../../../restrict/base/account/shared/account-restrict.service";
+import {User} from "../../../account/model/user.model";
 
 @Component({
   selector: 'app-adoption-submission-form',
@@ -36,7 +38,6 @@ import {AdoptionFormModel} from "../../models/AdoptionFormModel";
 export class AdoptionSubmissionFormComponent {
 
   adoptionForm: FormGroup;
-
   constructor(
     private fb: FormBuilder,
     private adoptionService: AdoptionService,
@@ -44,9 +45,11 @@ export class AdoptionSubmissionFormComponent {
     private router: ActivatedRoute,
     private route: Router,
     private animalService: AnimalService,
-    private viaCepService: AccountService
+    private viaCepService: AccountService,
+    private accountRestrictService: AccountRestrictService
   ) {
     this.adoptionForm = this.fb.group({
+      id_perfil_adocao:[''],
       id_adocao: [''],
       id_animal: [''],
       nome_adotante: ['', Validators.required],
@@ -81,6 +84,29 @@ export class AdoptionSubmissionFormComponent {
 
   ngOnInit(): void {
     const adoption: AdoptionProfileModel = this.router.snapshot.data['adocao'];
+
+    const perfil: any = localStorage.getItem('idUser');
+
+    this.accountRestrictService.loadById(perfil+'').subscribe((data: User) => {
+      this.adoptionForm.setValue({
+        nome_adotante: data.nome,
+        email: data.login,
+        telefone: data.telefone+'',
+        id_perfil_adocao: adoption.id_perfil_adocao+'',
+        id_adocao: adoption.id_adocao+'',
+        id_animal:adoption.id_animal+'',
+        data_nascimento: '',
+        CPF: '',
+        data_submissao: '',
+        endereco: '',
+        CEP: '',
+        numero: '',
+        Complemento: '',
+        Bairro: '',
+        Estado: '',
+        Cidade: '',
+      })
+    });
   }
 
   submitDetails(): void {
@@ -98,6 +124,10 @@ export class AdoptionSubmissionFormComponent {
     //     );
     //   }
   }
+  get id_perfil_adocao() {
+    return this.adoptionForm.get('id_perfil_adocao');
+  }
+
   get id_adocao() {
     return this.adoptionForm.get('id_adocao');
   }

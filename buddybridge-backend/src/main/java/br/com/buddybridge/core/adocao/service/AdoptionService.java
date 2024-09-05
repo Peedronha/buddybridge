@@ -30,10 +30,8 @@ public class AdoptionService {
 
             AdoptionProfileModel model = new AdoptionProfileModel(adoptionDTO);
 
-            if(adoptionRepository.findById(adoptionDTO.getId_adocao()).isEmpty()) {
-                AdoptionModel adoptionModel = new AdoptionModel();
-                adoptionModel.setStatus_adocao(AdoptionStatus.PENDING);
-                model.setAdocao(adoptionModel);
+            if(adoptionDTO.getId_adocao().isEmpty()) {
+                model.setAdocao(this.adoptionRepository.save(new AdoptionModel(AdoptionStatus.PENDING)));
             }
 
             Optional<AnimalModel> animalModelOptional = animalRepository.findById(Long.valueOf(adoptionDTO.getId_animal()));
@@ -63,11 +61,11 @@ public class AdoptionService {
 //        }
 
     public void deleteAdoptionProfile(Long id) {
-        adoptionProfileRepository.deleteById(id);
+        this.adoptionProfileRepository.deleteById(id);
     }
 
     public boolean existsByIdPerfilAdocao(Long id) {
-        return adoptionRepository.existsById(id);
+        return adoptionProfileRepository.existsById(id);
     }
 
     public List<ProfileDTO> findAllAdoptionProfiles() {

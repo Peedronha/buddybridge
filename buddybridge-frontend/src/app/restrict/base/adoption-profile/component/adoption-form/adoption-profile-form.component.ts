@@ -109,7 +109,7 @@ export class AdoptionProfileFormComponent {
           }
         );
       } else {
-        adoption.id_perfil_adocao = parseInt('')
+        adoption.id_perfil_adocao = ''
         this.adoptionService.registerAdoptionProfile(adoption).subscribe(
           response => {
             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção registrada!' });

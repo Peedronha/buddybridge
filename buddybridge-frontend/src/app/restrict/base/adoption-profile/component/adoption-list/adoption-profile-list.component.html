@@ -3,9 +3,9 @@
            [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session">
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="id_adocao" style="width:10%">Cod. <p-sortIcon field="id_adocao"></p-sortIcon></th>
+        <th pSortableColumn="id_perfil_adocao" style="width:10%">Cod. <p-sortIcon field="id_adocao"></p-sortIcon></th>
         <th pSortableColumn="nome_adotante" style="width:20%">Nome <p-sortIcon field="nome_adotante"></p-sortIcon></th>
-        <th pSortableColumn="email" style="width:20%">Email <p-sortIcon field="email"></p-sortIcon></th>
+        <th pSortableColumn="id_adocao" style="width:20%">Adoção <p-sortIcon field="adocao"></p-sortIcon></th>
         <th pSortableColumn="id_animal" style="width:20%">Animal <p-sortIcon field="id_animal"></p-sortIcon></th>
         <th pSortableColumn="status" style="width:20%">Status <p-sortIcon field="status"></p-sortIcon></th>
         <th pSortableColumn="Ações" style="width:15%">Ações</th>
@@ -18,7 +18,7 @@
           <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'nome_adotante', 'contains')" [value]="$any(dt1.filters['nome_adotante'])?.value" placeholder="Filtrar Nome" class="w-full">
         </th>
         <th>
-          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'email', 'contains')" [value]="$any(dt1.filters['email'])?.value" placeholder="Filtrar Email" class="w-full">
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'id_adocao', 'contains')" [value]="$any(dt1.filters['adocao'])?.value" placeholder="Filtrar Adoção" class="w-full">
         </th>
         <th>
           <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'id_animal', 'contains')" [value]="$any(dt1.filters['id_animal'])?.value" placeholder="Filtrar Animal" class="w-full">
@@ -35,15 +35,15 @@
       <tr [pSelectableRow]="profiles">
         <td>
           <span class="p-column-title">Cod.</span>
-          {{profile.id_adocao}}
+          {{profile.id_perfil_adocao}}
         </td>
         <td>
           <span class="p-column-title">Nome</span>
           {{profile.nome_adotante}}
         </td>
         <td>
-          <span class="p-column-title">Email</span>
-          <span class="ml-1 vertical-align-middle">{{profile.email}}</span>
+          <span class="p-column-title">Adocao</span>
+          <span class="ml-1 vertical-align-middle">{{profile.id_adocao}}</span>
         </td>
         <td>
           <span class="p-column-title">Animal</span>
