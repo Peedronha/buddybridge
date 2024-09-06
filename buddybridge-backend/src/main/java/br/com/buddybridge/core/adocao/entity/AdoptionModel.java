@@ -1,5 +1,6 @@
 package br.com.buddybridge.core.adocao.entity;
 
+import br.com.buddybridge.core.adocao.model.AdoptionSubmissionDTO;
 import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -51,6 +52,10 @@ public class AdoptionModel {
 
     public AdoptionModel(AdoptionStatus status_adocao) {
         this.status_adocao = status_adocao;
+        this.data_criacao = LocalDateTime.now();
+    }
+
+    public AdoptionModel(AdoptionSubmissionDTO adoptionDTO) {
     }
 }
 

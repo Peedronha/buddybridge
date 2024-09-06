@@ -89,20 +89,20 @@ public class AdoptionController {
         }
         return buildErrorResponse("Adoption profile not found", HttpStatus.NOT_FOUND);
     }
-//
-//    // Endpoint to create an adoption request
-//    @PostMapping("/add")
-//    public ResponseEntity<?> createAdoptionIntention(@RequestBody AdoptionSubmissionDTO adoptionDTO) {
-//        try {
-//            Boolean adoption = adoptionService.saveAdoptionRequest(adoptionDTO);
-//            return ResponseEntity.status(HttpStatus.CREATED).body(adoption);
-//        } catch (DataIntegrityViolationException e) {
-//            return buildErrorResponse("Invalid data: " + e.getMessage(), HttpStatus.BAD_REQUEST);
-//        } catch (Exception e) {
-//            return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-//
+
+    // Endpoint to create an adoption request
+    @PostMapping("/add")
+    public ResponseEntity<?> createAdoptionIntention(@RequestBody AdoptionSubmissionDTO adoptionDTO) {
+        try {
+            Boolean adoption = adoptionService.saveAdoptionRequest(adoptionDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(adoption);
+        } catch (DataIntegrityViolationException e) {
+            return buildErrorResponse("Invalid data: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 //    // Endpoint to update an adoption request
 //    @PutMapping("/change/{id}")
 //    public ResponseEntity<?> updateAdoptionIntention(@RequestBody AdoptionSubmissionDTO adoptionDTO, @PathVariable String id) {

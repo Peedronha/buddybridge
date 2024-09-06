@@ -1,5 +1,6 @@
 package br.com.buddybridge.core.adocao.entity;
 
+import br.com.buddybridge.core.adocao.model.AdoptionSubmissionDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -46,4 +47,12 @@ public class AdopterModel {
 
     @OneToMany(mappedBy = "adopter")
     private List<AdoptionModel> adoptions;
+
+    public AdopterModel(AdoptionSubmissionDTO adoptionDTO) {
+        this.nome_adotante = adoptionDTO.getNome_adotante();
+        this.data_nascimento = LocalDate.parse(adoptionDTO.getData_nascimento());
+        this.cpf = adoptionDTO.getCPF();
+        this.telefone = adoptionDTO.getTelefone();
+        this.email = adoptionDTO.getEmail();
+    }
 }

@@ -1,5 +1,7 @@
 package br.com.buddybridge.core.adocao.entity;
 
+import br.com.buddybridge.core.adocao.model.AddressDTO;
+import br.com.buddybridge.core.adocao.model.AdoptionSubmissionDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
@@ -37,4 +39,14 @@ public class AddressModel {
     @NotBlank
     @Column(name = "cidade")
     private String cidade;
+
+    public AddressModel(AddressDTO addressDTO) {
+        this.endereco = addressDTO.getEndereco();
+        this.cep = addressDTO.getCep();
+        this.numero = addressDTO.getNumero();
+        this.complemento = addressDTO.getComplemento();
+        this.bairro = addressDTO.getBairro();
+        this.estado = addressDTO.getEstado();
+        this.cidade = addressDTO.getCidade();
+    }
 }
