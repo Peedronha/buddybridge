@@ -21,10 +21,11 @@ public class AdoptionModel {
     @Column(name = "id_adocao")
     private Long id_adocao;
 
-    @OneToMany(mappedBy = "adocao")
-    private List<AdoptionProfileModel> profiles;
+    @OneToOne(mappedBy = "adocao", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn(name = "id_perfil_adocao")
+    private AdoptionProfileModel profile;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_adotante")
     private AdopterModel adopter;
 
@@ -37,15 +38,6 @@ public class AdoptionModel {
     @Column(name = "status_adocao")
     @Enumerated(EnumType.STRING)
     private AdoptionStatus status_adocao;
-
-    @Column(name = "priority")
-    private Integer priority;
-
-    @Column(name = "medical_necessities")
-    private String medical_necessities;
-
-    @Column(name = "image")
-    private String image;
 
     @Column(name = "data_criacao")
     private LocalDateTime data_criacao;

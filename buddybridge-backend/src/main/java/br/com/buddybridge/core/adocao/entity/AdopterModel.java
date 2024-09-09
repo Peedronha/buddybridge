@@ -45,8 +45,9 @@ public class AdopterModel {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(mappedBy = "adopter")
-    private List<AdoptionModel> adoptions;
+    @OneToOne
+    @JoinColumn(name = "id_adocao")
+    private AdoptionModel adocao;
 
     public AdopterModel(AdoptionSubmissionDTO adoptionDTO) {
         this.nome_adotante = adoptionDTO.getNome_adotante();

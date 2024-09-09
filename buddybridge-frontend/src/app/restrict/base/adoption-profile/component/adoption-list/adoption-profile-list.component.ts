@@ -48,7 +48,7 @@ export class AdoptionProfileListComponent {
               private router: Router) {}
 
   ngOnInit(): void {
-    this.adoptionService.getAdoptionsProfiles().subscribe((data: AdoptionProfileModel[]) => {
+    this.adoptionService.getAnimalsByProfileStatus().subscribe((data: AdoptionProfileModel[]) => {
       this.profiles = data;
     });
   }

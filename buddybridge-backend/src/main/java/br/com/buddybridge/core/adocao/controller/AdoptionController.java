@@ -3,6 +3,7 @@ package br.com.buddybridge.core.adocao.controller;
 import br.com.buddybridge.core.adocao.model.AdoptionSubmissionDTO;
 import br.com.buddybridge.core.adocao.model.ProfileDTO;
 import br.com.buddybridge.core.adocao.entity.AdoptionProfileModel;
+import br.com.buddybridge.core.adocao.model.get.GetAdoptionDTO;
 import br.com.buddybridge.core.adocao.service.AdoptionService;
 import br.com.buddybridge.core.animais.animal.service.AnimalService;
 import jakarta.transaction.SystemException;
@@ -50,7 +51,7 @@ public class AdoptionController {
     // Endpoint to get all adoption profiles
     @GetMapping("/profiles")
     public ResponseEntity<?> getAllAdoptionProfiles() {
-        List<ProfileDTO> adoptionProfiles = adoptionService.findAllAdoptionProfiles();
+        List<GetAdoptionDTO> adoptionProfiles = adoptionService.findAllAdoptionProfiles();
         if (adoptionProfiles.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -100,6 +101,16 @@ public class AdoptionController {
             return buildErrorResponse("Invalid data: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAllAdoptions()  {
+        try {
+            List<GetAdoptionDTO> model = adoptionService.findAllAdoptions();
+            return ResponseEntity.ok(model);
+        } catch (Exception e) {
+            return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 

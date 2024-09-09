@@ -4,6 +4,7 @@ import br.com.buddybridge.core.adocao.entity.*;
 import br.com.buddybridge.core.adocao.model.AddressDTO;
 import br.com.buddybridge.core.adocao.model.AdoptionSubmissionDTO;
 import br.com.buddybridge.core.adocao.model.ProfileDTO;
+import br.com.buddybridge.core.adocao.model.get.GetAdoptionDTO;
 import br.com.buddybridge.core.adocao.repository.AdopterRepository;
 import br.com.buddybridge.core.adocao.repository.AdoptionProfileRepository;
 import br.com.buddybridge.core.adocao.repository.AdoptionRepository;
@@ -11,6 +12,7 @@ import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
 import br.com.buddybridge.core.animais.animal.repository.AnimalRepository;
 import jakarta.transaction.SystemException;
 import lombok.AllArgsConstructor;
+import lombok.Generated;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -57,10 +59,7 @@ public class AdoptionService {
             try {
                 Optional<AdoptionModel> model = this.adoptionRepository.findById(adoptionDTO.getId_adocao());
                 if (model.isPresent()) {
-
-                    populateAdoption(adoptionDTO, model.get());
-
-                    this.adoptionRepository.save(new AdoptionModel(adoptionDTO));
+                    this.adoptionRepository.save(populateAdoption(adoptionDTO, model.get()));
                 } else {
                     throw new SystemException("AdoptionModel with ID " + adoptionDTO.getId_adocao() + " not found.");
                 }
@@ -72,14 +71,21 @@ public class AdoptionService {
             return true;
         }
 
-    private void populateAdoption(AdoptionSubmissionDTO adoptionDTO, AdoptionModel model) {
+    private AdoptionModel populateAdoption(AdoptionSubmissionDTO adoptionDTO, AdoptionModel model) {
         AddressModel addressModel = new AddressModel(new AddressDTO(adoptionDTO));
         AdopterModel adopterModel = new AdopterModel(adoptionDTO);
+
+        Optional<AdoptionProfileModel> adoptionProfileModel = this.adoptionProfileRepository.findById(adoptionDTO.getId_perfil_adocao());
+
+        adoptionProfileModel.ifPresent(model::setProfile);
 
         model.setAddress(addressModel);
         model.setAdopter(this.adopterRepository.save(adopterModel));
 
+        model.setStatus_adocao(AdoptionStatus.ANALYSING);
+
         model.setData_submissao(LocalDateTime.now());
+        return model;
     }
 
     public void deleteAdoptionProfile(Long id) {
@@ -90,10 +96,10 @@ public class AdoptionService {
         return adoptionProfileRepository.existsById(id);
     }
 
-    public List<ProfileDTO> findAllAdoptionProfiles() {
-        List<ProfileDTO> dtos = new ArrayList<>();
+    public List<GetAdoptionDTO> findAllAdoptionProfiles() {
+        List<GetAdoptionDTO> dtos = new ArrayList<>();
         for (AdoptionProfileModel model: adoptionProfileRepository.findAll()) {
-            dtos.add(new ProfileDTO(model));
+            dtos.add(new GetAdoptionDTO(model));
         }
         return dtos;
     }
@@ -118,19 +124,16 @@ public class AdoptionService {
 
     }
 
+    public List<GetAdoptionDTO> findAllAdoptions() throws SystemException {
+        try {
+            List<GetAdoptionDTO> dtos = new ArrayList<>();
+            for (AdoptionModel model: adoptionRepository.findAll()){
+                dtos.add(new GetAdoptionDTO(model));
+            };
+            return dtos;
 
-
-//    public Boolean updateAdoptionRequest(AdoptionSubmissionDTO adoptionDTO, String id) {
-//        if (adoptionRepository.existsById(Long.valueOf(id))) {
-//            AdoptionModel model = adoptionRepository.findById(Long.valueOf(id)).orElse(null);
-//            if (model != null) {
-//                model.setStatus_adocao(adoptionDTO.getStatus_adocao());
-//                model.setDescription(adoptionDTO.getDescripton());
-//                adoptionRepository.save(model);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
+        } catch (Exception e) {
+            throw new SystemException(String.valueOf(e));
+        }
+    }
 }

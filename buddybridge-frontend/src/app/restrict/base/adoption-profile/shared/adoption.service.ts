@@ -88,7 +88,7 @@ export class AdoptionService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.post<any>('http://localhost:8080/adocao/add/', adoption,{headers: reqHeader}).pipe(
+    return this.http.post<any>('http://localhost:8080/adocao/add', adoption,{headers: reqHeader}).pipe(
       map((response) =>{
           if (response)
             return response;

@@ -7,9 +7,11 @@ import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Embeddable
 @Data
+@NoArgsConstructor
 public class AddressModel {
 
     @NotBlank
@@ -49,4 +51,5 @@ public class AddressModel {
         this.estado = addressDTO.getEstado();
         this.cidade = addressDTO.getCidade();
     }
+
 }

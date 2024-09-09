@@ -8,20 +8,23 @@ import {AdoptionService} from "../../../../restrict/base/adoption-profile/shared
 import {AccountService} from "../../../account/shared/account.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MessageService} from "primeng/api";
+import {AdoptionListComponent} from "../adoption-list/adoption-list.component";
+import {AdoptionFormModel} from "../../models/AdoptionFormModel";
 
 @Component({
   selector: 'app-adoption',
   standalone: true,
   imports: [
     AdoptionGridComponent,
-    AdoptionProfileListComponent
+    AdoptionProfileListComponent,
+    AdoptionListComponent
   ],
   templateUrl: './adoption.component.html',
   styleUrl: './adoption.component.scss'
 })
 export class AdoptionComponent {
   profiles!: AdoptionProfileModel[]
-
+  adoptions!: AdoptionFormModel[]
   constructor(
     private adoptionService: AdoptionService,
     private accountService: AccountService,
@@ -38,10 +41,16 @@ export class AdoptionComponent {
     this.adoptionService.getAdoptionsProfiles().subscribe((data: AdoptionProfileModel[]) => {
       this.profiles! = data;
     });
+    this.adoptionService.getAdoptions().subscribe((data: AdoptionFormModel[]) => {
+      this.adoptions = data;
+    });
   }
 
   onAdd(idUser: any) {
     this.router.navigate(['addadocao', idUser], { relativeTo: this.route });
   }
 
+  onEdit(idUser: number) {
+    this.router.navigate(['editadocao', idUser], { relativeTo: this.route });
+  }
 }

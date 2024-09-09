@@ -18,7 +18,8 @@ public class AdoptionProfileModel {
     @Column(name = "id_perfil_adocao")
     private Long id_perfil_adocao;
 
-    @ManyToOne
+
+    @OneToOne
     @JoinColumn(name = "id_adocao")
     private AdoptionModel adocao;
 
