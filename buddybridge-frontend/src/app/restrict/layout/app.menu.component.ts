@@ -69,6 +69,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Buddy Animais',
                 items: [
                     { label: 'Animais', icon: 'pi pi-fw pi-heart', routerLink: ['/animal'] },
+                    { label: 'Adoções', icon: 'pi pi-fw pi-heart', routerLink: ['restrict/adocao/list'] },
                     {
                       label: 'Configurações',
                       icon: 'pi pi-fw pi-cog',

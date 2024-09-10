@@ -17,7 +17,6 @@ import {AdoptionFormModel} from "../../models/AdoptionFormModel";
   imports: [
     AdoptionGridComponent,
     AdoptionProfileListComponent,
-    AdoptionListComponent
   ],
   templateUrl: './adoption.component.html',
   styleUrl: './adoption.component.scss'

@@ -1,5 +1,21 @@
 <div class="card">
-  <p-table #dt1 [value]="profiles" selectionMode="single" [(selection)]="_specificEntity" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
+  <div class="surface-section py-2 md-3">
+    <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BRIDGE</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Adoções</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você encontra animais em busca de um lar!</a></li>
+    </ul>
+    <div class="flex align-items-center flex-column lg:flex-row">
+      <div class="font-semibold text-2ml text-900">Promovemos encontros para unir pessoas a pets que estão em busca de um lar.
+        Acreditamos que, ao doarmos tempo para cuidar de outro ser, criamos conexões mais fortes.
+        Temos aqui muitos animais à espera de uma família, por isso esperamos que você encontre o companheiro ideal.
+      </div><br/><br/><br/>
+    </div>
+  </div>
+  <p-table #dt1 [value]="adoptions" selectionMode="single" [(selection)]="_specificEntity" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
            [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session">
     <ng-template pTemplate="header">
       <tr>
@@ -31,27 +47,27 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-profile>
-      <tr [pSelectableRow]="profiles">
+    <ng-template pTemplate="body" let-adoption>
+      <tr [pSelectableRow]="adoptions">
         <td>
           <span class="p-column-title">Cod.</span>
-          {{profile.id_adocao}}
+          {{adoption.id_adocao}}
         </td>
         <td>
           <span class="p-column-title">Nome</span>
-          {{profile.nome_adotante}}
+          {{adoption.nome_adotante}}
         </td>
         <td>
           <span class="p-column-title">Perfil Adoção</span>
-          <span class="ml-1 vertical-align-middle">{{profile.id_perfil_adocao}}</span>
+          <span class="ml-1 vertical-align-middle">{{adoption.id_perfil_adocao}}</span>
         </td>
         <td>
           <span class="p-column-title">Animal</span>
-          <span class="ml-1 vertical-align-middle">{{profile.nome_animal}}</span>
+          <span class="ml-1 vertical-align-middle">{{adoption.nome_animal}}</span>
         </td>
         <td>
           <span class="p-column-title">Status</span>
-          <span class="ml-1 vertical-align-middle">{{profile.status_adocao}}</span>
+          <span class="ml-1 vertical-align-middle">{{adoption.status_adocao}}</span>
         </td>
         <td>
           <div>

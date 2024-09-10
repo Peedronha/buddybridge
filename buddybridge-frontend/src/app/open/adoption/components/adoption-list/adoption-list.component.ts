@@ -50,6 +50,8 @@ export class AdoptionListComponent {
 
   ngOnInit() {
     this.adoptionService.getAdoptions().subscribe((data: AdoptionFormModel[]) => {
+      alert(JSON.stringify(data))
+
       this.adoptions = data;
     });
   }
