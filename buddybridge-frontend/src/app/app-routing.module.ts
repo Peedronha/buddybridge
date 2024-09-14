@@ -30,6 +30,10 @@ import { volunteerResolver } from "./restrict/base/volunteer/guards/volunteer.re
 import { DashboardComponent } from './restrict/dashboard/dashboard.component';
 import { AppLayoutComponent } from './restrict/layout/app.layout.component';
 import { ErrorComponent } from './restrict/layout/error/error/error.component';
+import { GrupoacessoComponent } from './restrict/base/grupo_acesso/component/grupoacesso/grupoacesso.component';
+import { GrupoacessoFormComponent } from './restrict/base/grupo_acesso/component/grupoacesso-form/grupoacesso-form.component';
+import { grupoacessoResolver } from './restrict/base/grupo_acesso/guard/grupoacesso.resolver';
+import { SolicitacaoacessoComponent } from './restrict/base/solicitacao_acesso/component/solicitacaoacesso/solicitacaoacesso.component';
 const routes: Routes = [
   { path: 'errorBuddyBridge', title: 'BuddyBridge - Erro', component: ErrorComponent },
   {
@@ -40,6 +44,7 @@ const routes: Routes = [
 
       { path: 'restrict/home', title: 'BuddyBridge - Home', component: HomeComponent },
       { path: 'restrict/institucional', title: 'BuddyBridge - Institucional', component: InsitucionalComponent },
+
 
       { path: 'dashboard', title: 'BuddyBridge - DashBoard', component: DashboardComponent },
       { path: 'profile', title: 'BuddyBridge - Meu Perfil', component: ProfileComponent },
@@ -65,6 +70,12 @@ const routes: Routes = [
       { path: 'tipos/addtipo', title: 'BuddyBridge - Novo Tipo', component: FormTipoComponent, resolve: {tipo : tipoResolver} },
       { path: 'tipos/edittipo/:id', title: 'BuddyBridge - Alterar Tipo', component: FormTipoComponent, resolve: {tipo : tipoResolver} },
 
+      { path: 'grupoacesso', title: 'BuddyBridge - Grupos de acesso', component: GrupoacessoComponent },
+      { path: 'grupoacesso/addgrupoacesso', title: 'BuddyBridge - Novo Grupoe de acesso', component: GrupoacessoFormComponent, resolve: {grupoacesso : grupoacessoResolver} },
+      { path: 'grupoacesso/editgrupoacesso/:id', title: 'BuddyBridge - Alterar Grupo de acesso', component: GrupoacessoFormComponent, resolve: {grupoacesso : grupoacessoResolver} },
+
+      { path: 'solicitacaoAcesso', title: 'BuddyBridge - Grupos de acesso', component: SolicitacaoacessoComponent },
+
       { path: 'ong', title: 'BuddyBridge - Institucional', component: OngComponent },
     ],
     canActivate: [AuthGuard]
@@ -79,7 +90,7 @@ const routes: Routes = [
       { path: 'register', title: 'BuddyBridge - Criar Conta', component: RegisterComponent, canActivate: [LoginGuard] },
       { path: 'login', title: 'BuddyBridge - Login', component: LoginComponent, canActivate: [LoginGuard] },
       { path: 'recovery', title: 'BuddyBridge - Recovery', component: RecoveryComponent, canActivate: [LoginGuard] },
-      { path: 'validatelogin', title: 'BuddyBridge - Validar código OTP', component: ValidateloginComponent, canActivate: [LoginGuard] },
+      { path: 'validatelogin', title: 'BuddyBridge - Validar código', component: ValidateloginComponent, canActivate: [LoginGuard] },
     ]
   },
   { path: '', redirectTo: 'home', pathMatch: 'full'},

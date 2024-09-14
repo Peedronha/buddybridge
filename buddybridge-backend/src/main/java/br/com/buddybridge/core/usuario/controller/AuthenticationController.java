@@ -1,5 +1,7 @@
 package br.com.buddybridge.core.usuario.controller;
 
+import br.com.buddybridge.core.controleacesso.entity.Acesso;
+import br.com.buddybridge.core.controleacesso.service.GrupoAcessoService;
 import br.com.buddybridge.core.ong.entity.Ong;
 import br.com.buddybridge.core.security.jwt.JwtService;
 import br.com.buddybridge.core.usuario.entity.Usuario;
@@ -16,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/auth")

@@ -1,5 +1,6 @@
 package br.com.buddybridge.core.ong.entity;
 
+import br.com.buddybridge.core.controleacesso.entity.GrupoAcesso;
 import br.com.buddybridge.core.endereco.entity.Endereco;
 import br.com.buddybridge.core.usuario.entity.Usuario;
 import jakarta.persistence.*;
@@ -66,6 +67,14 @@ public class Ong {
     @ManyToOne
     @JoinColumn(name="usuario_id", referencedColumnName="id")
     private Usuario usuarioOng;
+
+    @ManyToOne
+    @JoinColumn(name="grupoacesso_adotante_id", referencedColumnName="idgrupoAcesso")
+    private GrupoAcesso grupoAcessoAdotante;
+
+    @ManyToOne
+    @JoinColumn(name="grupoacesso_Colaborador_id", referencedColumnName="idgrupoAcesso")
+    private GrupoAcesso grupoAcessoColaborador;
 
     @Embedded
     private Endereco ongEndereco;

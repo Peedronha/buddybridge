@@ -1,5 +1,5 @@
 import { UsuarioEndereco } from "./usuarioEndereco.model";
-
+import { GrupoAcesso } from "../../../restrict/base/grupo_acesso/model/grupoAcesso";
 export class User {
   id: number | undefined;
   nome!: string;
@@ -10,4 +10,5 @@ export class User {
   token?: string;
   telefone?: string;
   usuarioEndereco?: UsuarioEndereco;
+  grupoAcessoUsuario?: GrupoAcesso | null;
 }

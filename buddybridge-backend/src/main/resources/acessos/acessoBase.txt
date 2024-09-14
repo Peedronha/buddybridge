@@ -1,0 +1,16 @@
+Buddy Base;Cadastro de Usuários;POST;Cadastrar Usuário;
+Buddy Base;Cadastro de Usuários;PUT;Alterar Usuário;
+Buddy Base;Cadastro de Usuários;DELETE;Excluir Usuário;
+
+Buddy Base;Cadastro de Colaboradores;POST;Cadastrar Colaboradores;
+Buddy Base;Cadastro de Colaboradores;PUT;Alterar Colaboradores;
+Buddy Base;Cadastro de Colaboradores;DELETE;Excluir Colaboradores;
+
+Buddy Base;Cadastro de Grupos de Acesso;POST;Cadastrar Grupos de Acesso;
+Buddy Base;Cadastro de Grupos de Acesso;PUT;Alterar Grupos de Acesso;
+Buddy Base;Cadastro de Grupos de Acesso;DELETE;Excluir Grupo de Acesso;
+
+Buddy Base;Cadastro de Dados da ONG;POST;Cadastrar Dados da Ong;
+
+Buddy Base;Solicitações de Acesso;PUT;Liberar/Negar Acesso;
+Buddy Base;Solicitações de Acesso;DELETE;Excluir solicitação de Acesso;

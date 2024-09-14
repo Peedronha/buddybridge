@@ -30,6 +30,14 @@ export class AccountRestrictService {
     return this.httpClient.get<User[]>("http://localhost:8080/usuario/listarAll", { headers: reqHeader });
   }
 
+  getUsers(): Observable<User[]> {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.httpClient.get<User[]>("http://localhost:8080/usuario/listarAll", { headers: reqHeader });
+  }
+
   update(usuarioModel : User){
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -53,7 +61,6 @@ export class AccountRestrictService {
     });
     return this.httpClient.get<User>("http://localhost:8080/usuario/" + id, { headers: reqHeader });
   }
-
 
   loadUserById(id: string): Observable<User> {
     var reqHeader = new HttpHeaders({

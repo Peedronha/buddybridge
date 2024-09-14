@@ -1,6 +1,7 @@
 package br.com.buddybridge.core.usuario.entity;
 
 import br.com.buddybridge.core.colaborador.entity.Colaborador;
+import br.com.buddybridge.core.controleacesso.entity.GrupoAcesso;
 import br.com.buddybridge.core.endereco.entity.Endereco;
 import jakarta.persistence.*;
 import lombok.*;
@@ -36,7 +37,8 @@ public class Usuario implements UserDetails {
     @Column(name = "senha", nullable = false, length = 255)
     private String senha;
 
-    private Set<Role> authorities;
+    @Column(name = "role", nullable = false, length = 45)
+    private String role;
 
     @Column(name = "confirmacao_email")
     private Boolean confirmacaoEmail;
@@ -46,6 +48,10 @@ public class Usuario implements UserDetails {
 
     @Column(name = "telefone", nullable = true, length = 45)
     private String telefone;
+
+    @ManyToOne
+    @JoinColumn(name="grupoacesso_usuario", referencedColumnName="idgrupoAcesso")
+    private GrupoAcesso grupoAcessoUsuario;
 
     @Embedded
     private Endereco usuarioEndereco;
@@ -63,10 +69,9 @@ public class Usuario implements UserDetails {
         return Objects.hash(id);
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-       return authorities;
+       return null;
     }
 
     @Override

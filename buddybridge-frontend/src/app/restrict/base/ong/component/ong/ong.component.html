@@ -8,15 +8,22 @@
         <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
         <li><span class="text-900 line-height-3">Dados da Ong</span></li>
         <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia os dados da ong!</a></li>
+        <li>
+          <a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia os dados da ong!</a>
+        </li>
+        <button pButton pRipple label="Solicitar acesso" class="p-button-sm p-button-text p-button-secondary" icon="pi pi-lock-open" style="margin-left: 5px; padding: 0.25rem 0.5rem; font-size: 0.875rem;" (click)="openModal()"></button>
     </ul>
     <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
         <div>
             <div class="font-medium text-3xl text-900">Dados da Ong</div>
         </div>
         <div class="mt-3 lg:mt-0">
-        <button pButton pRipple label="Página institucional" class="p-button-success p-button mr-2" icon="pi pi-chevron-right" routerLink="/restrict/institucional"></button>        </div>
+        <button pButton pRipple label="Página institucional" class="p-button-success p-button mr-2" icon="pi pi-chevron-right" routerLink="/restrict/institucional"></button></div>
     </div>
+    <small class="block p-error">
+      <div >* campos obrigatórios</div>
+    </small>
+
     <p-messages></p-messages>
     <br/>
     <form [formGroup]="registerForm" (ngSubmit)="submitDetails()">
@@ -25,7 +32,7 @@
         <hr/>
         <div class="p-fluid p-formgrid grid">
           <div class="field col-12 md:col-12">
-            <label for="razaoSocialOng">Razão social:</label>
+            <label for="razaoSocialOng">Razão social: <i class="p-error">*</i></label>
             <input type="text" maxlength="255" pInputText formControlName="razaoSocialOng" class="w-12" name="razaoSocialOng" placeholder="Digite a razão social"/>
             <small *ngIf="razaoSocialOng?.invalid && (razaoSocialOng?.dirty || razaoSocialOng?.touched)" class="block p-error">
               <div *ngIf="razaoSocialOng?.errors?.['required']">A razão social é uma informação obrigatória.</div>
@@ -34,7 +41,7 @@
         </div>
         <div class="p-fluid p-formgrid grid">
           <div class="field col-6 md:col-6">
-            <label for="cnpjOng">CNPJ:</label>
+            <label for="cnpjOng">CNPJ: <i class="p-error">*</i></label>
             <input type="text" maxlength="18" pInputText formControlName="cnpjOng" class="w-full" name="cnpjOng" placeholder="Digite o CNPJ do coluntário"/>
             <small *ngIf="registerForm.get('cnpjOng')?.invalid && (registerForm.get('cnpjOng')?.dirty || registerForm.get('cnpjOng')?.touched)" class="block p-error">
               <div *ngIf="registerForm.get('cnpjOng')?.errors?.['required']">O CNPJ do coluntário é uma informação obrigatória.</div>
@@ -42,7 +49,7 @@
             </small>
           </div>
           <div class="field col-6 md:col-6">
-            <label for="email">Email de contato:</label>
+            <label for="email">Email de contato: <i class="p-error">*</i></label>
             <input type="text" maxlength="255" pInputText formControlName="emailContatoOng" class="w-full" name="emailContatoOng" placeholder="Digite o email de contato da Ong" />
             <small *ngIf="emailContatoOng?.invalid && (emailContatoOng?.dirty || emailContatoOng?.touched)" class="block p-error">
               <div *ngIf="emailContatoOng?.errors?.['required']">O email é uma informação obrigatória.</div>
@@ -52,7 +59,7 @@
         </div>
         <div class="p-fluid p-formgrid grid">
           <div class="field col-6 md:col-6">
-            <label for="email">Email Financeiro:</label>
+            <label for="email">Email Financeiro: <i class="p-error">*</i></label>
             <input type="text" maxlength="255" pInputText formControlName="emailFinanceiroOng" class="w-full" name="emailFinanceiroOng" placeholder="Digite o email financeiro da Ong" />
             <small *ngIf="emailFinanceiroOng?.invalid && (emailFinanceiroOng?.dirty || emailFinanceiroOng?.touched)" class="block p-error">
               <div *ngIf="emailFinanceiroOng?.errors?.['required']">O email é uma informação obrigatória.</div>
@@ -60,14 +67,14 @@
             </small>
           </div>
           <div class="field col-3 md:col-3">
-            <label for="telefoneOng">Telefone de contato:</label>
+            <label for="telefoneOng">Telefone de contato: <i class="p-error">*</i></label>
             <input type="text" maxlength="45" pInputText formControlName="telefoneOng" class="w-full" name="telefoneOng" placeholder="Digite o telefone de contato da ong" />
             <small *ngIf="whatsappOng?.invalid && (whatsappOng?.dirty || whatsappOng?.touched)" class="block p-error">
               <div *ngIf="whatsappOng?.errors?.['required']">O telefone é uma informação obrigatória.</div>
             </small>
           </div>
           <div class="field col-3 md:col-3">
-            <label for="whatsappOng">Whatsapp:</label>
+            <label for="whatsappOng">Whatsapp: <i class="p-error">*</i></label>
             <input type="text" maxlength="45" pInputText formControlName="whatsappOng" class="w-full" name="whatsappOng" placeholder="Digite o whatsapp da ong" />
             <small *ngIf="whatsappOng?.invalid && (whatsappOng?.dirty || whatsappOng?.touched)" class="block p-error">
               <div *ngIf="whatsappOng?.errors?.['required']">O whatsapp é uma informação obrigatória.</div>
@@ -122,6 +129,24 @@
             <input type="text"  maxlength="255" pInputText formControlName="linkedinOng" class="w-full" name="linkedinOng" placeholder="Digite a URL da página do Linkedin da instituição" />
           </div>
         </div>
+        <h5>Configurações de cadastro de usuários:</h5>
+        <hr/>
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-6 md:col-6">
+            <label for="grupoAcessoAdotante">Grupo de Acesso Adotante: <i class="p-error">*</i></label>
+            <p-dropdown [options]="gruposAcesso" formControlName="grupoAcessoAdotante" optionLabel="descricaoGrupoAcesso" placeholder="Selecione o grupo de acesso adotante"></p-dropdown>
+            <small *ngIf="registerForm.get('grupoAcessoAdotante')?.invalid && (registerForm.get('grupoAcessoAdotante')?.dirty || registerForm.get('grupoAcessoAdotante')?.touched)" class="block p-error">
+              <div *ngIf="registerForm.get('grupoAcessoAdotante')?.errors?.['required']">O grupo de acesso adotante é obrigatório.</div>
+            </small>
+          </div>
+          <div class="field col-6 md:col-6">
+            <label for="grupoAcessoColaborador">Grupo de Acesso Colaborador: <i class="p-error">*</i></label>
+            <p-dropdown [options]="gruposAcesso" formControlName="grupoAcessoColaborador" optionLabel="descricaoGrupoAcesso" placeholder="Selecione o grupo de acesso colaborador"></p-dropdown>
+            <small *ngIf="registerForm.get('grupoAcessoColaborador')?.invalid && (registerForm.get('grupoAcessoColaborador')?.dirty || registerForm.get('grupoAcessoColaborador')?.touched)" class="block p-error">
+              <div *ngIf="registerForm.get('grupoAcessoColaborador')?.errors?.['required']">O grupo de acesso colaborador é obrigatório.</div>
+            </small>
+          </div>
+        </div>
         <h5>Endereço da instituição:</h5>
         <hr/>
         <div class="p-fluid p-formgrid grid">
@@ -157,9 +182,23 @@
           </div>
         </div>
         <hr/>
-        <p-button label="SALVAR" styleClass="w-full" [disabled]="registerForm.invalid" type="submit"></p-button>
+        <p-button *ngIf="canEditOng"  label="SALVAR" styleClass="w-full" [disabled]="registerForm.invalid" type="submit"></p-button>
       </div>
     </form>
+    <p-dialog header="Solicitar Acesso" [(visible)]="displayModal" [modal]="true" [style]="{width: '400px'}">
+      <p-messages></p-messages>
+      <div *ngIf="acessos && acessos.length > 0; else noAcessos">
+          <ul>
+              <li *ngFor="let acesso of acessos" style="display: flex; align-items: center;">
+                  <span style="flex-grow: 1;">• {{ acesso.descricaoAcesso }}</span>
+                  <button pButton pRipple label="Solicitar" class="p-button-sm p-button-success ml-2" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" (click)="solicitarAcesso(acesso)"></button>
+              </li>
+          </ul>
+      </div>
+      <ng-template #noAcessos>
+          <p>Não há acessos disponíveis para esta tela.</p>
+      </ng-template>
+    </p-dialog>
   </div>
 </div>
 

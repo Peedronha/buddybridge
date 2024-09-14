@@ -37,6 +37,7 @@ export class AccountListComponent {
   onEditPassword(idUser: any) {
     this.editPassword.emit(idUser);
   }
+
   showDeleteDialog(entity: User) {
     this._specificEntity = entity;
     this.displayDeleteDialog = true;
@@ -50,11 +51,8 @@ export class AccountListComponent {
   confirmDelete() {
     if (this._specificEntity) {
       this.onDelete(this._specificEntity.id);
-
       this._specificEntity = null;
-
       this.displayDeleteDialog = false;
-
     }
   }
 }

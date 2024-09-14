@@ -1,3 +1,6 @@
+-- INSERINDO OPERADOR AMIN AO SISTEMA
+INSERT INTO usuario (login, nome, role, senha, token) VALUES ('admin@admin', 'ADMIN - BUDDY BRIDGE', 'ADMIN', '$2a$10$QzBRrvJ4JTdUuNKLXhBnCuu71P5T.Zs/W//KFZkdykXGHdl0AIhQW', '111111');
+
 -- INSERT INTO adopter (first_name, last_name, email, phone_number) VALUES ('Ana', 'Silva', 'ana@example.com', '123456789');
 -- INSERT INTO adopter (first_name, last_name, email, phone_number) VALUES ('João', 'Santos', 'joao@example.com', '987654321');
 -- INSERT INTO adopter (first_name, last_name, email, phone_number) VALUES ('Maria', 'Souza', 'maria@example.com', '555555555');

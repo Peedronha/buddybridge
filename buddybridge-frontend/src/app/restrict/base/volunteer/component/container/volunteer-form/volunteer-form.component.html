@@ -2,86 +2,101 @@
   <form [formGroup]="registerForm" (ngSubmit)="submitDetails()">
     <div class="surface-section py-2 md-3">
       <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
-          <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BASE</a></li>
-          <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Cadastros Gerais</a></li>
-          <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Voluntários</a></li>
-          <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-          @if (idcolaborador?.value != null && idcolaborador?.value != 'NaN') {
-            <li><span class="text-900 line-height-3">Alterar </span></li>
-            <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-            <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você Altera os colaboradors do sistema!</a></li>
-          } @else {
-            <li><span class="text-900 line-height-3">Novo</span></li>
-            <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-            <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra os colaboradors do sistema!</a></li>
-          }
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BASE</a></li>
+        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Cadastros Gerais</a></li>
+        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Voluntários</a></li>
+        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+        <ng-container *ngIf="registerForm.get('idcolaborador')?.value != null && registerForm.get('idcolaborador')?.value != 'NaN'; else newVolunteer">
+          <li><span class="text-900 line-height-3">Alterar</span></li>
+          <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você Altera os colaboradores do sistema!</a></li>
+        </ng-container>
+        <ng-template #newVolunteer>
+          <li><span class="text-900 line-height-3">Novo</span></li>
+          <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra os colaboradores do sistema!</a></li>
+        </ng-template>
       </ul>
       <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
         <div>
-          @if (idcolaborador?.value != null && idcolaborador?.value != 'NaN') {
+          <ng-container *ngIf="registerForm.get('idcolaborador')?.value != null && registerForm.get('idcolaborador')?.value != 'NaN'; else newVolunteerHeader">
             <div class="font-medium text-3xl text-900">Alterar Voluntário</div><br/><br/>
-          } @else {
+          </ng-container>
+          <ng-template #newVolunteerHeader>
             <div class="font-medium text-3xl text-900">Novo Voluntário</div><br/><br/>
-          }
+          </ng-template>
         </div>
         <div class="mt-3 lg:mt-0">
-            <button pButton pRipple label="Voltar" class="p-button mr-2" icon="pi pi-chevron-left" routerLink="/volunteer"></button>
+          <button pButton pRipple label="Voltar" class="p-button mr-2" icon="pi pi-chevron-left" routerLink="/volunteer"></button>
         </div>
       </div>
     </div>
     <div>
+      <div class="p-fluid p-formgrid grid">
+        <div class="field col-12 md:col-12">
+          <label for="usuario">Usuário Relacionado:</label>
+          <p-dropdown [options]="userOptions" formControlName="usuario" optionLabel="nome" placeholder="Selecione um usuário">
+            <ng-template let-user pTemplate="selectedItem">
+              <div *ngIf="user">
+                {{user.nome}} - {{user.login}} - {{user.confirmacaoEmail ? 'INATIVO' : 'ATIVO'}} [{{user.token}}]
+              </div>
+            </ng-template>
+            <ng-template let-user pTemplate="item">
+              <div>
+                <b>{{user.nome}}</b><br/>
+                <small>{{user.login}} - {{user.confirmacaoEmail ? 'INATIVO' : 'ATIVO'}} [{{user.token}}]</small>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+      </div>
+      <div class="p-fluid p-formgrid grid">
+        <div class="field col-2 md:col-2">
+          <div class="field checkbox-field" style="margin-top: 30px;">
+            <label for="pf_pj_colaborador">
+              <p-checkbox formControlName="pf_pj_colaborador" binary="true" [ngModel]="!showPj" (onChange)="updateState()" inputId="pf_pj_colaborador"></p-checkbox>
+              Pessoa Física?
+            </label>
+          </div>
+        </div>
+        <div class="field col-5 md:col-5">
+          <div *ngIf="!isPessoaJuridica()" class="field">
+            <label for="cpf_colaborador">CPF Colaborador:</label>
+            <input type="text" pInputText formControlName="cpf_colaborador" class="w-full" placeholder="Digite o CPF do colaborador"/>
+            <small *ngIf="registerForm.get('cpf_colaborador')?.invalid && (registerForm.get('cpf_colaborador')?.dirty || registerForm.get('cpf_colaborador')?.touched)" class="block p-error">
+              <div *ngIf="registerForm.get('cpf_colaborador')?.errors?.['required']">O CPF do colaborador é uma informação obrigatória.</div>
+              <div *ngIf="registerForm.get('cpf_colaborador')?.errors?.['pattern']">O CPF não deve conter caracteres especiais</div>
+            </small>
+          </div>
+          <div *ngIf="isPessoaJuridica()" class="field">
+            <label for="cnpj_colaborador">CNPJ Colaborador:</label>
+            <input type="text" pInputText formControlName="cnpj_colaborador" class="w-full" placeholder="Digite o CNPJ do colaborador"/>
+            <small *ngIf="registerForm.get('cnpj_colaborador')?.invalid && (registerForm.get('cnpj_colaborador')?.dirty || registerForm.get('cnpj_colaborador')?.touched)" class="block p-error">
+              <div *ngIf="registerForm.get('cnpj_colaborador')?.errors?.['required']">O CNPJ do colaborador é uma informação obrigatória.</div>
+              <div *ngIf="registerForm.get('cnpj_colaborador')?.errors?.['pattern']">O CNPJ não deve conter caracteres especiais</div>
+            </small>
+          </div>
+        </div>
+        <div class="field col-5 md:col-5">
+          <div class="field">
+            <label for="cargo_colaborador">Cargo Colaborador:</label>
+            <input type="text" pInputText formControlName="cargo_colaborador" class="w-full" placeholder="Digite o cargo do colaborador"/>
+            <small *ngIf="registerForm.get('cargo_colaborador')?.invalid && (registerForm.get('cargo_colaborador')?.dirty || registerForm.get('cargo_colaborador')?.touched)" class="block p-error">
+              <div *ngIf="registerForm.get('cargo_colaborador')?.errors?.['required']">O cargo do colaborador é uma informação obrigatória.</div>
+            </small>
+          </div>
+        </div>
+      </div>
+
+
+
       <div class="field">
-        <label for="nome_colaborador">Nome Completo:</label>
-        <input type="text" pInputText formControlName="nome_colaborador" class="w-full" name="fullName" placeholder="Digite seu nome"/>
-        <small *ngIf="registerForm.get('nome_colaborador')?.invalid && (registerForm.get('nome_colaborador')?.dirty || registerForm.get('nome_colaborador')?.touched)" class="block p-error">
-          <div *ngIf="registerForm.get('nome_colaborador')?.errors?.['required']">O nome é uma informação obrigatória.</div>
-        </small>
-      </div>
-      <div *ngIf="!isPessoaJuridica()" class="field">
-        <label  for="cpf_colaborador">CPF Voluntário:</label>
-        <input type="text" pInputText  formControlName="cpf_colaborador" class="w-full" name="cpf_colaborador" placeholder="Digite o CPF do voluntário"/>
-        <small *ngIf="registerForm.get('cpf_colaborador')?.invalid && (registerForm.get('cpf_colaborador')?.dirty || registerForm.get('cpf_colaborador')?.touched)" class="block p-error">
-          <div *ngIf="registerForm.get('cpf_colaborador')?.errors?.['required']">O CPF do voluntário é uma informação obrigatória.</div>
-          <div *ngIf="registerForm.get('cpf_colaborador')?.errors?.['pattern']">O CPF não deve conter caracteres especiais</div>
-        </small>
-      </div>
-      <div *ngIf="isPessoaJuridica()" class="field">
-        <label for="cnpj_coluntario">CNPJ Voluntário:</label>
-        <input type="text" pInputText formControlName="cnpj_colaborador" class="w-full" name="cnpj_coluntario" placeholder="Digite o CNPJ do coluntário"/>
-        <small *ngIf="registerForm.get('cnpj_coluntario')?.invalid && (registerForm.get('cnpj_coluntario')?.dirty || registerForm.get('cnpj_coluntario')?.touched)" class="block p-error">
-          <div *ngIf="registerForm.get('cnpj_coluntario')?.errors?.['required']">O CNPJ do coluntário é uma informação obrigatória.</div>
-          <div *ngIf="registerForm.get('cnpj_coluntario')?.errors?.['pattern']">O CNPJ não deve conter caracteres especiais</div>
-        </small>
-      </div>
-      <div  class="field checkbox-field">
-        <label for="pf_pj_colaborador">
-          <p-checkbox formControlName="pf_pj_colaborador" value="Pessoa Fisica"
-                      (click)="updateState()" inputId="pj"></p-checkbox>
-          Pessoa Fisica
-        </label>
-      </div>
-      <div class="field">
-        <label for="email">Email:</label>
-        <input type="text" pInputText formControlName="email" class="w-full" name="email" placeholder="Digite seu email" />
-        <small *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="block p-error">
-          <div *ngIf="registerForm.get('email')?.errors?.['required']">O email é uma informação obrigatória.</div>
-          <div *ngIf="registerForm.get('email')?.errors?.['email']">Email invalido</div>
-        </small>
-      </div>
-      <div class="field">
-        <label for="cargo_colaborador">Cargo Voluntário:</label>
-        <input type="text" pInputText  formControlName="cargo_colaborador" class="w-full" name="cargo_colaborador" placeholder="Digite o cargo do voluntário"/>
-        <small *ngIf="registerForm.get('cargo_colaborador')?.invalid && (registerForm.get('cargo_colaborador')?.dirty || registerForm.get('cargo_colaborador')?.touched)" class="block p-error">
-          <div *ngIf="registerForm.get('cargo_colaborador')?.errors?.['required']">O cargo do voluntário é uma informação obrigatória.</div>
-        </small>
-      </div>
-      <div class="field">
-        <label for="descricao_atividades_colaborador">Descrição das atividades de voluntariado:</label>
-        <textarea pInputTextarea formControlName="descricao_atividades_colaborador" class="w-full" name="descricao_atividades_colaborador" placeholder="Digite a descrição das atividades do voluntário"></textarea>
+        <label for="descricao_atividades_colaborador">Descrição das atividades do colaborador:</label>
+        <textarea pInputTextarea formControlName="descricao_atividades_colaborador" class="w-full" placeholder="Digite a descrição das atividades do colaborador"></textarea>
       </div>
     </div>
-      <button pButton label="SALVAR" styleClass="w-full"  type="submit"></button>
+    <button pButton label="SALVAR" styleClass="w-full" type="submit"></button>
   </form>
 </div>

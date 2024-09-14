@@ -1,6 +1,6 @@
 import { MessagesModule } from 'primeng/messages';
 import { NgModule } from '@angular/core';
-import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
 import { StyleClassModule } from 'primeng/styleclass';
@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './open/home/home.component';
 import { DashboardComponent } from './restrict/dashboard/dashboard.component';
-import { AppLayoutComponent } from './restrict/layout/app.layout.component';
 import { LoginComponent } from './open/account/login/login.component';
 import { RegisterComponent } from './open/account/register/register.component';
 import { TopMenuOpenComponent } from './open/top-menu-open/top-menu-open.component';
@@ -44,7 +43,6 @@ import { AccountFormComponent } from './restrict/base/account/component/containe
 import { AccountComponent } from './restrict/base/account/component/container/account/account.component';
 import { ValidateloginComponent } from './open/account/validatelogin/validatelogin.component';
 import { AccountFormSenhaComponent } from './restrict/base/account/component/container/account-form-senha/account-form-senha.component';
-import { RegisterVolunteerComponent } from "./restrict/base/volunteer/component/container/register-volunteer/register-volunteer.component";
 import { ListVolunteerComponent } from "./restrict/base/volunteer/component/container/list-volunteer/list-volunteer.component";
 import { VolunteerComponent } from './restrict/base/volunteer/component/container/volunteer/volunteer.component';
 import { VolunteerFormComponent} from "./restrict/base/volunteer/component/container/volunteer-form/volunteer-form.component";
@@ -61,6 +59,11 @@ import { ListTipoComponent } from './restrict/base/tipo_animal/component/list-ti
 import { FormTipoComponent } from './restrict/base/tipo_animal/component/form-tipo/form-tipo.component';
 import { OngComponent } from './restrict/base/ong/component/ong/ong.component';
 import { MenuModule } from 'primeng/menu';
+import { GrupoacessoComponent } from './restrict/base/grupo_acesso/component/grupoacesso/grupoacesso.component';
+import { GrupoacessoFormComponent } from './restrict/base/grupo_acesso/component/grupoacesso-form/grupoacesso-form.component';
+import { GrupoacessoListComponent } from './restrict/base/grupo_acesso/component/grupoacesso-list/grupoacesso-list.component';
+import { SolicitacaoacessoComponent } from './restrict/base/solicitacao_acesso/component/solicitacaoacesso/solicitacaoacesso.component';
+import { SolicitacaoacessoListComponent } from './restrict/base/solicitacao_acesso/component/solicitacaoacesso-list/solicitacaoacesso-list.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +74,6 @@ import { MenuModule } from 'primeng/menu';
       RecoveryComponent,
       HomeComponent,
       InsitucionalComponent,
-      RegisterVolunteerComponent,
       ListVolunteerComponent,
       InsitucionalComponent,
       ProfileComponent,
@@ -94,7 +96,11 @@ import { MenuModule } from 'primeng/menu';
       TipoComponent,
       ListTipoComponent,
       FormTipoComponent,
-
+      GrupoacessoComponent,
+      GrupoacessoFormComponent,
+      GrupoacessoListComponent,
+      SolicitacaoacessoComponent,
+      SolicitacaoacessoListComponent,
 
   ],
   imports: [
