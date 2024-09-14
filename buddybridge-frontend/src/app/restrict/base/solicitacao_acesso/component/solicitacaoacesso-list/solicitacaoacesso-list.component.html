@@ -1,0 +1,80 @@
+<div class="card">
+  <p-table #dt1 [value]="solicitacoesacesso" selectionMode="single" [(selection)]="_specificEntity" dataKey="idsolicitacaoAcesso" [tableStyle]="{'min-width': '50rem'}" [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session-solicitacao-acesso">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="idsolicitacaoAcesso" style="width:10%">Cod. <p-sortIcon field="idsolicitacaoAcesso"></p-sortIcon></th>
+        <th pSortableColumn="grupoAcessoAcessoObejto.descricaoGrupoAcesso" style="width:20%">Grupo de Acesso <p-sortIcon field="grupoAcessoAcessoObejto.descricaoGrupoAcesso"></p-sortIcon></th>
+        <th pSortableColumn="acessoAcessoObjeto.telaAcesso" style="width:20%">Tela <p-sortIcon field="acessoAcessoObjeto.telaAcesso"></p-sortIcon></th>
+        <th pSortableColumn="acessoAcessoObjeto.descricaoAcesso" style="width:30%">Acesso <p-sortIcon field="acessoAcessoObjeto.descricaoAcesso"></p-sortIcon></th>
+        <th pSortableColumn="delegadoSolicitacaoAcesso" style="width:10%">Tem Acesso? <p-sortIcon field="delegadoSolicitacaoAcesso"></p-sortIcon></th>
+        <th style="width:10%">Ações</th>
+      </tr>
+      <tr>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'idsolicitacaoAcesso', 'contains')" [value]="$any(dt1.filters['idsolicitacaoAcesso'])?.value" placeholder="Cod." class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'grupoAcessoAcessoObejto.descricaoGrupoAcesso', 'contains')" [value]="$any(dt1.filters['grupoAcessoAcessoObejto.descricaoGrupoAcesso'])?.value" placeholder="Filtrar Grupo de Acesso" class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'acessoAcessoObjeto.telaAcesso', 'contains')" [value]="$any(dt1.filters['acessoAcessoObjeto.telaAcesso'])?.value" placeholder="Tela" class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'acessoAcessoObjeto.descricaoAcesso', 'contains')" [value]="$any(dt1.filters['acessoAcessoObjeto.descricaoAcesso'])?.value" placeholder="Acesso" class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'delegadoSolicitacaoAcesso', 'contains')" [value]="$any(dt1.filters['delegadoSolicitacaoAcesso'])?.value" placeholder="Tem Acesso?" class="w-full">
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-solicitacaoacesso>
+      <tr [pSelectableRow]="solicitacaoacesso">
+        <td>
+          <span class="p-column-title">Cod.</span>
+          {{solicitacaoacesso.idsolicitacaoAcesso}}
+        </td>
+        <td>
+          <span class="p-column-title">Grupo de Acesso</span>
+          {{solicitacaoacesso.grupoAcessoAcessoObejto.descricaoGrupoAcesso}}
+        </td>
+        <td>
+          <span class="p-column-title">Tela</span>
+          {{solicitacaoacesso.acessoAcessoObjeto.telaAcesso}}
+        </td>
+        <td>
+          <span class="p-column-title">Acesso</span>
+          {{solicitacaoacesso.acessoAcessoObjeto.descricaoAcesso}}
+        </td>
+        <td>
+          <span class="p-column-title">Tem Acesso?</span>
+          <span class="ml-1 vertical-align-middle">{{solicitacaoacesso.delegadoSolicitacaoAcesso ? 'Sim' : 'Não'}}</span>
+        </td>
+        <td>
+          <div>
+            <button pButton pRipple label="Remover" (click)="showDeleteDialog(solicitacaoacesso)" class="p-button mr-2" icon="pi pi-trash" style="margin: 2px 0;"></button>
+            <button pButton pRipple label="Liberar Acesso" (click)="onPermit(solicitacaoacesso.idsolicitacaoAcesso)" class="p-button-success mr-2" icon="pi pi-check" style="margin: 2px 0;"></button>
+            <button pButton pRipple label="Negar Acesso" (click)="onDenied(solicitacaoacesso.idsolicitacaoAcesso)" class="p-button-danger mr-2" icon="pi pi-times" style="margin: 2px 0;"></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="6">Não foram encontrados registros.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dialog header="Confirmar Exclusão" [(visible)]="displayDeleteDialog" modal="modal" [closable]="false"
+            [dismissableMask]="true" [baseZIndex]="10000"
+            [draggable]="false" [resizable]="false">
+    <p class="m-0">Tem certeza de que deseja excluir este grupo de acesso?</p>
+    <ng-template pTemplate="footer">
+      <button pButton label="Cancelar" icon="pi pi-times" (click)="onCancelDelete()"></button>
+      <button pButton severity="danger" label="Confirmar" icon="pi pi-check" (click)="confirmDelete()"></button>
+    </ng-template>
+  </p-dialog>
+</div>
