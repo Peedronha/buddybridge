@@ -150,4 +150,20 @@ export class AdoptionService {
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
     return this.http.delete<any>(this.apiUrl+'/profiles/'+ idUser,{headers: reqHeader})  }
+
+  updateAdoptionIntention(formModel: AdoptionFormModel) {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.http.put<any>(this.apiUrl+'/profiles', formModel,{headers: reqHeader}).pipe(
+      map((response) =>{
+          if (response)
+            return response;
+        },
+        (error:any) =>{
+          return error;
+        }
+      ))
+  }
 }

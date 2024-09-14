@@ -125,6 +125,30 @@
         <div *ngIf="adoptionForm.get('Cidade')?.errors?.['required']">A cidade é uma informação obrigatória.</div>
       </small>
     </div>
+
+    <!-- Radio -->
+      <div class="field">
+        <label for="radio">Choose an option*</label>
+        <div class="p-field-radiobutton">
+          <p-radioButton
+            name="group1"
+            value="Option 1"
+            formControlName="radioOption"
+            inputId="option1"
+          ></p-radioButton>
+          <label for="option1">Option 1</label>
+        </div>
+        <div class="p-field-radiobutton">
+          <p-radioButton
+            name="group1"
+            value="Option 2"
+            formControlName="radioOption"
+            inputId="option2"
+          ></p-radioButton>
+          <label for="option2">Option 2</label>
+        </div>
+
+    </div>
     <button pButton label="ENVIAR" stylepInputText class="w-full" type="submit"></button>
   </form>
 </div>

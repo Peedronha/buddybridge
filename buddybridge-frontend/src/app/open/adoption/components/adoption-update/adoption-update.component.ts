@@ -1,45 +1,54 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {AnimalModel} from "../../../../restrict/base/animal/model/animal.model";
+import {ButtonModule} from "primeng/button";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {InputTextModule} from "primeng/inputtext";
+import {NgForOf, NgIf} from "@angular/common";
+import {RippleModule} from "primeng/ripple";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
+import {DropdownModule} from "primeng/dropdown";
+import {InputTextareaModule} from "primeng/inputtextarea";
 import {AdoptionService} from "../../../../restrict/base/adoption-profile/shared/adoption.service";
 import {MessageService} from "primeng/api";
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {AnimalService} from "../../../../restrict/base/animal/service/animal.service";
-import {AdoptionProfileModel} from "../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
-import {ButtonModule} from "primeng/button";
-import {DropdownModule} from "primeng/dropdown";
-import {InputTextModule} from "primeng/inputtext";
-import {InputTextareaModule} from "primeng/inputtextarea";
-import {MessagesModule} from "primeng/messages";
-import {NgIf} from "@angular/common";
-import {RippleModule} from "primeng/ripple";
 import {AccountService} from "../../../account/shared/account.service";
-import {AdoptionFormModel} from "../../models/AdoptionFormModel";
 import {AccountRestrictService} from "../../../../restrict/base/account/shared/account-restrict.service";
+import {
+  AdoptionProfileModel,
+  AdoptionStatus
+} from "../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
 import {User} from "../../../account/model/user.model";
-import {RadioButtonModule} from "primeng/radiobutton";
+import {AdoptionFormModel} from "../../models/AdoptionFormModel";
 
 @Component({
-  selector: 'app-adoption-submission-form',
+  selector: 'app-adoption-update',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
     ButtonModule,
-    DropdownModule,
+    FormsModule,
     InputTextModule,
-    InputTextareaModule,
-    MessagesModule,
     NgIf,
+    ReactiveFormsModule,
     RippleModule,
     RouterLink,
-    RadioButtonModule
+    DropdownModule,
+    NgForOf,
+    InputTextareaModule
   ],
-  templateUrl: './adoption-submission-form.component.html',
-  styleUrl: './adoption-submission-form.component.scss'
+  templateUrl: './adoption-update.component.html',
+  styleUrl: './adoption-update.component.scss'
 })
-export class AdoptionSubmissionFormComponent {
-
+export class AdoptionUpdateComponent {
   adoptionForm: FormGroup;
+
+  status = AdoptionStatus;
+
+  selectStatus: { label: string, value: string } | undefined;
+  statusOptions = [
+    { label: 'Pendente', value: 'PENDING' },
+    { label: 'Aprovada', value: 'APPROVED' },
+    { label: 'Rejeitada', value: 'REJECTED' },
+    { label: 'Finalizada', value: 'COMPLETED' }
+  ];
   constructor(
     private fb: FormBuilder,
     private adoptionService: AdoptionService,
@@ -67,21 +76,9 @@ export class AdoptionSubmissionFormComponent {
       Bairro: ['', Validators.required],
       Estado: ['', Validators.required],
       Cidade: ['', Validators.required],
-    });
+      observacoes: ['', Validators.required],
 
-    this.adoptionForm.get('CEP')?.valueChanges.subscribe(cep => {
-      if (cep.length === 8) {
-        this.viaCepService.getAddress(cep).subscribe(address => {
-          this.adoptionForm.patchValue({
-            endereco: address.logradouro,
-            Bairro: address.bairro,
-            Estado: address.uf,
-            Cidade: address.localidade,
-            Complemento: address.complemento
-          });
-        });
-      }
-    });
+    })
   }
 
   ngOnInit(): void {
@@ -101,12 +98,7 @@ export class AdoptionSubmissionFormComponent {
         CPF: '',
         data_submissao: '',
         endereco: '',
-        CEP: '',
-        numero: '',
-        Complemento: '',
-        Bairro: '',
-        Estado: '',
-        Cidade: '',
+        observacoes:''
       })
     });
   }
@@ -115,40 +107,17 @@ export class AdoptionSubmissionFormComponent {
     if (this.adoptionForm.valid) {
       const formModel = this.adoptionForm.value as AdoptionFormModel;
       alert(JSON.stringify(formModel))
-        this.adoptionService.registerAdoptionIntention(formModel).subscribe(
-          response => {
-            this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção registrada!' });
-            this.adoptionForm.reset();
-            this.route.navigateByUrl('/perfil-adocao');
-          },
-          error => {
-            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao registrar a adoção.' });
-          }
-        );
-      }
-  }
-  get id_perfil_adocao() {
-    return this.adoptionForm.get('id_perfil_adocao');
-  }
-
-  get id_adocao() {
-    return this.adoptionForm.get('id_adocao');
-  }
-
-  get id_animal() {
-    return this.adoptionForm.get('id_animal');
-  }
-
-  get nome_adotante() {
-    return this.adoptionForm.get('nome_adotante');
-  }
-
-  get data_nascimento() {
-    return this.adoptionForm.get('data_nascimento');
-  }
-
-  get CPF() {
-    return this.adoptionForm.get('CPF');
+      this.adoptionService.updateAdoptionIntention(formModel).subscribe(
+        response => {
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção registrada!' });
+          this.adoptionForm.reset();
+          this.route.navigateByUrl('/perfil-adocao');
+        },
+        error => {
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao registrar a adoção.' });
+        }
+      );
+    }
   }
 
   get telefone() {
@@ -190,5 +159,4 @@ export class AdoptionSubmissionFormComponent {
   get Cidade() {
     return this.adoptionForm.get('Cidade');
   }
-
 }
