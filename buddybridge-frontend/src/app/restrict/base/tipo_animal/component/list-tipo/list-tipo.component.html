@@ -1,18 +1,18 @@
 <div class="card">
   <p-table #dt1 [value]="tipos" selectionMode="single" [(selection)]="_specificEntity" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
-           [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session">
+           [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session-tipo-animal">
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="id_tipo" style="width:10%">Cod. <p-sortIcon field="id_animal"></p-sortIcon></th>
-        <th pSortableColumn="nome_tipo" style="width:20%">Nome <p-sortIcon field="nome_animal"></p-sortIcon></th>
-        <th pSortableColumn="Ações" style="width:15%">Ações</th>
+        <th pSortableColumn="nome_tipo" style="width:70%">Descrição <p-sortIcon field="nome_animal"></p-sortIcon></th>
+        <th pSortableColumn="Ações" style="width:20%">Ações</th>
       </tr>
       <tr>
         <th>
-          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'id_tipo', 'contains')" [value]="$any(dt1.filters['id_tipo'])?.value" placeholder="Filtrar tipo" class="w-full">
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'id_tipo', 'contains')" [value]="$any(dt1.filters['id_tipo'])?.value" placeholder="Filtrar cod." class="w-full">
         </th>
         <th>
-          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'nome_tipo', 'contains')" [value]="$any(dt1.filters['nome_tipo'])?.value" placeholder="Filtrar Nome" class="w-full">
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'nome_tipo', 'contains')" [value]="$any(dt1.filters['nome_tipo'])?.value" placeholder="Filtrar descrição" class="w-full">
         </th>
         <th>
           <p-button label="Novo" icon="pi pi-plus" (click)="onAdd()" ></p-button>

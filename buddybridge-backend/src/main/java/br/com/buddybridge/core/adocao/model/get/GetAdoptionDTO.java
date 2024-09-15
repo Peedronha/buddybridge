@@ -54,7 +54,7 @@ public class GetAdoptionDTO {
         this.idade = setIdadeAnimal(model.getAnimal().getData_nascimento());
 
         this.raca_animal = String.valueOf(model.getAnimal().getRace().getName());
-        this.tipo_animal = String.valueOf(model.getAnimal().getType().getName());
+        this.tipo_animal = String.valueOf(model.getAnimal().getRace().getType().getName());
     }
     public String setIdadeAnimal(LocalDate dataNascimento) {
         if ((dataNascimento != null)) {

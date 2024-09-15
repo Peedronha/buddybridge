@@ -2,6 +2,14 @@ Buddy Animais;Cadastro de Animais;POST;Cadastrar Animal;
 Buddy Animais;Cadastro de Animais;PUT;Alterar Animal;
 Buddy Animais;Cadastro de Animais;DELETE;Excluir Animal;
 
+Buddy Animais;Cadastro de Tipos de Animais;POST;Cadastrar Tipo;
+Buddy Animais;Cadastro de Tipos de Animais;PUT;Alterar Tipo;
+Buddy Animais;Cadastro de Tipos de Animais;DELETE;Excluir Tipo;
+
+Buddy Animais;Cadastro de Raça;POST;Cadastrar Raça;
+Buddy Animais;Cadastro de Raça;PUT;Alterar Raça;
+Buddy Animais;Cadastro de Raça;DELETE;Excluir Raça;
+
 Buddy Animais;Cadastro de perfil de adoção;POST;Cadastrar perfil de adoção;
 Buddy Animais;Cadastro de perfil de adoção;PUT;Alterar perfil de adoção;
 Buddy Animais;Cadastro de perfil de adoção;DELETE;Excluir perfil de adoção;

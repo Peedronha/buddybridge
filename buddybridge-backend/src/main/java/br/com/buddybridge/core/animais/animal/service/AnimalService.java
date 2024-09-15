@@ -49,13 +49,11 @@ public class AnimalService {
     private AnimalModel createAnimal(AnimalDto animalDto) throws Exception{
         AnimalModel model = new AnimalModel(animalDto);
 
-        Optional<TypeModel> typeModel = tipoRepository.findById(Long.valueOf(animalDto.getTipo_animal()));
+
         Optional<RacaModel> racaModel = racaRepository.findById(Long.valueOf(animalDto.getRaca_animal()));
 
-//        model.setStatus_adocao(AdoptionStatus.PENDING.name());
+        if (racaModel.isPresent()) {
 
-        if (typeModel.isPresent() && racaModel.isPresent()) {
-            model.setType(typeModel.get());
             model.setRace(racaModel.get());
 
             return model;

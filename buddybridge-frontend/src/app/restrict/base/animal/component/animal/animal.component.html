@@ -8,6 +8,7 @@
       <li><span class="text-900 line-height-3">Animais</span></li>
       <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
       <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia os animais do sistema!</a></li>
+      <button pButton pRipple label="Solicitar acesso" class="p-button-sm p-button-text p-button-secondary" icon="pi pi-lock-open" style="margin-left: 5px; padding: 0.25rem 0.5rem; font-size: 0.875rem;" (click)="openModal()"></button>
     </ul>
     <div class="flex align-items-start flex-column lg:flex-row">
       <div class="font-medium text-3xl text-900">Animais cadastrados no sistema</div><br/><br/><br/>
@@ -16,3 +17,17 @@
   <app-list-animal [animals]="animals" (add)="onAdd()" (edit)="onEdit($event)" (remove)="onRemove($event)">
   </app-list-animal>
 </div>
+<p-dialog header="Solicitar Acesso" [(visible)]="displayModal" [modal]="true" [style]="{width: '400px'}">
+  <p-messages></p-messages>
+  <div *ngIf="acessos && acessos.length > 0; else noAcessos">
+      <ul>
+          <li *ngFor="let acesso of acessos" style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+              <span style="flex-grow: 1;">• {{ acesso.descricaoAcesso }}</span>
+              <button pButton pRipple label="Solicitar" class="p-button-sm p-button-success ml-2" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" (click)="solicitarAcesso(acesso)"></button>
+          </li>
+      </ul>
+  </div>
+  <ng-template #noAcessos>
+      <p>Não há acessos disponíveis para esta tela.</p>
+  </ng-template>
+</p-dialog>

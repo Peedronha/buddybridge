@@ -43,7 +43,7 @@ public class GetAnimalDTO {
         this.idade = setIdadeAnimal(animalModel.getData_nascimento());
 
         this.raca_animal = new RaceDTO(animalModel.getRace());
-        this.tipo_animal = animalModel.getType();
+        this.tipo_animal = animalModel.getRace().getType();
     }
 
 

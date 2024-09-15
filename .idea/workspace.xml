@@ -6,9 +6,26 @@
   <component name="ChangeListManager">
     <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="merge">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/CoreApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/CoreApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/adocao/model/get/GetAdoptionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/adocao/model/get/GetAdoptionDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/animais/animal/entity/AnimalModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/animais/animal/entity/AnimalModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/animais/animal/model/GetAnimalDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/animais/animal/model/GetAnimalDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/animais/animal/service/AnimalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/animais/animal/service/AnimalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/ong/controller/OngController.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/ong/controller/OngController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/resources/acessos/acessoAnimais.txt" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/resources/acessos/acessoAnimais.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/resources/acessos/acessoMenu.txt" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/resources/acessos/acessoMenu.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/animal-form/animal-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/animal-form/animal-form.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/animal/animal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/animal/animal.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/animal/animal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/animal/animal.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/list-animal/list-animal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/list-animal/list-animal.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/grupo_acesso/component/grupoacesso/grupoacesso.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/grupo_acesso/component/grupoacesso/grupoacesso.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/raca/component/list-raca/list-raca.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/raca/component/list-raca/list-raca.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/raca/component/raca/raca.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/raca/component/raca/raca.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/raca/component/raca/raca.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/raca/component/raca/raca.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/tipo_animal/component/form-tipo/form-tipo.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/tipo_animal/component/form-tipo/form-tipo.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/tipo_animal/component/list-tipo/list-tipo.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/tipo_animal/component/list-tipo/list-tipo.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/tipo_animal/component/tipo/tipo.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/tipo_animal/component/tipo/tipo.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/tipo_animal/component/tipo/tipo.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/tipo_animal/component/tipo/tipo.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +46,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Validacoes-animais" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -72,7 +89,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "controle-acesso-buddy-animais",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "17",
     "last_opened_file_path": "C:/Users/negol/Documents/buddybridge/buddybridge-backend",
@@ -388,7 +405,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718320407222</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="merge">
+      <option name="closed" value="true" />
+      <created>1726403790895</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1726403790896</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

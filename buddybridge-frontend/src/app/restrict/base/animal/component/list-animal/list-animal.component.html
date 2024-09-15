@@ -1,6 +1,6 @@
 <div class="card">
-  <p-table #dt1 [value]="animals" selectionMode="single" [(selection)]="_specificEntity" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
-           [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session">
+  <p-table #dt1 [value]="animals" selectionMode="single" [(selection)]="_specificEntity" dataKey="id_animal" [tableStyle]="{'min-width': '50rem'}"
+           [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session-cadastro-animais">
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="id_animal" style="width:10%">Cod. <p-sortIcon field="id_animal"></p-sortIcon></th>

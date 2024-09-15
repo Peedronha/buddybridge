@@ -21,7 +21,7 @@ export class GrupoacessoComponent {
   //Fazendo a solicitação de acessos - fim
 
   constructor(
-    private grupoacessoserviceService: GrupoacessoserviceService,
+    private grupoacessoserviceService: GrupoacessoserviceService, //Fazendo a solicitação de acessos
     private accountService: AccountService,
     private router: Router,
     private route: ActivatedRoute,
@@ -36,8 +36,8 @@ export class GrupoacessoComponent {
     this.grupoacessoserviceService.getAcessosParaTela('Cadastro de Grupos de Acesso').subscribe((acessos: AcessoDTO[]) => {
      this.acessos = acessos;
      console.log(acessos)
-   });
-   //Fazendo a solicitação de acessos - fim
+    });
+    //Fazendo a solicitação de acessos - fim
   }
 
 

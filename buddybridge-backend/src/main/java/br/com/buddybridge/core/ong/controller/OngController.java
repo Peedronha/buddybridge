@@ -22,7 +22,6 @@ public class OngController {
 
     @PostMapping("/salvar")
     public ResponseEntity<?> salvar(@RequestBody Ong ong) throws ExampleExeption, SystemException {
-        System.out.println("este metodo foi chamado");
         ongService.salvar(ong);
         return new ResponseEntity<>(ong, HttpStatus.CREATED);
     }
