@@ -64,6 +64,8 @@ import { GrupoacessoFormComponent } from './restrict/base/grupo_acesso/component
 import { GrupoacessoListComponent } from './restrict/base/grupo_acesso/component/grupoacesso-list/grupoacesso-list.component';
 import { SolicitacaoacessoComponent } from './restrict/base/solicitacao_acesso/component/solicitacaoacesso/solicitacaoacesso.component';
 import { SolicitacaoacessoListComponent } from './restrict/base/solicitacao_acesso/component/solicitacaoacesso-list/solicitacaoacesso-list.component';
+import {AdoptionComponent} from "./open/adoption/components/adoption-header/adoption.component";
+import {AdoptionGridComponent} from "./open/adoption/components/adoption-grid/adoption-grid.component";
 
 @NgModule({
   declarations: [
@@ -135,6 +137,8 @@ import { SolicitacaoacessoListComponent } from './restrict/base/solicitacao_aces
     InputNumberModule,
     DropdownModule,
     MenuModule,
+    AdoptionGridComponent,
+    AdoptionComponent,
 
   ],
   providers: [
