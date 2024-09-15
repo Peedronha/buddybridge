@@ -1,16 +1,14 @@
 package br.com.buddybridge.core.colaborador.controller;
 
 import br.com.buddybridge.core.colaborador.entity.Colaborador;
-import br.com.buddybridge.core.colaborador.model.ColaboradorDto;
 import br.com.buddybridge.core.colaborador.service.ColaboradorService;
-import br.com.buddybridge.core.usuario.entity.Usuario;
+import br.com.buddybridge.core.controleacesso.annotation.LinkAccess;
 import br.com.buddybridge.core.usuario.service.UsuarioService;
 import br.com.buddybridge.core.util.ExampleExeption;
 import jakarta.transaction.SystemException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -20,7 +18,7 @@ import java.util.*;
 @AllArgsConstructor
 @RequestMapping("colaborador")
 public class ColaboradorController {
-    
+
     private ColaboradorService colaboradorService;
 
     private UsuarioService usuarioService;
@@ -35,16 +33,11 @@ public class ColaboradorController {
     }
 
     @PostMapping
-    public ResponseEntity<Colaborador> insertColaborador(@RequestBody ColaboradorDto colaboradorDto){
+    @LinkAccess(tela= "Cadastro de colaboradores", metodo="POST")
+    public ResponseEntity<Colaborador> insertColaborador(@RequestBody Colaborador colaborador){
         try{
-
-            if (colaboradorService.existsByEmail(colaboradorDto.getEmail())) {
-                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-            }
-            Colaborador colaborador = new Colaborador(colaboradorDto);
-
-            colaborador = this.colaboradorService.saveColaborador(colaborador);
-            return new ResponseEntity<>(colaborador, HttpStatus.CREATED);
+            Colaborador toReturn = this.colaboradorService.saveColaborador(colaborador);
+            return new ResponseEntity<>(toReturn, HttpStatus.CREATED);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -60,18 +53,15 @@ public class ColaboradorController {
     }
 
     @PutMapping
-    public ResponseEntity<Colaborador> updateColaborador(@RequestBody Colaborador Colaborador) throws SystemException, ExampleExeption {
-        if(this.colaboradorService.findColaboradorById(Colaborador.getIdcolaborador().longValue()).isPresent()) {
-            this.colaboradorService.saveColaborador(Colaborador);
-            return new ResponseEntity<>(Colaborador, HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
+    @LinkAccess(tela= "Cadastro de colaboradores", metodo="PUT")
+    public ResponseEntity<Colaborador> updateColaborador(@RequestBody Colaborador colaborador) throws SystemException, ExampleExeption {
+        Colaborador toReturn  = this.colaboradorService.saveColaborador(colaborador);
+        return new ResponseEntity<>(toReturn, HttpStatus.OK);
     }
 
 
     @PostMapping("/{id}")
+    @LinkAccess(tela= "Cadastro de colaboradores", metodo="DELETE")
     public ResponseEntity<Colaborador> inativarColaborador(@PathVariable Long id)  {
         Optional<Colaborador> optionalColaborador = this.colaboradorService.findColaboradorById(id);
         Colaborador model = optionalColaborador.orElseThrow(() -> new NoSuchElementException("colaborador not found"));
@@ -88,12 +78,8 @@ public class ColaboradorController {
         System.out.println("entrei");
         if (this.colaboradorService.findColaboradorById(id).isPresent()){
             Optional<Colaborador> optionalColaborador = this.colaboradorService.findColaboradorById(id);
-
             Colaborador model = optionalColaborador.orElseThrow(() -> new NoSuchElementException("colaborador not found"));
-
-            this.usuarioService.excluir(model.getUsuarioColaborador().getId());
             this.colaboradorService.deleteColaborador(id);
-
             return new ResponseEntity<>(true, HttpStatus.OK);
         }
         return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);

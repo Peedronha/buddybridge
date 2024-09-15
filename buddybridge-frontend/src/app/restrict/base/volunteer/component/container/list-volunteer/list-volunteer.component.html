@@ -1,14 +1,22 @@
 <div class="card">
-  <p-table #dt1 [value]="colaboradores" selectionMode="single" [(selection)]="_specificEntity" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
-           [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session">
+  <div class="button-group" style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 10px; align-items: center;">
+    <span style="font-weight: bold; margin-right: auto;">
+        Selecione um item na grid abaixo para poder alterá-lo ou excluí-lo.
+    </span>
+    <button pButton pRipple label="Novo" (click)='onAdd()' class="p-button p-button" icon="pi pi-plus"></button>
+    <button pButton pRipple label="Alterar" (click)='onEdit(_specificEntity?.idcolaborador)' class="p-button p-button" icon="pi pi-pencil" [disabled]='!_specificEntity?.idcolaborador'></button>
+    <button pButton pRipple label="Inativar" (click)='showDeleteDialog(_specificEntity)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;"  [disabled]='!_specificEntity?.idcolaborador'></button>
+  </div>
+  <p-table #dt1 [value]="colaboradores" selectionMode="single" [(selection)]="_specificEntity" dataKey="idcolaborador" [tableStyle]="{'min-width': '50rem'}"
+           [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session-volunteer">
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="idcolaborador" style="width:10%">Cod. <p-sortIcon field="idcolaborador"></p-sortIcon></th>
         <th pSortableColumn="nome_colaborador" style="width:20%">Nome <p-sortIcon field="nome_colaborador"></p-sortIcon></th>
         <th pSortableColumn="cpf_colaborador" style="width:20%">CPF <p-sortIcon field="cpf_colaborador"></p-sortIcon></th>
         <th pSortableColumn="cnpj_colaborador" style="width:20%">CNPJ <p-sortIcon field="cnpj_colaborador"></p-sortIcon></th>
-        <th pSortableColumn="cargo_colaborador" style="width:20%">Tipo <p-sortIcon field="cargo_colaborador"></p-sortIcon></th>
-        <th pSortableColumn="Ações" style="width:15%">Ações</th>
+        <th pSortableColumn="cargo_colaborador" style="width:10%">Tipo <p-sortIcon field="cargo_colaborador"></p-sortIcon></th>
+        <th pSortableColumn="cargo_colaborador" style="width:10%">Ativo? <p-sortIcon field="cargo_colaborador"></p-sortIcon></th>
       </tr>
       <tr>
         <th>
@@ -26,9 +34,7 @@
         <th>
           <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'cargo_colaborador', 'contains')" [value]="$any(dt1.filters['cargo_colaborador'])?.value" placeholder="Filtrar cargo" class="w-full">
         </th>
-        <th>
-          <p-button label="Novo" icon="pi pi-plus" (click)="onAdd()" ></p-button>
-        </th>
+        <th></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-volunteer>
@@ -39,7 +45,7 @@
         </td>
         <td>
           <span class="p-column-title">Nome</span>
-          {{volunteer.nome_colaborador}}
+          {{volunteer.usuarioColaborador?.nome}}
         </td>
         <td>
           <span class="p-column-title">CPF</span>
@@ -54,11 +60,8 @@
           <span class="ml-1 vertical-align-middle">{{volunteer.cargo_colaborador}}</span>
         </td>
         <td>
-          <div>
-            <button pButton pRipple label="Alterar " (click)='onEdit(volunteer.idcolaborador)' class="p-button mr-2" icon="pi pi-pencil" style="margin: 2px 0;"></button>
-            <!--button pButton pRipple label="Excluir" (click)='showDeleteDialog(volunteer)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;"></button-->
-            <button pButton pRipple label="Inativar" (click)='showDeleteDialog(volunteer)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;"></button>
-          </div>
+          <span class="p-column-title">Ativo?</span>
+          <span class="ml-1 vertical-align-middle">{{volunteer.usuarioColaborador?.confirmacaoEmail ? "Não" : "Sim"}} [{{volunteer.usuarioColaborador?.token}}]</span>
         </td>
       </tr>
     </ng-template>

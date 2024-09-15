@@ -15,7 +15,8 @@ export class accountResolver {
     if (route.params && route.params['id']) {
       return this.service.loadById(route.params['id']);
     }
-    return of({id: undefined, nome: '', login: '', senha: '', role: '', confirmacaoEmail: false, token: '', telefone: '', usuarioIdendereco: undefined, usuarioIdvoluntario: undefined});
+    return of({id: undefined, nome: '', login: '', senha: '', role: '', confirmacaoEmail: false, token: '', telefone: '',
+       usuarioIdendereco: undefined, usuarioIdvoluntario: undefined});
   }
 
 };

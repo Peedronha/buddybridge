@@ -1,74 +1,82 @@
 <div class="card">
+  <div class="button-group" style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 10px; align-items: center;">
+    <span style="font-weight: bold; margin-right: auto;">
+        Selecione um item na grid abaixo para poder alterá-lo ou excluí-lo.
+    </span>
+    <button pButton pRipple label="Novo" (click)='onAdd()' class="p-button p-button" icon="pi pi-plus"></button>
+    <button pButton pRipple label="Alterar" (click)='onEdit(_specificEntity?.id)' class="p-button p-button" icon="pi pi-pencil" [disabled]='!_specificEntity?.id'></button>
+    <button pButton pRipple label="Senha" (click)='onEditPassword(_specificEntity?.id)' class="p-button p-button" icon="pi pi-key" [disabled]='!_specificEntity?.id'></button>
+    <button pButton pRipple label="Excluir" (click)='showDeleteDialog(_specificEntity)' class="p-button p-button-danger" icon="pi pi-trash" [disabled]='!_specificEntity?.id'></button>
+  </div>
   <p-table #dt1 [value]="users" selectionMode="single" [(selection)]="_specificEntity" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
-  [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session">
-      <ng-template pTemplate="header">
-          <tr>
-            <th pSortableColumn="id" style="width:10%">Cod. <p-sortIcon field="id"></p-sortIcon></th>
-            <th pSortableColumn="nome" style="width:20%">Nome <p-sortIcon field="nome"></p-sortIcon></th>
-            <th pSortableColumn="login" style="width:20%">Email <p-sortIcon field="login"></p-sortIcon></th>
-            <th pSortableColumn="telefone" style="width:20%">Telefone <p-sortIcon field="telefone"></p-sortIcon></th>
-            <th pSortableColumn="validarEmail" style="width:20%">Confirmação de email<p-sortIcon field="validarEmail"></p-sortIcon></th>
-            <th pSortableColumn="Ações" style="width:15%">Ações</th>
-          </tr>
-          <tr>
-            <th>
-              <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'id', 'contains')" [value]="$any(dt1.filters['id'])?.value" placeholder="Filtrar Cod." class="w-full">
-            </th>
-            <th>
-                <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'nome', 'contains')" [value]="$any(dt1.filters['nome'])?.value" placeholder="Filtrar Nome" class="w-full">
-            </th>
-            <th>
-                <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'login', 'contains')" [value]="$any(dt1.filters['login'])?.value" placeholder="Filtrar Login" class="w-full">
-            </th>
-            <th>
-              <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'telefone', 'contains')" [value]="$any(dt1.filters['telefone'])?.value" placeholder="Filtrar telefone" class="w-full">
-            </th>
-            <th>
-                <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'validarEmail', 'contains')" [value]="$any(dt1.filters['role'])?.value" placeholder="Filtrar confirmação de email" class="w-full">
-            </th>
-            <th>
-              <p-button label="Novo" icon="pi pi-plus" (click)="onAdd()" ></p-button>
-            </th>
-          </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-user>
-          <tr [pSelectableRow]="user">
-            <td>
-              <span class="p-column-title">Cod.</span>
-              {{user.id}}
-            </td>
-            <td>
-              <span class="p-column-title">Nome</span>
-              {{user.nome}}
-            </td>
-            <td>
-              <span class="p-column-title">Email</span>
-              <span class="ml-1 vertical-align-middle">{{user.login}}</span>
-            </td>
-            <td>
-              <span class="p-column-title">Telefone</span>
-              <span class="ml-1 vertical-align-middle">{{user.telefone}}</span>
-            </td>
-            <td>
-              <span class="p-column-title">Confirmação de email</span>
-              <span class="ml-1 vertical-align-middle">{{user.confirmacaoEmail ? 'Sim' : 'Não'}}</span>
-            </td>
-            <td>
-              <div>
-                <button pButton pRipple label="Alterar " (click)='onEdit(user.id)' class="p-button mr-2" icon="pi pi-pencil" style="margin: 2px 0;"></button>
-                <button pButton pRipple label="Senha " (click)='onEditPassword(user.id)' class="p-button mr-2" icon="pi pi-key" style="margin: 2px 0;"></button>
-                <button pButton pRipple label="Excluir" (click)='showDeleteDialog(user)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;"></button>
-              </div>
-            </td>
-          </tr>
-      </ng-template>
-      <ng-template pTemplate="emptymessage">
-          <tr>
-              <td colspan="4">Não foram encontrados registros.</td>
-          </tr>
-      </ng-template>
+    [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session-user" >
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="id" style="width:10%">Cod. <p-sortIcon field="id"></p-sortIcon></th>
+        <th pSortableColumn="nome" style="width:20%">Nome <p-sortIcon field="nome"></p-sortIcon></th>
+        <th pSortableColumn="login" style="width:20%">Email <p-sortIcon field="login"></p-sortIcon></th>
+        <th pSortableColumn="grupoAcessoUsuario" style="width:20%">Grupo de Acesso <p-sortIcon field="grupoAcessoUsuario"></p-sortIcon></th>
+        <th pSortableColumn="role" style="width:15%">Tipo <p-sortIcon field="role"></p-sortIcon></th>
+        <th pSortableColumn="cargo_colaborador" style="width:10%">Ativo? <p-sortIcon field="cargo_colaborador"></p-sortIcon></th>
+      </tr>
+      <tr>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'id', 'contains')" [value]="$any(dt1.filters['id'])?.value" placeholder="Filtrar Cod." class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'nome', 'contains')" [value]="$any(dt1.filters['nome'])?.value" placeholder="Filtrar Nome" class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'login', 'contains')" [value]="$any(dt1.filters['login'])?.value" placeholder="Filtrar Login" class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'grupoAcessoUsuario', 'contains')" [value]="$any(dt1.filters['grupoAcessoUsuario'])?.value" placeholder="Filtrar Grupo de Acesso" class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'role', 'contains')" [value]="$any(dt1.filters['role'])?.value" placeholder="Filtrar tipo" class="w-full">
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-user>
+      <tr [pSelectableRow]="user">
+        <td>
+          <span class="p-column-title">Cod.</span>
+          {{user.id}}
+        </td>
+        <td>
+          <span class="p-column-title">Nome</span>
+          {{user.nome}}
+        </td>
+        <td>
+          <span class="p-column-title">Email</span>
+          <span class="ml-1 vertical-align-middle">{{user.login}}</span>
+        </td>
+        <td>
+          <span class="p-column-title">Grupo de Acesso</span>
+          <span class="ml-1 vertical-align-middle">{{user.grupoAcessoUsuario?.descricaoGrupoAcesso}}</span>
+        </td>
+        <td>
+          <span class="p-column-title">Role</span>
+          <span class="ml-1 vertical-align-middle">{{user.role}}</span>
+        </td>
+        <td>
+          <span class="p-column-title">Ativo?</span>
+          <span class="ml-1 vertical-align-middle">{{user?.confirmacaoEmail ? "Não" : "Sim"}} [{{user?.token}}]</span>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="5">Não foram encontrados registros.</td>
+      </tr>
+    </ng-template>
   </p-table>
-  <p-dialog header="Confirmar Exclusão" [(visible)]="displayDeleteDialog" modal="modal" [closable]="false"
+
+  <p-dialog header="Confirmar Inativação" [(visible)]="displayDeleteDialog" modal="modal" [closable]="false"
             [dismissableMask]="true" [baseZIndex]="10000"
             [draggable]="false" [resizable]="false">
     <p class="m-0">Tem certeza de que deseja excluir esta conta?</p>

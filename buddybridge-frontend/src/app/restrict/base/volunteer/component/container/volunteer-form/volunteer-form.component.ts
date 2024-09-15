@@ -1,10 +1,12 @@
-import { Colaborador } from '../../../model/colaborador';
 import { Component } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import { Router, ActivatedRoute } from '@angular/router';
 import { AccountService } from '../../../../../../open/account/shared/account.service';
 import {VolunteerService} from "../../../service/volunteer.service";
+import { User } from '../../../../../../open/account/model/user.model';
+import { AccountRestrictService } from '../../../../account/shared/account-restrict.service';
+import { Colaborador } from '../../../model/colaborador';
 
 @Component({
   selector: 'app-volunteer-form',
@@ -15,72 +17,57 @@ export class VolunteerFormComponent {
   registerForm = this.fb.group({
     idcolaborador: [''],
     nome_colaborador: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
     cpf_colaborador: [''],
     cnpj_colaborador: [''],
     cargo_colaborador: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
     descricao_atividades_colaborador: [''],
-    pf_pj_colaborador: ['']
-  })
+    pf_pj_colaborador: [''],
+    usuario: [null as User | null, Validators.required] // Select de usuários
+  });
 
+  userOptions: User[] = []; // Lista de usuários para o select
   showPj: boolean = true;
 
   constructor(
     private fb: FormBuilder,
     private volunteerService: VolunteerService,
     private messageService: MessageService,
+    private accountRestrictService: AccountRestrictService,
     private router: ActivatedRoute,
     private route: Router,
   ) { }
 
   ngOnInit(): void {
-    const colaborador: Colaborador = this.router.snapshot.data['volunteer'];
-    console.log(colaborador);
-    this.registerForm.setValue({
-      idcolaborador: colaborador.idcolaborador +'',
-      nome_colaborador: colaborador.nome_colaborador,
-      email: colaborador.email,
-      cpf_colaborador: colaborador.cpf_colaborador,
-      cnpj_colaborador: colaborador.cnpj_colaborador,
-      cargo_colaborador: colaborador.cargo_colaborador,
-      descricao_atividades_colaborador: colaborador.descricao_atividades_colaborador,
-      pf_pj_colaborador: colaborador.pf_pj_colaborador,
+    this.accountRestrictService.getUsers().subscribe((users: User[]) => {
+      this.userOptions = users;
     })
+
+    const colaborador: Colaborador = this.router.snapshot.data['volunteer'];
+    this.registerForm.setValue({
+      idcolaborador: colaborador.idcolaborador ? colaborador.idcolaborador + '' : '',
+      nome_colaborador: colaborador.usuarioColaborador != null ? colaborador.usuarioColaborador?.nome! : "",
+      cpf_colaborador: colaborador.cpf_colaborador || '',
+      cnpj_colaborador: colaborador.cnpj_colaborador || '',
+      cargo_colaborador: colaborador.cargo_colaborador || '',
+      descricao_atividades_colaborador: colaborador.descricao_atividades_colaborador || '',
+      pf_pj_colaborador: colaborador.pf_pj_colaborador || '',
+      usuario: colaborador.usuarioColaborador || null
+    });
+
+    //Valide preencher conforme o campo pf_pj_colaborador - se igual Pessoa Fisica vir como false, se não - vir como true
+    this.showPj = colaborador.pf_pj_colaborador === 'Pessoa Jurídica';
   }
 
-
-  get idcolaborador() {
-    return this.registerForm.get('idcolaborador');
+  // Carrega os usuários
+  loadUsers() {
+    this.accountRestrictService.listar().subscribe(users => {
+      this.userOptions = users;
+    }, error => {
+      console.error('Erro ao carregar os usuários', error);
+    });
   }
 
-  get nome_colaborador() {
-    return this.registerForm.get('nome_colaborador');
-  }
-
-  get email() {
-    return this.registerForm.get('email');
-  }
-
-  get cpf_colaborador() {
-    return this.registerForm.get('cpf_colaborador');
-  }
-
-  get cnpj_colaborador() {
-    return this.registerForm.get('cnpj_colaborador');
-  }
-
-  get cargo_colaborador() {
-    return this.registerForm.get('cargo_colaborador');
-  }
-
-  get descricao_atividades_colaborador() {
-    return this.registerForm.get('descricao_atividades_colaborador');
-  }
-
-  get pf_pj_colaborador() {
-    return this.registerForm.get('pf_pj_colaborador');
-  }
-
+  // Alterna entre CPF e CNPJ
   updateState() {
     this.showPj = !this.showPj;
     if (!this.showPj) {
@@ -102,45 +89,43 @@ export class VolunteerFormComponent {
     return this.showPj;
   }
 
-
+  // Submissão do formulário
   submitDetails() {
-    console.log(this.registerForm.get('idcolaborador')?.value+'');
     let volunteer = new Colaborador();
-    var id = this.registerForm.get('idcolaborador')?.value+'';
-    volunteer.idcolaborador = parseInt(id);
-    volunteer.nome_colaborador = this.registerForm.get('nome_colaborador')?.value+'';
-    volunteer.cpf_colaborador = this.registerForm.get('cpf_colaborador')?.value+'';
-    volunteer.cnpj_colaborador = this.registerForm.get('cnpj_colaborador')?.value +'';
-    volunteer.email = this.registerForm.get('email')?.value + '';
-    volunteer.cargo_colaborador = this.registerForm.get('cargo_colaborador')?.value+'';
-    volunteer.descricao_atividades_colaborador = this.registerForm.get('descricao_atividades_colaborador')?.value+'';
-    volunteer.pf_pj_colaborador =  this.registerForm.get('pf_pj_colaborador')?.value + '';
-    console.log(volunteer);
-    if (this.registerForm.get('idcolaborador')?.value + '' != 'NaN'){
+    let id = this.registerForm.get('idcolaborador')?.value ? parseInt(this.registerForm.get('idcolaborador')?.value + '') : undefined;
+
+    volunteer.idcolaborador = id;
+    volunteer.cpf_colaborador = this.registerForm.get('cpf_colaborador')?.value + '';
+    volunteer.cnpj_colaborador = this.registerForm.get('cnpj_colaborador')?.value + '';
+    volunteer.cargo_colaborador = this.registerForm.get('cargo_colaborador')?.value + '';
+    volunteer.descricao_atividades_colaborador = this.registerForm.get('descricao_atividades_colaborador')?.value + '';
+    volunteer.pf_pj_colaborador = this.registerForm.get('pf_pj_colaborador')?.value + '';
+    volunteer.usuarioColaborador = this.registerForm.get('usuario')?.value; // Relaciona o usuário
+
+    //console.log("id -> "+id);
+    if (id+"" !== "undefined") {
       this.volunteerService.updateVolunteer(volunteer).subscribe(
         response => {
-          console.log(response);
-          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso' });
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Atualizado com sucesso' });
           this.registerForm.reset();
-          this.route.navigateByUrl('/volunteer')
+          this.route.navigateByUrl('/volunteer');
         },
         error => {
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Já existe um usuário com este CPF / Email cadastrado no sistema' });
-        },
-      )
+        }
+      );
     } else {
       volunteer.idcolaborador = undefined;
       this.volunteerService.registerVolunteer(volunteer).subscribe(
         response => {
-          console.log(response);
-          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso!'});
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registrado com sucesso!' });
           this.registerForm.reset();
-          this.route.navigateByUrl('/volunteer')
+          this.route.navigateByUrl('/volunteer');
         },
         error => {
-          this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Já existe um usuário cadastrado no sistema com este email.'});
-        },
-      )
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Já existe um usuário cadastrado no sistema com este CNPJ.' });
+        }
+      );
     }
   }
 }

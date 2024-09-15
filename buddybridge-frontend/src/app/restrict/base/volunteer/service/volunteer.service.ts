@@ -78,7 +78,7 @@ export class VolunteerService {
       ))
   }
 
-  getVolunteersById(id: any): Observable<any> {
+  getVolunteersById(id: any): Observable<Colaborador> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()

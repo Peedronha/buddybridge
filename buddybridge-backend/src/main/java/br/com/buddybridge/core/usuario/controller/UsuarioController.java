@@ -39,7 +39,7 @@ public class UsuarioController {
     @PutMapping
     public ResponseEntity<Usuario> updateUsuario(@RequestBody Usuario usuario) throws SystemException, ExampleExeption {
         if(this.usuarioService.buscarPorId(usuario.getId()) != null) {
-            this.usuarioService.salvar(usuario, false);
+            this.usuarioService.update(usuario);
             return new ResponseEntity<>(usuario, HttpStatus.OK);
         }
         else {

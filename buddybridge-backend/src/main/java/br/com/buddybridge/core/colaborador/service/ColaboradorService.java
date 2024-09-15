@@ -11,11 +11,8 @@ import jakarta.transaction.SystemException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
-
-import static br.com.buddybridge.core.security.config.PasswordGenerator.generatePassword;
 
 @Service
 @AllArgsConstructor
@@ -30,27 +27,13 @@ public class ColaboradorService {
     }
 
     public Colaborador inativarColaborador(Colaborador colaborador) {
-        System.out.println("to aqui");
-        String nomeColaborador = colaborador.getNome_colaborador() + " [INATIVO]";
-        colaborador.setNome_colaborador(nomeColaborador);
         colaborador.getUsuarioColaborador().setConfirmacaoEmail(true);
         return colaboradorRepository.save(colaborador);
     }
 
     public Colaborador saveColaborador(Colaborador colaborador) throws SystemException, ExampleExeption {
         try {
-            if(colaborador.getIdcolaborador() != null){
-                colaborador = colaboradorRepository.save(colaborador);
-            } else {
-                Usuario user = new Usuario();
-                user.setNome(colaborador.getNome_colaborador());
-                user.setLogin(colaborador.getEmail());
-                user.setSenha(PasswordGenerator.generatePassword(8));
-                Usuario persisted = usuarioService.salvar(user, true);
-                colaborador.setUsuarioColaborador(persisted);
-                return colaboradorRepository.save(colaborador);
-            }
-            return colaborador;
+            return colaboradorRepository.save(colaborador);
         } catch (Exception e) {
             throw new SystemException(String.valueOf(e));
         }
@@ -67,7 +50,7 @@ public class ColaboradorService {
     }
 
     public boolean existsByEmail(String emailcolaborador) {
-        return colaboradorRepository.existsByEmail(emailcolaborador);
+        return usuarioRepository.findByLogin(emailcolaborador) != null && !usuarioRepository.findByLogin(emailcolaborador).isEmpty();
     }
 
 }

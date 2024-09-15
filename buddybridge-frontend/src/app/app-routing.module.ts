@@ -30,18 +30,10 @@ import { volunteerResolver } from "./restrict/base/volunteer/guards/volunteer.re
 import { DashboardComponent } from './restrict/dashboard/dashboard.component';
 import { AppLayoutComponent } from './restrict/layout/app.layout.component';
 import { ErrorComponent } from './restrict/layout/error/error/error.component';
-import {AdoptionProfileComponent} from "./restrict/base/adoption-profile/component/adoption/adoption-profile.component";
-import {
-  AdoptionProfileFormComponent
-} from "./restrict/base/adoption-profile/component/adoption-form/adoption-profile-form.component";
-import {adoptionProfileResolver} from "./restrict/base/adoption-profile/guards/adoption-profile.resolver.guard";
-import {AdoptionComponent} from "./open/adoption/components/adoption-header/adoption.component";
-import {
-  AdoptionSubmissionFormComponent
-} from "./open/adoption/components/adoption-submission-form/adoption-submission-form.component";
-import {AdoptionListComponent} from "./open/adoption/components/adoption-list/adoption-list.component";
-import {AdoptionUpdateComponent} from "./open/adoption/components/adoption-update/adoption-update.component";
-
+import { GrupoacessoComponent } from './restrict/base/grupo_acesso/component/grupoacesso/grupoacesso.component';
+import { GrupoacessoFormComponent } from './restrict/base/grupo_acesso/component/grupoacesso-form/grupoacesso-form.component';
+import { grupoacessoResolver } from './restrict/base/grupo_acesso/guard/grupoacesso.resolver';
+import { SolicitacaoacessoComponent } from './restrict/base/solicitacao_acesso/component/solicitacaoacesso/solicitacaoacesso.component';
 const routes: Routes = [
   { path: 'errorBuddyBridge', title: 'BuddyBridge - Erro', component: ErrorComponent },
   {
@@ -52,11 +44,6 @@ const routes: Routes = [
 
       { path: 'restrict/home', title: 'BuddyBridge - Home', component: HomeComponent },
       { path: 'restrict/institucional', title: 'BuddyBridge - Institucional', component: InsitucionalComponent },
-
-      { path: 'restrict/adocao', title: 'BuddyBridge - Adocao', component: AdoptionComponent },
-      { path: 'restrict/adocao/addadocao/:id', title: 'BuddyBridge - Adocao', component: AdoptionSubmissionFormComponent, resolve: {adocao : adoptionProfileResolver} },
-      { path: 'restrict/adocao/list', title: 'BuddyBridge - Adocao', component: AdoptionListComponent },
-      { path: 'restrict/adocao/editsubmission/:id', title: 'BuddyBridge - Adocao', component: AdoptionUpdateComponent },
 
 
       { path: 'dashboard', title: 'BuddyBridge - DashBoard', component: DashboardComponent },
@@ -83,12 +70,13 @@ const routes: Routes = [
       { path: 'tipos/addtipo', title: 'BuddyBridge - Novo Tipo', component: FormTipoComponent, resolve: {tipo : tipoResolver} },
       { path: 'tipos/edittipo/:id', title: 'BuddyBridge - Alterar Tipo', component: FormTipoComponent, resolve: {tipo : tipoResolver} },
 
-      { path: 'perfil-adocao', title: 'BuddyBridge - Perfil de Adoção', component: AdoptionProfileComponent },
-      { path: 'perfil-adocao/addperfil', title: 'BuddyBridge - Novo Perfil de Adoção', component: AdoptionProfileFormComponent, resolve: {perfil : adoptionProfileResolver} },
-      { path: 'perfil-adocao/editperfil/:id', title: 'BuddyBridge - Alterar Perfil de Adoção', component: AdoptionProfileFormComponent, resolve: {perfil : adoptionProfileResolver} },
+      { path: 'grupoacesso', title: 'BuddyBridge - Grupos de acesso', component: GrupoacessoComponent },
+      { path: 'grupoacesso/addgrupoacesso', title: 'BuddyBridge - Novo Grupoe de acesso', component: GrupoacessoFormComponent, resolve: {grupoacesso : grupoacessoResolver} },
+      { path: 'grupoacesso/editgrupoacesso/:id', title: 'BuddyBridge - Alterar Grupo de acesso', component: GrupoacessoFormComponent, resolve: {grupoacesso : grupoacessoResolver} },
+
+      { path: 'solicitacaoAcesso', title: 'BuddyBridge - Grupos de acesso', component: SolicitacaoacessoComponent },
 
       { path: 'ong', title: 'BuddyBridge - Institucional', component: OngComponent },
-
     ],
     canActivate: [AuthGuard]
   },
@@ -97,13 +85,12 @@ const routes: Routes = [
     component: TopMenuOpenComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full'},
-      { path: 'adocao', title: 'BuddyBridge - Quero Adotar', component: AdoptionComponent, canActivate: [LoginGuard] },
       { path: 'home', title: 'BuddyBridge - Home', component: HomeComponent, canActivate: [LoginGuard] },
       { path: 'institucional', title: 'BuddyBridge - Institucional', component: InsitucionalComponent, canActivate: [LoginGuard] },
       { path: 'register', title: 'BuddyBridge - Criar Conta', component: RegisterComponent, canActivate: [LoginGuard] },
       { path: 'login', title: 'BuddyBridge - Login', component: LoginComponent, canActivate: [LoginGuard] },
       { path: 'recovery', title: 'BuddyBridge - Recovery', component: RecoveryComponent, canActivate: [LoginGuard] },
-      { path: 'validatelogin', title: 'BuddyBridge - Validar código OTP', component: ValidateloginComponent, canActivate: [LoginGuard] },
+      { path: 'validatelogin', title: 'BuddyBridge - Validar código', component: ValidateloginComponent, canActivate: [LoginGuard] },
     ]
   },
   { path: '', redirectTo: 'home', pathMatch: 'full'},
