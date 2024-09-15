@@ -126,29 +126,46 @@
       </small>
     </div>
 
-    <!-- Radio -->
-      <div class="field">
-        <label for="radio">Choose an option*</label>
-        <div class="p-field-radiobutton">
-          <p-radioButton
-            name="group1"
-            value="Option 1"
-            formControlName="radioOption"
-            inputId="option1"
-          ></p-radioButton>
-          <label for="option1">Option 1</label>
-        </div>
-        <div class="p-field-radiobutton">
-          <p-radioButton
-            name="group1"
-            value="Option 2"
-            formControlName="radioOption"
-            inputId="option2"
-          ></p-radioButton>
-          <label for="option2">Option 2</label>
-        </div>
+<!-- Existem crianças ou pessoas com alergias na casa? -->
+<div class="field">
+  <label for="alergias">Existem crianças ou pessoas com alergias na casa?</label>
+  <p-radioButton name="alergias" value="true" formControlName="alergias" label="Sim"></p-radioButton>
+  <p-radioButton name="alergias" value="false" formControlName="alergias" label="Não"></p-radioButton>
+</div>
 
-    </div>
+<!-- Você já teve animais de estimação antes? -->
+<div class="field">
+  <label for="animais_antes">Você já teve animais de estimação antes?</label>
+  <p-radioButton name="animais_antes" value="true" formControlName="animais_antes" label="Sim"></p-radioButton>
+  <p-radioButton name="animais_antes" value="false" formControlName="animais_antes" label="Não"></p-radioButton>
+</div>
+
+<!-- Quantas horas por dia você costuma passar fora de casa? -->
+<div class="field">
+  <label for="horas_fora">Quantas horas por dia você costuma passar fora de casa?</label>
+  <input id="horas_fora" formControlName="horas_fora" pInputText type="number" class="w-full" />
+</div>
+
+<!-- Você tem um quintal ou área externa segura para o animal brincar? -->
+<div class="field">
+  <label for="quintal">Você tem um quintal ou área externa segura para o animal brincar?</label>
+  <p-radioButton name="quintal" value="true" formControlName="quintal" label="Sim"></p-radioButton>
+  <p-radioButton name="quintal" value="false" formControlName="quintal" label="Não"></p-radioButton>
+</div>
+
+<!-- Está disposto a fornecer cuidados médicos em caso de necessidade? -->
+<div class="field">
+  <label for="cuidados_medicos">Está disposto a fornecer cuidados médicos em caso de necessidade?</label>
+  <p-radioButton name="cuidados_medicos" value="true" formControlName="cuidados_medicos" label="Sim"></p-radioButton>
+  <p-radioButton name="cuidados_medicos" value="false" formControlName="cuidados_medicos" label="Não"></p-radioButton>
+</div>
+
+<!-- Por que você quer adotar este animal em particular? -->
+<div class="field">
+  <label for="motivo_adocao">Por que você quer adotar este animal em particular?</label>
+  <input id="motivo_adocao" formControlName="motivo_adocao" pInputTextarea class="w-full" type="text" />
+</div>
+
     <button pButton label="ENVIAR" stylepInputText class="w-full" type="submit"></button>
   </form>
 </div>

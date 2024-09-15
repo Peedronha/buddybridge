@@ -110,11 +110,11 @@ public class AdoptionService {
                 .orElseThrow(Exception::new);
     }
 
-    public List<ProfileDTO> AnimalsByAdoptionPendingStatus() throws SystemException {
+    public List<GetAdoptionDTO> AnimalsByAdoptionPendingStatus() throws SystemException {
         try {
-            List<ProfileDTO> dtos = new ArrayList<>();
+            List<GetAdoptionDTO> dtos = new ArrayList<>();
             for (AdoptionProfileModel model: adoptionProfileRepository.findAllByPendingAdoption()){
-                dtos.add(new ProfileDTO(model));
+                dtos.add(new GetAdoptionDTO(model));
             };
             return dtos;
 

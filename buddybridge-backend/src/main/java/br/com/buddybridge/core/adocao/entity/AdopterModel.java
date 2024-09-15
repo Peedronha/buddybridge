@@ -4,6 +4,7 @@ import br.com.buddybridge.core.adocao.model.AdoptionSubmissionDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -49,11 +50,40 @@ public class AdopterModel {
     @JoinColumn(name = "id_adocao")
     private AdoptionModel adocao;
 
+    @NotNull
+    @Column(name = "alergias")
+    private Boolean alergias;  // Existem crianças ou pessoas com alergias na casa?
+
+    @NotNull
+    @Column(name = "animais_antes")
+    private Boolean animaisAntes;  // Você já teve animais de estimação antes?
+
+    @NotNull
+    @Column(name = "horas_fora")
+    private Integer horasFora;  // Quantas horas por dia você costuma passar fora de casa?
+
+    @NotNull
+    @Column(name = "quintal_seguro")
+    private Boolean quintalSeguro;  // Você tem um quintal ou área externa segura para o animal brincar?
+
+    @NotNull
+    @Column(name = "cuidados_medicos")
+    private Boolean cuidadosMedicos;  // Está disposto a fornecer cuidados médicos em caso de necessidade?
+
+    @Column(name = "motivo_adocao", length = 500)
+    private String motivoAdocao;  // Por que você quer adotar este animal em particular?
+
     public AdopterModel(AdoptionSubmissionDTO adoptionDTO) {
         this.nome_adotante = adoptionDTO.getNome_adotante();
         this.data_nascimento = LocalDate.parse(adoptionDTO.getData_nascimento());
         this.cpf = adoptionDTO.getCPF();
         this.telefone = adoptionDTO.getTelefone();
         this.email = adoptionDTO.getEmail();
+        this.alergias = adoptionDTO.getAlergias();
+        this.animaisAntes = adoptionDTO.getAnimaisAntes();
+        this.horasFora = adoptionDTO.getHorasFora();
+        this.quintalSeguro = adoptionDTO.getQuintalSeguro();
+        this.cuidadosMedicos = adoptionDTO.getCuidadosMedicos();
+        this.motivoAdocao = adoptionDTO.getMotivoAdocao();
     }
 }

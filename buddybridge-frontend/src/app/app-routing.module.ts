@@ -40,6 +40,7 @@ import {
   AdoptionSubmissionFormComponent
 } from "./open/adoption/components/adoption-submission-form/adoption-submission-form.component";
 import {AdoptionListComponent} from "./open/adoption/components/adoption-list/adoption-list.component";
+import {AdoptionUpdateComponent} from "./open/adoption/components/adoption-update/adoption-update.component";
 
 const routes: Routes = [
   { path: 'errorBuddyBridge', title: 'BuddyBridge - Erro', component: ErrorComponent },
@@ -55,6 +56,7 @@ const routes: Routes = [
       { path: 'restrict/adocao', title: 'BuddyBridge - Adocao', component: AdoptionComponent },
       { path: 'restrict/adocao/addadocao/:id', title: 'BuddyBridge - Adocao', component: AdoptionSubmissionFormComponent, resolve: {adocao : adoptionProfileResolver} },
       { path: 'restrict/adocao/list', title: 'BuddyBridge - Adocao', component: AdoptionListComponent },
+      { path: 'restrict/adocao/editsubmission/:id', title: 'BuddyBridge - Adocao', component: AdoptionUpdateComponent },
 
 
       { path: 'dashboard', title: 'BuddyBridge - DashBoard', component: DashboardComponent },

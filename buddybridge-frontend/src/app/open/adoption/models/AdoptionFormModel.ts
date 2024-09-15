@@ -16,4 +16,11 @@ export interface AdoptionFormModel{
   Bairro: string;//address
   Estado: string;//address
   Cidade: string;//address
+  
+  alergias: boolean;  // Existem crianças ou pessoas com alergias na casa?
+  animaisAntes: boolean;  // Você já teve animais de estimação antes?
+  horasFora: number;  // Quantas horas por dia você costuma passar fora de casa?
+  quintalSeguro: boolean;  // Você tem um quintal ou área externa segura para o animal brincar?
+  cuidadosMedicos: boolean;  // Está disposto a fornecer cuidados médicos?
+  motivoAdocao: string;  // Por que você quer adotar este animal em particular? (TextArea)
 }

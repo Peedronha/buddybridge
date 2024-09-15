@@ -2,12 +2,16 @@ package br.com.buddybridge.core.adocao.model;
 
 import br.com.buddybridge.core.adocao.entity.AdoptionStatus;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
+@Getter
+@Setter
 public class AdoptionSubmissionDTO {
     private Long id_perfil_adocao;
     private Long id_adocao;
@@ -26,4 +30,11 @@ public class AdoptionSubmissionDTO {
     private String bairro;
     private String estado;
     private String cidade;
+
+    private Boolean alergias;
+    private Boolean animaisAntes;
+    private Integer horasFora;
+    private Boolean quintalSeguro;
+    private Boolean cuidadosMedicos;
+    private String motivoAdocao;
 }

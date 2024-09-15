@@ -43,7 +43,7 @@
           <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'status', 'contains')" [value]="$any(dt1.filters['status'])?.value" placeholder="Filtrar Status" class="w-full">
         </th>
         <th>
-          <p-button label="Novo" icon="pi pi-plus" (click)="onAdd(_specificEntity.id_perfil_adocao)"></p-button>
+<!--          <p-button label="Novo" icon="pi pi-plus" (click)="onEdit(_specificEntity.id_perfil_adocao)"></p-button>-->
         </th>
       </tr>
     </ng-template>
@@ -71,7 +71,7 @@
         </td>
         <td>
           <div>
-            <button pButton pRipple label="Alterar " (click)='onAdd(_specificEntity.id_perfil_adocao)' class="p-button mr-2" icon="pi pi-pencil" style="margin: 2px 0;"></button>
+            <button pButton pRipple label="Alterar " (click)='onEdit(_specificEntity.id_perfil_adocao)' class="p-button mr-2" icon="pi pi-pencil" style="margin: 2px 0;"></button>
           </div>
         </td>
       </tr>

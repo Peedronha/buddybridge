@@ -73,7 +73,7 @@ public class AdoptionController {
     @GetMapping("/profiles/PENDING")
     public ResponseEntity<?> getProfilesByStatusPending() {
         try {
-            List<ProfileDTO> model = adoptionService.AnimalsByAdoptionPendingStatus();
+            List<GetAdoptionDTO> model = adoptionService.AnimalsByAdoptionPendingStatus();
             return ResponseEntity.ok(model);
         } catch (Exception e) {
             return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.NOT_FOUND);

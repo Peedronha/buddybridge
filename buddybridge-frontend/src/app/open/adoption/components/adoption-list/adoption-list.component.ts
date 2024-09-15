@@ -8,7 +8,7 @@ import {TableModule} from "primeng/table";
 import {AdoptionProfileModel} from "../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
 import {FormBuilder, Validators} from "@angular/forms";
 import {AdoptionService} from "../../../../restrict/base/adoption-profile/shared/adoption.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AnimalCard} from "../../../../restrict/base/adoption-profile/model/AnimalCard";
 import {AnimalService} from "../../../../restrict/base/animal/service/animal.service";
 import {AdoptionFormModel} from "../../models/AdoptionFormModel";
@@ -46,7 +46,11 @@ export class AdoptionListComponent {
   ];
 
 
-  constructor(private animalService: AnimalService, private adoptionService: AdoptionService) {}
+  constructor(private animalService: AnimalService,
+              private adoptionService: AdoptionService,
+              private router: Router,
+              private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.adoptionService.getAdoptions().subscribe((data: AdoptionFormModel[]) => {
@@ -69,7 +73,7 @@ export class AdoptionListComponent {
     }
   }
 
-  onAdd(idAnimal: number | undefined) {
-    this.add.emit(idAnimal);
+  onEdit(idAdocao: number | undefined) {
+    this.router.navigate(['editsubmission', idAdocao], { relativeTo: this.route });
   }
 }
