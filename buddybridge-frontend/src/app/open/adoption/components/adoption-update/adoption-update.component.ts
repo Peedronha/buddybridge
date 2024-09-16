@@ -76,6 +76,12 @@ export class AdoptionUpdateComponent {
       Bairro: ['', Validators.required],
       Estado: ['', Validators.required],
       Cidade: ['', Validators.required],
+      alergias: [null, Validators.required],
+      animais_antes: [null, Validators.required],
+      horas_fora: [null, [Validators.required, Validators.min(0)]],
+      quintal: [null, Validators.required],
+      cuidados_medicos: [null, Validators.required],
+      motivo_adocao: [null, Validators.required],
       observacoes: ['', Validators.required],
 
     })
@@ -98,6 +104,12 @@ export class AdoptionUpdateComponent {
         CPF: '',
         data_submissao: '',
         endereco: '',
+        alergias: '',
+        animais_antes: '',
+        horas_fora: '',
+        quintal: '',
+        cuidados_medicos: '',
+        motivo_adocao: '',
         observacoes:''
       })
     });

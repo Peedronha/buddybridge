@@ -55,25 +55,14 @@ export class AdoptionListComponent {
   ngOnInit() {
     this.adoptionService.getAdoptions().subscribe((data: AdoptionFormModel[]) => {
       alert(JSON.stringify(data))
-
       this.adoptions = data;
     });
   }
 
-  getStatusSeverity(animal:any) {
-    switch (animal.status) {
-      case 'AVAILABLE':
-        return 'success';
-      case 'URGENT':
-        return 'warning';
-      case 'NOT_AVAILABLE':
-        return 'danger';
-      default:
-        return null;
-    }
-  }
 
   onEdit(idAdocao: number | undefined) {
-    this.router.navigate(['editsubmission', idAdocao], { relativeTo: this.route });
+    // this.router.navigate(['editsubmission', idAdocao], { relativeTo: this.route });
+    this.router.navigate(['restrict/adocao/editsubmission/'+idAdocao]);
+
   }
 }
