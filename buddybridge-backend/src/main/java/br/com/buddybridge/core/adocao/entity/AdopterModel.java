@@ -73,10 +73,13 @@ public class AdopterModel {
     @Column(name = "motivo_adocao", length = 500)
     private String motivoAdocao;  // Por que você quer adotar este animal em particular?
 
+    @Embedded
+    private AddressModel address;
+
     public AdopterModel(AdoptionSubmissionDTO adoptionDTO) {
-        this.nome_adotante = adoptionDTO.getNome_adotante();
-        this.data_nascimento = LocalDate.parse(adoptionDTO.getData_nascimento());
-        this.cpf = adoptionDTO.getCPF();
+        this.nome_adotante = adoptionDTO.getNomeAdotante();
+        this.data_nascimento = LocalDate.parse(adoptionDTO.getDataNascimento());
+        this.cpf = adoptionDTO.getCpf();
         this.telefone = adoptionDTO.getTelefone();
         this.email = adoptionDTO.getEmail();
         this.alergias = adoptionDTO.getAlergias();

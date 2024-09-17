@@ -18,7 +18,6 @@ public class AdoptionProfileModel {
     @Column(name = "id_perfil_adocao")
     private Long id_perfil_adocao;
 
-
     @OneToOne
     @JoinColumn(name = "id_adocao")
     private AdoptionModel adocao;
@@ -40,6 +39,7 @@ public class AdoptionProfileModel {
     private LocalDateTime data_criacao;
 
     public AdoptionProfileModel(ProfileDTO profileDTO) {
+        this.id_perfil_adocao = profileDTO.getId_perfil_adocao() != null ? profileDTO.getId_perfil_adocao() : null;
         this.priority = profileDTO.getPriority();
         this.medical_necessities = profileDTO.getMedical_necessities();
         this.image = profileDTO.getImage();

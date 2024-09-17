@@ -5,6 +5,7 @@ import {map, Observable} from "rxjs";
 import {AnimalModel} from "../../animal/model/animal.model";
 import {AdoptionProfileModel} from "../model/AdoptionProfileModel";
 import {AdoptionFormModel} from "../../../../open/adoption/models/AdoptionFormModel";
+import {AdoptionIntention} from "../../../../open/adoption/models/AdoptionIntention";
 
 @Injectable({
   providedIn: 'root'
@@ -151,12 +152,12 @@ export class AdoptionService {
     });
     return this.http.delete<any>(this.apiUrl+'/profiles/'+ idUser,{headers: reqHeader})  }
 
-  updateAdoptionIntention(formModel: AdoptionFormModel) {
+  updateAdoptionIntention(formModel: AdoptionIntention, id_adocao: number) {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.put<any>(this.apiUrl+'/profiles', formModel,{headers: reqHeader}).pipe(
+    return this.http.put<any>(this.apiUrl+'/change/'+ id_adocao, formModel,{headers: reqHeader}).pipe(
       map((response) =>{
           if (response)
             return response;

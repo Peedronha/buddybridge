@@ -5,6 +5,7 @@ import br.com.buddybridge.core.adocao.model.AddressDTO;
 import br.com.buddybridge.core.adocao.model.AdoptionSubmissionDTO;
 import br.com.buddybridge.core.adocao.model.ProfileDTO;
 import br.com.buddybridge.core.adocao.model.get.GetAdoptionDTO;
+import br.com.buddybridge.core.adocao.model.get.GetAdoptionDetails;
 import br.com.buddybridge.core.adocao.repository.AdopterRepository;
 import br.com.buddybridge.core.adocao.repository.AdoptionProfileRepository;
 import br.com.buddybridge.core.adocao.repository.AdoptionRepository;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -28,43 +30,99 @@ public class AdoptionService {
     private final AdoptionRepository adoptionRepository;
     private final AdopterRepository adopterRepository;
     private final AnimalRepository animalRepository;
-    public AdoptionProfileModel saveAdoptionProfileRequest(ProfileDTO adoptionDTO) throws SystemException, NumberFormatException {
-        try {
+//    public AdoptionProfileModel saveAdoptionProfileRequest(ProfileDTO adoptionDTO) throws SystemException, NumberFormatException {
+//        try {
+//            AdoptionProfileModel model = new AdoptionProfileModel(adoptionDTO);
+//
+//            if (adoptionDTO.getId_adocao().isEmpty()) {
+//                    AdoptionModel adoptionModel = new AdoptionModel(AdoptionStatus.PENDING);
+//                    model.setAdocao(this.adoptionRepository.save(adoptionModel));
+//                }
+//
+//                Optional<AnimalModel> animalModelOptional = animalRepository.findById(Long.valueOf(adoptionDTO.getId_animal()));
+//
+//                if (animalModelOptional.isPresent()) {
+//                    model.setAnimal(animalModelOptional.get());
+//                } else {
+//                    throw new SystemException("AnimalModel with ID " + adoptionDTO.getId_animal() + " not found.");
+//                }
+//                model.setData_criacao(LocalDateTime.now());
+//
+//            return adoptionProfileRepository.save(model);
+//        } catch (NumberFormatException e) {
+//            throw new NumberFormatException("Invalid animal ID format: " + adoptionDTO.getId_animal());
+//        } catch (Exception e) {
+//            throw new SystemException("An error occurred while saving the adoption profile: " + e.getMessage());
+//        }
+//    }
+public AdoptionProfileModel saveAdoptionProfileRequest(ProfileDTO adoptionDTO) throws SystemException {
+    try {
+        AdoptionProfileModel model;
+        boolean isNew = adoptionDTO.getId_perfil_adocao() == null;
 
-            AdoptionProfileModel model = new AdoptionProfileModel(adoptionDTO);
+        if (isNew) {
+            model = new AdoptionProfileModel(adoptionDTO);
 
-            if(adoptionDTO.getId_adocao().isEmpty()) {
+            // Create a new AdoptionModel if id_adocao is empty
+            if (adoptionDTO.getId_adocao().isEmpty()) {
                 AdoptionModel adoptionModel = new AdoptionModel(AdoptionStatus.PENDING);
                 model.setAdocao(this.adoptionRepository.save(adoptionModel));
             }
 
-            Optional<AnimalModel> animalModelOptional = animalRepository.findById(Long.valueOf(adoptionDTO.getId_animal()));
+            // Validate and convert animal ID
+            Long animalId;
+            try {
+                animalId = !Objects.equals(adoptionDTO.getId_animal(), " ") ? Long.valueOf(adoptionDTO.getId_animal()) : null;
+            } catch (NumberFormatException e) {
+                throw new SystemException();
+            }
 
+            // Fetch the AnimalModel from the repository
+            Optional<AnimalModel> animalModelOptional = animalRepository.findById(animalId);
             if (animalModelOptional.isPresent()) {
                 model.setAnimal(animalModelOptional.get());
             } else {
                 throw new SystemException("AnimalModel with ID " + adoptionDTO.getId_animal() + " not found.");
             }
+
+            // Set the creation date
             model.setData_criacao(LocalDateTime.now());
 
-            return adoptionProfileRepository.save(model);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Invalid animal ID format: " + adoptionDTO.getId_animal());
-        } catch (Exception e) {
-            throw new SystemException("An error occurred while saving the adoption profile: " + e.getMessage());
+        } else {
+            // Handle PUT (Update Existing)
+            Optional<AdoptionProfileModel> existingModelOptional = adoptionProfileRepository.findById(adoptionDTO.getId_perfil_adocao());
+            if (existingModelOptional.isPresent()) {
+                model = existingModelOptional.get();
+                // Update fields from DTO
+                model.setPriority(adoptionDTO.getPriority());
+                model.setMedical_necessities(adoptionDTO.getMedical_necessities());
+            } else {
+                throw new SystemException("AdoptionProfileModel with ID " + adoptionDTO.getId_perfil_adocao() + " not found for update.");
+            }
         }
-    }
 
-        public Boolean saveAdoptionRequest(AdoptionSubmissionDTO adoptionDTO) throws SystemException {
+        // Save and return the model
+        return adoptionProfileRepository.save(model);
+
+    } catch (SystemException e) {
+        throw e; // Re-throw the custom exception for higher-level handling
+    } catch (Exception e) {
+        throw new SystemException();
+    }
+}
+
+
+
+    public Boolean saveAdoptionRequest(AdoptionSubmissionDTO adoptionDTO) throws SystemException {
             try {
-                Optional<AdoptionModel> model = this.adoptionRepository.findById(adoptionDTO.getId_adocao());
+                Optional<AdoptionModel> model = this.adoptionRepository.findById(adoptionDTO.getIdAdocao());
                 if (model.isPresent()) {
                     this.adoptionRepository.save(populateAdoption(adoptionDTO, model.get()));
                 } else {
-                    throw new SystemException("AdoptionModel with ID " + adoptionDTO.getId_adocao() + " not found.");
+                    throw new SystemException("AdoptionModel with ID " + adoptionDTO.getIdAdocao() + " not found.");
                 }
             } catch (NumberFormatException e) {
-                throw new NumberFormatException("Invalid adoption ID format: " + adoptionDTO.getId_animal());
+                throw new NumberFormatException("Invalid adoption ID format: " + adoptionDTO.getIdAdocao());
             } catch (Exception e) {
                 throw new SystemException("An error occurred while saving the adoption: " + e.getMessage());
             }
@@ -75,14 +133,16 @@ public class AdoptionService {
         AddressModel addressModel = new AddressModel(new AddressDTO(adoptionDTO));
         AdopterModel adopterModel = new AdopterModel(adoptionDTO);
 
-        Optional<AdoptionProfileModel> adoptionProfileModel = this.adoptionProfileRepository.findById(adoptionDTO.getId_perfil_adocao());
+        adopterModel.setAddress(addressModel);
+        adopterModel.setAdocao(model);
+
+        Optional<AdoptionProfileModel> adoptionProfileModel = this.adoptionProfileRepository.findById(adoptionDTO.getIdPerfilAdocao());
 
         adoptionProfileModel.ifPresent(model::setProfile);
 
-        model.setAddress(addressModel);
         model.setAdopter(this.adopterRepository.save(adopterModel));
 
-        model.setStatus_adocao(AdoptionStatus.ANALYSING);
+//        model.setStatus_adocao(AdoptionStatus.ANALYSING);
 
         model.setData_submissao(LocalDateTime.now());
         return model;
@@ -135,5 +195,29 @@ public class AdoptionService {
         } catch (Exception e) {
             throw new SystemException(String.valueOf(e));
         }
+    }
+
+    public GetAdoptionDetails findAdoptionById(Long id) throws Exception {
+        Optional<AdoptionModel> profileModel = this.adoptionRepository.findById(id);
+        return profileModel.map(GetAdoptionDetails::new)
+                .orElseThrow(Exception::new);
+    }
+
+    public Boolean updateAdoptionRequest(AdoptionSubmissionDTO adoptionDTO, String id) throws SystemException {
+        try {
+            Optional<AdoptionModel> model = this.adoptionRepository.findById(adoptionDTO.getIdAdocao());
+            if (model.isPresent()) {
+                model.get().setStatus_adocao(AdoptionStatus.valueOf(adoptionDTO.getStatus_adocao()));
+                model.get().setObservacoes(adoptionDTO.getObservacoes());
+                this.adoptionRepository.save(model.get());
+            } else {
+                throw new SystemException("AdoptionModel with ID " + adoptionDTO.getIdAdocao() + " not found.");
+            }
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Invalid adoption ID format: " + adoptionDTO.getIdAdocao());
+        } catch (Exception e) {
+            throw new SystemException("An error occurred while saving the adoption: " + e.getMessage());
+        }
+        return true;
     }
 }

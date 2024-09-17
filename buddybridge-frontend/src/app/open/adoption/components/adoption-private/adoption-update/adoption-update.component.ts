@@ -7,17 +7,20 @@ import {RippleModule} from "primeng/ripple";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {DropdownModule} from "primeng/dropdown";
 import {InputTextareaModule} from "primeng/inputtextarea";
-import {AdoptionService} from "../../../../restrict/base/adoption-profile/shared/adoption.service";
+import {AdoptionService} from "../../../../../restrict/base/adoption-profile/shared/adoption.service";
 import {MessageService} from "primeng/api";
-import {AnimalService} from "../../../../restrict/base/animal/service/animal.service";
-import {AccountService} from "../../../account/shared/account.service";
-import {AccountRestrictService} from "../../../../restrict/base/account/shared/account-restrict.service";
+import {AnimalService} from "../../../../../restrict/base/animal/service/animal.service";
+import {AccountService} from "../../../../account/shared/account.service";
+import {AccountRestrictService} from "../../../../../restrict/base/account/shared/account-restrict.service";
 import {
   AdoptionProfileModel,
   AdoptionStatus
-} from "../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
-import {User} from "../../../account/model/user.model";
-import {AdoptionFormModel} from "../../models/AdoptionFormModel";
+} from "../../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
+import {User} from "../../../../account/model/user.model";
+import {AdoptionFormModel} from "../../../models/AdoptionFormModel";
+import {AdoptionIntention} from "../../../models/AdoptionIntention";
+import {RadioButtonModule} from "primeng/radiobutton";
+import {AdoptionAvaliation} from "../../../models/AdoptionAvaliation";
 
 @Component({
   selector: 'app-adoption-update',
@@ -32,7 +35,8 @@ import {AdoptionFormModel} from "../../models/AdoptionFormModel";
     RouterLink,
     DropdownModule,
     NgForOf,
-    InputTextareaModule
+    InputTextareaModule,
+    RadioButtonModule
   ],
   templateUrl: './adoption-update.component.html',
   styleUrl: './adoption-update.component.scss'
@@ -42,7 +46,12 @@ export class AdoptionUpdateComponent {
 
   status = AdoptionStatus;
 
-  selectStatus: { label: string, value: string } | undefined;
+  adoption!: AdoptionIntention;
+
+  aux: number = 0;
+
+  selectStatus: { label: string; value: string } | undefined;
+
   statusOptions = [
     { label: 'Pendente', value: 'PENDING' },
     { label: 'Aprovada', value: 'APPROVED' },
@@ -61,53 +70,80 @@ export class AdoptionUpdateComponent {
   ) {
     this.adoptionForm = this.fb.group({
       id_perfil_adocao:[''],
-      id_adocao: [''],
+      id_adocao: ['', Validators.required],
       id_animal: [''],
-      nome_adotante: ['', Validators.required],
-      data_nascimento: ['', Validators.required],
-      CPF: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
-      telefone: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      nome_adotante: [''],
+      data_nascimento: [''],
+      CPF: [''],
+      telefone: [''],
+      email: [''],
       data_submissao: [''],
-      endereco: ['', Validators.required],
-      CEP: ['', [Validators.required, Validators.pattern(/^\d{5}-?\d{3}$/)]],
-      numero: ['', Validators.required],
-      Complemento: [''],
-      Bairro: ['', Validators.required],
-      Estado: ['', Validators.required],
-      Cidade: ['', Validators.required],
-      observacoes: ['', Validators.required],
-
+      endereco: [''],
+      CEP: [''],
+      numero: [''],
+      complemento: [''],
+      Bairro: [''],
+      Estado: [''],
+      Cidade: [''],
+      alergias: [''],
+      animais_antes: [''],
+      horas_fora: [''],
+      quintal: [''],
+      cuidados_medicos: [''],
+      motivo_adocao: [''],
+      observacoes: ['',Validators.required],
+      status_adocao:['', Validators.required]
     })
   }
 
   ngOnInit(): void {
-    const adoption: AdoptionProfileModel = this.router.snapshot.data['adocao'];
+    this.adoption = this.router.snapshot.data['adocao'];
+
+    alert("ngOnInit :" + JSON.stringify(this.adoption))
 
     const perfil: any = localStorage.getItem('idUser');
+
+    this.aux = this.adoption.id_adocao;
+
+    this.selectStatus = this.statusOptions.find(option => option.value === this.adoption.status_adocao)
 
     this.accountRestrictService.loadById(perfil+'').subscribe((data: User) => {
       this.adoptionForm.setValue({
         nome_adotante: data.nome,
         email: data.login,
         telefone: data.telefone+'',
-        id_perfil_adocao: adoption.id_perfil_adocao+'',
-        id_adocao: adoption.id_adocao+'',
-        id_animal:adoption.id_animal+'',
+        id_perfil_adocao: '',
+        id_adocao: this.adoption.id_adocao+'',
+        id_animal:'',
         data_nascimento: '',
         CPF: '',
+        CEP: '',
+        numero:'',
+        complemento:'',
+        Bairro: '',
+        Estado: '',
+        Cidade: '',
         data_submissao: '',
         endereco: '',
-        observacoes:''
+        alergias: '',
+        animais_antes: '',
+        horas_fora: '',
+        quintal: '',
+        cuidados_medicos: '',
+        motivo_adocao: '',
+        observacoes:'',
+        status_adocao: this.selectStatus
       })
     });
   }
 
   submitDetails(): void {
     if (this.adoptionForm.valid) {
-      const formModel = this.adoptionForm.value as AdoptionFormModel;
-      alert(JSON.stringify(formModel))
-      this.adoptionService.updateAdoptionIntention(formModel).subscribe(
+      const formModel = this.adoptionForm.value as AdoptionIntention;
+      alert(JSON.stringify(formModel));
+      formModel.status_adocao =  this.selectStatus?.value.toString() || '';
+
+      this.adoptionService.updateAdoptionIntention(formModel, this.adoptionForm.get('id_adocao')?.value).subscribe(
         response => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção registrada!' });
           this.adoptionForm.reset();
@@ -118,6 +154,10 @@ export class AdoptionUpdateComponent {
         }
       );
     }
+  }
+
+   booleanToPortuguese(value: boolean): string {
+    return value ? "Sim" : "Não";
   }
 
   get telefone() {

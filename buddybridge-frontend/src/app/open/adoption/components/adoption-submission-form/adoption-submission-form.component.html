@@ -30,7 +30,7 @@
     <div class="field">
       <label for="data_nascimento">Data de Nascimento*</label>
       <br>
-      <input id="data_nascimento" formControlName="data_nascimento" pInputText class="p-calendar-w-btn" type="date" />
+      <input id="data_nascimento" formControlName="data_nascimento" pInputText class="p-calendar-w-btn" type="date" [attr.max]="maxDate"/>
       <small *ngIf="adoptionForm.get('data_nascimento')?.invalid && (adoptionForm.get('data_nascimento')?.dirty || adoptionForm.get('data_nascimento')?.touched)" class="block p-error">
         <div *ngIf="adoptionForm.get('data_nascimento')?.errors?.['required']">A data de nascimento é uma informação obrigatória.</div>
       </small>
@@ -49,7 +49,7 @@
     <!-- telefone -->
     <div class="field">
       <label for="telefone">Telefone*</label>
-      <input id="telefone" formControlName="telefone" pInputText class="w-full" type="text" />
+      <input id="telefone" formControlName="telefone" pInputText class="w-full" type="text"  maxlength="12"/>
       <small *ngIf="adoptionForm.get('telefone')?.invalid && (adoptionForm.get('telefone')?.dirty || adoptionForm.get('telefone')?.touched)" class="block p-error">
         <div *ngIf="adoptionForm.get('telefone')?.errors?.['required']">O telefone é uma informação obrigatória.</div>
       </small>
@@ -128,42 +128,57 @@
 
 <!-- Existem crianças ou pessoas com alergias na casa? -->
 <div class="field">
-  <label for="alergias">Existem crianças ou pessoas com alergias na casa?</label>
+  <label for="alergias">Existem crianças ou pessoas com alergias na casa? *</label>
+  <br/>
   <p-radioButton name="alergias" value="true" formControlName="alergias" label="Sim"></p-radioButton>
+  <br/>
   <p-radioButton name="alergias" value="false" formControlName="alergias" label="Não"></p-radioButton>
 </div>
 
 <!-- Você já teve animais de estimação antes? -->
 <div class="field">
-  <label for="animais_antes">Você já teve animais de estimação antes?</label>
+  <label for="animais_antes">Você já teve animais de estimação antes? *</label>
+  <br>
   <p-radioButton name="animais_antes" value="true" formControlName="animais_antes" label="Sim"></p-radioButton>
+  <br/>
   <p-radioButton name="animais_antes" value="false" formControlName="animais_antes" label="Não"></p-radioButton>
 </div>
 
 <!-- Quantas horas por dia você costuma passar fora de casa? -->
 <div class="field">
-  <label for="horas_fora">Quantas horas por dia você costuma passar fora de casa?</label>
-  <input id="horas_fora" formControlName="horas_fora" pInputText type="number" class="w-full" />
+  <label for="horas_fora">Quantas horas por dia você costuma passar fora de casa? *</label>
+  <input id="horas_fora" formControlName="horas_fora" pInputText type="number" class="w-full"  min="1" max="24"/>
+  <small *ngIf="adoptionForm.get('horas_fora')?.invalid && (adoptionForm.get('horas_fora')?.dirty || adoptionForm.get('horas_fora')?.touched)" class="block p-error">
+  <div *ngIf="adoptionForm.get('horas_fora')?.errors?.['required']">É obrigátorio informar as horas.</div>
+  <div *ngIf="adoptionForm.get('horas_fora')?.errors?.['min']">A hora deve ser no mínimo 0.</div>
+  <div *ngIf="adoptionForm.get('horas_fora')?.errors?.['max']">A hora deve ser no máximo 24.</div>
+</small>
 </div>
 
 <!-- Você tem um quintal ou área externa segura para o animal brincar? -->
 <div class="field">
-  <label for="quintal">Você tem um quintal ou área externa segura para o animal brincar?</label>
+  <label for="quintal">Você tem um quintal ou área externa segura para o animal brincar? *</label>
+  <br>
   <p-radioButton name="quintal" value="true" formControlName="quintal" label="Sim"></p-radioButton>
   <p-radioButton name="quintal" value="false" formControlName="quintal" label="Não"></p-radioButton>
 </div>
 
 <!-- Está disposto a fornecer cuidados médicos em caso de necessidade? -->
 <div class="field">
-  <label for="cuidados_medicos">Está disposto a fornecer cuidados médicos em caso de necessidade?</label>
+  <label for="cuidados_medicos">Está disposto a fornecer cuidados médicos em caso de necessidade? *</label
+  ><br/>
   <p-radioButton name="cuidados_medicos" value="true" formControlName="cuidados_medicos" label="Sim"></p-radioButton>
+  <br/>
   <p-radioButton name="cuidados_medicos" value="false" formControlName="cuidados_medicos" label="Não"></p-radioButton>
 </div>
 
 <!-- Por que você quer adotar este animal em particular? -->
 <div class="field">
-  <label for="motivo_adocao">Por que você quer adotar este animal em particular?</label>
-  <input id="motivo_adocao" formControlName="motivo_adocao" pInputTextarea class="w-full" type="text" />
+  <label for="motivo_adocao">Por que você quer adotar este animal? *</label>
+  <textarea id="motivo_adocao"  formControlName="motivo_adocao" pInputTextarea class="w-full" type="text"></textarea>
+  <small *ngIf="adoptionForm.get('motivo_adocao')?.invalid && (adoptionForm.get('motivo_adocao')?.dirty || adoptionForm.get('motivo_adocao')?.touched)" class="block p-error">
+    <div *ngIf="adoptionForm.get('motivo_adocao')?.errors?.['required']">É obrigátorio informar as suas motivações.</div>
+  </small>
 </div>
 
     <button pButton label="ENVIAR" stylepInputText class="w-full" type="submit"></button>

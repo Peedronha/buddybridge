@@ -18,6 +18,7 @@ import {AdoptionFormModel} from "../../models/AdoptionFormModel";
 import {AccountRestrictService} from "../../../../restrict/base/account/shared/account-restrict.service";
 import {User} from "../../../account/model/user.model";
 import {RadioButtonModule} from "primeng/radiobutton";
+import {CurrentDate} from "../../models/CurrentDate";
 
 @Component({
   selector: 'app-adoption-submission-form',
@@ -40,6 +41,8 @@ import {RadioButtonModule} from "primeng/radiobutton";
 export class AdoptionSubmissionFormComponent {
 
   adoptionForm: FormGroup;
+  maxDate: string;
+
   constructor(
     private fb: FormBuilder,
     private adoptionService: AdoptionService,
@@ -48,15 +51,19 @@ export class AdoptionSubmissionFormComponent {
     private route: Router,
     private animalService: AnimalService,
     private viaCepService: AccountService,
-    private accountRestrictService: AccountRestrictService
+    private accountRestrictService: AccountRestrictService,
+    private currentDate: CurrentDate,
   ) {
+
+    this.maxDate = this.currentDate.getReducedDate(21);
+
     this.adoptionForm = this.fb.group({
       id_perfil_adocao:[''],
       id_adocao: [''],
       id_animal: [''],
       nome_adotante: ['', Validators.required],
       data_nascimento: ['', Validators.required],
-      CPF: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
+      CPF: ['', Validators.required],
       telefone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       data_submissao: [''],
@@ -67,12 +74,12 @@ export class AdoptionSubmissionFormComponent {
       Bairro: ['', Validators.required],
       Estado: ['', Validators.required],
       Cidade: ['', Validators.required],
-      alergias: [null, Validators.required],
-      animais_antes: [null, Validators.required],
-      horas_fora: [null, [Validators.required, Validators.min(0)]],
-      quintal: [null, Validators.required],
-      cuidados_medicos: [null, Validators.required],
-      motivo_adocao: [null, Validators.required]
+      alergias: ['', Validators.required],
+      animais_antes: ['', Validators.required],
+      horas_fora: ['', [Validators.required, Validators.min(0)]],
+      quintal: ['', Validators.required],
+      cuidados_medicos: ['', Validators.required],
+      motivo_adocao: ['', Validators.required]
     });
 
     this.adoptionForm.get('CEP')?.valueChanges.subscribe(cep => {
@@ -91,7 +98,7 @@ export class AdoptionSubmissionFormComponent {
   }
 
   ngOnInit(): void {
-    const adoption: AdoptionProfileModel = this.router.snapshot.data['adocao'];
+    const adoption: AdoptionProfileModel = this.router.snapshot.data['perfil_adocao'];
 
     const perfil: any = localStorage.getItem('idUser');
 
@@ -105,7 +112,7 @@ export class AdoptionSubmissionFormComponent {
         id_animal:adoption.id_animal+'',
         data_nascimento: '',
         CPF: '',
-        data_submissao: '',
+        data_submissao: this.currentDate.getCurrentDate(),
         endereco: '',
         CEP: '',
         numero: '',
@@ -131,7 +138,7 @@ export class AdoptionSubmissionFormComponent {
           response => {
             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção registrada!' });
             this.adoptionForm.reset();
-            this.route.navigateByUrl('/perfil-adocao');
+            this.route.navigateByUrl('/adocao');
           },
           error => {
             this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao registrar a adoção.' });

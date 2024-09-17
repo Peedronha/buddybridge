@@ -8,7 +8,7 @@ import {AdoptionService} from "../../../../restrict/base/adoption-profile/shared
 import {AccountService} from "../../../account/shared/account.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MessageService} from "primeng/api";
-import {AdoptionListComponent} from "../adoption-list/adoption-list.component";
+import {AdoptionListComponent} from "../adoption-private/adoption-list/adoption-list.component";
 import {AdoptionFormModel} from "../../models/AdoptionFormModel";
 
 @Component({

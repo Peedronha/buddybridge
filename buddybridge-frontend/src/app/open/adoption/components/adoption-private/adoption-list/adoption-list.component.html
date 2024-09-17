@@ -19,9 +19,9 @@
            [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session">
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="id_perfil_adocao" style="width:10%">Cod. <p-sortIcon field="id_adocao"></p-sortIcon></th>
-        <th pSortableColumn="nome_adotante" style="width:20%">Nome <p-sortIcon field="nome_adotante"></p-sortIcon></th>
-        <th pSortableColumn="id_adocao" style="width:20%">Adoção <p-sortIcon field="adocao"></p-sortIcon></th>
+        <th pSortableColumn="id_perfil_adocao" style="width:10%">Cod. Adoção<p-sortIcon field="id_adocao"></p-sortIcon></th>
+        <th pSortableColumn="nome_adotante" style="width:20%">Nome Adotante<p-sortIcon field="nome_adotante"></p-sortIcon></th>
+        <th pSortableColumn="id_adocao" style="width:20%">Perfil Adoção <p-sortIcon field="adocao"></p-sortIcon></th>
         <th pSortableColumn="id_animal" style="width:20%">Animal <p-sortIcon field="id_animal"></p-sortIcon></th>
         <th pSortableColumn="status" style="width:20%">Status <p-sortIcon field="status"></p-sortIcon></th>
         <th pSortableColumn="Ações" style="width:15%">Ações</th>
@@ -43,7 +43,6 @@
           <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'status', 'contains')" [value]="$any(dt1.filters['status'])?.value" placeholder="Filtrar Status" class="w-full">
         </th>
         <th>
-<!--          <p-button label="Novo" icon="pi pi-plus" (click)="onEdit(_specificEntity.id_perfil_adocao)"></p-button>-->
         </th>
       </tr>
     </ng-template>
@@ -54,8 +53,8 @@
           {{adoption.id_adocao}}
         </td>
         <td>
-          <span class="p-column-title">Nome</span>
-          {{adoption.nome_adotante}}
+          <span class="p-column-title">Nome Adotante</span>
+          <span class="ml-1 vertical-align-middle">{{adoption.nome_adotante}}</span>
         </td>
         <td>
           <span class="p-column-title">Perfil Adoção</span>
@@ -71,7 +70,7 @@
         </td>
         <td>
           <div>
-            <button pButton pRipple label="Alterar " (click)='onEdit(_specificEntity.id_perfil_adocao)' class="p-button mr-2" icon="pi pi-pencil" style="margin: 2px 0;"></button>
+            <button pButton pRipple label="Alterar " (click)='onEdit(adoption.id_adocao)' class="p-button mr-2" icon="pi pi-pencil" style="margin: 2px 0;"></button>
           </div>
         </td>
       </tr>
