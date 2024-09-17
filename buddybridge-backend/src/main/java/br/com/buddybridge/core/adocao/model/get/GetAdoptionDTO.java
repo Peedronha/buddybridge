@@ -2,6 +2,8 @@ package br.com.buddybridge.core.adocao.model.get;
 
 import br.com.buddybridge.core.adocao.entity.AdoptionModel;
 import br.com.buddybridge.core.adocao.entity.AdoptionProfileModel;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -30,6 +32,19 @@ public class GetAdoptionDTO {
     private String genero_animal;
     private String localizacao_animal;
 
+    private Boolean alergias;  // Existem crianças ou pessoas com alergias na casa?
+
+    private Boolean animaisAntes;  // Você já teve animais de estimação antes?
+
+    private Integer horasFora;  // Quantas horas por dia você costuma passar fora de casa?
+
+    private Boolean quintalSeguro;  // Você tem um quintal ou área externa segura para o animal brincar?
+
+    private Boolean cuidadosMedicos;  // Está disposto a fornecer cuidados médicos em caso de necessidade?
+
+    private String motivoAdocao;  // Por que você quer adotar este animal em particular?
+
+
     public GetAdoptionDTO(AdoptionModel model) {
         this.id_perfil_adocao = String.valueOf(model.getProfile().getId_perfil_adocao());
         this.id_adocao = String.valueOf(model.getId_adocao());
@@ -37,6 +52,13 @@ public class GetAdoptionDTO {
         this.nome_adotante = model.getAdopter() != null ? model.getAdopter().getNome_adotante() : null;
         this.nome_animal = String.valueOf(model.getProfile().getAnimal().getNome_animal());
         this.status_adocao = String.valueOf(model.getStatus_adocao());
+
+        this.alergias =model.getAdopter() != null ? model.getAdopter().getAlergias() : null;;
+        this.animaisAntes =model.getAdopter() != null ? model.getAdopter().getAnimaisAntes() : null;;
+        this.horasFora =model.getAdopter() != null ? model.getAdopter().getHorasFora() : null;;
+        this.quintalSeguro =model.getAdopter() != null ? model.getAdopter().getQuintalSeguro() : null;;
+        this.cuidadosMedicos =model.getAdopter() != null ? model.getAdopter().getCuidadosMedicos() : null;;
+        this.motivoAdocao =model.getAdopter() != null ? model.getAdopter().getMotivoAdocao() : null;;
     }
 
     public GetAdoptionDTO(AdoptionProfileModel model) {
@@ -59,10 +81,9 @@ public class GetAdoptionDTO {
     public String setIdadeAnimal(LocalDate dataNascimento) {
         if ((dataNascimento != null)) {
             Period period = Period.between(dataNascimento, LocalDate.now());
-            String idade = period.getYears() +" anos "
+            return period.getYears() +" anos "
                     + period.getMonths() + " meses e "
                     + period.getDays() +" dias";
-            return idade;
         }
         return "";
     }

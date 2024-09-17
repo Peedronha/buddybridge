@@ -5,14 +5,14 @@ import {InputTextModule} from "primeng/inputtext";
 import {RippleModule} from "primeng/ripple";
 import {MessageService, SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
-import {AdoptionProfileModel} from "../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
+import {AdoptionProfileModel} from "../../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
 import {FormBuilder, Validators} from "@angular/forms";
-import {AdoptionService} from "../../../../restrict/base/adoption-profile/shared/adoption.service";
+import {AdoptionService} from "../../../../../restrict/base/adoption-profile/shared/adoption.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AnimalCard} from "../../../../restrict/base/adoption-profile/model/AnimalCard";
-import {AnimalService} from "../../../../restrict/base/animal/service/animal.service";
-import {AdoptionFormModel} from "../../models/AdoptionFormModel";
-import {AdoptionSubmissionFormComponent} from "../adoption-submission-form/adoption-submission-form.component";
+import {AnimalCard} from "../../../../../restrict/base/adoption-profile/model/AnimalCard";
+import {AnimalService} from "../../../../../restrict/base/animal/service/animal.service";
+import {AdoptionFormModel} from "../../../models/AdoptionFormModel";
+import {AdoptionSubmissionFormComponent} from "../../adoption-submission-form/adoption-submission-form.component";
 
 @Component({
   selector: 'app-adoption-list',
@@ -29,16 +29,16 @@ import {AdoptionSubmissionFormComponent} from "../adoption-submission-form/adopt
   styleUrl: './adoption-list.component.scss'
 })
 export class AdoptionListComponent {
-  @Input() profiles!: AdoptionFormModel[];
+  @Input() adoptions!: AdoptionFormModel[];
+
   _specificEntity: any = {};
+
   @Output() add = new EventEmitter<number>();
   @Output() edit = new EventEmitter<number>();
   @Output() remove = new EventEmitter<number>();
   layout: string = 'list';
 
   formVisible: boolean = false;
-
-  adoptions!: AdoptionFormModel[];
 
   genero = [
     { label: 'Fêmea', value: 'Female' },
@@ -54,15 +54,12 @@ export class AdoptionListComponent {
 
   ngOnInit() {
     this.adoptionService.getAdoptions().subscribe((data: AdoptionFormModel[]) => {
-      alert(JSON.stringify(data))
       this.adoptions = data;
     });
   }
 
 
-  onEdit(idAdocao: number | undefined) {
-    // this.router.navigate(['editsubmission', idAdocao], { relativeTo: this.route });
-    this.router.navigate(['restrict/adocao/editsubmission/'+idAdocao]);
-
+  onEdit(idAdocao: number) {
+    this.edit.emit(idAdocao);
   }
 }

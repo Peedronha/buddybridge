@@ -7,17 +7,17 @@ import {RippleModule} from "primeng/ripple";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {DropdownModule} from "primeng/dropdown";
 import {InputTextareaModule} from "primeng/inputtextarea";
-import {AdoptionService} from "../../../../restrict/base/adoption-profile/shared/adoption.service";
+import {AdoptionService} from "../../../../../restrict/base/adoption-profile/shared/adoption.service";
 import {MessageService} from "primeng/api";
-import {AnimalService} from "../../../../restrict/base/animal/service/animal.service";
-import {AccountService} from "../../../account/shared/account.service";
-import {AccountRestrictService} from "../../../../restrict/base/account/shared/account-restrict.service";
+import {AnimalService} from "../../../../../restrict/base/animal/service/animal.service";
+import {AccountService} from "../../../../account/shared/account.service";
+import {AccountRestrictService} from "../../../../../restrict/base/account/shared/account-restrict.service";
 import {
   AdoptionProfileModel,
   AdoptionStatus
-} from "../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
-import {User} from "../../../account/model/user.model";
-import {AdoptionFormModel} from "../../models/AdoptionFormModel";
+} from "../../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
+import {User} from "../../../../account/model/user.model";
+import {AdoptionFormModel} from "../../../models/AdoptionFormModel";
 
 @Component({
   selector: 'app-adoption-update',
@@ -88,7 +88,7 @@ export class AdoptionUpdateComponent {
   }
 
   ngOnInit(): void {
-    const adoption: AdoptionProfileModel = this.router.snapshot.data['adocao'];
+    const adoption: AdoptionFormModel = this.router.snapshot.data['adocao'];
 
     const perfil: any = localStorage.getItem('idUser');
 

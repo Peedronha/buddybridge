@@ -136,4 +136,10 @@ public class AdoptionService {
             throw new SystemException(String.valueOf(e));
         }
     }
+
+    public GetAdoptionDTO findAdoptionById(Long id) throws Exception {
+        Optional<AdoptionModel> profileModel = this.adoptionRepository.findById(id);
+        return profileModel.map(GetAdoptionDTO::new)
+                .orElseThrow(Exception::new);
+    }
 }

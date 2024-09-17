@@ -127,7 +127,15 @@ public class AdoptionController {
 //        }
 //    }
 
-
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getAdoptionById(@PathVariable Long id) {
+        try {
+            GetAdoptionDTO model = adoptionService.findAdoptionById(id);
+            return ResponseEntity.ok(model);
+        } catch (Exception e) {
+            return buildErrorResponse("Adoption profile not found: " + e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
     // Common error response builder
     private ResponseEntity<String> buildErrorResponse(String message, HttpStatus status) {
         return ResponseEntity.status(status).body(message);

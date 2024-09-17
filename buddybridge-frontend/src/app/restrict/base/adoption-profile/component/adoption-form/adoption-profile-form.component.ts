@@ -85,7 +85,6 @@ export class AdoptionProfileFormComponent {
   }
 
   loadDropdownOptions(): void {
-    alert('loading dropdown')
     this.animalService.getAnimals().subscribe(animals => {
       this.animals = animals;
     });

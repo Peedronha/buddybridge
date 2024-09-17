@@ -39,8 +39,10 @@ import {AdoptionComponent} from "./open/adoption/components/adoption-header/adop
 import {
   AdoptionSubmissionFormComponent
 } from "./open/adoption/components/adoption-submission-form/adoption-submission-form.component";
-import {AdoptionListComponent} from "./open/adoption/components/adoption-list/adoption-list.component";
-import {AdoptionUpdateComponent} from "./open/adoption/components/adoption-update/adoption-update.component";
+import {AdoptionListComponent} from "./open/adoption/components/adoption-private/adoption-list/adoption-list.component";
+import {AdoptionUpdateComponent} from "./open/adoption/components/adoption-private/adoption-update/adoption-update.component";
+import {AdoptionManagementComponent} from "./open/adoption/components/adoption-private/adoption/adoption-management.component";
+import {AdoptionManagementResolver} from "./open/adoption/components/adoption.resolver.guard";
 
 const routes: Routes = [
   { path: 'errorBuddyBridge', title: 'BuddyBridge - Erro', component: ErrorComponent },
@@ -54,10 +56,15 @@ const routes: Routes = [
       { path: 'restrict/institucional', title: 'BuddyBridge - Institucional', component: InsitucionalComponent },
 
       { path: 'restrict/adocao', title: 'BuddyBridge - Adocao', component: AdoptionComponent },
-      { path: 'restrict/adocao/addadocao/:id', title: 'BuddyBridge - Adocao', component: AdoptionSubmissionFormComponent, resolve: {adocao : adoptionProfileResolver} },
-      { path: 'restrict/adocao/list', title: 'BuddyBridge - Adocao', component: AdoptionListComponent },
-      { path: 'restrict/adocao/editsubmission/:id', title: 'BuddyBridge - Adocao', component: AdoptionUpdateComponent },
+      { path: 'restrict/adocao/addadocao/:id', title: 'BuddyBridge - Adocao', component: AdoptionSubmissionFormComponent, resolve: {perfil_adocao : adoptionProfileResolver} },
 
+      { path: 'restrict/manage-adoption', title: 'BuddyBridge - Adoção', component: AdoptionManagementComponent },
+      // { path: 'restrict/manage-adoption/list', title: 'BuddyBridge - Adocao', component: AdoptionListComponent },
+      { path: 'restrict/manage-adoption/editsubmission/:id', title: 'BuddyBridge - Adocao', component: AdoptionUpdateComponent, resolve: {adocao : AdoptionManagementResolver}  },
+
+      { path: 'volunteer', title: 'BuddyBridge - Voluntários', component: VolunteerComponent },
+      { path: 'volunteer/addvolunteer', title: 'BuddyBridge - Novo Voluntário', component: VolunteerFormComponent, resolve: {volunteer : volunteerResolver} },
+      { path: 'volunteer/editvolunteer/:id', title: 'BuddyBridge - Alterar Voluntário', component: VolunteerFormComponent, resolve: {volunteer : volunteerResolver} },
 
       { path: 'dashboard', title: 'BuddyBridge - DashBoard', component: DashboardComponent },
       { path: 'profile', title: 'BuddyBridge - Meu Perfil', component: ProfileComponent },
