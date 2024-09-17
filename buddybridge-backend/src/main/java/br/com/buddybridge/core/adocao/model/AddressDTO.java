@@ -14,7 +14,7 @@ public class AddressDTO {
 
     public AddressDTO(AdoptionSubmissionDTO dto) {
         this.endereco = dto.getEndereco();
-        this.cep = dto.getCEP();
+        this.cep = dto.getCep();
         this.numero = dto.getNumero();
         this.complemento = dto.getComplemento();
         this.bairro = dto.getBairro();

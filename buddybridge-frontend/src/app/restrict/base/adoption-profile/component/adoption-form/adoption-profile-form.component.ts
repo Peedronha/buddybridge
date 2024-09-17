@@ -37,7 +37,7 @@ export class AdoptionProfileFormComponent {
   adoptionForm: FormGroup;
   animals: AnimalModel[] = [];
 
-  selectAnimal: AnimalModel | undefined;
+  selectAnimal!: AnimalModel[];
 
   statusOptions = [
     { label: 'Pendente', value: 'PENDING' },
@@ -75,12 +75,17 @@ export class AdoptionProfileFormComponent {
       id_perfil_adocao: adoption.id_perfil_adocao,
       id_adocao: adoption.id_adocao,
       id_animal: adoption.id_animal,
-      status_adocao: adoption.status_adocao,
+      status_adocao: '',
       medical_necessities: adoption.medical_necessities,
       data_criacao: adoption.data_criacao,
       priority: adoption.priority,
       image: adoption.image,
     });
+    if (adoption.id_animal != null){
+      this.animalService.getAnimalsById(adoption.id_animal).subscribe(data => {
+        this.selectAnimal = data;
+      });
+    }
     this.loadDropdownOptions();
   }
 
@@ -93,22 +98,14 @@ export class AdoptionProfileFormComponent {
   submitDetails(): void {
     if (this.adoptionForm.valid) {
       const adoption = this.adoptionForm.value as AdoptionProfileModel;
+      alert('id_anima '+ JSON.stringify(this.selectAnimal))
 
-      adoption.id_animal = this.selectAnimal?.id_animal?.toString() || '';
+      let aux = JSON.parse(JSON.stringify(this.selectAnimal))
+      adoption.id_animal = aux.id_animal
+
       adoption.status_adocao = this.selectStatus?.value;
-      if (adoption.id_perfil_adocao) {
-        this.adoptionService.updateAdoptionProfile(adoption).subscribe(
-          response => {
-            this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção atualizada!' });
-            this.adoptionForm.reset();
-            this.route.navigateByUrl('/perfil-adocao');
-          },
-          error => {
-            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao atualizar a adoção.' });
-          }
-        );
-      } else {
-        adoption.id_perfil_adocao = ''
+
+      if (!adoption.id_perfil_adocao) {
         this.adoptionService.registerAdoptionProfile(adoption).subscribe(
           response => {
             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção registrada!' });
@@ -117,6 +114,17 @@ export class AdoptionProfileFormComponent {
           },
           error => {
             this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao registrar a adoção.' });
+          }
+        );
+      } else {
+        this.adoptionService.updateAdoptionProfile(adoption).subscribe(
+          response => {
+            this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção atualizada!' });
+            this.adoptionForm.reset();
+            this.route.navigateByUrl('/perfil-adocao');
+          },
+          error => {
+            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao atualizar a adoção.' });
           }
         );
       }

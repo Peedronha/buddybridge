@@ -32,9 +32,6 @@ public class AdoptionModel {
     @Column(name = "data_submissao")
     private LocalDateTime data_submissao;
 
-    @Embedded
-    private AddressModel address;
-
     @Column(name = "status_adocao")
     @Enumerated(EnumType.STRING)
     private AdoptionStatus status_adocao;

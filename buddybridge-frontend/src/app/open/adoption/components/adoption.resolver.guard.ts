@@ -3,8 +3,10 @@ import {AdoptionService} from "../../../restrict/base/adoption-profile/shared/ad
 import {Observable, of} from "rxjs";
 import {AdoptionProfileModel} from "../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
 import {AdoptionFormModel} from "../models/AdoptionFormModel";
-import {booleanAttribute} from "@angular/core";
-
+import {booleanAttribute, Injectable} from "@angular/core";
+@Injectable({
+  providedIn: 'root'
+})
 export class AdoptionManagementResolver{
 
   constructor(private service: AdoptionService) {

@@ -41,7 +41,7 @@ public class AdoptionController {
     // Endpoint to update an existing adoption profile
     @PutMapping("/profiles")
     public ResponseEntity<?> updateAdoptionProfile(@RequestBody ProfileDTO adoptionDTO) throws SystemException {
-        if (adoptionService.existsByIdPerfilAdocao(Long.valueOf(adoptionDTO.getId_perfil_adocao()))) {
+        if (adoptionService.existsByIdPerfilAdocao(adoptionDTO.getId_perfil_adocao())) {
             adoptionService.saveAdoptionProfileRequest(adoptionDTO);
             return ResponseEntity.ok(adoptionDTO);
         }

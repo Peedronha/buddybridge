@@ -31,7 +31,7 @@ export class AdoptionProfileComponent {
   ngOnInit(): void { this.accountService.validarSessao(); }
 
   refresh() {
-    this.adoptionService.getAdoptionsProfiles().subscribe((data: AdoptionProfileModel[]) => {
+    this.adoptionService.getAnimalsByProfileStatus().subscribe((data: AdoptionProfileModel[]) => {
       this.profiles! = data;
     });
   }

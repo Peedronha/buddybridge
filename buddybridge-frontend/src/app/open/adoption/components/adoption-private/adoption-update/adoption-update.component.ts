@@ -18,6 +18,8 @@ import {
 } from "../../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
 import {User} from "../../../../account/model/user.model";
 import {AdoptionFormModel} from "../../../models/AdoptionFormModel";
+import {AdoptionIntention} from "../../../models/AdoptionIntention";
+import {RadioButtonModule} from "primeng/radiobutton";
 
 @Component({
   selector: 'app-adoption-update',
@@ -32,7 +34,8 @@ import {AdoptionFormModel} from "../../../models/AdoptionFormModel";
     RouterLink,
     DropdownModule,
     NgForOf,
-    InputTextareaModule
+    InputTextareaModule,
+    RadioButtonModule
   ],
   templateUrl: './adoption-update.component.html',
   styleUrl: './adoption-update.component.scss'
@@ -41,6 +44,8 @@ export class AdoptionUpdateComponent {
   adoptionForm: FormGroup;
 
   status = AdoptionStatus;
+
+  adoption!: AdoptionIntention;
 
   selectStatus: { label: string, value: string } | undefined;
   statusOptions = [
@@ -72,23 +77,23 @@ export class AdoptionUpdateComponent {
       endereco: ['', Validators.required],
       CEP: ['', [Validators.required, Validators.pattern(/^\d{5}-?\d{3}$/)]],
       numero: ['', Validators.required],
-      Complemento: [''],
+      complemento: [''],
       Bairro: ['', Validators.required],
       Estado: ['', Validators.required],
       Cidade: ['', Validators.required],
-      alergias: [null, Validators.required],
-      animais_antes: [null, Validators.required],
-      horas_fora: [null, [Validators.required, Validators.min(0)]],
-      quintal: [null, Validators.required],
-      cuidados_medicos: [null, Validators.required],
-      motivo_adocao: [null, Validators.required],
+      alergias: ['', Validators.required],
+      animais_antes: ['', Validators.required],
+      horas_fora: ['', [Validators.required, Validators.min(0)]],
+      quintal: ['', Validators.required],
+      cuidados_medicos: ['', Validators.required],
+      motivo_adocao: ['', Validators.required],
       observacoes: ['', Validators.required],
 
     })
   }
 
   ngOnInit(): void {
-    const adoption: AdoptionFormModel = this.router.snapshot.data['adocao'];
+    this.adoption = this.router.snapshot.data['adocao'];
 
     const perfil: any = localStorage.getItem('idUser');
 
@@ -97,11 +102,17 @@ export class AdoptionUpdateComponent {
         nome_adotante: data.nome,
         email: data.login,
         telefone: data.telefone+'',
-        id_perfil_adocao: adoption.id_perfil_adocao+'',
-        id_adocao: adoption.id_adocao+'',
-        id_animal:adoption.id_animal+'',
+        id_perfil_adocao: this.adoption.id_perfil_adocao+'',
+        id_adocao: this.adoption.id_adocao+'',
+        id_animal:this.adoption.id_animal+'',
         data_nascimento: '',
         CPF: '',
+        CEP: '',
+        numero:'',
+        complemento:'',
+        Bairro: '',
+        Estado: '',
+        Cidade: '',
         data_submissao: '',
         endereco: '',
         alergias: '',
@@ -130,6 +141,10 @@ export class AdoptionUpdateComponent {
         }
       );
     }
+  }
+
+   booleanToPortuguese(value: boolean): string {
+    return value ? "Sim" : "Não";
   }
 
   get telefone() {

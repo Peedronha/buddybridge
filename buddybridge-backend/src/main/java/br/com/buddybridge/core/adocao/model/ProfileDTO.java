@@ -19,7 +19,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProfileDTO {
-    private String id_perfil_adocao;
+    private Long id_perfil_adocao;
     private String id_adocao;
     private String id_animal;
     private Integer priority;
@@ -29,7 +29,7 @@ public class ProfileDTO {
     private LocalDateTime data_criacao;
 
     public ProfileDTO(AdoptionProfileModel model) {
-        this.id_perfil_adocao = model.getId_perfil_adocao().toString();
+        this.id_perfil_adocao = model.getId_perfil_adocao();
         this.id_adocao = model.getAdocao() != null ? model.getAdocao().getId_adocao().toString() : null;
         this.id_animal = model.getAnimal() != null ? model.getAnimal().getId_animal().toString() : null;
         this.idade = setIdadeAnimal(model.getAnimal().getData_nascimento());
