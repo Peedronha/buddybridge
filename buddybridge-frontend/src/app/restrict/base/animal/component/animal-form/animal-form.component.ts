@@ -1,3 +1,4 @@
+import { CurrentDate } from './../../../../../open/adoption/models/CurrentDate';
 import {Component, OnInit} from '@angular/core';
 import {AnimalService} from "../../service/animal.service";
 import {MessageService} from "primeng/api";
@@ -47,7 +48,7 @@ export class AnimalFormComponent implements OnInit {
   tipoId: any;
   tipoRaca: any;
 
-
+  maxDate: string;
   genero = [
     { label: 'Fêmea', value: 'Female' },
     { label: 'Macho', value: 'Male' },
@@ -62,8 +63,11 @@ export class AnimalFormComponent implements OnInit {
     private messageService: MessageService,
     private router: ActivatedRoute,
     private route: Router,
-    private accountService: AccountService
-  ) { }
+    private accountService: AccountService,
+    private CurrentDate: CurrentDate
+  ) {
+    this.maxDate = this.CurrentDate.getCurrentDate();
+  }
 
   ngOnInit(): void {
     this.accountService.validarSessao();

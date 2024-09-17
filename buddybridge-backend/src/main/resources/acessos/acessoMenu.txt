@@ -8,7 +8,7 @@ Buddy Menu;BUDDY BASE;GET;Configurações;pi-cog;/menu;
 Buddy Menu;BUDDY BASE;Configurações;Dados da Ong;pi-bookmark;/ong;
 Buddy Menu;BUDDY ANIMAIS;GET;Animais;pi-heart;/animal;
 Buddy Menu;BUDDY ANIMAIS;GET;Perfis de Adoção;pi-id-card;/perfil-adocao;
-Buddy Menu;BUDDY ANIMAIS;GET;Adoções;pi-asterisk;restrict/adocao;
+Buddy Menu;BUDDY ANIMAIS;GET;Adoções;pi-asterisk;restrict/manage-adoption;
 Buddy Menu;BUDDY ANIMAIS;GET;Configurações;pi-cog;/menu;
 Buddy Menu;BUDDY ANIMAIS;Configurações;Cadastro de Raças;pi-folder-open;/racas;
 Buddy Menu;BUDDY ANIMAIS;Configurações;Tipos de Animal;pi-folder-open;/tipos;

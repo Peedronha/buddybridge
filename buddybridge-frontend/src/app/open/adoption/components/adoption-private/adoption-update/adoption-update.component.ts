@@ -99,7 +99,7 @@ export class AdoptionUpdateComponent {
   ngOnInit(): void {
     this.adoption = this.router.snapshot.data['adocao'];
 
-    alert("ngOnInit :" + JSON.stringify(this.adoption))
+    //alert("ngOnInit :" + JSON.stringify(this.adoption))
 
     const perfil: any = localStorage.getItem('idUser');
 
@@ -140,7 +140,7 @@ export class AdoptionUpdateComponent {
   submitDetails(): void {
     if (this.adoptionForm.valid) {
       const formModel = this.adoptionForm.value as AdoptionIntention;
-      alert(JSON.stringify(formModel));
+      //alert(JSON.stringify(formModel));
       formModel.status_adocao =  this.selectStatus?.value.toString() || '';
 
       this.adoptionService.updateAdoptionIntention(formModel, this.adoptionForm.get('id_adocao')?.value).subscribe(

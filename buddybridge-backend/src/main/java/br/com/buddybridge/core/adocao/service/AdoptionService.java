@@ -142,7 +142,7 @@ public AdoptionProfileModel saveAdoptionProfileRequest(ProfileDTO adoptionDTO) t
 
         model.setAdopter(this.adopterRepository.save(adopterModel));
 
-//        model.setStatus_adocao(AdoptionStatus.ANALYSING);
+        //model.setStatus_adocao(AdoptionStatus.ANALYSING);
 
         model.setData_submissao(LocalDateTime.now());
         return model;

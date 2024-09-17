@@ -71,7 +71,7 @@
       <div class="p-fluid p-formgrid grid">
         <div class="field col-3 md:col-3">
           <label for="data_nascimento">Data de nascimento <i class="p-error">*</i></label>
-          <input type="date" pInputText formControlName="data_nascimento" class="w-full" name="data_nascimento" placeholder="Selecione a data de nascimento do animal"/>
+          <input type="date" pInputText formControlName="data_nascimento" class="w-full" name="data_nascimento" placeholder="Selecione a data de nascimento do animal" [attr.max]="maxDate"/>
           <small *ngIf="registerForm.get('data_nascimento')?.invalid && (registerForm.get('data_nascimento')?.dirty || registerForm.get('data_nascimento')?.touched)" class="block p-error">
             <div *ngIf="registerForm.get('data_nascimento')?.errors?.['required']">A data de nascimento do animal é uma informação obrigatória.</div>
           </small>
@@ -79,7 +79,7 @@
         <div class="field col-3 md:col-3">
           <label for="data_resgate">Data de Resgate <i class="p-error">*</i></label>
           <input type="date" pInputText formControlName="data_resgate" class="w-full" name="data_resgate"
-                 placeholder="Selecione a data de resgate do animal"/>
+                 placeholder="Selecione a data de resgate do animal" [attr.max]="maxDate"/>
           <small *ngIf="registerForm.get('data_resgate')?.invalid && (registerForm.get('data_resgate')?.dirty || registerForm.get('data_resgate')?.touched)" class="block p-error">
             <div *ngIf="registerForm.get('data_resgate')?.errors?.['required']">A data de resgate do animal é uma informação obrigatória.</div>
           </small>

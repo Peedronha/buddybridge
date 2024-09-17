@@ -133,7 +133,7 @@ export class AdoptionSubmissionFormComponent {
   submitDetails(): void {
     if (this.adoptionForm.valid) {
       const formModel = this.adoptionForm.value as AdoptionFormModel;
-      alert(JSON.stringify(formModel))
+      //alert(JSON.stringify(formModel))
         this.adoptionService.registerAdoptionIntention(formModel).subscribe(
           response => {
             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção registrada!' });

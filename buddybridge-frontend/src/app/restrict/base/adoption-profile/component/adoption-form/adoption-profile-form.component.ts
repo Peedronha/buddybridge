@@ -70,7 +70,7 @@ export class AdoptionProfileFormComponent {
 
   ngOnInit(): void {
     const adoption: AdoptionProfileModel = this.router.snapshot.data['perfil'];
-    alert(JSON.stringify(adoption))
+    //alert(JSON.stringify(adoption))
     this.adoptionForm.setValue({
       id_perfil_adocao: adoption.id_perfil_adocao,
       id_adocao: adoption.id_adocao,
@@ -98,7 +98,7 @@ export class AdoptionProfileFormComponent {
   submitDetails(): void {
     if (this.adoptionForm.valid) {
       const adoption = this.adoptionForm.value as AdoptionProfileModel;
-      alert('id_anima '+ JSON.stringify(this.selectAnimal))
+      //alert('id_anima '+ JSON.stringify(this.selectAnimal))
 
       let aux = JSON.parse(JSON.stringify(this.selectAnimal))
       adoption.id_animal = aux.id_animal
