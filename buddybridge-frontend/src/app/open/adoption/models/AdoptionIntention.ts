@@ -8,8 +8,10 @@ export interface AdoptionIntention{
   data_criacao:string;//adoption
   telefone: string;//adopter
   email: string;//adopter
+  observacoes:string,
 
   data_submissao?: string;//adoption
+  status_adocao?:string;
 
   endereco: string;//address
   CEP: string;//address

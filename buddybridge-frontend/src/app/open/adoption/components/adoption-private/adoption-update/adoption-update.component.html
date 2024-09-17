@@ -23,7 +23,11 @@
         <p class="adoption-details"><strong>Nome Adotante:</strong> {{adoption.nome_adotante}}</p>
         <p class="adoption-details"><strong>Email:</strong> {{adoption.email}}</p>
         <p class="adoption-details"><strong>Telefone:</strong> {{adoption.telefone}}</p>
-        <p class="adoption-details"><strong>Endereço:</strong> {{adoption.endereco}} {{adoption.numero}}, {{adoption.Complemento}}</p>
+        <p class="adoption-details"><strong>Logradouro:</strong> {{adoption.endereco}}</p>
+        <p class="adoption-details"><strong>Número:</strong> {{adoption.numero}}</p>
+        <p class="adoption-details"><strong>Bairro:</strong> {{adoption.Bairro}}</p>
+        <p class="adoption-details"><strong>Cidade:</strong> {{adoption.Cidade}}</p>
+        <p class="adoption-details"><strong>Estado:</strong> {{adoption.Estado}}</p>
       </div>
 
       <div class="field">
@@ -41,8 +45,8 @@
         <h4>Considerações Finais</h4>
           <label for="status_adocao">Status *</label>
           <br>
-          <p-dropdown [options]="statusOptions" [(ngModel)]="selectStatus" optionLabel="label" formControlName="status_adocao" class="w-full" name="status_adocao"
-                      placeholder="Selecione o animal"></p-dropdown>
+          <p-dropdown [options]="statusOptions" [(ngModel)]="selectStatus"  optionLabel="label" formControlName="status_adocao" class="w-full" name="status_adocao"
+                      placeholder="Selecione o status"></p-dropdown>
           <small *ngIf="adoptionForm.get('status_adocao')?.invalid && (adoptionForm.get('status_adocao')?.dirty || adoptionForm.get('status_adocao')?.touched)" class="block p-error">
             <div *ngIf="adoptionForm.get('status_adocao')?.errors?.['required']">Selecionar o status de adoção é uma informação obrigatória.</div>
           </small>

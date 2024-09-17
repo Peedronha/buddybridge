@@ -83,5 +83,11 @@ public class AdoptionSubmissionDTO {
 
     @JsonProperty("motivo_adocao")
     private String motivoAdocao;
+
+    @JsonProperty("status_adocao")
+    private String status_adocao;
+
+    @JsonProperty("observacoes")
+    private String observacoes;
 }
 

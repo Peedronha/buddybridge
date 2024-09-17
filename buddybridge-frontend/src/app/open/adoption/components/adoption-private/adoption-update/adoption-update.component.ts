@@ -20,6 +20,7 @@ import {User} from "../../../../account/model/user.model";
 import {AdoptionFormModel} from "../../../models/AdoptionFormModel";
 import {AdoptionIntention} from "../../../models/AdoptionIntention";
 import {RadioButtonModule} from "primeng/radiobutton";
+import {AdoptionAvaliation} from "../../../models/AdoptionAvaliation";
 
 @Component({
   selector: 'app-adoption-update',
@@ -47,7 +48,10 @@ export class AdoptionUpdateComponent {
 
   adoption!: AdoptionIntention;
 
-  selectStatus: { label: string, value: string } | undefined;
+  aux: number = 0;
+
+  selectStatus: { label: string; value: string } | undefined;
+
   statusOptions = [
     { label: 'Pendente', value: 'PENDING' },
     { label: 'Aprovada', value: 'APPROVED' },
@@ -66,45 +70,51 @@ export class AdoptionUpdateComponent {
   ) {
     this.adoptionForm = this.fb.group({
       id_perfil_adocao:[''],
-      id_adocao: [''],
+      id_adocao: ['', Validators.required],
       id_animal: [''],
-      nome_adotante: ['', Validators.required],
-      data_nascimento: ['', Validators.required],
-      CPF: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
-      telefone: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      nome_adotante: [''],
+      data_nascimento: [''],
+      CPF: [''],
+      telefone: [''],
+      email: [''],
       data_submissao: [''],
-      endereco: ['', Validators.required],
-      CEP: ['', [Validators.required, Validators.pattern(/^\d{5}-?\d{3}$/)]],
-      numero: ['', Validators.required],
+      endereco: [''],
+      CEP: [''],
+      numero: [''],
       complemento: [''],
-      Bairro: ['', Validators.required],
-      Estado: ['', Validators.required],
-      Cidade: ['', Validators.required],
-      alergias: ['', Validators.required],
-      animais_antes: ['', Validators.required],
-      horas_fora: ['', [Validators.required, Validators.min(0)]],
-      quintal: ['', Validators.required],
-      cuidados_medicos: ['', Validators.required],
-      motivo_adocao: ['', Validators.required],
-      observacoes: ['', Validators.required],
-
+      Bairro: [''],
+      Estado: [''],
+      Cidade: [''],
+      alergias: [''],
+      animais_antes: [''],
+      horas_fora: [''],
+      quintal: [''],
+      cuidados_medicos: [''],
+      motivo_adocao: [''],
+      observacoes: ['',Validators.required],
+      status_adocao:['', Validators.required]
     })
   }
 
   ngOnInit(): void {
     this.adoption = this.router.snapshot.data['adocao'];
 
+    alert("ngOnInit :" + JSON.stringify(this.adoption))
+
     const perfil: any = localStorage.getItem('idUser');
+
+    this.aux = this.adoption.id_adocao;
+
+    this.selectStatus = this.statusOptions.find(option => option.value === this.adoption.status_adocao)
 
     this.accountRestrictService.loadById(perfil+'').subscribe((data: User) => {
       this.adoptionForm.setValue({
         nome_adotante: data.nome,
         email: data.login,
         telefone: data.telefone+'',
-        id_perfil_adocao: this.adoption.id_perfil_adocao+'',
+        id_perfil_adocao: '',
         id_adocao: this.adoption.id_adocao+'',
-        id_animal:this.adoption.id_animal+'',
+        id_animal:'',
         data_nascimento: '',
         CPF: '',
         CEP: '',
@@ -121,16 +131,19 @@ export class AdoptionUpdateComponent {
         quintal: '',
         cuidados_medicos: '',
         motivo_adocao: '',
-        observacoes:''
+        observacoes:'',
+        status_adocao: this.selectStatus
       })
     });
   }
 
   submitDetails(): void {
     if (this.adoptionForm.valid) {
-      const formModel = this.adoptionForm.value as AdoptionFormModel;
-      alert(JSON.stringify(formModel))
-      this.adoptionService.updateAdoptionIntention(formModel).subscribe(
+      const formModel = this.adoptionForm.value as AdoptionIntention;
+      alert(JSON.stringify(formModel));
+      formModel.status_adocao =  this.selectStatus?.value.toString() || '';
+
+      this.adoptionService.updateAdoptionIntention(formModel, this.adoptionForm.get('id_adocao')?.value).subscribe(
         response => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção registrada!' });
           this.adoptionForm.reset();

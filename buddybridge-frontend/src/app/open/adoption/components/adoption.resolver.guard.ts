@@ -39,6 +39,7 @@ export class AdoptionManagementResolver{
       Estado: '',
       Cidade: '',
       CPF: '',
+      observacoes:'',
       alergias: booleanAttribute(''),
       animaisAntes: booleanAttribute(''),
       horasFora: parseInt(''),

@@ -4,6 +4,7 @@ import br.com.buddybridge.core.adocao.model.AdoptionSubmissionDTO;
 import br.com.buddybridge.core.adocao.model.ProfileDTO;
 import br.com.buddybridge.core.adocao.entity.AdoptionProfileModel;
 import br.com.buddybridge.core.adocao.model.get.GetAdoptionDTO;
+import br.com.buddybridge.core.adocao.model.get.GetAdoptionDetails;
 import br.com.buddybridge.core.adocao.service.AdoptionService;
 import br.com.buddybridge.core.animais.animal.service.AnimalService;
 import jakarta.transaction.SystemException;
@@ -114,23 +115,23 @@ public class AdoptionController {
         }
     }
 
-//    // Endpoint to update an adoption request
-//    @PutMapping("/change/{id}")
-//    public ResponseEntity<?> updateAdoptionIntention(@RequestBody AdoptionSubmissionDTO adoptionDTO, @PathVariable String id) {
-//        try {
-//            Boolean adoption = adoptionService.updateAdoptionRequest(adoptionDTO, id);
-//            return ResponseEntity.ok(adoption);
-//        } catch (DataIntegrityViolationException e) {
-//            return buildErrorResponse("Invalid data: " + e.getMessage(), HttpStatus.BAD_REQUEST);
-//        } catch (Exception e) {
-//            return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    // Endpoint to update an adoption request
+    @PutMapping("/change/{id}")
+    public ResponseEntity<?> updateAdoptionIntention(@RequestBody AdoptionSubmissionDTO adoptionDTO, @PathVariable String id) {
+        try {
+            Boolean adoption = adoptionService.updateAdoptionRequest(adoptionDTO, id);
+            return ResponseEntity.ok(adoption);
+        } catch (DataIntegrityViolationException e) {
+            return buildErrorResponse("Invalid data: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getAdoptionById(@PathVariable Long id) {
         try {
-            GetAdoptionDTO model = adoptionService.findAdoptionById(id);
+            GetAdoptionDetails model = adoptionService.findAdoptionById(id);
             return ResponseEntity.ok(model);
         } catch (Exception e) {
             return buildErrorResponse("Adoption profile not found: " + e.getMessage(), HttpStatus.NOT_FOUND);

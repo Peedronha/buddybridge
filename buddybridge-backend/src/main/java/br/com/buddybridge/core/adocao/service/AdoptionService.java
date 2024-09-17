@@ -5,6 +5,7 @@ import br.com.buddybridge.core.adocao.model.AddressDTO;
 import br.com.buddybridge.core.adocao.model.AdoptionSubmissionDTO;
 import br.com.buddybridge.core.adocao.model.ProfileDTO;
 import br.com.buddybridge.core.adocao.model.get.GetAdoptionDTO;
+import br.com.buddybridge.core.adocao.model.get.GetAdoptionDetails;
 import br.com.buddybridge.core.adocao.repository.AdopterRepository;
 import br.com.buddybridge.core.adocao.repository.AdoptionProfileRepository;
 import br.com.buddybridge.core.adocao.repository.AdoptionRepository;
@@ -196,9 +197,27 @@ public AdoptionProfileModel saveAdoptionProfileRequest(ProfileDTO adoptionDTO) t
         }
     }
 
-    public GetAdoptionDTO findAdoptionById(Long id) throws Exception {
+    public GetAdoptionDetails findAdoptionById(Long id) throws Exception {
         Optional<AdoptionModel> profileModel = this.adoptionRepository.findById(id);
-        return profileModel.map(GetAdoptionDTO::new)
+        return profileModel.map(GetAdoptionDetails::new)
                 .orElseThrow(Exception::new);
+    }
+
+    public Boolean updateAdoptionRequest(AdoptionSubmissionDTO adoptionDTO, String id) throws SystemException {
+        try {
+            Optional<AdoptionModel> model = this.adoptionRepository.findById(adoptionDTO.getIdAdocao());
+            if (model.isPresent()) {
+                model.get().setStatus_adocao(AdoptionStatus.valueOf(adoptionDTO.getStatus_adocao()));
+                model.get().setObservacoes(adoptionDTO.getObservacoes());
+                this.adoptionRepository.save(model.get());
+            } else {
+                throw new SystemException("AdoptionModel with ID " + adoptionDTO.getIdAdocao() + " not found.");
+            }
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Invalid adoption ID format: " + adoptionDTO.getIdAdocao());
+        } catch (Exception e) {
+            throw new SystemException("An error occurred while saving the adoption: " + e.getMessage());
+        }
+        return true;
     }
 }

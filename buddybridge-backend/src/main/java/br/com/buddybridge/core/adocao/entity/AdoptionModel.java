@@ -39,6 +39,9 @@ public class AdoptionModel {
     @Column(name = "data_criacao")
     private LocalDateTime data_criacao;
 
+    @Column(name = "observacoes")
+    private String observacoes;
+
     public AdoptionModel(AdoptionStatus status_adocao) {
         this.status_adocao = status_adocao;
         this.data_criacao = LocalDateTime.now();
