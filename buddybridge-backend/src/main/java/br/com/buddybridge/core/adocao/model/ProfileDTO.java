@@ -35,7 +35,7 @@ public class ProfileDTO {
         this.idade = setIdadeAnimal(model.getAnimal().getData_nascimento());
         this.priority = model.getPriority();
         this.medical_necessities = model.getMedical_necessities();
-        this.image = model.getImage();
+//        this.image = model.getImage();
         this.data_criacao = model.getData_criacao();
     }
 

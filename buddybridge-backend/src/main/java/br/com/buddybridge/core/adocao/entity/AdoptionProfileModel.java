@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,7 +36,8 @@ public class AdoptionProfileModel {
     private String medical_necessities;
 
     @Column(name = "image")
-    private String image;
+    @ElementCollection
+    private List<String> imageUrls = new ArrayList<>();
 
     @Column(name = "data_criacao")
     private LocalDateTime data_criacao;
@@ -42,6 +46,6 @@ public class AdoptionProfileModel {
         this.id_perfil_adocao = profileDTO.getId_perfil_adocao() != null ? profileDTO.getId_perfil_adocao() : null;
         this.priority = profileDTO.getPriority();
         this.medical_necessities = profileDTO.getMedical_necessities();
-        this.image = profileDTO.getImage();
+//        this.image = profileDTO.getImage();
     }
 }

@@ -1,5 +1,11 @@
 package br.com.buddybridge.core.imageuploader.controller;
 
+import br.com.buddybridge.core.adocao.entity.AdoptionModel;
+import br.com.buddybridge.core.adocao.entity.AdoptionProfileModel;
+import br.com.buddybridge.core.adocao.repository.AdoptionProfileRepository;
+import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
+import br.com.buddybridge.core.animais.animal.repository.AnimalRepository;
+import br.com.buddybridge.core.animais.animal.service.AnimalService;
 import br.com.buddybridge.core.imageuploader.entity.Image;
 import br.com.buddybridge.core.imageuploader.entity.UploadResponse;
 import br.com.buddybridge.core.imageuploader.exception.WrongFileException;
@@ -21,17 +27,33 @@ import static br.com.buddybridge.core.imageuploader.entity.ImageContentTypes.*;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "https://image-uploader-elliot.vercel.app")
+@CrossOrigin(origins = "http://localhost:4200/perfil-adocao/editperfil/")
 public class ImageRestController {
     private final ImageServiceImpl imageService;
+    private final AdoptionProfileRepository profileRepository;
 
-    @PostMapping("/upload")
-    public ResponseEntity<UploadResponse> uploadImage(@RequestParam("imageFile") MultipartFile imageFile)
+
+    @PostMapping("/upload/{id_animal}")
+    public ResponseEntity<UploadResponse> uploadImage(@RequestParam("imageFile") MultipartFile imageFile,
+                                                      @PathVariable("id_animal") String animalId)
             throws ExecutionException, InterruptedException {
+        AdoptionProfileModel profileModel = profileRepository.getReferenceById(Long.valueOf(animalId));
+
+        // Check if the animal already has 3 images
+        if (profileModel.getImageUrls().size() >= 3) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new UploadResponse(HttpStatus.BAD_REQUEST.value(), LocalDateTime.now(),
+                            "This animal already has the maximum number of images (3)", null, null));
+        }
+
         CompletableFuture<Image> uploadedImage = imageService.uploadImage(imageFile);
 
-        String baseURL = "https://images-image-uploader.up.railway.app";
+        String baseURL = "http://localhost:4200";
         String imageUrl = uploadedImage.get().getImageName();
+
+        // Add the image URL to the animal's image list
+        profileModel.getImageUrls().add(imageUrl);
+        profileRepository.save(profileModel);
 
         UploadResponse response = new UploadResponse(HttpStatus.CREATED.value(),
                 LocalDateTime.now(),

@@ -70,7 +70,9 @@
       </div>
       <div class="field">
         <label for="image">Imagem do Animal</label>
-        <input type="file" pInputText formControlName="image" class="w-full" name="image" accept="image/*"/>
+<!--        <input type="file" pInputText formControlName="image" class="w-full" name="image" accept="image/*"/>-->
+        <button id="file-chooser" class="file-button" type="button" (click)="fileInput.click()">Choose a file</button>
+        <input #fileInput style="display: none"  (change)="onFileInput($event)" type="file" accept="image/jpeg,image/png,image/webp,image/bmp">
       </div>
     </div>
     <button pButton label="SALVAR" styleClass="w-full" type="submit"></button>

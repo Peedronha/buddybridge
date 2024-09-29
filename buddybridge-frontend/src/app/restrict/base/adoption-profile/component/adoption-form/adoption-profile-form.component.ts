@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {DropdownModule} from "primeng/dropdown";
 import {InputTextModule} from "primeng/inputtext";
@@ -14,7 +14,16 @@ import {AdoptionService} from "../../shared/adoption.service";
 import {AdoptionProfileModel, AdoptionStatus} from "../../model/AdoptionProfileModel";
 import {AnimalService} from "../../../animal/service/animal.service";
 import {AnimalModel} from "../../../animal/model/animal.model";
+import {Subscription} from "rxjs";
+import {ImageUploadService} from "../../shared/image-upload.service";
 
+enum ImageFileTypes {
+  PNG = 'image/png',
+  JPG = 'image/jpeg',
+  SVG = 'image/svg+xml',
+  TIFF = 'image/tiff',
+  WEBP = 'image/webp'
+}
 @Component({
   selector: 'app-adoption-profile-form',
   standalone: true,
@@ -33,12 +42,11 @@ import {AnimalModel} from "../../../animal/model/animal.model";
   templateUrl: './adoption-profile-form.component.html',
   styleUrl: './adoption-profile-form.component.scss'
 })
-export class AdoptionProfileFormComponent {
+
+export class AdoptionProfileFormComponent implements OnInit {
   adoptionForm: FormGroup;
   animals: AnimalModel[] = [];
-
   selectAnimal!: AnimalModel[];
-
   statusOptions = [
     { label: 'Pendente', value: 'PENDING' },
     { label: 'Aprovada', value: 'APPROVED' },
@@ -47,13 +55,20 @@ export class AdoptionProfileFormComponent {
   ];
   selectStatus: { label: string, value: string } | undefined;
 
+  // Image upload properties
+  imageFile!: File;
+  subscription!: Subscription;
+  imageStatus: 'Loading' | 'Uploaded' | 'Upload' | undefined;
+  imageURL: string | undefined;
+
   constructor(
     private fb: FormBuilder,
     private adoptionService: AdoptionService,
     private messageService: MessageService,
     private router: ActivatedRoute,
     private route: Router,
-    private animalService: AnimalService
+    private animalService: AnimalService,
+    private imageUploadService: ImageUploadService // Inject your image upload service
   ) {
     this.adoptionForm = this.fb.group({
       id_perfil_adocao: [''],
@@ -63,14 +78,12 @@ export class AdoptionProfileFormComponent {
       status_adocao: [''],
       priority: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
       image: [null],
-
       data_criacao: ['']
     });
   }
 
   ngOnInit(): void {
     const adoption: AdoptionProfileModel = this.router.snapshot.data['perfil'];
-    //alert(JSON.stringify(adoption))
     this.adoptionForm.setValue({
       id_perfil_adocao: adoption.id_perfil_adocao,
       id_adocao: adoption.id_adocao,
@@ -81,7 +94,7 @@ export class AdoptionProfileFormComponent {
       priority: adoption.priority,
       image: adoption.image,
     });
-    if (adoption.id_animal != null){
+    if (adoption.id_animal != null) {
       this.animalService.getAnimalsById(adoption.id_animal).subscribe(data => {
         this.selectAnimal = data;
       });
@@ -95,14 +108,52 @@ export class AdoptionProfileFormComponent {
     });
   }
 
+  onFileInput(event: any) {
+    this.imageFile = event.target.files[0];
+    this.uploadFile();
+  }
+
+  fileDropped(file: File) {
+    this.imageFile = file;
+    this.uploadFile();
+  }
+
+  uploadFile = () => {
+    const types = Object.values(ImageFileTypes);
+
+    if (types.includes(this.imageFile.type as string as ImageFileTypes)) {
+      const img = new Image();
+      const url = window.URL || window.webkitURL;
+
+      img.onload = () => this.putImage();
+
+      img.src = url.createObjectURL(this.imageFile);
+    } else {
+    }
+  }
+
+  putImage = () => {
+    const upload$ = this.imageUploadService.addImage(this.imageFile, 1);
+    this.imageStatus = 'Loading';
+    this.subscription = upload$.subscribe({
+      next: data => {
+        this.imageURL = Object.values(data)[4]; // Assuming the image URL is returned here
+        this.imageStatus = 'Uploaded';
+        this.adoptionForm.patchValue({ image: this.imageURL }); // Set the image URL in the form
+      },
+      error: () => {
+        this.imageStatus = 'Upload';
+      }
+    });
+  }
+
+
   submitDetails(): void {
     if (this.adoptionForm.valid) {
       const adoption = this.adoptionForm.value as AdoptionProfileModel;
-      //alert('id_anima '+ JSON.stringify(this.selectAnimal))
 
-      let aux = JSON.parse(JSON.stringify(this.selectAnimal))
-      adoption.id_animal = aux.id_animal
-
+      let aux = JSON.parse(JSON.stringify(this.selectAnimal));
+      adoption.id_animal = aux.id_animal;
       adoption.status_adocao = this.selectStatus?.value;
 
       if (!adoption.id_perfil_adocao) {

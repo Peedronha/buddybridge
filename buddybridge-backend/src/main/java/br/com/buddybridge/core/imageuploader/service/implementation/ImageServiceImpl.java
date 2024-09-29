@@ -37,7 +37,7 @@ public class ImageServiceImpl implements ImageService
 
     @Override
     @Async
-    public CompletableFuture<Image> uploadImage(MultipartFile file) {
+    public CompletableFuture<Image> uploadImage(MultipartFile file) throws RuntimeException {
 
         // Content-Type handling
         List<String> contentTypes = Arrays.stream(ImageContentTypes.values())
@@ -51,7 +51,12 @@ public class ImageServiceImpl implements ImageService
         File fileToUpload = convertToFile(file);
         String fileName = "photo-" +  UUID.randomUUID() + "." + Objects.requireNonNull(file.getOriginalFilename()).split("\\.")[1];
 
-        s3Client.putObject(s3BucketName, fileName, fileToUpload);
+        try {
+            s3Client.putObject(s3BucketName, fileName, fileToUpload);
+        } catch (AmazonS3Exception e) {
+            throw new RuntimeException("Failed to upload file to S3: " + e.getMessage());
+        }
+
 
         Image image = new Image(fileName);
         log.info("File uploaded! Name: " + fileName);
@@ -82,6 +87,8 @@ public class ImageServiceImpl implements ImageService
 
             outputStream.write(multipartFile.getBytes());
             outputStream.close();
+
+            converted.deleteOnExit();
 
             return converted;
 
