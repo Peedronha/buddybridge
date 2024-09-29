@@ -1,3 +1,5 @@
+import { MovimentoListComponent } from './restrict/base/financeiro/movimento/component/movimento-list/movimento-list.component';
+import { ClassificacaoComponent } from './restrict/base/financeiro/classificacao/component/classificacao/classificacao.component';
 import { MessagesModule } from 'primeng/messages';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
@@ -66,6 +68,17 @@ import { SolicitacaoacessoComponent } from './restrict/base/solicitacao_acesso/c
 import { SolicitacaoacessoListComponent } from './restrict/base/solicitacao_acesso/component/solicitacaoacesso-list/solicitacaoacesso-list.component';
 import {AdoptionComponent} from "./open/adoption/components/adoption-header/adoption.component";
 import {AdoptionGridComponent} from "./open/adoption/components/adoption-grid/adoption-grid.component";
+import { ClassificacaoListComponent } from './restrict/base/financeiro/classificacao/component/classificacao-list/classificacao-list.component';
+import { ClassificacaoFormComponent } from './restrict/base/financeiro/classificacao/component/classificacao-form/classificacao-form.component';
+import { ContacaixaComponent } from './restrict/base/financeiro/contacaixa/component/contacaixa/contacaixa.component';
+import { ContacaixaFormComponent } from './restrict/base/financeiro/contacaixa/component/contacaixa-form/contacaixa-form.component';
+import { ContacaixaListComponent } from './restrict/base/financeiro/contacaixa/component/contacaixa-list/contacaixa-list.component';
+import { MovimentoComponent } from './restrict/base/financeiro/movimento/component/movimento/movimento.component';
+import { MovimentoFormComponent } from './restrict/base/financeiro/movimento/component/movimento-form/movimento-form.component';
+import { PagamentoComponent } from './restrict/base/financeiro/pagamento/component/pagamento/pagamento.component';
+import { PagamentoFormComponent } from './restrict/base/financeiro/pagamento/component/pagamento-form/pagamento-form.component';
+import { PagamentoListComponent } from './restrict/base/financeiro/pagamento/component/pagamento-list/pagamento-list.component';
+
 
 @NgModule({
   declarations: [
@@ -103,6 +116,18 @@ import {AdoptionGridComponent} from "./open/adoption/components/adoption-grid/ad
       GrupoacessoListComponent,
       SolicitacaoacessoComponent,
       SolicitacaoacessoListComponent,
+      ClassificacaoComponent,
+      ClassificacaoListComponent,
+      ClassificacaoFormComponent,
+      ContacaixaComponent,
+      ContacaixaFormComponent,
+      ContacaixaListComponent,
+      MovimentoComponent,
+      MovimentoFormComponent,
+      MovimentoListComponent,
+      PagamentoComponent,
+      PagamentoFormComponent,
+      PagamentoListComponent
 
   ],
   imports: [

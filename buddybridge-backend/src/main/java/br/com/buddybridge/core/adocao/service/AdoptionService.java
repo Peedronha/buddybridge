@@ -39,18 +39,18 @@ public class AdoptionService {
 //                    model.setAdocao(this.adoptionRepository.save(adoptionModel));
 //                }
 //
-//                Optional<AnimalModel> animalModelOptional = animalRepository.findById(Long.valueOf(adoptionDTO.getId_animal()));
+//                Optional<ContaCaixa> animalModelOptional = animalRepository.findById(Long.valueOf(adoptionDTO.getId_animal()));
 //
 //                if (animalModelOptional.isPresent()) {
 //                    model.setAnimal(animalModelOptional.get());
 //                } else {
-//                    throw new SystemException("AnimalModel with ID " + adoptionDTO.getId_animal() + " not found.");
+//                    throw new SystemException("ContaCaixa with ID " + adoptionDTO.getId_animal() + " not found.");
 //                }
 //                model.setData_criacao(LocalDateTime.now());
 //
 //            return adoptionProfileRepository.save(model);
 //        } catch (NumberFormatException e) {
-//            throw new NumberFormatException("Invalid animal ID format: " + adoptionDTO.getId_animal());
+//            throw new NumberFormatException("Invalid contacaixa ID format: " + adoptionDTO.getId_animal());
 //        } catch (Exception e) {
 //            throw new SystemException("An error occurred while saving the adoption profile: " + e.getMessage());
 //        }
@@ -69,7 +69,7 @@ public AdoptionProfileModel saveAdoptionProfileRequest(ProfileDTO adoptionDTO) t
                 model.setAdocao(this.adoptionRepository.save(adoptionModel));
             }
 
-            // Validate and convert animal ID
+            // Validate and convert contacaixa ID
             Long animalId;
             try {
                 animalId = !Objects.equals(adoptionDTO.getId_animal(), " ") ? Long.valueOf(adoptionDTO.getId_animal()) : null;
@@ -77,12 +77,12 @@ public AdoptionProfileModel saveAdoptionProfileRequest(ProfileDTO adoptionDTO) t
                 throw new SystemException();
             }
 
-            // Fetch the AnimalModel from the repository
+            // Fetch the ContaCaixa from the repository
             Optional<AnimalModel> animalModelOptional = animalRepository.findById(animalId);
             if (animalModelOptional.isPresent()) {
                 model.setAnimal(animalModelOptional.get());
             } else {
-                throw new SystemException("AnimalModel with ID " + adoptionDTO.getId_animal() + " not found.");
+                throw new SystemException("ContaCaixa with ID " + adoptionDTO.getId_animal() + " not found.");
             }
 
             // Set the creation date

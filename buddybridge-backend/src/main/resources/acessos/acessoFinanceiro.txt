@@ -1,0 +1,12 @@
+Buddy Financeiro;Cadastro de Classificações;POST;Cadastrar Classificação;
+Buddy Financeiro;Cadastro de Classificações;PUT;Alterar Classificação;
+Buddy Financeiro;Cadastro de Classificações;DELETE;Excluir Classificação;
+Buddy Financeiro;Cadastro de Movimentações;POST;Cadastrar Movimentação;
+Buddy Financeiro;Cadastro de Movimentações;PUT;Alterar Movimentação;
+Buddy Financeiro;Cadastro de Movimentações;DELETE;Excluir Movimentação;
+Buddy Financeiro;Cadastro de Conta Caixa;POST;Cadastrar Conta Caixa;
+Buddy Financeiro;Cadastro de Conta Caixa;PUT;Alterar Conta Caixa;
+Buddy Financeiro;Cadastro de Conta Caixa;DELETE;Excluir Conta Caixa;
+Buddy Financeiro;Cadastro de Pagamentos;POST;Cadastrar Pagamento;
+Buddy Financeiro;Cadastro de Pagamentos;PUT;Alterar Pagamento;
+Buddy Financeiro;Cadastro de Pagamentos;DELETE;Excluir Pagamento;

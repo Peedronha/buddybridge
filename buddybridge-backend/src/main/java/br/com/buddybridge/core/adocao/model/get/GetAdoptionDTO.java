@@ -40,11 +40,11 @@ public class GetAdoptionDTO {
 
     private Integer horasFora;  // Quantas horas por dia você costuma passar fora de casa?
 
-    private Boolean quintalSeguro;  // Você tem um quintal ou área externa segura para o animal brincar?
+    private Boolean quintalSeguro;  // Você tem um quintal ou área externa segura para o contacaixa brincar?
 
     private Boolean cuidadosMedicos;  // Está disposto a fornecer cuidados médicos em caso de necessidade?
 
-    private String motivoAdocao;  // Por que você quer adotar este animal em particular?
+    private String motivoAdocao;  // Por que você quer adotar este contacaixa em particular?
 
     private String endereco;
 

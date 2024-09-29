@@ -12,5 +12,8 @@ Buddy Menu;BUDDY ANIMAIS;GET;Adoções;pi-asterisk;restrict/manage-adoption;
 Buddy Menu;BUDDY ANIMAIS;GET;Configurações;pi-cog;/menu;
 Buddy Menu;BUDDY ANIMAIS;Configurações;Cadastro de Raças;pi-folder-open;/racas;
 Buddy Menu;BUDDY ANIMAIS;Configurações;Tipos de Animal;pi-folder-open;/tipos;
-
-
+Buddy Menu;BUDDY FINANCEIRO;GET;Movimentações;pi-money-bill;/movimentacao;
+Buddy Menu;BUDDY FINANCEIRO;GET;Pagamentos;pi-ticket;/pagamento;
+Buddy Menu;BUDDY FINANCEIRO;GET;Configurações;pi-cog;/menu;
+Buddy Menu;BUDDY FINANCEIRO;Configurações;Classificações;pi-list;/classificacao;
+Buddy Menu;BUDDY FINANCEIRO;Configurações;Contas de caixa;pi-wallet;/contacaixa;

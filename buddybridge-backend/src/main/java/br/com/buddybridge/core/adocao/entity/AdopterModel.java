@@ -64,14 +64,14 @@ public class AdopterModel {
 
     @NotNull
     @Column(name = "quintal_seguro")
-    private Boolean quintalSeguro;  // Você tem um quintal ou área externa segura para o animal brincar?
+    private Boolean quintalSeguro;  // Você tem um quintal ou área externa segura para o contacaixa brincar?
 
     @NotNull
     @Column(name = "cuidados_medicos")
     private Boolean cuidadosMedicos;  // Está disposto a fornecer cuidados médicos em caso de necessidade?
 
     @Column(name = "motivo_adocao", length = 500)
-    private String motivoAdocao;  // Por que você quer adotar este animal em particular?
+    private String motivoAdocao;  // Por que você quer adotar este contacaixa em particular?
 
     @Embedded
     private AddressModel address;
