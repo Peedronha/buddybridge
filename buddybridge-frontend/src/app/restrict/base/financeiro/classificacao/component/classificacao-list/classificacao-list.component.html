@@ -1,0 +1,73 @@
+<div class="card">
+  <div class="button-group" style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 10px; align-items: center;">
+    <span style="font-weight: bold; margin-right: auto;">
+      Selecione um item na grid abaixo para poder alterá-lo ou excluí-lo.
+    </span>
+    <button pButton pRipple label="Novo" (click)='onAdd()' class="p-button p-button" icon="pi pi-plus"></button>
+    <button pButton pRipple label="Alterar" (click)='onEdit(_specificEntity?.idClassificacao)' class="p-button p-button" icon="pi pi-pencil" [disabled]='!_specificEntity?.idClassificacao'></button>
+    <button pButton pRipple label="Excluir" (click)='showDeleteDialog(_specificEntity)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;" [disabled]='!_specificEntity?.idClassificacao'></button>
+  </div>
+
+  <p-table #dt1 [value]="classificacoes" selectionMode="single" [(selection)]="_specificEntity" dataKey="idClassificacao" [tableStyle]="{'min-width': '50rem'}"
+           [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session-classificacao">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="idClassificacao" style="width:10%">Cod. <p-sortIcon field="idClassificacao"></p-sortIcon></th>
+        <th pSortableColumn="descricaoClassificacao" style="width:40%">Descrição <p-sortIcon field="descricaoClassificacao"></p-sortIcon></th>
+        <th pSortableColumn="tipo" style="width:20%">Tipo <p-sortIcon field="tipo"></p-sortIcon></th>
+        <th pSortableColumn="ativoClassificacao" style="width:10%">Ativo? <p-sortIcon field="ativoClassificacao"></p-sortIcon></th>
+      </tr>
+      <tr>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'idClassificacao', 'contains')" [value]="$any(dt1.filters['idClassificacao'])?.value" placeholder="Filtrar Cod." class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'descricaoClassificacao', 'contains')" [value]="$any(dt1.filters['descricaoClassificacao'])?.value" placeholder="Filtrar Descrição" class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'tipo', 'contains')" [value]="$any(dt1.filters['tipo'])?.value" placeholder="Filtrar Tipo" class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'ativoClassificacao', 'contains')" [value]="$any(dt1.filters['ativoClassificacao'])?.value" placeholder="Filtrar Ativo" class="w-full">
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-classificacao>
+      <tr [pSelectableRow]="classificacao">
+        <td>
+          <span class="p-column-title">Cod.</span>
+          {{classificacao.idClassificacao}}
+        </td>
+        <td>
+          <span class="p-column-title">Descrição</span>
+          {{classificacao.descricaoClassificacao}}
+        </td>
+        <td>
+          <span class="p-column-title">Tipo</span>
+          {{classificacao.tipo === 'ENTRADA' ? 'Entrada' : 'Saída'}}
+        </td>
+        <td>
+          <span class="p-column-title">Ativo?</span>
+          <span class="ml-1 vertical-align-middle">{{classificacao.ativoClassificacao ? 'Sim' : 'Não'}}</span>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">Não foram encontrados registros.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dialog header="Confirmar Exclusão" [(visible)]="displayDeleteDialog" modal="modal" [closable]="false"
+            [dismissableMask]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <p class="m-0">Tem certeza de que deseja EXCLUIR esta classificação?</p>
+    <ng-template pTemplate="footer">
+      <button pButton label="Cancelar" icon="pi pi-times" (click)="onCancelDelete()"></button>
+      <button pButton severity="danger" label="Confirmar" icon="pi pi-check" (click)="confirmDelete()"></button>
+    </ng-template>
+  </p-dialog>
+</div>
