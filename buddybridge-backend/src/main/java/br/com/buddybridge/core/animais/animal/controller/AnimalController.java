@@ -24,8 +24,19 @@ public class AnimalController {
     
     private AnimalService animalService;
 
+    @GetMapping("/filter")
+    public ResponseEntity<List<AnimalModel>> filterAnimals(
+            @RequestParam(required = false) String species,
+            @RequestParam(required = false) String breed,
+            @RequestParam(required = false) Integer minAge,
+            @RequestParam(required = false) Integer maxAge) {
+
+        List<AnimalModel> filteredAnimals = animalService.filterAnimals(species, breed, minAge, maxAge);
+        return ResponseEntity.ok(filteredAnimals);
+    }
+
     @GetMapping
-    public ResponseEntity<List<GetAnimalDTO>> getALlAnimalModels(){
+        public ResponseEntity<List<GetAnimalDTO>> getALlAnimalModels(){
         List<GetAnimalDTO> animalModels = new ArrayList<>(this.animalService.findAll());
         if (animalModels.isEmpty()) {
             return new ResponseEntity<>(animalModels, HttpStatus.NOT_FOUND);
@@ -35,6 +46,7 @@ public class AnimalController {
 
     @PostMapping
     public ResponseEntity<AnimalModel> insertAnimalModel(@RequestBody AnimalDto animalDto){
+
         try {
             AnimalModel animal = this.animalService.saveAnimalModel(animalDto);
             return new ResponseEntity<>(animal, HttpStatus.CREATED);

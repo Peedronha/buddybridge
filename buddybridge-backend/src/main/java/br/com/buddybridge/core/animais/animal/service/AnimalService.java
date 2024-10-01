@@ -78,4 +78,7 @@ public class AnimalService {
         return animalRepository.existsById(id);
     }
 
+    public List<AnimalModel> filterAnimals(String species, String breed, Integer minAge, Integer maxAge) {
+        return animalRepository.filterAnimals(species, breed, minAge, maxAge);
+    }
 }
