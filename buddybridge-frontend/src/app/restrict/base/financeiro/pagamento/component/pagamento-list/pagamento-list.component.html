@@ -1,4 +1,3 @@
-<!-- pagamento-list.component.html -->
 <div class="card">
   <div class="button-group" style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 10px; align-items: center;">
     <span style="font-weight: bold; margin-right: auto;">
@@ -9,17 +8,19 @@
     <button pButton pRipple label="Excluir" (click)='showDeleteDialog(_specificEntity)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;" [disabled]='!_specificEntity?.idPagamento'></button>
   </div>
 
-  <p-table #dt1 [value]="pagamentos" selectionMode="single" [(selection)]="_specificEntity" dataKey="idPagamento" [tableStyle]="{'min-width': '50rem'}"
+  <p-table #dt1 [value]="pagamentos" selectionMode="single" [(selection)]="_specificEntity" dataKey="idPagamento" [tableStyle]="{'min-width': '60rem'}"
            [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session-pagamento">
 
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="idPagamento" style="width:10%">Cod. <p-sortIcon field="idPagamento"></p-sortIcon></th>
-        <th pSortableColumn="movimentacao" style="width:30%">Movimentação <p-sortIcon field="movimentacao"></p-sortIcon></th>
-        <th pSortableColumn="dataRecebimento" style="width:20%">Data Recebimento <p-sortIcon field="dataRecebimento"></p-sortIcon></th>
-        <th pSortableColumn="contaCaixa" style="width:20%">Conta Caixa <p-sortIcon field="contaCaixa"></p-sortIcon></th>
-        <th pSortableColumn="valorPagamento" style="width:10%">Valor <p-sortIcon field="valorPagamento"></p-sortIcon></th>
-        <th pSortableColumn="observacoes" style="width:10%">Observações <p-sortIcon field="observacoes"></p-sortIcon></th>
+        <th pSortableColumn="movimentacao" style="width:20%">Movimentação <p-sortIcon field="movimentacao"></p-sortIcon></th>
+        <th pSortableColumn="dataRecebimento" style="width:10%">Data Recebimento <p-sortIcon field="dataRecebimento"></p-sortIcon></th>
+        <th pSortableColumn="contaCaixa" style="width:15%">Conta Caixa <p-sortIcon field="contaCaixa"></p-sortIcon></th>
+        <th pSortableColumn="valorPagamento" style="width:10%">Valor Pagamento <p-sortIcon field="valorPagamento"></p-sortIcon></th>
+        <th pSortableColumn="valorTotalMovimentacao" style="width:10%">Valor Total <p-sortIcon field="valorTotalMovimentacao"></p-sortIcon></th>
+        <th pSortableColumn="valorPendente" style="width:10%">Movimentação de Caixa <p-sortIcon field="valorPendente"></p-sortIcon></th>
+        <th pSortableColumn="observacoes" style="width:15%">Observações <p-sortIcon field="observacoes"></p-sortIcon></th>
       </tr>
       <tr>
         <!-- Input filters for each column -->
@@ -28,6 +29,8 @@
         <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'dataRecebimento', 'contains')" placeholder="Filtrar Data" class="w-full"></th>
         <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'contaCaixa', 'contains')" placeholder="Filtrar Conta" class="w-full"></th>
         <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'valorPagamento', 'contains')" placeholder="Filtrar Valor" class="w-full"></th>
+        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'valorTotalMovimentacao', 'contains')" placeholder="Filtrar Valor Total" class="w-full"></th>
+        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'valorPendente', 'contains')" placeholder="Filtrar Valor Pendente" class="w-full"></th>
         <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'observacoes', 'contains')" placeholder="Filtrar Observações" class="w-full"></th>
       </tr>
     </ng-template>
@@ -37,15 +40,17 @@
         <td>{{ pagamento.idPagamento }}</td>
         <td>{{ pagamento.movimentacao?.historico }}</td>
         <td>{{ pagamento.dataRecebimento | date:'dd/MM/yyyy' }}</td>
-        <td>{{ pagamento.contaCaixa?.descricao }}</td>
+        <td>{{ pagamento.contaCaixa?.descricaoContaCaixa }}</td>
         <td>{{ pagamento.valorPagamento | currency:'BRL' }}</td>
+        <td>{{ pagamento.movimentacao?.valor | currency:'BRL' }}</td> <!-- Valor Total da Movimentação -->
+        <td>{{ pagamento.movimentacao?.valorPendente | currency:'BRL' }}</td> <!-- Valor Pendente da Movimentação -->
         <td>{{ pagamento.observacoes }}</td>
       </tr>
     </ng-template>
 
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="6">Não foram encontrados registros.</td>
+        <td colspan="8">Não foram encontrados registros.</td>
       </tr>
     </ng-template>
   </p-table>

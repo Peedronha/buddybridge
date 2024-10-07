@@ -5,13 +5,13 @@
       <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
       <li><a class="text-500 no-underline line-height-3 cursor-pointer">Financeiro</a></li>
       <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-      <li><span class="text-900 line-height-3">Pagamentos</span></li>
+      <li><span class="text-900 line-height-3">Movimentação de Caixa</span></li>
       <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia os pagamentos do sistema!</a></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia as entradas/saídas de caixa do sistema!</a></li>
       <button pButton pRipple label="Solicitar acesso" class="p-button-sm p-button-text p-button-secondary" icon="pi pi-lock-open" (click)="openModal()"></button>
     </ul>
     <div class="flex align-items-start flex-column lg:flex-row">
-      <div class="font-medium text-3xl text-900">Pagamentos</div><br/><br/><br/>
+      <div class="font-medium text-3xl text-900">Movimentação de Caixa</div><br/><br/><br/>
     </div>
   </div>
   <app-pagamento-list [pagamentos]="pagamentos" (add)="onAdd()" (edit)="onEdit($event)" (remove)="onRemove($event)">

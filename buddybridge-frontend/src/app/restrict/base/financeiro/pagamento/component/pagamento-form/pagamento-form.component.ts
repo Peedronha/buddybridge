@@ -43,7 +43,7 @@ export class PagamentoFormComponent implements OnInit {
     const pagamento: Pagamento = this.activatedRoute.snapshot.data['pagamento'];
 
     // Carrega movimentações e contas caixa
-    this.movimentacaoService.getAllMovimentacoes().subscribe(
+    this.movimentacaoService.getMovimentacoesPendentesToRecieve().subscribe(
       (data: Movimentacao[]) => {
         this.movimentacoes = data;
       },

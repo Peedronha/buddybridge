@@ -45,4 +45,29 @@ export class MovimentacaoService {
   deleteMovimentacao(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
   }
+
+  getValoresRelatorioMensal(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/relatorio-mensal`, { headers: this.getHeaders() });
+  }
+
+  getMovimentacoesPendentes(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/resumo-pendentes`, { headers: this.getHeaders() });
+  }
+
+  getReceitasDespesasAnual(): Observable<any> {
+    return this.http.get<any[]>(`${this.apiUrl}/receitas-despesas-anual`, { headers: this.getHeaders() });
+  }
+
+  getReceitasPorContaCaixa(ano: number, mes: number, filtro: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/receitas`, { params: { ano, mes, filtro }, headers: this.getHeaders() });
+  }
+
+  getDespesasPorContaCaixa(ano: number, mes: number, filtro: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/despesas`, { params: { ano, mes, filtro }, headers: this.getHeaders() });
+  }
+
+  getMovimentacoesPendentesToRecieve(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/pendentes`, { headers: this.getHeaders() });
+  }
+
 }

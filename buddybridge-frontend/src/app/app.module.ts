@@ -78,6 +78,7 @@ import { MovimentoFormComponent } from './restrict/base/financeiro/movimento/com
 import { PagamentoComponent } from './restrict/base/financeiro/pagamento/component/pagamento/pagamento.component';
 import { PagamentoFormComponent } from './restrict/base/financeiro/pagamento/component/pagamento-form/pagamento-form.component';
 import { PagamentoListComponent } from './restrict/base/financeiro/pagamento/component/pagamento-list/pagamento-list.component';
+import { DashfinanceiroComponent } from './restrict/base/financeiro/dashfinanceiro/dashfinanceiro.component';
 
 
 @NgModule({
@@ -127,7 +128,8 @@ import { PagamentoListComponent } from './restrict/base/financeiro/pagamento/com
       MovimentoListComponent,
       PagamentoComponent,
       PagamentoFormComponent,
-      PagamentoListComponent
+      PagamentoListComponent,
+      DashfinanceiroComponent,
 
   ],
   imports: [

@@ -54,6 +54,7 @@ import { MovimentacaoResolver } from './restrict/base/financeiro/movimento/guard
 import { PagamentoComponent } from './restrict/base/financeiro/pagamento/component/pagamento/pagamento.component';
 import { PagamentoFormComponent } from './restrict/base/financeiro/pagamento/component/pagamento-form/pagamento-form.component';
 import { PagamentoResolver } from './restrict/base/financeiro/pagamento/guard/pagamento.resolver';
+import { DashfinanceiroComponent } from './restrict/base/financeiro/dashfinanceiro/dashfinanceiro.component';
 const routes: Routes = [
   { path: 'errorBuddyBridge', title: 'BuddyBridge - Erro', component: ErrorComponent },
   {
@@ -124,7 +125,9 @@ const routes: Routes = [
 
       { path: 'pagamento', title: 'BuddyBridge - Pagamentos', component: PagamentoComponent },
       { path: 'pagamento/addpagamento', title: 'BuddyBridge - Novo Pagamento', component: PagamentoFormComponent, resolve: { pagamento: PagamentoResolver } },
-      { path: 'pagamento/editpagamento/:id', title: 'BuddyBridge - Editar Pagamento', component: PagamentoFormComponent, resolve: { pagamento: PagamentoResolver } }
+      { path: 'pagamento/editpagamento/:id', title: 'BuddyBridge - Editar Pagamento', component: PagamentoFormComponent, resolve: { pagamento: PagamentoResolver } },
+
+      { path: 'dashfinanceiro', title: 'BuddyBridge - Financeiro', component: DashfinanceiroComponent }
 
     ],
     canActivate: [AuthGuard]
