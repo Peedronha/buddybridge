@@ -44,6 +44,9 @@ public class AnimalModel {
     @Column(name = "caracteristicas_animal", nullable = false)
     private String caracteristicas_animal;
 
+    @Column(name = "porte_animal", nullable = false)
+    private String porte_animal;
+
     @Column(name = "localizacao_animal", nullable = false)
     private String localizacao_animal;
 

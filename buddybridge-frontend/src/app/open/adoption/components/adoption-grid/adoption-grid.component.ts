@@ -10,6 +10,11 @@ import { AdoptionService } from "../../../../restrict/base/adoption-profile/shar
 import { AnimalCard } from "../../../../restrict/base/adoption-profile/model/AnimalCard";
 import { AdoptionSubmissionFormComponent } from "../adoption-submission-form/adoption-submission-form.component";
 import { CardModule } from "primeng/card";
+import {DropdownModule} from "primeng/dropdown";
+import {FormsModule} from "@angular/forms";
+import {InputTextModule} from "primeng/inputtext";
+import {RippleModule} from "primeng/ripple";
+import {TableModule} from "primeng/table";
 
 @Component({
   selector: 'app-adoption-grid',
@@ -21,10 +26,15 @@ import { CardModule } from "primeng/card";
     NgForOf,
     AdoptionSubmissionFormComponent,
     CardModule,
-    DataViewModule
+    DataViewModule,
+    DropdownModule,
+    FormsModule,
+    InputTextModule,
+    RippleModule,
+    TableModule
   ],
   templateUrl: './adoption-grid.component.html',
-  styleUrls: ['./adoption-grid.component.scss'] // fixed typo (styleUrls instead of styleUrl)
+  styleUrls: ['./adoption-grid.component.scss']
 })
 export class AdoptionGridComponent {
   @Input() profiles!: AdoptionProfileModel[];
@@ -33,9 +43,36 @@ export class AdoptionGridComponent {
   @Output() edit = new EventEmitter<number>();
   @Output() remove = new EventEmitter<number>();
 
-  layout: 'list' | 'grid' = 'grid'; // Default layout
+  animals: any[] = [];
+  filteredAnimals: any[] = [];
+  filterName: string = '';
+  filterGender: string = '';
+  filterBreed: string = '';
+  filterLocation: string = '';
+  filterMinAge: number | null = null;
+  filterMaxAge: number | null = null;
 
-  animals!: AnimalCard[];
+  genders: any[] = [
+    { label: 'Todos', value: '' },
+    { label: 'Macho', value: 'Macho' },
+    { label: 'Fêmea', value: 'Fêmea' }
+  ];
+
+
+  applyFilters(): void {
+    this.filteredAnimals = this.animals.filter(animal => {
+      const matchesName = this.filterName ? animal.nome_animal.toLowerCase().includes(this.filterName.toLowerCase()) : true;
+      const matchesBreed = this.filterBreed ? animal.raca_animal.toLowerCase().includes(this.filterBreed.toLowerCase()) : true;
+      const matchesGender = this.filterGender ? animal.genero_animal === this.filterGender : true;
+      const matchesLocation = this.filterLocation ? animal.localizacao_animal.toLowerCase().includes(this.filterLocation.toLowerCase()) : true;
+      const matchesMinAge = this.filterMinAge !== null ? animal.idade >= this.filterMinAge : true;
+      const matchesMaxAge = this.filterMaxAge !== null ? animal.idade <= this.filterMaxAge : true;
+
+      return matchesName && matchesBreed && matchesGender && matchesLocation && matchesMinAge && matchesMaxAge ;
+    });
+  }
+
+  layout: 'list' | 'grid' = 'grid'; // Default layout
 
   genero = [
     { label: 'Fêmea', value: 'Female' },
@@ -47,6 +84,7 @@ export class AdoptionGridComponent {
   ngOnInit() {
     this.adoptionService.getAnimalsByProfileStatus().subscribe((data: AnimalCard[]) => {
       console.log('Received data:', data);
+      this.filteredAnimals = data;
       this.animals = data;
     });
   }
