@@ -16,12 +16,12 @@ export class HistoricoMedicoService {
     return token;
   }
 
-  private apiUrl = 'http://localhost:8080/animal';
+  private apiUrl = 'http://localhost:8080/medical';
 
   constructor(private http: HttpClient, private tokenService: TokenService) {
   }
 
-  getAnimalsById(id: any): Observable<any> {
+  getMedicalReportById(id: any): Observable<any> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
@@ -29,7 +29,7 @@ export class HistoricoMedicoService {
     return this.http.get<any>(this.apiUrl + '/' + id,{headers: reqHeader})
   }
 
-  getAnimals() {
+  getMedicalReport() {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
@@ -37,7 +37,7 @@ export class HistoricoMedicoService {
     return this.http.get<any>(this.apiUrl,{headers: reqHeader})
   }
 
-  deleteAnimal(idUser: any) {
+  deleteMedicalReport(idUser: any) {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
@@ -45,15 +45,15 @@ export class HistoricoMedicoService {
     return this.http.delete<any>(this.apiUrl + '/' +idUser,{headers: reqHeader})
   }
 
-  updateanimal(animal: AnimalModel){
+  updateMedical(medicalReport: HistoricoMedico){
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.put<any>(this.apiUrl, animal, {headers: reqHeader});
+    return this.http.put<any>(this.apiUrl, medicalReport, {headers: reqHeader});
   }
 
-  registerAnimal(postData1: AnimalModel): Observable<any> {
+  registerMedicalReport(postData1: HistoricoMedico): Observable<any> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
@@ -68,19 +68,4 @@ export class HistoricoMedicoService {
         }
       ))
   }
-
-  getRacesByType(type: string):Observable<any> {
-    var reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.getAuthorizationToken()
-    });
-    return this.http.get<Raca[]>(`http://localhost:8080/raca/type/` + type);
-  }
-
-  getMedicalReportById(param: any) {
-    var reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.getAuthorizationToken()
-    });
-    return this.http.get<HistoricoMedico[]>(`http://localhost:8080/medical/` + param);  }
 }

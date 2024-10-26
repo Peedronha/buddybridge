@@ -12,6 +12,8 @@ import {AnimalService} from "../../../animal/service/animal.service";
 import {AccountService} from "../../../../../open/account/shared/account.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MessageService} from "primeng/api";
+import {HistoricoMedicoService} from "../../service/historico-medico.service";
+import {HistoricoMedico} from "../../model/historico-medico";
 
 @Component({
   selector: 'app-historico-medico',
@@ -29,9 +31,8 @@ import {MessageService} from "primeng/api";
   styleUrl: './historico-medico.component.scss'
 })
 export class HistoricoMedicoComponent {
-  animals!: AnimalModel[]
 
-  medical_report: any;
+  medicalReport: any;
 
   //Fazendo a solicitação de acessos - inicio
   acessos: AcessoDTO[] = [];
@@ -41,7 +42,7 @@ export class HistoricoMedicoComponent {
 
   constructor(
     private grupoacessoserviceService: GrupoacessoserviceService, //Fazendo a solicitação de acessos
-    private animalService: AnimalService,
+    private historicoMedicoService: HistoricoMedicoService,
     private accountService: AccountService,
     private router: Router,
     private route: ActivatedRoute,
@@ -82,8 +83,8 @@ export class HistoricoMedicoComponent {
   //Fazendo a solicitação de acessos - fim
 
   refresh() {
-    this.animalService.getAnimals().subscribe((data: AnimalModel[]) => {
-      this.animals! = data;
+    this.historicoMedicoService.getMedicalReport().subscribe((data: HistoricoMedico[]) => {
+      this.medicalReport! = data;
     });
   }
 
@@ -104,11 +105,11 @@ export class HistoricoMedicoComponent {
   }
 
   onRemove(idUser: any) {
-    if (this.hasAccess('Excluir Animal')) {
-      this.animalService.deleteAnimal(idUser).subscribe(() =>{
+    if (this.hasAccess('Excluir registro médico')) {
+      this.historicoMedicoService.deleteMedicalReport(idUser).subscribe(() =>{
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro excluido com sucesso' });
         window.location.reload();
-        this.router.navigateByUrl('/animal')
+        this.router.navigateByUrl('/registro')
       })
     } else {
       this.showAccessDeniedModal();
