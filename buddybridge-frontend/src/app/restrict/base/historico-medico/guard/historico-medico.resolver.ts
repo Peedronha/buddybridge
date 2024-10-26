@@ -12,7 +12,16 @@ export class historicoMedicoResolver {
   constructor(private service: HistoricoMedicoService) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<HistoricoMedico[]> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<{
+    date: string;
+    doctor: string;
+    returnDate: string;
+    notes: string;
+    description: string;
+    id: number;
+    type: string;
+    animalId: number
+  }> {
     if (route.params && route.params['id']) {
       return this.service.getMedicalReportById(route.params['id']);
     }

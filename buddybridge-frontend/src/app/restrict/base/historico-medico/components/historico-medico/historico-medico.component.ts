@@ -109,7 +109,7 @@ export class HistoricoMedicoComponent {
       this.historicoMedicoService.deleteMedicalReport(idUser).subscribe(() =>{
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro excluido com sucesso' });
         window.location.reload();
-        this.router.navigateByUrl('/registro')
+        this.router.navigateByUrl('/report')
       })
     } else {
       this.showAccessDeniedModal();

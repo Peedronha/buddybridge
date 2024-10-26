@@ -1,5 +1,5 @@
 export class HistoricoMedico {
-  id!:number;
+  id?:number;
   animalId?: number;
   date?: string;
   description?: string;

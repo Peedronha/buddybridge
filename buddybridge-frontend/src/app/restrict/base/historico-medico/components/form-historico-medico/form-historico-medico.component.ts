@@ -49,8 +49,11 @@ export class FormHistoricoMedicoComponent {
     type: ['', Validators.required],
     description: ['', Validators.required],
     date: ['', Validators.required],
-    returnDate: ['', Validators.required],
+    returnDate: [''],
   });
+  protected maxDate: string;
+  animals: AnimalModel[] = [];
+  selectAnimal!: AnimalModel[];
 
   constructor(
     private fb: FormBuilder,
@@ -59,13 +62,19 @@ export class FormHistoricoMedicoComponent {
     private router: ActivatedRoute,
     private route: Router,
     private accountService: AccountService,
-    private CurrentDate: CurrentDate
+    private CurrentDate: CurrentDate,
+    private animalService: AnimalService
   ) {
+    this.maxDate = CurrentDate.getCurrentDate();
   }
 
   ngOnInit(): void {
     this.accountService.validarSessao();
     const medicalReport: HistoricoMedico = this.router.snapshot.data['medicalReport']
+
+    this.animalService.getAnimals().subscribe(animals => {
+      this.animals = animals;
+    });
 
     this.registerForm.setValue({
       medicalReportId: medicalReport.id + '',
@@ -85,9 +94,13 @@ export class FormHistoricoMedicoComponent {
   submitDetails() {
     let medicalReport = new HistoricoMedico();
 
-    var id = this.registerForm.get('id_animal')?.value + '';
+
+    let aux = JSON.parse(JSON.stringify(this.selectAnimal))
+    medicalReport.animalId = aux.id_animal
+
+    var id = this.registerForm.get('medicalReportId')?.value + '';
     medicalReport.id = parseInt(id);
-    medicalReport.animalId = parseInt(this.registerForm.get('animalId')?.value + '');
+    // medicalReport.animalId = parseInt(this.registerForm.get('animalId')?.value + '');
     medicalReport.doctor = this.registerForm.get('doctor')?.value + '';
     medicalReport.date = this.registerForm.get('date')?.value + '';
     medicalReport.notes = this.registerForm.get('notes')?.value + '';
@@ -127,5 +140,9 @@ export class FormHistoricoMedicoComponent {
         }
       );
     }
+  }
+
+  get medicalReportId() {
+    return this.registerForm.get('medicalReportId');
   }
 }

@@ -55,6 +55,13 @@ import { PagamentoComponent } from './restrict/base/financeiro/pagamento/compone
 import { PagamentoFormComponent } from './restrict/base/financeiro/pagamento/component/pagamento-form/pagamento-form.component';
 import { PagamentoResolver } from './restrict/base/financeiro/pagamento/guard/pagamento.resolver';
 import { DashfinanceiroComponent } from './restrict/base/financeiro/dashfinanceiro/dashfinanceiro.component';
+import {
+  HistoricoMedicoComponent
+} from "./restrict/base/historico-medico/components/historico-medico/historico-medico.component";
+import {
+  FormHistoricoMedicoComponent
+} from "./restrict/base/historico-medico/components/form-historico-medico/form-historico-medico.component";
+import {historicoMedicoResolver} from "./restrict/base/historico-medico/guard/historico-medico.resolver";
 const routes: Routes = [
   { path: 'errorBuddyBridge', title: 'BuddyBridge - Erro', component: ErrorComponent },
   {
@@ -77,6 +84,10 @@ const routes: Routes = [
       { path: 'volunteer', title: 'BuddyBridge - Voluntários', component: VolunteerComponent },
       { path: 'volunteer/addvolunteer', title: 'BuddyBridge - Novo Voluntário', component: VolunteerFormComponent, resolve: {volunteer : volunteerResolver} },
       { path: 'volunteer/editvolunteer/:id', title: 'BuddyBridge - Alterar Voluntário', component: VolunteerFormComponent, resolve: {volunteer : volunteerResolver} },
+
+      { path: 'report', title: 'BuddyBridge - Registro Médico', component: HistoricoMedicoComponent },
+      { path: 'report/addRegistro', title: 'BuddyBridge - Novo Registro', component: FormHistoricoMedicoComponent, resolve: {volunteer : historicoMedicoResolver} },
+      { path: 'report/editRegistro/:id', title: 'BuddyBridge - Alterar Registro', component: FormHistoricoMedicoComponent, resolve: {volunteer : historicoMedicoResolver} },
 
       { path: 'animal', title: 'BuddyBridge - Animais', component: AnimalComponent },
       { path: 'animal/addanimal', title: 'BuddyBridge - Novo Animal', component: AnimalFormComponent, resolve: {animal : animalResolver} },
