@@ -53,7 +53,7 @@ export class FormHistoricoMedicoComponent {
   });
   protected maxDate: string;
   animals: AnimalModel[] = [];
-  selectAnimal!: AnimalModel[];
+  selectAnimal?: AnimalModel[];
 
   constructor(
     private fb: FormBuilder,
@@ -77,7 +77,7 @@ export class FormHistoricoMedicoComponent {
     });
 
     this.registerForm.setValue({
-      medicalReportId: medicalReport.id + '',
+      medicalReportId: medicalReport.id+'',
       animalId: medicalReport.animalId + '',
       doctor: medicalReport.doctor + '',
       type: medicalReport.type + '',
@@ -94,13 +94,10 @@ export class FormHistoricoMedicoComponent {
   submitDetails() {
     let medicalReport = new HistoricoMedico();
 
-
-    let aux = JSON.parse(JSON.stringify(this.selectAnimal))
-    medicalReport.animalId = aux.id_animal
-
     var id = this.registerForm.get('medicalReportId')?.value + '';
     medicalReport.id = parseInt(id);
-    // medicalReport.animalId = parseInt(this.registerForm.get('animalId')?.value + '');
+    medicalReport.animalId = this.selectAnimal?.map(value => {return value.id_animal})
+
     medicalReport.doctor = this.registerForm.get('doctor')?.value + '';
     medicalReport.date = this.registerForm.get('date')?.value + '';
     medicalReport.notes = this.registerForm.get('notes')?.value + '';
@@ -108,7 +105,10 @@ export class FormHistoricoMedicoComponent {
     medicalReport.returnDate = this.registerForm.get('returnDate')?.value + '';
     medicalReport.type = this.registerForm.get('type')?.value + '';
 
-    if (this.registerForm.get('id')?.value + '' != 'NaN') {
+    if (this.medicalReportId) {
+
+
+
       this.historicoMedicoService.updateMedical(medicalReport).subscribe(
         response => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro Médico atualizado!' });
