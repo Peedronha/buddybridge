@@ -4,6 +4,7 @@ import br.com.buddybridge.core.adocao.entity.AdoptionProfileModel;
 import br.com.buddybridge.core.animais.animal.model.AnimalDto;
 import br.com.buddybridge.core.animais.raca.entity.RacaModel;
 import br.com.buddybridge.core.animais.tipo.entity.TypeModel;
+import br.com.buddybridge.core.historico.model.MedicalHistoryModel;
 import br.com.buddybridge.core.usuario.entity.Usuario;
 import jakarta.persistence.*;
 import lombok.*;
@@ -57,6 +58,9 @@ public class AnimalModel {
     @ManyToOne
     @JoinColumn(name="usuario_id", referencedColumnName="id")
     private Usuario usuarioAnimal;
+
+    @OneToMany(mappedBy = "animal")
+    private List<MedicalHistoryModel> medicalHistories;
 
     public AnimalModel(AnimalDto animalDto) {
         this.id_animal = animalDto.getId_animal();
