@@ -33,7 +33,7 @@ export class PagamentoComponent {
 
   ngOnInit(): void {
     this.accountService.validarSessao();
-    this.grupoacessoserviceService.getAcessosParaTela('Cadastro de Movimento de Caixa').subscribe((acessos: AcessoDTO[]) => {
+    this.grupoacessoserviceService.getAcessosParaTela('Cadastro de Fluxo de Caixa').subscribe((acessos: AcessoDTO[]) => {
       this.acessos = acessos;
      });
   }
@@ -59,7 +59,7 @@ export class PagamentoComponent {
   }
 
   onAdd() {
-    if (this.hasAccess('Cadastrar Movimento de caixa')) {
+    if (this.hasAccess('Cadastrar Fluxo de caixa')) {
       this.router.navigate(['addpagamento'], { relativeTo: this.route });
     } else {
       this.showAccessDeniedModal();
@@ -67,7 +67,7 @@ export class PagamentoComponent {
   }
 
   onEdit(id: any) {
-    if (this.hasAccess('Alterar Movimento de Caixa')) {
+    if (this.hasAccess('Alterar Fluxo de Caixa')) {
       this.router.navigate(['editpagamento', id], { relativeTo: this.route });
     } else {
       this.showAccessDeniedModal();
@@ -75,7 +75,7 @@ export class PagamentoComponent {
   }
 
   onRemove(id: any) {
-    if (this.hasAccess('Excluir Movimento de Caixa')) {
+    if (this.hasAccess('Excluir Fluxo de Caixa')) {
       this.pagamentoService.deletePagamento(id).subscribe(() => {
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro excluído com sucesso' });
         window.location.reload();

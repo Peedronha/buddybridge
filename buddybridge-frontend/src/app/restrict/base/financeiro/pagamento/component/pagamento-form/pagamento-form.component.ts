@@ -79,8 +79,8 @@ export class PagamentoFormComponent implements OnInit {
       return;
     }
 
-    const valor = this.registerForm.get('valorPagamento')?.value + "" ?? "0,00";
-    const valorNumerico = parseFloat(valor.replace(",", "."));
+    const valorStr = this.registerForm.get('valorPagamento')?.value + "" ?? "0,00";
+    const valorNumerico = parseFloat(valorStr.replace(",", "."));
 
     const pagamento: Pagamento = {
       idPagamento: this.registerForm.get('idPagamento')?.value,

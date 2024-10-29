@@ -1,20 +1,45 @@
-<div id="hero" class="flex flex-column pt-4 px-4 lg:px-8 overflow-hidden"
-    style="background: linear-gradient(0deg, rgba(0, 10, 100, 0.2), rgba(40, 2, 255, 0.2)),
-                       radial-gradient(77.36% 256.97% at 77.36% 57.52%, #3b82f6 0%, #C3E3FA 100%); clip-path: ellipse(150% 87% at 93% 13%);">
-    <div class="mx-4 md:mx-8 mt-0 md:mt-4">
-        <h1 class="text-6xl font-bold text-gray-900 line-height-2"><span class="font-light block">Ajude a fazer a diferença! </span>ADOTE UM ANIMAL</h1>
-        <p class="font-normal text-2xl line-height-3 md:mt-3 text-gray-700">Se não puder adotar, ainda é possível ajudar a causa doando ou se voluntariando!</p>
-    </div>
-    <div class="flex justify-content-center md:justify-content-end">
-        <img src="../../../assets/img/default-logo.png" alt="Hero Image" class="w-9 md:w-auto">
-    </div>
-    <br/>
-    <br/>
-    <br/>
+<div class="grid grid-nogutter surface-section text-800">
+  <div class="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
+      <section>
+          <span class="block text-6xl font-bold mb-1">UMA PLATAFORMA ANIMAL</span>
+          <div class="text-6xl text-primary font-bold mb-3">no resgate e na proteção animal</div>
+          <p class="mt-0 mb-4 text-700 line-height-3"></p>
+
+          <button pButton pRipple label="Clique para saber mais" type="button" class="mr-3 p-button-raised"></button>
+          <button pButton pRipple label="Cadastre-se" type="button" class="p-button-outlined"></button>
+      </section>
+  </div>
+  <div class="col-12 md:col-6 overflow-hidden" style="padding: 40px;">
+      <img src="../../../assets/img/DEVICES.png" alt="Image" class="md:ml-auto block md:h-full" >
+  </div>
 </div>
-<br/>
-<br/>
-<div class="grid" style="margin: 10px;">
+<!--div id="hero" class="pt-4  lg:px-8 overflow-hidden" style="background: linear-gradient(0deg, rgba(0, 10, 100, 0.2), rgba(40, 2, 255, 0.2)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, #3b82f6 0%, #C3E3FA 100%);">
+    <div class="mb-3 font-bold text-2xl text-center">
+      <span class="text-900">Ajude a causa! Adote um animal!</span>
+    </div>
+
+
+    <div class="mb-3 font-bold text-2xl">
+
+      <p-card header="exemplo card adoção" subheader="Card Subheader" [style]="{ width: '360px' }">
+        <ng-template pTemplate="header">
+            <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+        </ng-template>
+        <p>
+            Lorem ipsum dolor sit amet...
+        </p>
+        <ng-template pTemplate="footer">
+            <div class="flex gap-3 mt-1">
+                <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" />
+                <p-button label="Save" class="w-full" styleClass="w-full" />
+            </div>
+        </ng-template>
+      </p-card>
+
+
+  </div>
+</div-->
+<div class="grid" style="margin: 60px;">
   <div class="col-12 lg:col-6 xl:col-3">
     <div class="card mb-0">
         <div class="flex justify-content-between mb-3">
@@ -76,3 +101,61 @@
     </div>
   </div>
 </div>
+
+<div id="hero" class="pt-4  lg:px-8 overflow-hidden" style="background: linear-gradient(0deg, rgba(0, 10, 100, 0.2), rgba(40, 2, 255, 0.2)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, #3b82f6 0%, #C3E3FA 100%);">
+  <div class="surface-section px-4 py-8 md:px-6 lg:px-8 text-center" style="border-top-left-radius: 5px; border-top-right-radius: 5px;">
+    <div class="mb-3 font-bold text-2xl">
+      <span class="text-900">Não pode adotar? </span>
+      <span class="text-blue-600">Ainda é possivel ajudar!</span>
+    </div>
+    <div class="text-700 text-sm mb-6">Como ajudar?</div>
+    <div class="grid">
+        <div class="col-12 md:col-4 mb-4 px-5">
+            <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                <i class="pi pi-check-circle text-4xl text-blue-500"></i>
+            </span>
+            <div class="text-900 mb-3 font-medium">Participando de eventos</div>
+            <span class="text-700 text-sm line-height-3">Ajude a instituíção cuidando de animais em eventos de adoção que são realizados em sua cidade!</span>
+        </div>
+        <div class="col-12 md:col-4 mb-4 px-5">
+            <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                <i class="pi pi-heart text-4xl text-blue-500"></i>
+            </span>
+            <div class="text-900 mb-3 font-medium">Cuidando dos animais na instituíção</div>
+            <span class="text-700 text-sm line-height-3">Muitos animais precisam de voluntarios que se disponham a brincar com eles.</span>
+        </div>
+        <div class="col-12 md:col-4 mb-4 px-5">
+            <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                <i class="pi pi-wallet text-4xl text-blue-500"></i>
+            </span>
+            <div class="text-900 mb-3 font-medium">Doe!</div>
+            <span class="text-700 text-sm line-height-3">Ajude apadrinhando os animais na instituição, desta forma, nos ajudara a prestar sempre o melhor serviço.</span>
+        </div>
+        <div class="col-12 md:col-4 mb-4 px-5">
+            <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                <i class="pi pi-globe text-4xl text-blue-500"></i>
+            </span>
+            <div class="text-900 mb-3 font-medium">Expandindo a rede de ajuda</div>
+            <span class="text-700 text-sm line-height-3">Ajudando a expandir a rede de voluntarios, adotantes e padrinhos da instituíção.</span>
+        </div>
+        <div class="col-12 md:col-4 mb-4 px-5">
+            <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                <i class="pi pi-bullseye text-4xl text-blue-500"></i>
+            </span>
+            <div class="text-900 mb-3 font-medium">Controle de animais</div>
+            <span class="text-700 text-sm line-height-3">Ajudando a cuidar dos animais desde o momento do resgate até a adoção. </span>
+        </div>
+        <div class="col-12 md:col-4 md:mb-4 mb-0 px-3">
+            <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                <i class="pi pi-shield text-4xl text-blue-500"></i>
+            </span>
+            <div class="text-900 mb-3 font-medium">Confiança no cuidado dos animais</div>
+            <span class="text-700 text-sm line-height-3">Ajudando a controlar as fichas médicas dos pets, e suas futuras consultas.</span>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+
