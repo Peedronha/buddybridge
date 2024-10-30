@@ -8,6 +8,7 @@ import br.com.buddybridge.core.historico.model.MedicalHistoryModel;
 import br.com.buddybridge.core.usuario.entity.Usuario;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -32,6 +33,9 @@ public class AnimalModel {
 
     @Column(name = "peso_animal")
     private Double peso_animal;
+
+    @Column(name = "porte_animal")
+    private String porte_animal;
 
     @Column(name = "comprimento_animal")
     private Double comprimento_animal;
@@ -72,5 +76,6 @@ public class AnimalModel {
         this.data_resgate = LocalDate.parse(animalDto.getData_resgate());
         this.data_nascimento = LocalDate.parse(animalDto.getData_nascimento());
         this.genero_animal = animalDto.getGenero_animal();
+        this.porte_animal = (animalDto.getPorte_animal() != null ? animalDto.getPorte_animal() : "");
     }
 }

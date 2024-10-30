@@ -67,4 +67,5 @@ public class MedicalHistoryService {
             throw new RuntimeException("Erro ao deletar o histórico médico", e);
         }
     }
+
 }

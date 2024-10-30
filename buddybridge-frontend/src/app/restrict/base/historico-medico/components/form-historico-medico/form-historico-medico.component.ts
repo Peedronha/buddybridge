@@ -53,7 +53,7 @@ export class FormHistoricoMedicoComponent {
   });
   protected maxDate: string;
   animals: AnimalModel[] = [];
-  selectAnimal?: AnimalModel[];
+  selectAnimal?: AnimalModel;
 
   constructor(
     private fb: FormBuilder,
@@ -71,6 +71,8 @@ export class FormHistoricoMedicoComponent {
   ngOnInit(): void {
     this.accountService.validarSessao();
     const medicalReport: HistoricoMedico = this.router.snapshot.data['medicalReport']
+
+    alert('teste: '+ medicalReport.id)
 
     this.animalService.getAnimals().subscribe(animals => {
       this.animals = animals;
@@ -96,7 +98,8 @@ export class FormHistoricoMedicoComponent {
 
     var id = this.registerForm.get('medicalReportId')?.value + '';
     medicalReport.id = parseInt(id);
-    medicalReport.animalId = this.selectAnimal?.map(value => {return value.id_animal})
+
+    medicalReport.animalId = this.selectAnimal!.id_animal || undefined;
 
     medicalReport.doctor = this.registerForm.get('doctor')?.value + '';
     medicalReport.date = this.registerForm.get('date')?.value + '';
@@ -105,10 +108,7 @@ export class FormHistoricoMedicoComponent {
     medicalReport.returnDate = this.registerForm.get('returnDate')?.value + '';
     medicalReport.type = this.registerForm.get('type')?.value + '';
 
-    if (this.medicalReportId) {
-
-
-
+    if (this.medicalReportId != null) {
       this.historicoMedicoService.updateMedical(medicalReport).subscribe(
         response => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro Médico atualizado!' });

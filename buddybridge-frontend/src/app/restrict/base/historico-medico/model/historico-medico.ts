@@ -1,6 +1,6 @@
 export class HistoricoMedico {
   id?:number;
-  animalId?: (number | undefined)[] | undefined;
+  animalId?: number | undefined;
   date?: string;
   description?: string;
   type?: string;

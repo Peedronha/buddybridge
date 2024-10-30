@@ -20,6 +20,7 @@ public class GetAnimalDTO {
     private Double peso_animal;
     private Double comprimento_animal;
     private String idade;
+    private String porte_animal;
     private String data_resgate;
     private String data_nascimento;
     private RaceDTO raca_animal;
@@ -37,7 +38,7 @@ public class GetAnimalDTO {
         this.caracteristicas_animal = animalModel.getCaracteristicas_animal();
         this.genero_animal = animalModel.getGenero_animal();
 
-
+        this.porte_animal = animalModel.getPorte_animal();
         this.data_resgate = formatLocalDate(animalModel.getData_resgate());
         this.data_nascimento = formatLocalDate(animalModel.getData_nascimento());
         this.idade = setIdadeAnimal(animalModel.getData_nascimento());

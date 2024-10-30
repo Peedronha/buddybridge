@@ -16,6 +16,7 @@ public class AnimalDto {
 
     private Long id_animal;
     private String nome_animal;
+    private String porte_animal;
     private Double peso_animal;
     private Double comprimento_animal;
     private String data_resgate;
