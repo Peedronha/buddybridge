@@ -86,8 +86,8 @@ const routes: Routes = [
       { path: 'volunteer/editvolunteer/:id', title: 'BuddyBridge - Alterar Voluntário', component: VolunteerFormComponent, resolve: {volunteer : volunteerResolver} },
 
       { path: 'report', title: 'BuddyBridge - Registro Médico', component: HistoricoMedicoComponent },
-      { path: 'report/addRegistro', title: 'BuddyBridge - Novo Registro', component: FormHistoricoMedicoComponent, resolve: {volunteer : historicoMedicoResolver} },
-      { path: 'report/editRegistro/:id', title: 'BuddyBridge - Alterar Registro', component: FormHistoricoMedicoComponent, resolve: {volunteer : historicoMedicoResolver} },
+      { path: 'report/addRegistro', title: 'BuddyBridge - Novo Registro', component: FormHistoricoMedicoComponent, resolve: {medicalReport : historicoMedicoResolver} },
+      { path: 'report/editRegistro/:id', title: 'BuddyBridge - Alterar Registro', component: FormHistoricoMedicoComponent, resolve: {medicalReport : historicoMedicoResolver} },
 
       { path: 'animal', title: 'BuddyBridge - Animais', component: AnimalComponent },
       { path: 'animal/addanimal', title: 'BuddyBridge - Novo Animal', component: AnimalFormComponent, resolve: {animal : animalResolver} },

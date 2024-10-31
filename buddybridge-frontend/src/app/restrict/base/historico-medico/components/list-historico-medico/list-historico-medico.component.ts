@@ -67,12 +67,12 @@ export class ListHistoricoMedicoComponent {
         this.add.emit(true);
     }
 
-    onEdit(idAnimal: number) {
-        this.edit.emit(idAnimal);
+    onEdit(medicalReportId: HistoricoMedico) {
+        this.edit.emit(medicalReportId.medicalReportId);
     }
 
-    onDelete(idAnimal: number) {
-        this.remove.emit(idAnimal);
+    onDelete(medicalReportId: number) {
+        this.remove.emit(medicalReportId);
     }
 
     showDeleteDialog(entity: any) {
@@ -87,7 +87,7 @@ export class ListHistoricoMedicoComponent {
 
     confirmDelete() {
         if (this._specificEntity) {
-            this.onDelete(this._specificEntity.id_animal);
+            this.onDelete(this._specificEntity.medicalReportId);
 
             this._specificEntity = null;
 

@@ -32,7 +32,7 @@ import {HistoricoMedico} from "../../model/historico-medico";
 })
 export class HistoricoMedicoComponent {
 
-  medicalReport: any;
+  medicalReport!: HistoricoMedico[]
 
   //Fazendo a solicitação de acessos - inicio
   acessos: AcessoDTO[] = [];

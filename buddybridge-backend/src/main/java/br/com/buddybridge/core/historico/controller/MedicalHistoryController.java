@@ -1,12 +1,5 @@
 package br.com.buddybridge.core.historico.controller;
 
-import br.com.buddybridge.core.adocao.entity.AdoptionProfileModel;
-import br.com.buddybridge.core.adocao.model.AdoptionSubmissionDTO;
-import br.com.buddybridge.core.adocao.model.ProfileDTO;
-import br.com.buddybridge.core.adocao.model.get.GetAdoptionDTO;
-import br.com.buddybridge.core.adocao.model.get.GetAdoptionDetails;
-import br.com.buddybridge.core.adocao.service.AdoptionService;
-import br.com.buddybridge.core.animais.animal.service.AnimalService;
 import br.com.buddybridge.core.historico.model.MedicalHistoryModel;
 import br.com.buddybridge.core.historico.model.dto.MedicalProfileDTO;
 import br.com.buddybridge.core.historico.service.MedicalHistoryService;
@@ -27,7 +20,7 @@ import java.util.List;
 public class MedicalHistoryController {
 
     private final MedicalHistoryService medicalHistoryService;
-    @PostMapping("/medical-profiles")
+    @PostMapping("/register")
     public ResponseEntity<?> insertMedicalProfile(@RequestBody MedicalProfileDTO medicalDTO) {
         try {
             MedicalHistoryModel medicalHistoryModel = medicalHistoryService.saveMedicalProfile(medicalDTO);
@@ -40,9 +33,9 @@ public class MedicalHistoryController {
     }
 
     // Endpoint to update an existing adoption profile
-    @PutMapping("/medical-profiles")
+    @PutMapping("/update")
     public ResponseEntity<?> updateMedicalProfile(@RequestBody MedicalProfileDTO medicalDTO) throws SystemException {
-        if (medicalHistoryService.existsById(medicalDTO.getId())) {
+        if (medicalHistoryService.existsById(medicalDTO.getMedicalReportId())) {
             medicalHistoryService.saveMedicalProfile(medicalDTO);
             return ResponseEntity.ok(HttpStatus.CREATED);
         }
@@ -51,8 +44,8 @@ public class MedicalHistoryController {
 
     // Endpoint to get all adoption profiles
     @GetMapping("/medical-profiles")
-    public ResponseEntity<?> getAllMedicalProfiles() {
-        List<MedicalHistoryModel> models = medicalHistoryService.findAllMedicalProfiles();
+    public ResponseEntity<List<MedicalProfileDTO>> getAllMedicalProfiles() {
+        List<MedicalProfileDTO> models = medicalHistoryService.findAllMedicalProfiles();
         if (models.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -61,12 +54,13 @@ public class MedicalHistoryController {
 
     // Endpoint to get an adoption profile by ID
     @GetMapping("/medical-profiles/{id}")
-    public ResponseEntity<?> getMedicalProfileById(@PathVariable Long id) {
+    public ResponseEntity<MedicalProfileDTO> getMedicalProfileById(@PathVariable Long id) {
         try {
-            MedicalHistoryModel model = medicalHistoryService.findMedicalProfileById(id);
+            MedicalProfileDTO model = medicalHistoryService.findMedicalProfileById(id);
             return ResponseEntity.ok(model);
         } catch (Exception e) {
-            return buildErrorResponse("Adoption profile not found: " + e.getMessage(), HttpStatus.NOT_FOUND);
+            throw new RuntimeException(e.getMessage());
+//            return buildErrorResponse("Adoption profile not found: " + e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 

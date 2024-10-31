@@ -26,7 +26,7 @@ export class HistoricoMedicoService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.get<any>(this.apiUrl + '/' + id,{headers: reqHeader})
+    return this.http.get<any>(this.apiUrl+'/medical-profiles' + '/' + id,{headers: reqHeader})
   }
 
   getMedicalReport() {
@@ -34,7 +34,7 @@ export class HistoricoMedicoService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.get<any>(this.apiUrl,{headers: reqHeader})
+    return this.http.get<any>(this.apiUrl+'/medical-profiles',{headers: reqHeader})
   }
 
   deleteMedicalReport(idUser: any) {
@@ -42,7 +42,7 @@ export class HistoricoMedicoService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.delete<any>(this.apiUrl + '/' +idUser,{headers: reqHeader})
+    return this.http.delete<any>(this.apiUrl+'/medical-profiles' + '/' +idUser,{headers: reqHeader})
   }
 
   updateMedical(medicalReport: HistoricoMedico){
@@ -50,7 +50,7 @@ export class HistoricoMedicoService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.put<any>(this.apiUrl, medicalReport, {headers: reqHeader});
+    return this.http.put<any>(this.apiUrl+'/update', medicalReport, {headers: reqHeader});
   }
 
   registerMedicalReport(postData1: HistoricoMedico): Observable<any> {
@@ -58,7 +58,7 @@ export class HistoricoMedicoService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.post<any>(this.apiUrl, postData1,{headers: reqHeader}).pipe(
+    return this.http.post<any>(this.apiUrl+'/register', postData1,{headers: reqHeader}).pipe(
       map((response) =>{
           if (response)
             return response;

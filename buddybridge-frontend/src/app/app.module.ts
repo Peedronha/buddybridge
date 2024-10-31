@@ -79,6 +79,7 @@ import { PagamentoComponent } from './restrict/base/financeiro/pagamento/compone
 import { PagamentoFormComponent } from './restrict/base/financeiro/pagamento/component/pagamento-form/pagamento-form.component';
 import { PagamentoListComponent } from './restrict/base/financeiro/pagamento/component/pagamento-list/pagamento-list.component';
 import { DashfinanceiroComponent } from './restrict/base/financeiro/dashfinanceiro/dashfinanceiro.component';
+import {HistoricoMedicoComponent} from "./restrict/base/historico-medico/components/historico-medico/historico-medico.component";
 
 
 @NgModule({
@@ -130,7 +131,6 @@ import { DashfinanceiroComponent } from './restrict/base/financeiro/dashfinancei
       PagamentoFormComponent,
       PagamentoListComponent,
       DashfinanceiroComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -166,6 +166,7 @@ import { DashfinanceiroComponent } from './restrict/base/financeiro/dashfinancei
     MenuModule,
     AdoptionGridComponent,
     AdoptionComponent,
+    HistoricoMedicoComponent,
 
   ],
   providers: [
