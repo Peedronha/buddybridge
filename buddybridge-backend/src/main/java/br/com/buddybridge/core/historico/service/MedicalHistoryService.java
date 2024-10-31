@@ -7,7 +7,9 @@ import br.com.buddybridge.core.historico.model.dto.MedicalProfileDTO;
 import br.com.buddybridge.core.historico.repository.MedicalHistoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +23,8 @@ public class MedicalHistoryService {
         try {
             MedicalHistoryModel model= new MedicalHistoryModel();
 
-            if (medicalDTO.getId() != null) {
-                model.setId(medicalDTO.getId());
+            if (medicalDTO.getMedicalReportId() != null) {
+                model.setMedicalReportId(medicalDTO.getMedicalReportId());
             }
 
             AnimalModel animal = animalRepository.findById(medicalDTO.getAnimalId())
@@ -49,15 +51,44 @@ public class MedicalHistoryService {
         return medicalHistoryRepository.existsById(id);
     }
 
-    public List<MedicalHistoryModel> findAllMedicalProfiles(){
-        return medicalHistoryRepository.findAll();
+    public List<MedicalProfileDTO> findAllMedicalProfiles(){
+        
+        List<MedicalHistoryModel> list = medicalHistoryRepository.findAll();
+
+        if (!CollectionUtils.isEmpty(list)) {
+            List<MedicalProfileDTO> medicalProfileDTOS = new ArrayList<>();
+            for (MedicalHistoryModel medicalHistoryModel : list) {
+                MedicalProfileDTO medicalProfileDTO = medicalProfileDTOPopulator(medicalHistoryModel);
+
+                medicalProfileDTOS.add(medicalProfileDTO);
+            }
+            return medicalProfileDTOS;
+        }
+
+        return null;
     }
 
-    public MedicalHistoryModel findMedicalProfileById(Long id){
+    private static MedicalProfileDTO medicalProfileDTOPopulator(MedicalHistoryModel medicalHistoryModel) {
+        MedicalProfileDTO medicalProfileDTO = new MedicalProfileDTO();
+
+        medicalProfileDTO.setMedicalReportId(medicalHistoryModel.getMedicalReportId());
+        medicalProfileDTO.setDescription(medicalHistoryModel.getDescription());
+        medicalProfileDTO.setDoctor(medicalHistoryModel.getDoctor());
+        medicalProfileDTO.setType(medicalHistoryModel.getType());
+        medicalProfileDTO.setDate(medicalHistoryModel.getDate());
+        medicalProfileDTO.setNotes(medicalHistoryModel.getNotes());
+        medicalProfileDTO.setReturnDate(medicalHistoryModel.getReturnDate());
+        medicalProfileDTO.setAnimalId(medicalHistoryModel.getAnimal().getId_animal());
+
+        return medicalProfileDTO;
+    }
+
+    public MedicalProfileDTO findMedicalProfileById(Long id){
 
         Optional<MedicalHistoryModel> model = medicalHistoryRepository.findById(id);
 
-        return model.orElse(null);
+        return model.map(MedicalHistoryService::medicalProfileDTOPopulator).orElse(null);
+
     }
 
     public void deleteMedicalProfile(Long id) throws RuntimeException{

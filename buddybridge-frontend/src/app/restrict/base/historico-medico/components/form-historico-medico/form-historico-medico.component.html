@@ -11,28 +11,28 @@
         <script>
         </script>
         @if (this.medicalReportId?.value == null || this.medicalReportId?.value == 'NaN') {
-          <li><span class="text-900 line-height-3">Novo</span></li>
-          <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra os animais do
-            sistema!</a></li>
-        } @else {
           <li><span class="text-900 line-height-3">Alterar </span></li>
           <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
           <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você altera os animais do sistema!</a>
           </li>
+        } @else {
+          <li><span class="text-900 line-height-3">Novo</span></li>
+          <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra os animais do
+            sistema!</a></li>
         }
       </ul>
       <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
         <div>
-          @if (this.medicalReportId?.value == null || this.medicalReportId?.value == 'NaN') {
-            <div class="font-medium text-3xl text-900">Novo Registro</div><br/><br/>
-          } @else {
+          @if (this.medicalReportId?.value == null || this.medicalReportId?.value == 'NaN'){
             <div class="font-medium text-3xl text-900">Alterar Registro</div><br/><br/>
+          } @else {
+          <div class="font-medium text-3xl text-900">Novo Registro</div><br/><br/>
           }
         </div>
         <div class="mt-3 lg:mt-0">
           <button pButton pRipple label="Voltar" class="p-button mr-2" icon="pi pi-chevron-left"
-                  routerLink="/animal"></button>
+                  routerLink="/report"></button>
         </div>
       </div>
       <small class="block p-error">
@@ -82,7 +82,7 @@
         <div class="field col-3 md:col-3">
           <label for="date">Data do procedimento<i class="p-error">*</i></label>
           <input type="date" pInputText formControlName="date" class="w-full" name="date"
-                 placeholder="Selecione a data de nascimento do animal" [attr.max]="maxDate"/>
+                 placeholder="Selecione a data do procedimento" [attr.max]="maxDate"/>
           <small
             *ngIf="registerForm.get('date')?.invalid && (registerForm.get('date')?.dirty || registerForm.get('date')?.touched)"
             class="block p-error">
@@ -92,7 +92,7 @@
         <div class="field col-3 md:col-3">
           <label for="returnDate">Data de retorno <i class="p-error">*</i></label>
           <input type="date" pInputText formControlName="returnDate" class="w-full" name="returnDate"
-                 placeholder="Selecione a data de resgate do animal" [attr.min]="maxDate"/>
+                 placeholder="Selecione a data de retorno" [attr.min]="maxDate"/>
           <small
             *ngIf="registerForm.get('returnDate')?.invalid && (registerForm.get('returnDate')?.dirty || registerForm.get('returnDate')?.touched)"
             class="block p-error">
@@ -100,10 +100,8 @@
         </div>
         <div class="field col-3 md:col-3">
           <label for="description">Descrição <i class="p-error">*</i></label>
-          <!--          <input pInputTextarea -->
-          <!--                 formControlName="description" class="w-full" name="description"-->
-          <!--                 placeholder="Digite a descrição do procedimento"/>-->
-          <textarea inputId="description" rows="5" cols="30" pInputTextarea name="description" formControlName="description"
+          <textarea inputId="description" rows="5" cols="30" pInputTextarea name="description"
+                    formControlName="description"
                     class="w-full" maxlength="255"></textarea>
           <small
             *ngIf="registerForm.get('description')?.invalid && (registerForm.get('description')?.dirty || registerForm.get('description')?.touched)"

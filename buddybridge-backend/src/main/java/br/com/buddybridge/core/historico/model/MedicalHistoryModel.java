@@ -10,12 +10,13 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
-@Entity(name = "historico-medico")
+@Entity(name = "historico_medico")
 public class MedicalHistoryModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "medicalReportId")
+    private Long medicalReportId;
 
 
     @ManyToOne
@@ -30,7 +31,7 @@ public class MedicalHistoryModel {
     private String notes;
 
     public MedicalHistoryModel(MedicalProfileDTO medicalDTO) {
-        this.setId(medicalDTO.getId());
+        this.setMedicalReportId(medicalDTO.getMedicalReportId());
         this.setDate(medicalDTO.getDate());
         this.setDescription(medicalDTO.getDescription());
         this.setType(medicalDTO.getType());

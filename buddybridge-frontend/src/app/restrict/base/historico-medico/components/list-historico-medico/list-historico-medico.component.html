@@ -12,7 +12,7 @@
       </tr>
       <tr>
         <th>
-          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'id', 'contains')" [value]="$any(dt1.filters['id'])?.value" placeholder="Filtrar Cod." class="w-full">
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'id', 'contains')" [value]="$any(dt1.filters['medicalReportId'])?.value" placeholder="Filtrar Cod." class="w-full">
         </th>
         <th>
           <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'animalId', 'contains')" [value]="$any(dt1.filters['animalId'])?.value" placeholder="Filtrar Cod. animal" class="w-full">
@@ -35,7 +35,7 @@
       <tr [pSelectableRow]="medicalReports">
         <td>
           <span class="p-column-title">Cod.</span>
-          {{medicalReport.id}}
+          {{medicalReport.medicalReportId}}
         </td>
         <td>
           <span class="p-column-title">Animal</span>
@@ -55,7 +55,7 @@
         </td>
         <td>
           <div>
-            <button pButton pRipple label="Alterar " (click)='onEdit(medicalReport.id)' class="p-button mr-2" icon="pi pi-pencil" style="margin: 2px 0;"></button>
+            <button pButton pRipple label="Alterar " (click)='onEdit(medicalReport)' class="p-button mr-2" icon="pi pi-pencil" style="margin: 2px 0;"></button>
             <button pButton pRipple label="Excluir" (click)='showDeleteDialog(medicalReport)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;"></button>
           </div>
         </td>

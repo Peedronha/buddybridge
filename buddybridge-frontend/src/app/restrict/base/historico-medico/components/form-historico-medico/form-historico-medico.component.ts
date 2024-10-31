@@ -9,11 +9,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {Raca} from "../../../raca/model/raca.model";
-import {Tipo} from "../../../tipo_animal/model/tipo.model";
 import {AnimalService} from "../../../animal/service/animal.service";
-import {TipoService} from "../../../tipo_animal/service/tipo.service";
-import {RacaService} from "../../../raca/service/raca.service";
 import {MessageService} from "primeng/api";
 import {AccountService} from "../../../../../open/account/shared/account.service";
 import {AnimalModel} from "../../../animal/model/animal.model";
@@ -55,6 +51,7 @@ export class FormHistoricoMedicoComponent {
   animals: AnimalModel[] = [];
   selectAnimal?: AnimalModel;
 
+
   constructor(
     private fb: FormBuilder,
     private historicoMedicoService : HistoricoMedicoService,
@@ -62,29 +59,27 @@ export class FormHistoricoMedicoComponent {
     private router: ActivatedRoute,
     private route: Router,
     private accountService: AccountService,
-    private CurrentDate: CurrentDate,
+    private currentDate: CurrentDate,
     private animalService: AnimalService
   ) {
-    this.maxDate = CurrentDate.getCurrentDate();
+    this.maxDate = currentDate.getCurrentDate();
   }
 
   ngOnInit(): void {
     this.accountService.validarSessao();
     const medicalReport: HistoricoMedico = this.router.snapshot.data['medicalReport']
 
-    alert('teste: '+ medicalReport.id)
-
     this.animalService.getAnimals().subscribe(animals => {
       this.animals = animals;
     });
 
     this.registerForm.setValue({
-      medicalReportId: medicalReport.id+'',
+      medicalReportId: medicalReport.medicalReportId + '',
       animalId: medicalReport.animalId + '',
       doctor: medicalReport.doctor + '',
       type: medicalReport.type + '',
-      description: medicalReport.description+ '',
-      date: medicalReport.date+'',
+      description: medicalReport.description + '',
+      date: medicalReport.date + '',
       returnDate: medicalReport.returnDate + '',
     });
   }
@@ -97,9 +92,9 @@ export class FormHistoricoMedicoComponent {
     let medicalReport = new HistoricoMedico();
 
     var id = this.registerForm.get('medicalReportId')?.value + '';
-    medicalReport.id = parseInt(id);
+    medicalReport.medicalReportId = parseInt(id);
 
-    medicalReport.animalId = this.selectAnimal!.id_animal || undefined;
+    medicalReport.animalId = this.selectAnimal?.id_animal || undefined;
 
     medicalReport.doctor = this.registerForm.get('doctor')?.value + '';
     medicalReport.date = this.registerForm.get('date')?.value + '';
@@ -108,7 +103,8 @@ export class FormHistoricoMedicoComponent {
     medicalReport.returnDate = this.registerForm.get('returnDate')?.value + '';
     medicalReport.type = this.registerForm.get('type')?.value + '';
 
-    if (this.medicalReportId != null) {
+    if (medicalReport.medicalReportId != null) {
+
       this.historicoMedicoService.updateMedical(medicalReport).subscribe(
         response => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro Médico atualizado!' });
@@ -124,7 +120,7 @@ export class FormHistoricoMedicoComponent {
         }
       );
     } else {
-      medicalReport.id = undefined;
+      medicalReport.medicalReportId = undefined;
       this.historicoMedicoService.registerMedicalReport(medicalReport).subscribe(
         response => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro Médico registrado!' });
