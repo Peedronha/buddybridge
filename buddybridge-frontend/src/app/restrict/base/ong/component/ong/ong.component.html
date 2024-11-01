@@ -139,13 +139,6 @@
               <div *ngIf="registerForm.get('grupoAcessoAdotante')?.errors?.['required']">O grupo de acesso adotante é obrigatório.</div>
             </small>
           </div>
-          <div class="field col-6 md:col-6">
-            <label for="grupoAcessoColaborador">Grupo de Acesso Colaborador: <i class="p-error">*</i></label>
-            <p-dropdown [options]="gruposAcesso" formControlName="grupoAcessoColaborador" optionLabel="descricaoGrupoAcesso" placeholder="Selecione o grupo de acesso colaborador"></p-dropdown>
-            <small *ngIf="registerForm.get('grupoAcessoColaborador')?.invalid && (registerForm.get('grupoAcessoColaborador')?.dirty || registerForm.get('grupoAcessoColaborador')?.touched)" class="block p-error">
-              <div *ngIf="registerForm.get('grupoAcessoColaborador')?.errors?.['required']">O grupo de acesso colaborador é obrigatório.</div>
-            </small>
-          </div>
         </div>
         <h5>Endereço da instituição:</h5>
         <hr/>

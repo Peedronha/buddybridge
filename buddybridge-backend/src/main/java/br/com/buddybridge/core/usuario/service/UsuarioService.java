@@ -86,14 +86,8 @@ public class UsuarioService {
 
             if(usuario.getGrupoAcessoUsuario() == null){
                 Ong ong = ongService.buscarPorId(Long.valueOf(1));
-                if(colaborador) {
-                    if (ong.getGrupoAcessoColaborador() != null){
-                        usuario.setGrupoAcessoUsuario(ong.getGrupoAcessoColaborador());
-                    }
-                } else {
-                    if (ong.getGrupoAcessoAdotante() != null){
-                        usuario.setGrupoAcessoUsuario(ong.getGrupoAcessoAdotante());
-                    }
+                if (ong.getGrupoAcessoAdotante() != null) {
+                    usuario.setGrupoAcessoUsuario(ong.getGrupoAcessoAdotante());
                 }
             }
 

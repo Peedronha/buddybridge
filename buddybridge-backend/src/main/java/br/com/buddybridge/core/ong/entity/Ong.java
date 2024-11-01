@@ -72,10 +72,6 @@ public class Ong {
     @JoinColumn(name="grupoacesso_adotante_id", referencedColumnName="idgrupoAcesso")
     private GrupoAcesso grupoAcessoAdotante;
 
-    @ManyToOne
-    @JoinColumn(name="grupoacesso_Colaborador_id", referencedColumnName="idgrupoAcesso")
-    private GrupoAcesso grupoAcessoColaborador;
-
     @Embedded
     private Endereco ongEndereco;
 

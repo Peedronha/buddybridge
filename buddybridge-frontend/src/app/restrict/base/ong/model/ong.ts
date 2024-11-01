@@ -21,5 +21,4 @@ export class Ong {
   usuarioOng?: User;
   ongEndereco?: UsuarioEndereco;
   grupoAcessoAdotante?: GrupoAcesso | null;
-  grupoAcessoColaborador?: GrupoAcesso | null;
 }

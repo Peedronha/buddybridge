@@ -90,6 +90,11 @@ public class GrupoAcessoService {
         grupoAcessoRepository.deleteById(id);
     }
 
+    @Transactional
+    public void deleteSolicitacaoAcesso(Long id) {
+        solicitacaoAcessoRepository.deleteById(id);
+    }
+
     @Transactional(readOnly = true)
     public List<GrupoAcesso> findAll() {
         return grupoAcessoRepository.findAll();

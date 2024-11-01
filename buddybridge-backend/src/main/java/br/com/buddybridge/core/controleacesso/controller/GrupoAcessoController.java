@@ -172,5 +172,14 @@ public class GrupoAcessoController {
         }
     }
 
+    @DeleteMapping("solicitacaoAcesso/{id}")
+    public ResponseEntity<Boolean> deleteSolicitacaoAcesso(@PathVariable Long id){
+        if (this.grupoAcessoService.getSolicitacoesAcessoById(id) != null){
+            this.grupoAcessoService.deleteSolicitacaoAcesso(id);
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 
 }
