@@ -1,0 +1,25 @@
+.feature-list {
+  ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      list-style: none;
+      padding: 0;
+      margin-top: 20px; // Espaço após a imagem e texto
+  }
+
+  .feature-item {
+      background-color: #34A853; // Cor verde
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 5px; // Espaço entre os botões
+
+      &:hover {
+          background-color: darken(#34A853, 10%); // Escurecer o botão ao passar o mouse
+      }
+  }
+}

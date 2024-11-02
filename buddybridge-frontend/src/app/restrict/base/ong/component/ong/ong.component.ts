@@ -36,7 +36,6 @@ export class OngComponent {
     twitterOng: [''],
     linkedinOng: [''],
     grupoAcessoAdotante: [null as GrupoAcesso | null, Validators.required],
-    grupoAcessoColaborador: [null as GrupoAcesso | null, Validators.required],
     logradouroEndereco: [''],
     numeroEndereco: [''],
     cidadeEndereco: [''],
@@ -126,7 +125,6 @@ export class OngComponent {
         twitterOng: data.twitterOng+'',
         linkedinOng: data.linkedinOng+'',
         grupoAcessoAdotante: data.grupoAcessoAdotante || null,
-        grupoAcessoColaborador: data.grupoAcessoColaborador || null,
         logradouroEndereco: data.ongEndereco?.logradouroEndereco+'',
         numeroEndereco: data.ongEndereco?.numeroEndereco+'',
         cidadeEndereco: data.ongEndereco?.cidadeEndereco+'',
@@ -251,7 +249,6 @@ export class OngComponent {
     ong.twitterOng = this.registerForm.get('twitterOng')?.value + '';
     ong.linkedinOng = this.registerForm.get('linkedinOng')?.value + '';
     ong.grupoAcessoAdotante = this.registerForm.get('grupoAcessoAdotante')?.value;
-    ong.grupoAcessoColaborador = this.registerForm.get('grupoAcessoColaborador')?.value;
 
     this.accountRestrictService.getUsuarioLogado().subscribe(
       (user: User) => {

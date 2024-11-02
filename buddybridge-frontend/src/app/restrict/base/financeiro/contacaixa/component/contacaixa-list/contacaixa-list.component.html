@@ -1,0 +1,73 @@
+<div class="card">
+  <div class="button-group" style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 10px; align-items: center;">
+    <span style="font-weight: bold; margin-right: auto;">
+      Selecione um item na grid abaixo para poder alterá-lo ou excluí-lo.
+    </span>
+    <button pButton pRipple label="Novo" (click)='onAdd()' class="p-button p-button" icon="pi pi-plus"></button>
+    <button pButton pRipple label="Alterar" (click)='onEdit(_specificEntity?.idContaCaixa)' class="p-button p-button" icon="pi pi-pencil" [disabled]='!_specificEntity?.idContaCaixa'></button>
+    <button pButton pRipple label="Excluir" (click)='showDeleteDialog(_specificEntity)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;" [disabled]='!_specificEntity?.idContaCaixa'></button>
+  </div>
+
+  <p-table #dt1 [value]="contasCaixa" selectionMode="single" [(selection)]="_specificEntity" dataKey="idContaCaixa" [tableStyle]="{'min-width': '50rem'}"
+           [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session-conta-caixa">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="idContaCaixa" style="width:10%">Cod. <p-sortIcon field="idContaCaixa"></p-sortIcon></th>
+        <th pSortableColumn="descricaoContaCaixa" style="width:40%">Descrição <p-sortIcon field="descricaoContaCaixa"></p-sortIcon></th>
+        <th pSortableColumn="tipoContaCaixa" style="width:20%">Tipo <p-sortIcon field="tipoContaCaixa"></p-sortIcon></th>
+        <th pSortableColumn="ativoContaCaixa" style="width:10%">Ativo? <p-sortIcon field="ativoContaCaixa"></p-sortIcon></th>
+      </tr>
+      <tr>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'idContaCaixa', 'contains')" [value]="$any(dt1.filters['idContaCaixa'])?.value" placeholder="Filtrar Cod." class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'descricaoContaCaixa', 'contains')" [value]="$any(dt1.filters['descricaoContaCaixa'])?.value" placeholder="Filtrar Descrição" class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'tipoContaCaixa', 'contains')" [value]="$any(dt1.filters['tipoContaCaixa'])?.value" placeholder="Filtrar Tipo" class="w-full">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'ativoContaCaixa', 'contains')" [value]="$any(dt1.filters['ativoContaCaixa'])?.value" placeholder="Filtrar Ativo" class="w-full">
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-contaCaixa>
+      <tr [pSelectableRow]="contaCaixa">
+        <td>
+          <span class="p-column-title">Cod.</span>
+          {{contaCaixa.idContaCaixa}}
+        </td>
+        <td>
+          <span class="p-column-title">Descrição</span>
+          {{contaCaixa.descricaoContaCaixa}}
+        </td>
+        <td>
+          <span class="p-column-title">Tipo</span>
+          {{contaCaixa.tipoContaCaixa}}
+        </td>
+        <td>
+          <span class="p-column-title">Ativo?</span>
+          <span class="ml-1 vertical-align-middle">{{contaCaixa.ativoContaCaixa ? 'Sim' : 'Não'}}</span>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">Não foram encontrados registros.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dialog header="Confirmar Exclusão" [(visible)]="displayDeleteDialog" modal="modal" [closable]="false"
+            [dismissableMask]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <p class="m-0">Tem certeza de que deseja EXCLUIR esta conta caixa?</p>
+    <ng-template pTemplate="footer">
+      <button pButton label="Cancelar" icon="pi pi-times" (click)="onCancelDelete()"></button>
+      <button pButton severity="danger" label="Confirmar" icon="pi pi-check" (click)="confirmDelete()"></button>
+    </ng-template>
+  </p-dialog>
+</div>

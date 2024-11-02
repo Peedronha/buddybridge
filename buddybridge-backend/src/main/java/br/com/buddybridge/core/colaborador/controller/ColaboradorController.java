@@ -33,7 +33,7 @@ public class ColaboradorController {
     }
 
     @PostMapping
-    @LinkAccess(tela= "Cadastro de colaboradores", metodo="POST")
+    //@LinkAccess(tela= "Cadastro de colaboradores", metodo="POST")
     public ResponseEntity<Colaborador> insertColaborador(@RequestBody Colaborador colaborador){
         try{
             Colaborador toReturn = this.colaboradorService.saveColaborador(colaborador);
@@ -53,7 +53,6 @@ public class ColaboradorController {
     }
 
     @PutMapping
-    @LinkAccess(tela= "Cadastro de colaboradores", metodo="PUT")
     public ResponseEntity<Colaborador> updateColaborador(@RequestBody Colaborador colaborador) throws SystemException, ExampleExeption {
         Colaborador toReturn  = this.colaboradorService.saveColaborador(colaborador);
         return new ResponseEntity<>(toReturn, HttpStatus.OK);
@@ -61,7 +60,6 @@ public class ColaboradorController {
 
 
     @PostMapping("/{id}")
-    @LinkAccess(tela= "Cadastro de colaboradores", metodo="DELETE")
     public ResponseEntity<Colaborador> inativarColaborador(@PathVariable Long id)  {
         Optional<Colaborador> optionalColaborador = this.colaboradorService.findColaboradorById(id);
         Colaborador model = optionalColaborador.orElseThrow(() -> new NoSuchElementException("colaborador not found"));

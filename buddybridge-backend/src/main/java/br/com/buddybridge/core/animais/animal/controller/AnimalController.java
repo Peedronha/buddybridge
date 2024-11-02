@@ -1,7 +1,9 @@
 package br.com.buddybridge.core.animais.animal.controller;
 
 import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
+import br.com.buddybridge.core.animais.animal.model.AnimalAdoptionStatusDTO;
 import br.com.buddybridge.core.animais.animal.model.AnimalDto;
+import br.com.buddybridge.core.animais.animal.model.AnimalRescueAdoptionDTO;
 import br.com.buddybridge.core.animais.animal.model.GetAnimalDTO;
 import br.com.buddybridge.core.animais.animal.service.AnimalService;
 import br.com.buddybridge.core.util.ExampleExeption;
@@ -12,8 +14,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -76,6 +80,44 @@ public class AnimalController {
             return new ResponseEntity<>(true, HttpStatus.OK);
         }
         return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @GetMapping("/adoption-status")
+    public ResponseEntity<AnimalAdoptionStatusDTO> getAnimalAdoptionStatus() {
+        AnimalAdoptionStatusDTO statusDTO = animalService.getAnimalAdoptionStatus();
+        return ResponseEntity.ok(statusDTO);
+    }
+
+    @GetMapping("/animaisAguardandoAnalise")
+    public ResponseEntity<List<GetAnimalDTO>> getAnimalsAwaitingAnalysis() {
+        List<GetAnimalDTO> animals = this.animalService.findAnimalsAwaitingAnalysis();
+        if (animals.isEmpty()) {
+            return new ResponseEntity<>(animals, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(animals, HttpStatus.OK);
+    }
+
+    @GetMapping("/statusResgateAdocao")
+    public ResponseEntity<List<AnimalRescueAdoptionDTO>> getRescueAndAdoptionStatusByMonth() {
+        int currentYear = LocalDate.now().getYear();
+        List<AnimalRescueAdoptionDTO> result = animalService.getAnimalsRescuedAndAdoptedByYear(currentYear);
+
+        if (result.isEmpty()) {
+            return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/adoption-status-chart")
+    public ResponseEntity<Map<String, Long>> getAdoptionStatusChart() {
+        Map<String, Long> statusData = animalService.getAnimalsByAdoptionStatus();
+        return ResponseEntity.ok(statusData);
+    }
+
+    @GetMapping("/race-chart")
+    public ResponseEntity<Map<String, Long>> getRaceChart() {
+        Map<String, Long> raceData = animalService.getAnimalsByRace();
+        return ResponseEntity.ok(raceData);
     }
 
 }

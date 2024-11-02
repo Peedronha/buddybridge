@@ -31,7 +31,7 @@ public class Usuario implements UserDetails {
     @Column(name = "nome", nullable = false, length = 255)
     private String nome;
 
-    @Column(name = "login", nullable = false, length = 255, unique = true)
+    @Column(name = "login", nullable = false, length = 255)
     private String login;
 
     @Column(name = "senha", nullable = false, length = 255)

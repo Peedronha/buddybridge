@@ -46,7 +46,8 @@ export class SolicitacaoacessoService {
   }
 
   // Deletar solicitação de acesso por ID
-  deleteSolicitacaoAcesso(id: string): Observable<any> {
+  deleteSolicitacaoAcesso(id: any): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/solicitacaoAcesso/${id}`, { headers: this.createHeaders() });
   }
+
 }

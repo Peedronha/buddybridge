@@ -57,7 +57,7 @@ export class SolicitacaoacessoListComponent {
 
   confirmDelete() {
     if (this._specificEntity) {
-      this.onDelete(this._specificEntity.idGrupoAcesso);
+      this.onDelete(this._specificEntity.idsolicitacaoAcesso);
       this._specificEntity = null;
       this.displayDeleteDialog = false;
     }

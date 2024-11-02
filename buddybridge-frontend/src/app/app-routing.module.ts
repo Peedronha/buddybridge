@@ -42,6 +42,26 @@ import { AdoptionSubmissionFormComponent } from './open/adoption/components/adop
 import { AdoptionManagementComponent } from './open/adoption/components/adoption-private/adoption/adoption-management.component';
 import { AdoptionManagementResolver } from './open/adoption/components/adoption.resolver.guard';
 import { AdoptionUpdateComponent } from './open/adoption/components/adoption-private/adoption-update/adoption-update.component';
+import { ClassificacaoComponent } from './restrict/base/financeiro/classificacao/component/classificacao/classificacao.component';
+import { ClassificacaoFormComponent } from './restrict/base/financeiro/classificacao/component/classificacao-form/classificacao-form.component';
+import { ClassificacaoResolver } from './restrict/base/financeiro/classificacao/guard/classificacao.resolver';
+import { ContacaixaComponent } from './restrict/base/financeiro/contacaixa/component/contacaixa/contacaixa.component';
+import { ContacaixaFormComponent } from './restrict/base/financeiro/contacaixa/component/contacaixa-form/contacaixa-form.component';
+import { ContaCaixaResolver } from './restrict/base/financeiro/contacaixa/guard/contacaixa.resolver';
+import { MovimentoComponent } from './restrict/base/financeiro/movimento/component/movimento/movimento.component';
+import { MovimentoFormComponent } from './restrict/base/financeiro/movimento/component/movimento-form/movimento-form.component';
+import { MovimentacaoResolver } from './restrict/base/financeiro/movimento/guard/movimento.resolver';
+import { PagamentoComponent } from './restrict/base/financeiro/pagamento/component/pagamento/pagamento.component';
+import { PagamentoFormComponent } from './restrict/base/financeiro/pagamento/component/pagamento-form/pagamento-form.component';
+import { PagamentoResolver } from './restrict/base/financeiro/pagamento/guard/pagamento.resolver';
+import { DashfinanceiroComponent } from './restrict/base/financeiro/dashfinanceiro/dashfinanceiro.component';
+import {
+  HistoricoMedicoComponent
+} from "./restrict/base/historico-medico/components/historico-medico/historico-medico.component";
+import {
+  FormHistoricoMedicoComponent
+} from "./restrict/base/historico-medico/components/form-historico-medico/form-historico-medico.component";
+import {historicoMedicoResolver} from "./restrict/base/historico-medico/guard/historico-medico.resolver";
 const routes: Routes = [
   { path: 'errorBuddyBridge', title: 'BuddyBridge - Erro', component: ErrorComponent },
   {
@@ -64,6 +84,10 @@ const routes: Routes = [
       { path: 'volunteer', title: 'BuddyBridge - Voluntários', component: VolunteerComponent },
       { path: 'volunteer/addvolunteer', title: 'BuddyBridge - Novo Voluntário', component: VolunteerFormComponent, resolve: {volunteer : volunteerResolver} },
       { path: 'volunteer/editvolunteer/:id', title: 'BuddyBridge - Alterar Voluntário', component: VolunteerFormComponent, resolve: {volunteer : volunteerResolver} },
+
+      { path: 'report', title: 'BuddyBridge - Registro Médico', component: HistoricoMedicoComponent },
+      { path: 'report/addRegistro', title: 'BuddyBridge - Novo Registro', component: FormHistoricoMedicoComponent, resolve: {medicalReport : historicoMedicoResolver} },
+      { path: 'report/editRegistro/:id', title: 'BuddyBridge - Alterar Registro', component: FormHistoricoMedicoComponent, resolve: {medicalReport : historicoMedicoResolver} },
 
       { path: 'animal', title: 'BuddyBridge - Animais', component: AnimalComponent },
       { path: 'animal/addanimal', title: 'BuddyBridge - Novo Animal', component: AnimalFormComponent, resolve: {animal : animalResolver} },
@@ -90,7 +114,6 @@ const routes: Routes = [
       //{ path: 'restrict/adocao/list', title: 'BuddyBridge - Adocao', component: AdoptionListComponent },
       //{ path: 'restrict/adocao/editsubmission/:id', title: 'BuddyBridge - Adocao', component: AdoptionUpdateComponent },
 
-
       { path: 'restrict/manage-adoption', title: 'BuddyBridge - Adoção', component: AdoptionManagementComponent },
       // { path: 'restrict/manage-adoption/list', title: 'BuddyBridge - Adocao', component: AdoptionListComponent },
       { path: 'restrict/manage-adoption/editsubmission/:id', title: 'BuddyBridge - Adocao', component: AdoptionUpdateComponent, resolve: {adocao : AdoptionManagementResolver}  },
@@ -98,6 +121,25 @@ const routes: Routes = [
       { path: 'solicitacaoAcesso', title: 'BuddyBridge - Grupos de acesso', component: SolicitacaoacessoComponent },
 
       { path: 'ong', title: 'BuddyBridge - Institucional', component: OngComponent },
+
+      { path: 'classificacao', title: 'BuddyBridge - Classificações', component: ClassificacaoComponent },
+      { path: 'classificacao/addclassificacao', title: 'BuddyBridge - Nova Classificação', component: ClassificacaoFormComponent, resolve: { classificacao: ClassificacaoResolver } },
+      { path: 'classificacao/editclassificacao/:id', title: 'BuddyBridge - Editar Classificação', component: ClassificacaoFormComponent, resolve: { classificacao: ClassificacaoResolver } },
+
+      { path: 'contacaixa', title: 'BuddyBridge - Contas de Caixa', component: ContacaixaComponent },
+      { path: 'contacaixa/addcontacaixa', title: 'BuddyBridge - Nova Conta de Caixa', component: ContacaixaFormComponent, resolve: { contacaixa: ContaCaixaResolver } },
+      { path: 'contacaixa/editcontacaixa/:id', title: 'BuddyBridge - Editar Conta de Caixa', component: ContacaixaFormComponent, resolve: { contacaixa: ContaCaixaResolver } },
+
+      { path: 'movimentacao', title: 'BuddyBridge - Movimentações', component: MovimentoComponent },
+      { path: 'movimentacao/addmovimentacao', title: 'BuddyBridge - Nova Movimentação', component: MovimentoFormComponent, resolve: { movimentacao: MovimentacaoResolver } },
+      { path: 'movimentacao/editmovimentacao/:id', title: 'BuddyBridge - Editar Movimentação', component: MovimentoFormComponent, resolve: { movimentacao: MovimentacaoResolver } },
+
+      { path: 'pagamento', title: 'BuddyBridge - Pagamentos', component: PagamentoComponent },
+      { path: 'pagamento/addpagamento', title: 'BuddyBridge - Novo Pagamento', component: PagamentoFormComponent, resolve: { pagamento: PagamentoResolver } },
+      { path: 'pagamento/editpagamento/:id', title: 'BuddyBridge - Editar Pagamento', component: PagamentoFormComponent, resolve: { pagamento: PagamentoResolver } },
+
+      { path: 'dashfinanceiro', title: 'BuddyBridge - Financeiro', component: DashfinanceiroComponent }
+
     ],
     canActivate: [AuthGuard]
   },

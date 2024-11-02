@@ -21,6 +21,7 @@ import java.util.NoSuchElementException;
 public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
+
     @GetMapping("/listarAll")
     public List<Usuario> listar() {
         return usuarioService.listar();

@@ -1,8 +1,11 @@
+import { animalResolver } from './../base/animal/guard/animal.resolver';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Subscription, debounceTime } from 'rxjs';
 import { LayoutService } from '../layout/service/app.layout.service';
 import { Adocao } from './model/adocao';
+import { AnimalService } from '../base/animal/service/animal.service';
+import { AnimalModel } from '../base/animal/model/animal.model';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -10,24 +13,27 @@ import { Adocao } from './model/adocao';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   items!: MenuItem[];
-
-  adocao!: Adocao[];
+  adocao!: AnimalModel[];
 
   chartData: any;
-
   chartOptions: any;
 
   barData: any;
-
   barOptions: any;
 
-  pieData: any;
-
+  pieDataRace: any;
+  pieDataAdoption: any;
   pieOptions: any;
-
   subscription!: Subscription;
 
-  constructor(public layoutService: LayoutService) {
+   // Quantidade de processos de adoção (inicializado com valores fictícios)
+   completedAdoptions = 0;
+   inProgressAdoptions = 0;
+   pendingAdoptions = 0;
+   ineligibleAnimals = 0;
+
+
+  constructor(public layoutService: LayoutService, public animalService: AnimalService) {
       this.subscription = this.layoutService.configUpdate$
       .pipe(debounceTime(25))
       .subscribe((config) => {
@@ -36,171 +42,131 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+      this.loadAdoptionStatusChart();
+      this.loadRaceChart();
+
       this.initChart();
-      //this.productService.getProductsSmall().then(data => this.products = data);
-    this.adocao = [
-      { cod: '001', nome: 'Bella', raca: 'Labrador', localizacao: '1A', status: 'Aguardando retirada' },
-      { cod: '002', nome: 'Max', raca: 'Bulldog', localizacao: '2B', status: 'Aguardando microchipagem' },
-      { cod: '003', nome: 'Luna', raca: 'Poodle', localizacao: '3C', status: 'Aguardando documentação' },
-      { cod: '004', nome: 'Charlie', raca: 'Beagle', localizacao: '4D', status: 'Aguardando retirada' },
-      { cod: '005', nome: 'Lucy', raca: 'Boxer', localizacao: '5E', status: 'Aguardando microchipagem' },
-      { cod: '006', nome: 'Cooper', raca: 'Chihuahua', localizacao: '6F', status: 'Aguardando documentação' },
-      { cod: '007', nome: 'Daisy', raca: 'Pomeranian', localizacao: '7G', status: 'Aguardando retirada' },
-      { cod: '008', nome: 'Bailey', raca: 'Rottweiler', localizacao: '8H', status: 'Aguardando microchipagem' },
-      { cod: '009', nome: 'Sadie', raca: 'Dachshund', localizacao: '9I', status: 'Aguardando documentação' },
-      { cod: '010', nome: 'Molly', raca: 'Shih Tzu', localizacao: '10J', status: 'Aguardando retirada' },
-      { cod: '011', nome: 'Maggie', raca: 'Cocker Spaniel', localizacao: '11K', status: 'Aguardando microchipagem' },
-      { cod: '012', nome: 'Buddy', raca: 'Schnauzer', localizacao: '12L', status: 'Aguardando documentação' },
-      { cod: '013', nome: 'Rocky', raca: 'Golden Retriever', localizacao: '13M', status: 'Aguardando retirada' },
-      { cod: '014', nome: 'Zoey', raca: 'Great Dane', localizacao: '14N', status: 'Aguardando microchipagem' },
-      { cod: '015', nome: 'Jack', raca: 'Siberian Husky', localizacao: '15O', status: 'Aguardando documentação' },
-      { cod: '016', nome: 'Oliver', raca: 'Doberman', localizacao: '16P', status: 'Aguardando retirada' },
-      { cod: '017', nome: 'Chloe', raca: 'Mastiff', localizacao: '17Q', status: 'Aguardando microchipagem' },
-      { cod: '018', nome: 'Duke', raca: 'Border Collie', localizacao: '18R', status: 'Aguardando documentação' },
-      { cod: '019', nome: 'Zoe', raca: 'Pug', localizacao: '19S', status: 'Aguardando retirada' },
-      { cod: '020', nome: 'Buster', raca: 'Saint Bernard', localizacao: '20T', status: 'Aguardando microchipagem' }
+      // Carregar animais com adoção pendente
+      this.animalService.getPendingAdoptions().subscribe((data: AnimalModel[]) => {
+        this.adocao = data;
+      });
+      // Carregar quantidade de processos de adoção
+      this.animalService.getAdoptionStats().subscribe((stats) => {
+        this.completedAdoptions = stats.completedAdoptions;
+        this.inProgressAdoptions = stats.inProgressAdoptions;
+        this.pendingAdoptions = stats.pendingAdoptions;
+        this.ineligibleAnimals = stats.noAdoptionProfile;
+      });
+      //Carrega grafico de linhas
+      this.carregarEstatisticasResgateAdocao();
 
-    ]
-
-      this.items = [
-          { label: 'Add New', icon: 'pi pi-fw pi-plus' },
-          { label: 'Remove', icon: 'pi pi-fw pi-minus' }
-      ];
   }
 
-  initChart() {
-      const documentStyle = getComputedStyle(document.documentElement);
-      const textColor = documentStyle.getPropertyValue('--text-color');
-      const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-      const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
-      this.chartData = {
-          labels: ['Dezembro','Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',],
-          datasets: [
-              {
-                  label: 'Animais resgatados',
-                  data: [65, 59, 80, 81, 56, 55, 40],
-                  fill: false,
-                  backgroundColor: documentStyle.getPropertyValue('--bluegray-700'),
-                  borderColor: documentStyle.getPropertyValue('--bluegray-700'),
-                  tension: .4
-              },
-              {
-                  label: 'Animais doados',
-                  data: [28, 48, 40, 19, 86, 27, 90],
-                  fill: false,
-                  backgroundColor: documentStyle.getPropertyValue('--green-600'),
-                  borderColor: documentStyle.getPropertyValue('--green-600'),
-                  tension: .4
-              }
-          ]
-      };
-
-      this.chartOptions = {
-          plugins: {
-              legend: {
-                  labels: {
-                      color: textColor
-                  }
-              }
-          },
-          scales: {
-              x: {
-                  ticks: {
-                      color: textColorSecondary
-                  },
-                  grid: {
-                      color: surfaceBorder,
-                      drawBorder: false
-                  }
-              },
-              y: {
-                  ticks: {
-                      color: textColorSecondary
-                  },
-                  grid: {
-                      color: surfaceBorder,
-                      drawBorder: false
-                  }
-              }
-          }
-      };
-
-      this.barData = {
-        labels: ['Dezembro','Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',],
+  loadAdoptionStatusChart() {
+    this.animalService.getAdoptionStatusChart().subscribe((data) => {
+      this.pieDataAdoption = {
+        labels: Object.keys(data),
         datasets: [
-            {
-                label: 'Animais',
-                backgroundColor: documentStyle.getPropertyValue('--primary-500'),
-                borderColor: documentStyle.getPropertyValue('--primary-500'),
-                data: [65, 59, 80, 81, 56, 55, 40]
-            }
-        ]
-    };
+          {
+            data: Object.values(data),
+            backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726', '#FF7043'],
+          },
+        ],
+      };
+    });
+  }
 
-    this.barOptions = {
+  loadRaceChart() {
+    this.animalService.getRaceChart().subscribe((data) => {
+      this.pieDataRace = {
+        labels: Object.keys(data),
+        datasets: [
+          {
+            data: Object.values(data),
+            backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726', '#FF7043'],
+          },
+        ],
+      };
+    });
+  }
+
+   // Novo método para carregar receitas e despesas anual para o gráfico
+   carregarEstatisticasResgateAdocao() {
+    this.animalService.getRescueAndAdoptionStats().subscribe(
+      (dados) => {
+        // Labels para os meses do ano
+        const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+        // Criação de arrays para receitas e despesas
+        const resgates = new Array(12).fill(0); // Inicializando com 0 para os 12 meses
+        const adocoes = new Array(12).fill(0);
+
+        // Mapeando os dados do backend, assumindo que o backend está retornando o mês no formato numérico (1 para Janeiro, 2 para Fevereiro, etc.)
+        dados.forEach((d: any) => {
+          const mesIndex = d.mes - 1; // Subtrair 1 para ajustar o índice do array (Janeiro = 0)
+          resgates[mesIndex] = d.totalResgatados || 0;
+          adocoes[mesIndex] = d.totalAdotados || 0;
+        });
+
+        // Configurando os dados para o gráfico de barras
+        this.barData = {
+          labels: meses,
+          datasets: [
+            {
+              label: 'Resgates',
+              backgroundColor: '#42A5F5',
+              data: resgates
+            },
+            {
+              label: 'Adoções',
+              backgroundColor: '#FFA726',
+              data: adocoes
+            }
+          ]
+        };
+
+        // Configurando os dados para o gráfico de linhas
+        this.chartData = {
+          labels: meses,
+          datasets: [
+            {
+              label: 'Resgates',
+              borderColor: '#42A5F5',
+              fill: false,
+              data: resgates
+            },
+            {
+              label: 'Adoções',
+              borderColor: '#FFA726',
+              fill: false,
+              data: adocoes
+            }
+          ]
+        };
+      },
+      (error) => {
+        console.error('Erro ao carregar dados de receitas e despesas', error);
+      }
+    );
+  }
+
+
+  initChart() {
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color');
+
+
+    this.pieOptions = {
         plugins: {
             legend: {
                 labels: {
-                    fontColor: textColor
+                    usePointStyle: true,
+                    color: textColor
                 }
             }
-        },
-        scales: {
-            x: {
-                ticks: {
-                    color: textColorSecondary,
-                    font: {
-                        weight: 500
-                    }
-                },
-                grid: {
-                    display: false,
-                    drawBorder: false
-                }
-            },
-            y: {
-                ticks: {
-                    color: textColorSecondary
-                },
-                grid: {
-                    color: surfaceBorder,
-                    drawBorder: false
-                }
-            },
         }
     };
-
-    this.pieData = {
-      labels: ['Adoções concluídas', 'Aguardando Adoção', 'Adoções em andamento', 'Animais inaptos para doação'],
-      datasets: [
-          {
-              data: [2593, 658, 125, 40],
-              backgroundColor: [
-                  documentStyle.getPropertyValue('--indigo-500'),
-                  documentStyle.getPropertyValue('--purple-500'),
-                  documentStyle.getPropertyValue('--teal-500'),
-                  documentStyle.getPropertyValue('--red-500')
-              ],
-              hoverBackgroundColor: [
-                  documentStyle.getPropertyValue('--indigo-400'),
-                  documentStyle.getPropertyValue('--purple-400'),
-                  documentStyle.getPropertyValue('--teal-400'),
-                  documentStyle.getPropertyValue('--red-400'),
-              ]
-          }]
-  };
-
-  this.pieOptions = {
-      plugins: {
-          legend: {
-              labels: {
-                  usePointStyle: true,
-                  color: textColor
-              }
-          }
-      }
-  };
 
 
   }
@@ -210,4 +176,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.subscription.unsubscribe();
       }
   }
+
+
 }

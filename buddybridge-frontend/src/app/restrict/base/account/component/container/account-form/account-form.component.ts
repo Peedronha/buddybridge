@@ -90,7 +90,8 @@ export class AccountFormComponent {
 
   submitDetails() {
     let usuario = new User();
-    usuario.id = parseInt(window.localStorage.getItem('idUser') ?? '0');  // Default to '0' if getItem returns null
+
+    usuario.id = parseInt(this.registerForm.get('id')?.value ?? '0');
     usuario.nome = this.registerForm.get('fullName')?.value + '';
     usuario.login = this.registerForm.get('email')?.value ?? '';
     usuario.senha = this.registerForm.get('password')?.value + '';
@@ -106,7 +107,7 @@ export class AccountFormComponent {
     usuario.usuarioEndereco.cepEndereco = this.registerForm.get('usuarioEndereco.cep')?.value ?? '';
     usuario.grupoAcessoUsuario = this.registerForm.get('grupoAcessoUsuario')?.value;
 
-    if(usuario.id != undefined){
+    if (usuario.id + '' != 'NaN') {
       this.accountRestrictService.update(usuario).subscribe(
         response => {
           console.log(response);
@@ -125,7 +126,7 @@ export class AccountFormComponent {
           this.route.navigate(['account'])
         },
         error => {
-          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao cadastrar dados do usuário' });
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao cadastrar dados do usuário - já existe um login com este e-mail' });
         }
       )
     }

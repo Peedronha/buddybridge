@@ -1,0 +1,120 @@
+<div class="card">
+  <form [formGroup]="registerForm" (ngSubmit)="submitDetails()">
+    <div class="surface-section py-2 md-3">
+      <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BASE</a></li>
+        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Cadastros Gerais</a></li>
+        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Animais</a></li>
+        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+        <script>
+        </script>
+        @if (medicalReportId?.value != null && medicalReportId?.value == 'NaN')  {
+          <li><span class="text-900 line-height-3">Novo</span></li>
+          <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra os registros médico no
+            sistema!</a></li>
+        }@else
+        {
+        <li><span class="text-900 line-height-3">Alterar </span></li>
+        <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você altera os registros médicos no sistema!</a>
+        </li>
+        }
+      </ul>
+      <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
+        <div>
+          @if (this.medicalReportId?.value != null && this.medicalReportId?.value == 'NaN') {
+          <div class="font-medium text-3xl text-900">Novo Registro</div><br/><br/>
+          } @else
+            {
+            <div class="font-medium text-3xl text-900">Alterar Registro</div><br/><br/>
+            }
+        </div>
+        <div class="mt-3 lg:mt-0">
+          <button pButton pRipple label="Voltar" class="p-button mr-2" icon="pi pi-chevron-left"
+                  routerLink="/report"></button>
+        </div>
+      </div>
+      <small class="block p-error">
+        <div>* campos obrigatórios</div>
+      </small>
+    </div>
+    <p-messages></p-messages>
+    <div>
+      <div class="p-fluid p-formgrid grid">
+        <div class="field col-6 md:col-6">
+          <label for="doctor">Nome do Veterinário <i class="p-error">*</i></label>
+          <input type="text" pInputText formControlName="doctor" name="doctor"
+                 placeholder="Digite o nome do veterinário" maxlength="50"/>
+          <small
+            *ngIf="registerForm.get('doctor')?.invalid && (registerForm.get('doctor')?.dirty || registerForm.get('doctor')?.touched)"
+            class="block p-error">
+            <div *ngIf="registerForm.get('doctor')?.errors?.['required']">O nome do animal é uma informação
+              obrigatória.
+            </div>
+          </small>
+        </div>
+        <div class="field col-3 md:col-3">
+          <label for="type">Tipo de procedimento <i class="p-error">*</i></label>
+          <input pInputText inputId="type" formControlName="type" name="type"
+                 placeholder="Digite o tipo de procedimento" maxlength="6"/>
+          <small
+            *ngIf="registerForm.get('type')?.invalid && (registerForm.get('type')?.dirty || registerForm.get('type')?.touched)"
+            class="block p-error">
+            <div *ngIf="registerForm.get('type')?.errors?.['required']">O tipo de procedimento é uma informação
+              obrigatória.
+            </div>
+          </small>
+        </div>
+        <div class="field col-3 md:col-3">
+          <label for="animalId">Animal *</label>
+          <p-dropdown [options]="animals" [(ngModel)]="selectAnimal" optionLabel="nome_animal"
+                      formControlName="animalId" class="w-full" name="animalId"
+                      placeholder="Selecione o animal"></p-dropdown>
+          <small
+            *ngIf="registerForm.get('animalId')?.invalid && (registerForm.get('animalId')?.dirty || registerForm.get('animalId')?.touched)"
+            class="block p-error">
+            <div *ngIf="registerForm.get('animalId')?.errors?.['required']">O animal é uma informação obrigatória.</div>
+          </small>
+        </div>
+      </div>
+      <div class="p-fluid p-formgrid grid">
+        <div class="field col-3 md:col-3">
+          <label for="date">Data do procedimento<i class="p-error">*</i></label>
+          <input type="date" pInputText formControlName="date" class="w-full" name="date"
+                 placeholder="Selecione a data do procedimento" [attr.max]="maxDate"/>
+          <small
+            *ngIf="registerForm.get('date')?.invalid && (registerForm.get('date')?.dirty || registerForm.get('date')?.touched)"
+            class="block p-error">
+            <div *ngIf="registerForm.get('date')?.errors?.['required']">A data é uma informação obrigatória.</div>
+          </small>
+        </div>
+        <div class="field col-3 md:col-3">
+          <label for="returnDate">Data de retorno <i class="p-error">*</i></label>
+          <input type="date" pInputText formControlName="returnDate" class="w-full" name="returnDate"
+                 placeholder="Selecione a data de retorno" [attr.min]="maxDate"/>
+          <small
+            *ngIf="registerForm.get('returnDate')?.invalid && (registerForm.get('returnDate')?.dirty || registerForm.get('returnDate')?.touched)"
+            class="block p-error">
+          </small>
+        </div>
+        <div class="field col-3 md:col-3">
+          <label for="description">Descrição <i class="p-error">*</i></label>
+          <textarea inputId="description" rows="5" cols="30" pInputTextarea name="description"
+                    formControlName="description"
+                    class="w-full" maxlength="255"></textarea>
+          <small
+            *ngIf="registerForm.get('description')?.invalid && (registerForm.get('description')?.dirty || registerForm.get('description')?.touched)"
+            class="block p-error">
+            <div *ngIf="registerForm.get('description')?.errors?.['required']">A descrição do procedimento é uma
+              informação obrigatória.
+            </div>
+          </small>
+        </div>
+        <button pButton label="SALVAR" styleClass="w-full" type="submit"></button>
+      </div>
+    </div>
+  </form>
+</div>

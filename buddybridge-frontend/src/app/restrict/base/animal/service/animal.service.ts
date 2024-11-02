@@ -16,8 +16,7 @@ export class AnimalService {
 
   private apiUrl = 'http://localhost:8080/animal';
 
-  constructor(private http: HttpClient, private tokenService: TokenService) {
-  }
+  constructor(private http: HttpClient, private tokenService: TokenService) {}
 
   getAnimalsById(id: any): Observable<any> {
     var reqHeader = new HttpHeaders({
@@ -74,4 +73,48 @@ export class AnimalService {
     });
     return this.http.get<Raca[]>(`http://localhost:8080/raca/type/` + type);
   }
+
+  // Método para obter a quantidade de processos de adoção
+  getAdoptionStats(): Observable<any> {
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.http.get<any>(`${this.apiUrl}/adoption-status`, { headers: reqHeader });
+  }
+
+  // Método para obter animais pendentes de adoção
+  getPendingAdoptions(): Observable<AnimalModel[]> {
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.http.get<AnimalModel[]>(`${this.apiUrl}/animaisAguardandoAnalise`, { headers: reqHeader });
+  }
+
+
+  getRescueAndAdoptionStats(): Observable<any> {
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.http.get<any>(`${this.apiUrl}/statusResgateAdocao`, { headers: reqHeader });
+  }
+
+  getAdoptionStatusChart(): Observable<any> {
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.http.get<any>(`${this.apiUrl}/adoption-status-chart`, { headers: reqHeader });
+  }
+
+  getRaceChart(): Observable<any> {
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.http.get<any>(`${this.apiUrl}/race-chart`, { headers: reqHeader });
+  }
+
 }
