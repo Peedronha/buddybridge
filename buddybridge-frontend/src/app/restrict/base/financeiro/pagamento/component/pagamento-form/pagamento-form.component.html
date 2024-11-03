@@ -1,17 +1,24 @@
 <div class="card">
   <div class="surface-section py-2 md-3">
     <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BRIDGE</a></li>
-        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Financeiro</a></li>
-        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-        <li><span class="text-900 line-height-3">Fluxo de Caixa</span></li>
-        <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia um fluxo de caixa!</a></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY FINANCEIRO</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><span class="text-900 line-height-3">Fluxo de Caixa</span></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li>
+        <span class="text-900 line-height-3">
+          <ng-container *ngIf="registerForm.get('idPagamento')?.value != null ; else newItem">Alterar</ng-container>
+          <ng-template #newItem>Novo</ng-template>
+        </span>
+      </li>
+      <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia um fluxo de caixa!</a></li>
     </ul>
     <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
         <div>
-            <div class="font-medium text-3xl text-900">Fluxo de caixa</div>
+          <div class="font-medium text-3xl text-900">
+            <ng-container *ngIf="registerForm.get('idPagamento')?.value != null ; else newItem">Alterar</ng-container> fluxo de caixa
+          </div>
         </div>
         <div class="mt-3 lg:mt-0">
             <button pButton pRipple label="Voltar" class="p-button-danger p-button mr-2" icon="pi pi-chevron-left" routerLink="/pagamento"></button>
@@ -30,6 +37,16 @@
             </small>
           </div>
           <div class="field col-3 md:col-3">
+            <label for="valorPagamento">Valor do Pagamento:</label>
+            <input type="text" pInputText formControlName="valorPagamento" class="w-12" name="valorPagamento" placeholder="Digite o valor do pagamento"/>
+            <small *ngIf="registerForm.get('valorPagamento')?.invalid && (registerForm.get('valorPagamento')?.dirty || registerForm.get('valorPagamento')?.touched)" class="block p-error">
+              <div *ngIf="registerForm.get('valorPagamento')?.errors?.['required']">O valor do pagamento é obrigatório.</div>
+            </small>
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-3 md:col-3">
             <label for="dataRecebimento">Data de Recebimento:</label>
             <input type="date" pInputText formControlName="dataRecebimento" class="w-full" name="dataRecebimento" placeholder="Selecione a data do pagamento"/>
             <p-calendar formControlName="" dateFormat="dd/mm/yy" showIcon="true"></p-calendar>
@@ -37,8 +54,6 @@
               <div *ngIf="registerForm.get('dataRecebimento')?.errors?.['required']">A data de recebimento é obrigatória.</div>
             </small>
           </div>
-        </div>
-        <div class="p-fluid p-formgrid grid">
           <div class="field col-9 md:col-9">
             <label for="contaCaixa">Conta de Caixa:</label>
             <p-dropdown [options]="contasCaixa" formControlName="contaCaixa" optionLabel="descricaoContaCaixa" placeholder="Selecione uma conta"></p-dropdown>
@@ -46,13 +61,7 @@
               <div *ngIf="registerForm.get('contaCaixa')?.errors?.['required']">A conta de caixa é obrigatória.</div>
             </small>
           </div>
-          <div class="field col-3 md:col-3">
-            <label for="valorPagamento">Valor do Pagamento:</label>
-            <input type="text" pInputText formControlName="valorPagamento" class="w-12" name="valorPagamento" placeholder="Digite o valor do pagamento"/>
-            <small *ngIf="registerForm.get('valorPagamento')?.invalid && (registerForm.get('valorPagamento')?.dirty || registerForm.get('valorPagamento')?.touched)" class="block p-error">
-              <div *ngIf="registerForm.get('valorPagamento')?.errors?.['required']">O valor do pagamento é obrigatório.</div>
-            </small>
-          </div>
+
         </div>
         <p-button label="SALVAR" styleClass="w-full" [disabled]="registerForm.invalid" type="submit"></p-button>
       </div>

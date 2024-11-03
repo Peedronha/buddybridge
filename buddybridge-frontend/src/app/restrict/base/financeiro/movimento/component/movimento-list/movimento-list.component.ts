@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Movimentacao } from '../../model/movimentacao';
+import { Pagamento } from '../../../pagamento/model/pagamento';
+import { PagamentoService } from '../../../pagamento/service/pagamento.service';
 
 
 @Component({
@@ -18,6 +20,12 @@ export class MovimentoListComponent {
   loading: boolean = false;
   displayDeleteDialog: boolean = false;
 
+  pagamentosMovimento: Pagamento[] = [];
+  displayPagamentosDialog: boolean = false;
+  movimentoSelecionado: Movimentacao | null = null;
+
+  constructor(private pagamentoService: PagamentoService) {}
+
   onAdd() {
     this.add.emit(true);
   }
@@ -26,8 +34,17 @@ export class MovimentoListComponent {
     this.edit.emit(idmovimento);
   }
 
-  onPay(idmovimento: number) {
-    this.pay.emit(idmovimento);
+  onNovoFluxoCaixa(movimentacao: Movimentacao) {
+    this.movimentoSelecionado = movimentacao;
+    this.pagamentoService.getPagamentosPorMovimento(movimentacao.idMovimentacao!).subscribe((pagamentos: Pagamento[]) => {
+      this.pagamentosMovimento = pagamentos;
+      this.displayPagamentosDialog = true;
+    });
+  }
+
+  adicionarPagamento() {
+    this.displayPagamentosDialog = false;
+    this.pay.emit(this.movimentoSelecionado?.idMovimentacao);
   }
 
   onDelete(idmovimento: number) {

@@ -13,38 +13,35 @@
 
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="idPagamento" style="width:10%">Cod. <p-sortIcon field="idPagamento"></p-sortIcon></th>
+        <th pSortableColumn="idPagamento" style="width:5%">Cod. <p-sortIcon field="idPagamento"></p-sortIcon></th>
         <th pSortableColumn="movimentacao" style="width:20%">Movimentação <p-sortIcon field="movimentacao"></p-sortIcon></th>
-        <th pSortableColumn="dataRecebimento" style="width:10%">Data Recebimento <p-sortIcon field="dataRecebimento"></p-sortIcon></th>
-        <th pSortableColumn="contaCaixa" style="width:15%">Conta Caixa <p-sortIcon field="contaCaixa"></p-sortIcon></th>
-        <th pSortableColumn="valorPagamento" style="width:10%">Valor Pagamento <p-sortIcon field="valorPagamento"></p-sortIcon></th>
-        <th pSortableColumn="valorTotalMovimentacao" style="width:10%">Valor Total <p-sortIcon field="valorTotalMovimentacao"></p-sortIcon></th>
-        <th pSortableColumn="valorPendente" style="width:10%">Movimentação de Caixa <p-sortIcon field="valorPendente"></p-sortIcon></th>
-        <th pSortableColumn="observacoes" style="width:15%">Observações <p-sortIcon field="observacoes"></p-sortIcon></th>
+        <th pSortableColumn="contaCaixa" style="width:20%">Conta de Caixa <p-sortIcon field="contaCaixa"></p-sortIcon></th>
+        <th pSortableColumn="dataRecebimento" style="width:10%">Data <p-sortIcon field="dataRecebimento"></p-sortIcon></th>
+        <th pSortableColumn="valorTotalMovimentacao" style="width:10%">R$ Movimentação <p-sortIcon field="valorTotalMovimentacao"></p-sortIcon></th>
+        <th pSortableColumn="valorPagamento" style="width:10%">R$ Pago/Recebido <p-sortIcon field="valorPagamento"></p-sortIcon></th>
+        <th pSortableColumn="valorPendente" style="width:10%">R$ Pendente <p-sortIcon field="valorPendente"></p-sortIcon></th>
       </tr>
       <tr>
         <!-- Input filters for each column -->
-        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'idPagamento', 'contains')" placeholder="Filtrar Cod." class="w-full"></th>
-        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'movimentacao', 'contains')" placeholder="Filtrar Movimentação" class="w-full"></th>
-        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'dataRecebimento', 'contains')" placeholder="Filtrar Data" class="w-full"></th>
-        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'contaCaixa', 'contains')" placeholder="Filtrar Conta" class="w-full"></th>
-        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'valorPagamento', 'contains')" placeholder="Filtrar Valor" class="w-full"></th>
-        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'valorTotalMovimentacao', 'contains')" placeholder="Filtrar Valor Total" class="w-full"></th>
-        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'valorPendente', 'contains')" placeholder="Filtrar Valor Pendente" class="w-full"></th>
-        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'observacoes', 'contains')" placeholder="Filtrar Observações" class="w-full"></th>
+        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'idPagamento', 'contains')" placeholder="Cod." class="w-full"></th>
+        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'movimentacao', 'contains')" placeholder="Movimentação" class="w-full"></th>
+        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'contaCaixa', 'contains')" placeholder="Conta" class="w-full"></th>
+        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'dataRecebimento', 'contains')" placeholder="Data" class="w-full"></th>
+        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'valorTotalMovimentacao', 'contains')" placeholder="Valor Movimentação" class="w-full"></th>
+        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'valorPagamento', 'contains')" placeholder="Valor Pgto/recebido" class="w-full"></th>
+        <th><input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'valorPendente', 'contains')" placeholder="Valor Pendente" class="w-full"></th>
       </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-pagamento>
       <tr [pSelectableRow]="pagamento">
         <td>{{ pagamento.idPagamento }}</td>
-        <td>{{ pagamento.movimentacao?.historico }}</td>
-        <td>{{ pagamento.dataRecebimento | date:'dd/MM/yyyy' }}</td>
+        <td>{{ pagamento.movimentacao?.historico }} (Cod. {{ pagamento.movimentacao?.idMovimentacao }})</td>
         <td>{{ pagamento.contaCaixa?.descricaoContaCaixa }}</td>
-        <td>{{ pagamento.valorPagamento | currency:'BRL' }}</td>
+        <td>{{ pagamento.dataRecebimento | date:'dd/MM/yyyy' }}</td>
         <td>{{ pagamento.movimentacao?.valor | currency:'BRL' }}</td> <!-- Valor Total da Movimentação -->
+        <td>{{ pagamento.valorPagamento | currency:'BRL' }}</td>
         <td>{{ pagamento.movimentacao?.valorPendente | currency:'BRL' }}</td> <!-- Valor Pendente da Movimentação -->
-        <td>{{ pagamento.observacoes }}</td>
       </tr>
     </ng-template>
 

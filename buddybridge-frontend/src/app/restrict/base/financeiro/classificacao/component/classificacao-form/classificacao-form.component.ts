@@ -62,7 +62,7 @@ export class ClassificacaoFormComponent implements OnInit {
 
   submitDetails() {
 
-    alert(this.registerForm.get('tipo')?.value);
+    //alert(this.registerForm.get('tipo')?.value);
 
     const classificacao: Classificacao = {
       idClassificacao: this.registerForm.get('idClassificacao')?.value,

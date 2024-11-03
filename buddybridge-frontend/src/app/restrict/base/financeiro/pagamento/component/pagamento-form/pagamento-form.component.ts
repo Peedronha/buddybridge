@@ -40,6 +40,31 @@ export class PagamentoFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    // Captura os parâmetros passados na navegação
+    this.activatedRoute.queryParams.subscribe(params => {
+      const idMovimento = params['idMovimento'];
+      const valor = params['valor'];
+      const data = params['data'];
+
+      if (idMovimento) {
+        // Carrega a movimentação usando o idMovimento
+        this.movimentacaoService.getMovimentacaoById(idMovimento).subscribe(
+          (movimentacao: Movimentacao) => {
+            this.registerForm.patchValue({
+              movimentacao: movimentacao, // Preenche com o objeto Movimentacao completo
+              valorPagamento: valor ? parseFloat(valor) : movimentacao.valorPendente, // Usa o valor passado ou o valor pendente
+              dataRecebimento: data ? new Date(data) : new Date() // Converte a data se existir
+            });
+          },
+          (error) => {
+            console.error('Erro ao carregar a movimentação:', error);
+            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível carregar a movimentação.' });
+          }
+        );
+      }
+    });
+
     const pagamento: Pagamento = this.activatedRoute.snapshot.data['pagamento'];
 
     // Carrega movimentações e contas caixa

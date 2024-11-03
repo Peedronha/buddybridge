@@ -42,6 +42,8 @@ export class VolunteerFormComponent {
       this.userOptions = users;
     })
 
+
+
     const colaborador: Colaborador = this.router.snapshot.data['volunteer'];
     this.registerForm.setValue({
       idcolaborador: colaborador.idcolaborador ? colaborador.idcolaborador + '' : '',

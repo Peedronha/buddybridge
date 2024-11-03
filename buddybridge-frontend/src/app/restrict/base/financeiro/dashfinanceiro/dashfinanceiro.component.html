@@ -77,7 +77,7 @@
             <td>{{ movimentacao.dataLancamento | date: 'dd/MM/yyyy' }}</td>
             <td>{{ movimentacao.vencido ? 'Vencido' : 'No Prazo' }}</td> <!-- Exibe se está vencido ou não -->
             <td>
-              <button pButton pRipple type="button" label="Pagar/Receber" icon="pi pi-dollar" class="p-button-text" (click)="incluirRecibo(movimentacao.idMovimentacao)"></button>
+              <button pButton pRipple label="Fluxo de caixa" icon="pi pi-dollar" (click)="onNovoFluxoCaixa(movimentacao)"></button>
             </td>
           </tr>
         </ng-template>
@@ -128,7 +128,20 @@
   </div>
 
 
-
+  <p-dialog header="Pagamentos do Movimento" [(visible)]="displayPagamentosDialog" [modal]="true" [style]="{ width: '400px' }">
+    <hr/>
+    <ul *ngIf="pagamentosMovimento.length > 0">
+      <li *ngFor="let pagamento of pagamentosMovimento" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+        <span>{{ pagamento.dataRecebimento | date: 'dd/MM/yyyy' }} - {{ pagamento.valorPagamento | currency:'BRL' }}</span>
+      </li>
+    </ul>
+    <hr/>
+    <button *ngIf="movimentoSelecionado?.valorPendente! > 0" pButton label="Adicionar Fluxo de Caixa" (click)="adicionarPagamento()"></button>
+    <ng-template #noPagamentos>
+      <p>Não existem pagamentos para este movimento.</p>
+      <button pButton label="Adicionar Fluxo de Caixa" (click)="adicionarPagamento()"></button>
+    </ng-template>
+  </p-dialog>
 
 
 
