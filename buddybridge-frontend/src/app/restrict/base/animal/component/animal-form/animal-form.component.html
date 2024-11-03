@@ -1,44 +1,38 @@
 <div class="card">
-  <form [formGroup]="registerForm" (ngSubmit)="submitDetails()">
-    <div class="surface-section py-2 md-3">
-      <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BASE</a></li>
-        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Cadastros Gerais</a></li>
-        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Animais</a></li>
-        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+  <div class="surface-section py-2 md-3">
+    <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY ANIMAIS</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Animais</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      @if (id_animal?.value != null && id_animal?.value == 'NaN') {
+        <li><span class="text-900 line-height-3">Novo</span></li>
+      } @else {
+        <li><span class="text-900 line-height-3">Alterar </span></li>
+      }
+      <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra os animais do sistema!</a></li>
+    </ul>
+    <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
+      <div class="font-medium text-3xl text-900">
         @if (id_animal?.value != null && id_animal?.value == 'NaN') {
-          <li><span class="text-900 line-height-3">Novo</span></li>
-          <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra os animais do
-            sistema!</a></li>
+          Novo Animal
         } @else {
-          <li><span class="text-900 line-height-3">Alterar </span></li>
-          <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você altera os animais do sistema!</a>
-          </li>
+          Alterar Animal
         }
-      </ul>
-      <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
-        <div>
-          @if (id_animal?.value != null && id_animal?.value == 'NaN') {
-            <div class="font-medium text-3xl text-900">Novo Animal</div><br/><br/>
-          } @else {
-            <div class="font-medium text-3xl text-900">Alterar Animal</div><br/><br/>
-          }
-        </div>
-        <div class="mt-3 lg:mt-0">
-          <button pButton pRipple label="Voltar" class="p-button mr-2" icon="pi pi-chevron-left"
-                  routerLink="/animal"></button>
-        </div>
       </div>
-      <small class="block p-error">
-        <div >* campos obrigatórios</div>
-      </small>
+      <div class="mt-3 lg:mt-0">
+        <button pButton pRipple label="Voltar" class="p-button-danger p-button mr-2" icon="pi pi-chevron-left" routerLink="/animal"></button>
+      </div>
     </div>
-    <p-messages></p-messages>
-    <div>
+    <small class="block p-error">
+      <div >* campos obrigatórios</div>
+    </small>
+  </div>
+  <p-messages></p-messages>
+  <br/>
+  <form [formGroup]="registerForm" (ngSubmit)="submitDetails()">
+    <div class="p-4 shadow-2 border-round w-12 lg:w-12">
       <div class="p-fluid p-formgrid grid">
         <div class="field col-6 md:col-6">
           <label for="nome_animal">Nome do Animal <i class="p-error">*</i></label>
@@ -128,18 +122,15 @@
           </small>
         </div>
       </div>
-
       <div class="field">
         <label for="caracteristicas_animal">Características do animal</label>
-        <textarea rows="5" cols="30" pInputTextarea name="caracteristicas_animal" formControlName="caracteristicas_animal"
+        <textarea rows="2" cols="30" pInputTextarea name="caracteristicas_animal" formControlName="caracteristicas_animal"
                   class="w-full" maxlength="255"></textarea>
         <small *ngIf="registerForm.get('caracteristicas_animal')?.invalid && (registerForm.get('caracteristicas_animal')?.dirty || registerForm.get('caracteristicas_animal')?.touched)" class="block p-error">
           <div *ngIf="registerForm.get('caracteristicas_animal')?.errors?.['pattern']">As características do animal não devem conter caracteres especiais.</div>
         </small>
       </div>
-
-
+      <p-button label="SALVAR" styleClass="w-full" [disabled]="registerForm.invalid" type="submit"></p-button>
     </div>
-    <button pButton label="SALVAR" styleClass="w-full" type="submit"></button>
   </form>
 </div>
