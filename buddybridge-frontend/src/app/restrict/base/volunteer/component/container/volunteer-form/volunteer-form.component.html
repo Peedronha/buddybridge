@@ -8,20 +8,20 @@
         <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
         <li><a class="text-500 no-underline line-height-3 cursor-pointer">Voluntários</a></li>
         <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-        <ng-container *ngIf="registerForm.get('idcolaborador')?.value != null && registerForm.get('idcolaborador')?.value != 'NaN'; else newVolunteer">
+        <ng-container *ngIf="registerForm.get('idcolaborador')?.value != null && registerForm.get('idcolaborador')?.value != ''; else newVolunteer">
           <li><span class="text-900 line-height-3">Alterar</span></li>
           <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você Altera os colaboradores do sistema!</a></li>
+          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia os colaboradores do sistema!</a></li>
         </ng-container>
         <ng-template #newVolunteer>
           <li><span class="text-900 line-height-3">Novo</span></li>
           <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra os colaboradores do sistema!</a></li>
+          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia os colaboradores do sistema!</a></li>
         </ng-template>
       </ul>
       <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
         <div>
-          <ng-container *ngIf="registerForm.get('idcolaborador')?.value != null && registerForm.get('idcolaborador')?.value != 'NaN'; else newVolunteerHeader">
+          <ng-container *ngIf="registerForm.get('idcolaborador')?.value != null && registerForm.get('idcolaborador')?.value != ''; else newVolunteerHeader">
             <div class="font-medium text-3xl text-900">Alterar Voluntário</div><br/><br/>
           </ng-container>
           <ng-template #newVolunteerHeader>

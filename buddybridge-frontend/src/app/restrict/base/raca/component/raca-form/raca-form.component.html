@@ -2,21 +2,21 @@
   <form [formGroup]="registerForm" (ngSubmit)="submitDetails()">
     <div class="surface-section py-2 md-3">
       <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BASE</a></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY ANIMAIS</a></li>
         <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Cadastros Gerais</a></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Configurações</a></li>
         <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
         <li><a class="text-500 no-underline line-height-3 cursor-pointer">Raças</a></li>
         <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
         @if (id_raca?.value != null && id_raca?.value != 'NaN') {
           <li><span class="text-900 line-height-3">Novo</span></li>
           <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra as raças do
+          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia as raças do
             sistema!</a></li>
         } @else {
           <li><span class="text-900 line-height-3">Alterar </span></li>
           <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você altera as raças do sistema!</a>
+          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia as raças do sistema!</a>
           </li>
         }
       </ul>
@@ -35,35 +35,26 @@
       </div>
     </div>
     <div>
-      <div class="field">
-        <label for="nome_raca">Nome da Raça</label>
-        <input type="text" pInputText formControlName="nome_raca" class="w-full" name="nome_raca"
-               placeholder="Digite o nome do animal"/>
-        <small
-          *ngIf="registerForm.get('nome_raca')?.invalid && (registerForm.get('nome_raca')?.dirty || registerForm.get('nome_raca')?.touched)"
-          class="block p-error">
-          <div *ngIf="registerForm.get('nome_raca')?.errors?.['required']">O nome da raça é uma informação
-            obrigatória.
-          </div>
-          <div *ngIf="registerForm.get('nome_raca')?.errors?.['pattern']">O nome da raça não deve conter caracteres
-            especiais.
-          </div>
-        </small>
-      </div>
-      <div class="field">
-        <p>
-          <label for="id_tipo">Tipo de animal</label>
-        </p>
-        <p-dropdown
-          [options]="tipos"
-          optionLabel="name"
-          [(ngModel)]="selectTipo"
-          [showClear]="true"
-          formControlName="id_tipo"
-          class="w-full"
-          name="id_tipo"
-          placeholder="Selecione o tipo do animal"
-        />
+      <div class="p-fluid p-formgrid grid">
+        <div class="field col-12 md:col-6">
+          <label for="nome_raca">Nome da Raça</label>
+          <input type="text" pInputText formControlName="nome_raca" class="w-full" name="nome_raca"
+                placeholder="Digite o nome do animal"/>
+          <small
+            *ngIf="registerForm.get('nome_raca')?.invalid && (registerForm.get('nome_raca')?.dirty || registerForm.get('nome_raca')?.touched)"
+            class="block p-error">
+            <div *ngIf="registerForm.get('nome_raca')?.errors?.['required']">O nome da raça é uma informação
+              obrigatória.
+            </div>
+            <div *ngIf="registerForm.get('nome_raca')?.errors?.['pattern']">O nome da raça não deve conter caracteres
+              especiais.
+            </div>
+          </small>
+        </div>
+        <div class="field col-6 md:col-6">
+          <label for="id_tipo">Tipo de animal: <i class="p-error">*</i></label>
+          <p-dropdown [options]="tipos" [(ngModel)]="selectTipo" formControlName="id_tipo" optionLabel="name" placeholder="Selecione o tipo do animal"></p-dropdown>
+        </div>
       </div>
     </div>
     <button pButton label="SALVAR" styleClass="w-full" type="submit"></button>

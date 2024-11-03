@@ -45,4 +45,8 @@ export class PagamentoService {
   deletePagamento(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
   }
+
+  getPagamentosPorMovimento(id: number): Observable<Pagamento[]> {
+    return this.http.get<Pagamento[]>(`${this.apiUrl}/getAllPagamentosByMovimentoId/${id}`, { headers: this.getHeaders() });
+  }
 }

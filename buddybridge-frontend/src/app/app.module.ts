@@ -79,6 +79,7 @@ import { PagamentoFormComponent } from './restrict/base/financeiro/pagamento/com
 import { PagamentoListComponent } from './restrict/base/financeiro/pagamento/component/pagamento-list/pagamento-list.component';
 import { DashfinanceiroComponent } from './restrict/base/financeiro/dashfinanceiro/dashfinanceiro.component';
 import {HistoricoMedicoComponent} from "./restrict/base/historico-medico/components/historico-medico/historico-medico.component";
+import { DashAdocaoComponent } from './restrict/base/dash-adocao/dash-adocao.component';
 import {
   ClassificacaoComponent
 } from "./restrict/base/financeiro/classificacao/component/classificacao/classificacao.component";
@@ -133,6 +134,7 @@ import {
       PagamentoFormComponent,
       PagamentoListComponent,
       DashfinanceiroComponent,
+      DashAdocaoComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,7 @@
 <div class="card">
   <div class="surface-section py-2 md-3">
     <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
-      <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BASE</a></li>
-      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Cadastros Gerais</a></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY FINANCEIRO</a></li>
       <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
       <li><span class="text-900 line-height-3">Movimentações</span></li>
       <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
@@ -14,7 +12,7 @@
       <div class="font-medium text-3xl text-900">Movimentações</div><br/><br/><br/>
     </div>
   </div>
-  <app-movimento-list [movimentacoes]="movimentacoes" (add)="onAdd()" (edit)="onEdit($event)" (remove)="onRemove($event)">
+  <app-movimento-list [movimentacoes]="movimentacoes" (add)="onAdd()" (edit)="onEdit($event)" (remove)="onRemove($event)" (pay)="onPay($event)">
   </app-movimento-list>
 </div>
 

@@ -1,3 +1,4 @@
+import { PagamentoService } from './../pagamento/service/pagamento.service';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MenuItem } from 'primeng/api';
@@ -5,6 +6,8 @@ import { Subscription, debounceTime } from 'rxjs';
 import { LayoutService } from '../../../layout/service/app.layout.service';
 import { Movimentacao } from '../movimento/model/movimentacao';
 import { MovimentacaoService } from '../movimento/service/movimento.service';
+import { Pagamento } from '../pagamento/model/pagamento';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,7 +38,16 @@ export class DashfinanceiroComponent implements OnInit, OnDestroy {
 
   subscription!: Subscription;
 
-  constructor(public layoutService: LayoutService, private movimentacaoService: MovimentacaoService) {
+  pagamentosMovimento: Pagamento[] = [];
+  displayPagamentosDialog: boolean = false;
+  movimentoSelecionado: Movimentacao | null = null;
+
+
+  constructor(public layoutService: LayoutService,
+              private movimentacaoService: MovimentacaoService,
+              private pagamentoService : PagamentoService,
+              private router: Router,
+              private route: ActivatedRoute) {
       this.subscription = this.layoutService.configUpdate$
       .pipe(debounceTime(25))
       .subscribe((config) => {
@@ -263,9 +275,44 @@ export class DashfinanceiroComponent implements OnInit, OnDestroy {
       }
   }
 
-  incluirRecibo(idMovimentacao: number) {
-    // Aqui você pode implementar a lógica para incluir um recibo
-    console.log('Incluir recibo para movimentação com ID:', idMovimentacao);
-    // Implemente a lógica de inclusão de recibo aqui
+  onNovoFluxoCaixa(movimentacao: Movimentacao) {
+    this.movimentoSelecionado = movimentacao;
+    this.pagamentoService.getPagamentosPorMovimento(movimentacao.idMovimentacao!).subscribe((pagamentos: Pagamento[]) => {
+      this.pagamentosMovimento = pagamentos;
+      this.displayPagamentosDialog = true;
+    });
   }
+
+  adicionarPagamento() {
+    this.displayPagamentosDialog = false;
+
+    // Obtenha a movimentação selecionada por meio de uma chamada assíncrona
+    this.movimentacaoService.getMovimentacaoById(this.movimentoSelecionado?.idMovimentacao!).subscribe(
+      (movimentoSelecionado: Movimentacao) => {
+        const valorPendente = movimentoSelecionado.valorPendente;
+        const dataRecebimento = new Date(); // data atual
+
+        // Navegue para a tela de novo pagamento com os parâmetros necessários
+        this.router.navigate(['pagamento/addpagamento'], {
+          queryParams: {
+            idMovimento: movimentoSelecionado.idMovimentacao,
+            valor: valorPendente,
+            data: dataRecebimento.toISOString() // Formata a data para ISO
+          }
+        });
+      },
+      (error) => {
+        // Manipule o erro, ex: mensagem de erro ao usuário
+        alert("erro, contatar suporte");
+      }
+    );
+
+
+  }
+
+
+
+
+
+
 }

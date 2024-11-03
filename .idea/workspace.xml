@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="merge relatório animais into master">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/colaborador/controller/ColaboradorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/colaborador/controller/ColaboradorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/controleacesso/controller/GrupoAcessoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/controleacesso/controller/GrupoAcessoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/controleacesso/service/GrupoAcessoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/controleacesso/service/GrupoAcessoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/ong/entity/Ong.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/ong/entity/Ong.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/controller/UsuarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/entity/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/entity/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/service/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/service/UsuarioService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/account/component/container/account-form/account-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/account/component/container/account-form/account-form.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/account/component/container/account-form/account-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/account/component/container/account-form/account-form.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/ong/component/ong/ong.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/ong/component/ong/ong.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/ong/component/ong/ong.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/ong/component/ong/ong.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/ong/model/ong.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/ong/model/ong.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/solicitacao_acesso/component/solicitacaoacesso-list/solicitacaoacesso-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/solicitacao_acesso/component/solicitacaoacesso-list/solicitacaoacesso-list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/solicitacao_acesso/service/solicitacaoacesso.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/solicitacao_acesso/service/solicitacaoacesso.service.ts" afterDir="false" />
-    </list>
+    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="Commit - ajustes merge" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="relatorio-animais" />
+        <entry key="$PROJECT_DIR$" value="ajustes-financeiro" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -448,7 +432,39 @@
       <option name="project" value="LOCAL" />
       <updated>1728263762698</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Commit - ajustes financeiros">
+      <option name="closed" value="true" />
+      <created>1730648108262</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1730648108262</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Commit - ajustes merge">
+      <option name="closed" value="true" />
+      <created>1730653036241</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1730653036243</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Commit - ajustes merge">
+      <option name="closed" value="true" />
+      <created>1730653157185</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1730653157185</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Commit - ajustes merge">
+      <option name="closed" value="true" />
+      <created>1730658834574</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1730658834574</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -498,7 +514,9 @@
     <MESSAGE value="Commit relatório financeiro" />
     <MESSAGE value="Commit relatórios de adoções" />
     <MESSAGE value="merge relatório animais into master" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge relatório animais into master" />
+    <MESSAGE value="Commit - ajustes financeiros" />
+    <MESSAGE value="Commit - ajustes merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit - ajustes merge" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -62,6 +62,7 @@ import {
   FormHistoricoMedicoComponent
 } from "./restrict/base/historico-medico/components/form-historico-medico/form-historico-medico.component";
 import {historicoMedicoResolver} from "./restrict/base/historico-medico/guard/historico-medico.resolver";
+import { DashAdocaoComponent } from './restrict/base/dash-adocao/dash-adocao.component';
 const routes: Routes = [
   { path: 'errorBuddyBridge', title: 'BuddyBridge - Erro', component: ErrorComponent },
   {
@@ -138,7 +139,8 @@ const routes: Routes = [
       { path: 'pagamento/addpagamento', title: 'BuddyBridge - Novo Pagamento', component: PagamentoFormComponent, resolve: { pagamento: PagamentoResolver } },
       { path: 'pagamento/editpagamento/:id', title: 'BuddyBridge - Editar Pagamento', component: PagamentoFormComponent, resolve: { pagamento: PagamentoResolver } },
 
-      { path: 'dashfinanceiro', title: 'BuddyBridge - Financeiro', component: DashfinanceiroComponent }
+      { path: 'dashfinanceiro', title: 'BuddyBridge - Financeiro', component: DashfinanceiroComponent },
+      { path: 'dashadocao', title: 'BuddyBridge - Adoções', component: DashAdocaoComponent }
 
     ],
     canActivate: [AuthGuard]

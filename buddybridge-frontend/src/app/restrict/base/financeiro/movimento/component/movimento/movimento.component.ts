@@ -21,6 +21,7 @@ export class MovimentoComponent {
   displayModal: boolean = false;
   //Fazendo a solicitação de acessos - fim
 
+
   constructor(
     private grupoacessoserviceService: GrupoacessoserviceService,
     private movimentacaoService: MovimentacaoService,
@@ -77,11 +78,31 @@ export class MovimentoComponent {
 
   onPay(id: any) {
     if (this.hasAccess('Pagar Movimentação')) {
-      this.router.navigate(['/pagamento/new', { movimentacaoId: id }]);
+      // Obtenha a movimentação selecionada por meio de uma chamada assíncrona
+      this.movimentacaoService.getMovimentacaoById(id).subscribe(
+        (movimentoSelecionado: Movimentacao) => {
+          const valorPendente = movimentoSelecionado.valorPendente;
+          const dataRecebimento = new Date(); // data atual
+
+          // Navegue para a tela de novo pagamento com os parâmetros necessários
+          this.router.navigate(['pagamento/addpagamento'], {
+            queryParams: {
+              idMovimento: movimentoSelecionado.idMovimentacao,
+              valor: valorPendente,
+              data: dataRecebimento.toISOString() // Formata a data para ISO
+            }
+          });
+        },
+        (error) => {
+          // Manipule o erro, ex: mensagem de erro ao usuário
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível carregar a movimentação.' });
+        }
+      );
     } else {
       this.showAccessDeniedModal();
     }
   }
+
 
 
 
