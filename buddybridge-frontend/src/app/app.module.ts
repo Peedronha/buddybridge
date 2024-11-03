@@ -80,6 +80,7 @@ import { PagamentoFormComponent } from './restrict/base/financeiro/pagamento/com
 import { PagamentoListComponent } from './restrict/base/financeiro/pagamento/component/pagamento-list/pagamento-list.component';
 import { DashfinanceiroComponent } from './restrict/base/financeiro/dashfinanceiro/dashfinanceiro.component';
 import {HistoricoMedicoComponent} from "./restrict/base/historico-medico/components/historico-medico/historico-medico.component";
+import { DashAdocaoComponent } from './restrict/base/dash-adocao/dash-adocao.component';
 
 
 @NgModule({
@@ -131,6 +132,7 @@ import {HistoricoMedicoComponent} from "./restrict/base/historico-medico/compone
       PagamentoFormComponent,
       PagamentoListComponent,
       DashfinanceiroComponent,
+      DashAdocaoComponent,
   ],
   imports: [
     BrowserModule,

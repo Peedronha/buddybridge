@@ -1,118 +1,75 @@
-<div class="grid">
-  <div class="col-12 lg:col-6 xl:col-3">
-    <div class="card mb-0">
-        <div class="flex justify-content-between mb-3">
-            <div>
-                <span class="block text-500 font-medium mb-3">Adoções concluídas</span>
-                <div class="text-900 font-medium text-xl">{{ completedAdoptions }} processos</div>
-            </div>
-            <div class="flex align-items-center justify-content-center bg-blue-100 border-round" style="width: 2.5rem; height: 2.5rem">
-                <i class="pi pi-check-circle text-blue-500 text-xl"></i>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-12 lg:col-6 xl:col-3">
-    <div class="card mb-0">
-        <div class="flex justify-content-between mb-3">
-            <div>
-                <span class="block text-500 font-medium mb-3">Adoções em andamento</span>
-                <div class="text-900 font-medium text-xl">{{ inProgressAdoptions }} processos</div>
-            </div>
-            <div class="flex align-items-center justify-content-center bg-purple-100 border-round" style="width: 2.5rem; height: 2.5rem">
-                <i class="pi pi-heart text-purple-500 text-xl"></i>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-12 lg:col-6 xl:col-3">
-    <div class="card mb-0">
-        <div class="flex justify-content-between mb-3">
-            <div>
-                <span class="block text-500 font-medium mb-3">Aguardando adoção</span>
-                <div class="text-900 font-medium text-xl">{{ pendingAdoptions }} animais</div>
-            </div>
-            <div class="flex align-items-center justify-content-center bg-orange-100 border-round" style="width: 2.5rem; height: 2.5rem">
-                <i class="pi pi-clock text-orange-500 text-xl"></i>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-12 lg:col-6 xl:col-3">
-    <div class="card mb-0">
-        <div class="flex justify-content-between mb-3">
-            <div>
-                <span class="block text-500 font-medium mb-3">Inaptos</span>
-                <div class="text-900 font-medium text-xl">{{ ineligibleAnimals }} animais</div>
-            </div>
-            <div class="flex align-items-center justify-content-center bg-red-100 border-round" style="width: 2.5rem; height: 2.5rem">
-                <i class="pi pi-exclamation-triangle text-red-500 text-xl"></i>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="card">
+  <div class="surface-section py-2 md-3">
+    <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">INICIO</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Meu painel</a></li>
+      <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+      <li>
+        <a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia os dados do seu painel!</a>
+      </li>
+    </ul>
+    <div class="bg-blue-400 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap">
+      <div class="font-bold">Meus processos de adoção em andamento!</div>
 
-  <div class="col-12 xl:col-6">
-    <div class="card">
-      <h5>Processos de adoção aguardando</h5>
-      <p-table [value]="adocao" [paginator]="true" [rows]="5" responsiveLayout="scroll">
-        <ng-template pTemplate="header">
-          <tr>
-            <th pSortableColumn="id_animal">ID</th>
-            <th pSortableColumn="nome_animal">Nome</th>
-            <th pSortableColumn="raca_animal">Raça</th>
-            <th pSortableColumn="localizacao_animal">Localização</th>
-            <th pSortableColumn="status">Status</th>
-            <th>Ação</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-animal>
-          <tr>
-            <td style="width: 5%;">{{ animal.id_animal }}</td>
-            <td style="width: 10%;">{{ animal.nome_animal }}</td>
-            <td style="width: 10%;">{{ animal.raca_animal.name }}</td>
-            <td style="width: 10%;">{{ animal.localizacao_animal }}</td>
-            <td style="width: 10%;">{{ animal.status || 'Pendente' }}</td> <!-- Adicione status dinamicamente se aplicável -->
-            <td style="width: 15%;">
-              <button
-                pButton
-                pRipple
-                type="button"
-                icon="pi pi-search"
-                class="p-button p-component p-button-text p-button-icon-only"
-              ></button>
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
+
     </div>
-    <div class="card">
-      <h5>ADOÇÃO E RESGATE DE ANIMAIS POR MÊS</h5>
-      <p-chart type="bar" [data]="barData" [options]="barOptions"></p-chart>
+    <br/>
+    <div class="bg-blue-400 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap">
+      <div class="font-bold mr-8">Os número da ong!</div>
+      <div class="align-items-center hidden lg:flex">
+          <span class="line-height-3">Ajude na adoção, apadrinhamento ou doando.</span>
+      </div>
+    </div>
+    <br/>
+    <div class="grid">
+      <div class="col-12 lg:col-6 xl:col-4">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Adoções concluídas</span>
+                    <div class="text-900 font-medium text-xl">{{ completedAdoptions }} processos</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round" style="width: 2.5rem; height: 2.5rem">
+                    <i class="pi pi-check-circle text-blue-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6 xl:col-4">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Adoções em andamento</span>
+                    <div class="text-900 font-medium text-xl">{{ inProgressAdoptions }} processos</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-purple-100 border-round" style="width: 2.5rem; height: 2.5rem">
+                    <i class="pi pi-heart text-purple-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6 xl:col-4">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Aguardando adoção</span>
+                    <div class="text-900 font-medium text-xl">{{ pendingAdoptions }} animais</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-orange-100 border-round" style="width: 2.5rem; height: 2.5rem">
+                    <i class="pi pi-clock text-orange-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
     </div>
   </div>
-  <div class="col-12 xl:col-6">
-    <div class="card">
-      <h5>ADOÇÃO e RESGATE de animais por mês</h5>
-      <p-chart type="line" [data]="chartData" [options]="chartOptions"></p-chart>
-    </div>
-    <div class="card flex flex-column align-items-center">
-      <h5>Animais por raça</h5>
-      <p-chart type="pie" [data]="pieDataRace" [options]="pieOptions"></p-chart>
-    </div>
-    <!--div class="card flex flex-column align-items-center">
-      <h5>Animais por status de adoção</h5>
-      <p-chart type="pie" [data]="pieDataAdoption" [options]="pieOptions"></p-chart>
-    </div-->
-
+  <div class="bg-bluegray-900 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap">
+    <div class="font-bold">Se você pode mudar o destino de um animal de rua, por que não fazer isso?!</div>
   </div>
-
-
-
-
-
-
-
-
-
+  <br/>
+  <div class="text-center">
+    <a class="layout-topbar-logo" routerLink="restrict/home">
+      <img src="../../../assets/img/logo_buddyBridge_light.png" alt="logo" style="width: 30%;">
+    </a>
+  </div>
 </div>
