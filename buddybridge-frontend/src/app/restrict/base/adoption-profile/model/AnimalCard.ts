@@ -14,6 +14,7 @@ export interface AnimalCard {
   genero_animal?: string;
   localizacao_animal?: string;
   priority?: number;
-  image?: string;
+  image?:string;
+  image_test?: string;
   medical_necessities?: string;
 }

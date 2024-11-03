@@ -2,10 +2,7 @@ package br.com.buddybridge.core.adocao.model.get;
 
 import br.com.buddybridge.core.adocao.entity.AdoptionModel;
 import br.com.buddybridge.core.adocao.entity.AdoptionProfileModel;
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import br.com.buddybridge.core.imageuploader.entity.Image;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -23,7 +20,6 @@ public class GetAdoptionDTO {
     private Integer priority;
     private String idade;
     private String medical_necessities;
-    private String image;
     private LocalDateTime data_criacao;
 
     private String peso_animal;
@@ -59,6 +55,10 @@ public class GetAdoptionDTO {
     private String estado;
 
     private String cidade;
+
+    private String image;
+
+
 
 
     public GetAdoptionDTO(AdoptionModel model) {

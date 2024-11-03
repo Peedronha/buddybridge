@@ -15,21 +15,21 @@ public class AmazonS3Config {
     private String regionName;
 
 
-    @Bean
-    public AmazonS3 getAmazonS3Client() {
-        return AmazonS3ClientBuilder.standard()
-                .withRegion(regionName)
-                .withCredentials(new EnvironmentVariableCredentialsProvider())
-                .build();
-    }
-////   515341448711
-////   buddybridge
 //    @Bean
 //    public AmazonS3 getAmazonS3Client() {
 //        return AmazonS3ClientBuilder.standard()
 //                .withRegion(regionName)
-//                .withCredentials(new AWSStaticCredentialsProvider(
-//                        new BasicAWSCredentials("AKIAXP7F6OYDQ4ZIECAI", "PJchIx6w/9gu3mf5UeYUqM8S18UvKeHmRI2zD1rw")))
+//                .withCredentials(new EnvironmentVariableCredentialsProvider())
 //                .build();
 //    }
+////   515341448711
+////   buddybridge
+    @Bean
+    public AmazonS3 getAmazonS3Client() {
+        return AmazonS3ClientBuilder.standard()
+                .withRegion(regionName)
+                .withCredentials(new AWSStaticCredentialsProvider(
+                        new BasicAWSCredentials("AKIAXP7F6OYDQ4ZIECAI", "PJchIx6w/9gu3mf5UeYUqM8S18UvKeHmRI2zD1rw")))
+                .build();
+    }
 }

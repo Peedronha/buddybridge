@@ -46,7 +46,7 @@ enum ImageFileTypes {
 export class AdoptionProfileFormComponent implements OnInit {
   adoptionForm: FormGroup;
   animals: AnimalModel[] = [];
-  selectAnimal!: AnimalModel[];
+  selectAnimal!: AnimalModel;
   statusOptions = [
     { label: 'Pendente', value: 'PENDING' },
     { label: 'Aprovada', value: 'APPROVED' },
@@ -54,6 +54,10 @@ export class AdoptionProfileFormComponent implements OnInit {
     { label: 'Finalizada', value: 'COMPLETED' }
   ];
   selectStatus: { label: string, value: string } | undefined;
+
+  imagePreview: string | ArrayBuffer | null = null; // Stores the image preview URL
+  selectedFile: File | null = null; // Stores the file to send on submission
+
 
   // Image upload properties
   imageFile!: File;
@@ -109,13 +113,18 @@ export class AdoptionProfileFormComponent implements OnInit {
   }
 
   onFileInput(event: any) {
-    this.imageFile = event.target.files[0];
-    this.uploadFile();
-  }
+    const input = event.target as HTMLInputElement;
 
-  fileDropped(file: File) {
-    this.imageFile = file;
-    this.uploadFile();
+    if (input.files && input.files[0]) {
+      this.imageFile = input.files[0];
+
+      // Create a URL for the image preview
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result; // Stores the preview URL
+      };
+      reader.readAsDataURL(this.imageFile); // Reads file data as URL
+    }
   }
 
   uploadFile = () => {
@@ -128,18 +137,22 @@ export class AdoptionProfileFormComponent implements OnInit {
       img.onload = () => this.putImage();
 
       img.src = url.createObjectURL(this.imageFile);
-    } else {
     }
   }
 
+  fileDropped(file: File) {
+    this.imageFile = file;
+    this.uploadFile();
+  }
+
   putImage = () => {
-    const upload$ = this.imageUploadService.addImage(this.imageFile, 1);
+    const upload$ = this.imageUploadService.addImage(this.imageFile, this.selectAnimal.id_animal);
     this.imageStatus = 'Loading';
     this.subscription = upload$.subscribe({
       next: data => {
-        this.imageURL = Object.values(data)[4]; // Assuming the image URL is returned here
+        this.imageURL = Object.values(data)[4];
         this.imageStatus = 'Uploaded';
-        this.adoptionForm.patchValue({ image: this.imageURL }); // Set the image URL in the form
+        this.adoptionForm.patchValue({ image: this.imageURL });
       },
       error: () => {
         this.imageStatus = 'Upload';
@@ -157,6 +170,7 @@ export class AdoptionProfileFormComponent implements OnInit {
       adoption.status_adocao = this.selectStatus?.value;
 
       if (!adoption.id_perfil_adocao) {
+        this.uploadFile();
         this.adoptionService.registerAdoptionProfile(adoption).subscribe(
           response => {
             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção registrada!' });
@@ -168,6 +182,7 @@ export class AdoptionProfileFormComponent implements OnInit {
           }
         );
       } else {
+        this.uploadFile();
         this.adoptionService.updateAdoptionProfile(adoption).subscribe(
           response => {
             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção atualizada!' });

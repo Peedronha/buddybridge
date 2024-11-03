@@ -66,6 +66,10 @@ public class AnimalModel {
     @OneToMany(mappedBy = "animal")
     private List<MedicalHistoryModel> medicalHistories;
 
+    @Column(name = "animal_image")
+    private String imageName;
+
+
     public AnimalModel(AnimalDto animalDto) {
         this.id_animal = animalDto.getId_animal();
         this.nome_animal = animalDto.getNome_animal();

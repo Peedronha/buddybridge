@@ -11,16 +11,17 @@ import br.com.buddybridge.core.adocao.repository.AdoptionProfileRepository;
 import br.com.buddybridge.core.adocao.repository.AdoptionRepository;
 import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
 import br.com.buddybridge.core.animais.animal.repository.AnimalRepository;
+import br.com.buddybridge.core.imageuploader.entity.Image;
+import br.com.buddybridge.core.imageuploader.service.ImageService;
+import br.com.buddybridge.core.imageuploader.service.implementation.ImageServiceImpl;
 import jakarta.transaction.SystemException;
 import lombok.AllArgsConstructor;
 import lombok.Generated;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @AllArgsConstructor
@@ -30,31 +31,10 @@ public class AdoptionService {
     private final AdoptionRepository adoptionRepository;
     private final AdopterRepository adopterRepository;
     private final AnimalRepository animalRepository;
-//    public AdoptionProfileModel saveAdoptionProfileRequest(ProfileDTO adoptionDTO) throws SystemException, NumberFormatException {
-//        try {
-//            AdoptionProfileModel model = new AdoptionProfileModel(adoptionDTO);
-//
-//            if (adoptionDTO.getId_adocao().isEmpty()) {
-//                    AdoptionModel adoptionModel = new AdoptionModel(AdoptionStatus.PENDING);
-//                    model.setAdocao(this.adoptionRepository.save(adoptionModel));
-//                }
-//
-//                Optional<ContaCaixa> animalModelOptional = animalRepository.findById(Long.valueOf(adoptionDTO.getId_animal()));
-//
-//                if (animalModelOptional.isPresent()) {
-//                    model.setAnimal(animalModelOptional.get());
-//                } else {
-//                    throw new SystemException("ContaCaixa with ID " + adoptionDTO.getId_animal() + " not found.");
-//                }
-//                model.setData_criacao(LocalDateTime.now());
-//
-//            return adoptionProfileRepository.save(model);
-//        } catch (NumberFormatException e) {
-//            throw new NumberFormatException("Invalid contacaixa ID format: " + adoptionDTO.getId_animal());
-//        } catch (Exception e) {
-//            throw new SystemException("An error occurred while saving the adoption profile: " + e.getMessage());
-//        }
-//    }
+
+    private  final ImageService  imageService;
+
+
 public AdoptionProfileModel saveAdoptionProfileRequest(ProfileDTO adoptionDTO) throws SystemException {
     try {
         AdoptionProfileModel model;
@@ -173,16 +153,33 @@ public AdoptionProfileModel saveAdoptionProfileRequest(ProfileDTO adoptionDTO) t
     public List<GetAdoptionDTO> AnimalsByAdoptionPendingStatus() throws SystemException {
         try {
             List<GetAdoptionDTO> dtos = new ArrayList<>();
-            for (AdoptionProfileModel model: adoptionProfileRepository.findAllByPendingAdoption()){
-                dtos.add(new GetAdoptionDTO(model));
-            };
+
+            List<AdoptionProfileModel> models = adoptionProfileRepository.findAllByPendingAdoption();
+
+            // Fetch all adoption profiles with pending status
+            for (AdoptionProfileModel model : models) {
+                GetAdoptionDTO dto = new GetAdoptionDTO(model);
+
+                // Check if the animal has an associated image
+                if (model.getAnimal().getImageName() != null) {
+                    // Fetch the image asynchronously
+                    byte[] imageBytes = this.imageService.getImage(model.getAnimal().getImageName());
+                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                    dto.setImage(base64Image);
+                }
+
+                // Add the DTO to the list
+                dtos.add(dto);
+            }
+
             return dtos;
 
         } catch (Exception e) {
             throw new SystemException(String.valueOf(e));
         }
-
     }
+
+
 
     public List<GetAdoptionDTO> findAllAdoptions() throws SystemException {
         try {

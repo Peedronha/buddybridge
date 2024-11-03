@@ -51,7 +51,7 @@
           <small
             *ngIf="registerForm.get('doctor')?.invalid && (registerForm.get('doctor')?.dirty || registerForm.get('doctor')?.touched)"
             class="block p-error">
-            <div *ngIf="registerForm.get('doctor')?.errors?.['required']">O nome do animal é uma informação
+            <div *ngIf="registerForm.get('doctor')?.errors?.['required']">O nome do veterinário é uma informação
               obrigatória.
             </div>
           </small>

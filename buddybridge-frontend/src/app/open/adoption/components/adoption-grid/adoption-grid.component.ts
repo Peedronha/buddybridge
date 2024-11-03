@@ -10,6 +10,7 @@ import { AdoptionService } from "../../../../restrict/base/adoption-profile/shar
 import { AnimalCard } from "../../../../restrict/base/adoption-profile/model/AnimalCard";
 import { AdoptionSubmissionFormComponent } from "../adoption-submission-form/adoption-submission-form.component";
 import { CardModule } from "primeng/card";
+import {ImageUploadService} from "../../../../restrict/base/adoption-profile/shared/image-upload.service";
 
 @Component({
   selector: 'app-adoption-grid',
@@ -37,12 +38,16 @@ export class AdoptionGridComponent {
 
   animals!: AnimalCard[];
 
+  imagePreview: string | ArrayBuffer | null = null; // Stores the image preview URL
+
+  imageFile!: File;
+
   genero = [
     { label: 'Fêmea', value: 'Female' },
     { label: 'Macho', value: 'Male' },
   ];
 
-  constructor(private animalService: AnimalService, private adoptionService: AdoptionService) {}
+  constructor(private animalService: AnimalService, private adoptionService: AdoptionService, private imageService: ImageUploadService) {}
 
   ngOnInit() {
     this.adoptionService.getAnimalsByProfileStatus().subscribe((data: AnimalCard[]) => {
@@ -51,6 +56,40 @@ export class AdoptionGridComponent {
     });
   }
 
+  onFileInput(event: any) {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files[0]) {
+      this.imageFile = input.files[0];
+
+      // Create a URL for the image preview
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result; // Stores the preview URL
+      };
+      reader.readAsDataURL(this.imageFile); // Reads file data as URL
+    }
+  }
+
+  imageSrc: string | null = null;
+
+  // loadImage(event: any) {
+  //   this.imageFile = event.target.files[0];
+  //
+  //   // Create a preview URL for the selected image
+  //   if (this.imageFile) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e: any) => {
+  //       this.imagePreview = e.target.result; // Set the preview URL
+  //     };
+  //     reader.readAsDataURL(this.imageFile);
+  //   }
+  // }
+
+  loadImage(key: any) {
+    this.imageSrc = `data:image/jpeg;base64,${key}`;
+    return this.imageSrc
+  }
 
   onAdd(idAnimal: number | undefined) {
     this.add.emit(idAnimal);

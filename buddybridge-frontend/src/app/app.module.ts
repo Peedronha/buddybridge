@@ -1,5 +1,4 @@
 import { MovimentoListComponent } from './restrict/base/financeiro/movimento/component/movimento-list/movimento-list.component';
-import { ClassificacaoComponent } from './restrict/base/financeiro/classificacao/component/classificacao/classificacao.component';
 import { MessagesModule } from 'primeng/messages';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
@@ -80,6 +79,9 @@ import { PagamentoFormComponent } from './restrict/base/financeiro/pagamento/com
 import { PagamentoListComponent } from './restrict/base/financeiro/pagamento/component/pagamento-list/pagamento-list.component';
 import { DashfinanceiroComponent } from './restrict/base/financeiro/dashfinanceiro/dashfinanceiro.component';
 import {HistoricoMedicoComponent} from "./restrict/base/historico-medico/components/historico-medico/historico-medico.component";
+import {
+  ClassificacaoComponent
+} from "./restrict/base/financeiro/classificacao/component/classificacao/classificacao.component";
 
 
 @NgModule({

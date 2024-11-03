@@ -37,23 +37,23 @@ public class ImageRestController {
     public ResponseEntity<UploadResponse> uploadImage(@RequestParam("imageFile") MultipartFile imageFile,
                                                       @PathVariable("id_animal") String animalId)
             throws ExecutionException, InterruptedException {
-        AdoptionProfileModel profileModel = profileRepository.getReferenceById(Long.valueOf(animalId));
+//        AdoptionProfileModel profileModel = profileRepository.getReferenceById(Long.valueOf(animalId));
 
         // Check if the animal already has 3 images
-        if (profileModel.getImageUrls().size() >= 3) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new UploadResponse(HttpStatus.BAD_REQUEST.value(), LocalDateTime.now(),
-                            "This animal already has the maximum number of images (3)", null, null));
-        }
+//        if (profileModel.getImageUrls().size() >= 3) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+//                    .body(new UploadResponse(HttpStatus.BAD_REQUEST.value(), LocalDateTime.now(),
+//                            "This animal already has the maximum number of images (3)", null, null));
+//        }
 
-        CompletableFuture<Image> uploadedImage = imageService.uploadImage(imageFile);
+        CompletableFuture<Image> uploadedImage = imageService.uploadImage(imageFile, Long.valueOf(animalId));
 
         String baseURL = "http://localhost:4200";
         String imageUrl = uploadedImage.get().getImageName();
 
         // Add the image URL to the animal's image list
-        profileModel.getImageUrls().add(imageUrl);
-        profileRepository.save(profileModel);
+//        profileModel.getImageUrls().add(imageUrl);
+//        profileRepository.save(profileModel);
 
         UploadResponse response = new UploadResponse(HttpStatus.CREATED.value(),
                 LocalDateTime.now(),
