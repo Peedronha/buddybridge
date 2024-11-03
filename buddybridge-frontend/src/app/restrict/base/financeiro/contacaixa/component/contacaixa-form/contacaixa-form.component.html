@@ -1,17 +1,26 @@
 <div class="card">
   <div class="surface-section py-2 md-3">
     <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BRIDGE</a></li>
-        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Contas de Caixa</a></li>
-        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-        <li><span class="text-900 line-height-3">Nova Conta de Caixa</span></li>
-        <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra as contas de caixa do sistema!</a></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY FINANCEIRO</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Configurações</a></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li><span class="text-900 line-height-3">Contas de Caixa</span></li>
+      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
+      <li>
+        <span class="text-900 line-height-3">
+          <ng-container *ngIf="registerForm.get('idContaCaixa')?.value != null ; else newItem">Alterar</ng-container>
+          <ng-template #newItem>Novo</ng-template>
+        </span>
+      </li>
+      <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia as contas de caixa do sistema!</a></li>
     </ul>
     <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
         <div>
-            <div class="font-medium text-3xl text-900">Nova Conta de Caixa</div>
+          <div class="font-medium text-3xl text-900">
+            <ng-container *ngIf="registerForm.get('idContaCaixa')?.value != null ; else newItem">Alterar</ng-container>
+          </div>
         </div>
         <div class="mt-3 lg:mt-0">
         <button pButton pRipple label="Voltar" class="p-button-danger p-button mr-2" icon="pi pi-chevron-left" routerLink="/contacaixa"></button>

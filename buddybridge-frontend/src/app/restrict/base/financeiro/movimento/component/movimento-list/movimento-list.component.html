@@ -5,7 +5,7 @@
     </span>
     <button pButton pRipple label="Novo" (click)='onAdd()' class="p-button p-button" icon="pi pi-plus"></button>
     <button pButton pRipple label="Alterar" (click)='onEdit(_specificEntity?.idMovimentacao)' class="p-button p-button" icon="pi pi-pencil" [disabled]='!_specificEntity?.idMovimentacao'></button>
-    <button pButton pRipple label="Pagar" icon="pi pi-dollar" (click)="onPay(_specificEntity)" [disabled]='!_specificEntity?.idMovimentacao'></button>
+    <button pButton pRipple label="Fluxo de caixa" icon="pi pi-dollar" (click)="onNovoFluxoCaixa(_specificEntity)" [disabled]='!_specificEntity?.idMovimentacao'></button>
     <button pButton pRipple label="Excluir" (click)='showDeleteDialog(_specificEntity)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;" [disabled]='!_specificEntity?.idMovimentacao'></button>
   </div>
 
@@ -15,35 +15,32 @@
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="idMovimentacao" style="width:10%">Cod. <p-sortIcon field="idMovimentacao"></p-sortIcon></th>
-        <th pSortableColumn="historico" style="width:30%">Histórico <p-sortIcon field="historico"></p-sortIcon></th>
-        <th pSortableColumn="dataLancamento" style="width:15%">Data Lançamento <p-sortIcon field="dataLancamento"></p-sortIcon></th>
+        <th pSortableColumn="historico" style="width:20%">Histórico <p-sortIcon field="historico"></p-sortIcon></th>
         <th pSortableColumn="classificacao" style="width:20%">Classificação <p-sortIcon field="classificacao"></p-sortIcon></th>
-        <th pSortableColumn="valor" style="width:10%">Valor <p-sortIcon field="valor"></p-sortIcon></th>
-        <th pSortableColumn="valorPendente" style="width:10%">Valor Pendente <p-sortIcon field="valorPendente"></p-sortIcon></th>
-        <th pSortableColumn="observacoes" style="width:10%">Observações <p-sortIcon field="observacoes"></p-sortIcon></th>
+        <th pSortableColumn="dataLancamento" style="width:10%">Data <p-sortIcon field="dataLancamento"></p-sortIcon></th>
+        <th pSortableColumn="valor" style="width:20%">R$ Movimentação<p-sortIcon field="valor"></p-sortIcon></th>
+        <th pSortableColumn="valorPendente" style="width:20%">R$ Pendente<p-sortIcon field="valorPendente"></p-sortIcon></th>
       </tr>
       <tr>
         <th>
-          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'idMovimentacao', 'contains')" [value]="$any(dt1.filters['idMovimentacao'])?.value" placeholder="Filtrar Cod." class="w-full">
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'idMovimentacao', 'contains')" [value]="$any(dt1.filters['idMovimentacao'])?.value" placeholder="Cod." class="w-full">
         </th>
         <th>
-          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'historico', 'contains')" [value]="$any(dt1.filters['historico'])?.value" placeholder="Filtrar Histórico" class="w-full">
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'historico', 'contains')" [value]="$any(dt1.filters['historico'])?.value" placeholder="Histórico" class="w-full">
         </th>
         <th>
-          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'dataLancamento', 'contains')" [value]="$any(dt1.filters['dataLancamento'])?.value" placeholder="Filtrar Data" class="w-full">
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'classificacao', 'contains')" [value]="$any(dt1.filters['classificacao'])?.value" placeholder="Classificação" class="w-full">
         </th>
         <th>
-          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'classificacao', 'contains')" [value]="$any(dt1.filters['classificacao'])?.value" placeholder="Filtrar Classificação" class="w-full">
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'dataLancamento', 'contains')" [value]="$any(dt1.filters['dataLancamento'])?.value" placeholder="Data" class="w-full">
         </th>
         <th>
-          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'valor', 'contains')" [value]="$any(dt1.filters['valor'])?.value" placeholder="Filtrar Valor" class="w-full">
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'valor', 'contains')" [value]="$any(dt1.filters['valor'])?.value" placeholder="Valor Movimentação" class="w-full">
         </th>
         <th>
-          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'valorPendente', 'contains')" [value]="$any(dt1.filters['valorPendente'])?.value" placeholder="Filtrar Valor Pendente" class="w-full">
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'valorPendente', 'contains')" [value]="$any(dt1.filters['valorPendente'])?.value" placeholder="Valor Pendente" class="w-full">
         </th>
-        <th>
-          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'observacoes', 'contains')" [value]="$any(dt1.filters['observacoes'])?.value" placeholder="Filtrar Observações" class="w-full">
-        </th>
+
       </tr>
     </ng-template>
 
@@ -58,12 +55,12 @@
           {{movimentacao.historico}}
         </td>
         <td>
-          <span class="p-column-title">Data Lançamento</span>
-          {{movimentacao.dataLancamento | date:'dd/MM/yyyy'}}
-        </td>
-        <td>
           <span class="p-column-title">Classificação</span>
           {{movimentacao.classificacao?.descricaoClassificacao}}
+        </td>
+        <td>
+          <span class="p-column-title">Data </span>
+          {{movimentacao.dataLancamento | date:'dd/MM/yyyy'}}
         </td>
         <td>
           <span class="p-column-title">Valor</span>
@@ -73,10 +70,7 @@
           <span class="p-column-title">Valor Pendente</span>
           {{movimentacao.valorPendente | currency:'BRL'}}
         </td>
-        <td>
-          <span class="p-column-title">Observações</span>
-          {{movimentacao.observacoes}}
-        </td>
+
       </tr>
     </ng-template>
 
@@ -93,6 +87,20 @@
     <ng-template pTemplate="footer">
       <button pButton label="Cancelar" icon="pi pi-times" (click)="onCancelDelete()"></button>
       <button pButton severity="danger" label="Confirmar" icon="pi pi-check" (click)="confirmDelete()"></button>
+    </ng-template>
+  </p-dialog>
+  <p-dialog header="Pagamentos do Movimento" [(visible)]="displayPagamentosDialog" [modal]="true" [style]="{ width: '400px' }">
+    <hr/>
+    <ul *ngIf="pagamentosMovimento.length > 0">
+      <li *ngFor="let pagamento of pagamentosMovimento" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+        <span>{{ pagamento.dataRecebimento | date: 'dd/MM/yyyy' }} - {{ pagamento.valorPagamento | currency:'BRL' }}</span>
+      </li>
+    </ul>
+    <hr/>
+    <button *ngIf="movimentoSelecionado?.valorPendente! > 0" pButton label="Adicionar Fluxo de Caixa" (click)="adicionarPagamento()"></button>
+    <ng-template #noPagamentos>
+      <p>Não existem pagamentos para este movimento.</p>
+      <button pButton label="Adicionar Fluxo de Caixa" (click)="adicionarPagamento()"></button>
     </ng-template>
   </p-dialog>
 </div>

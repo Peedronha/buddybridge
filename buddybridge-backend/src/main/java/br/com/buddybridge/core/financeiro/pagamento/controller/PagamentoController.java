@@ -40,6 +40,12 @@ public class PagamentoController {
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("getAllPagamentosByMovimentoId/{id}")
+    public ResponseEntity<List<Pagamento>> getAllPagamentosByMovimentoId(@PathVariable Long id) {
+        List<Pagamento> pagamentoList = pagamentoService.getAllPagamentosByMovimentoId(id);
+        return new ResponseEntity<>(pagamentoList, HttpStatus.OK);
+    }
+
     @PutMapping
     public ResponseEntity<Pagamento> updatePagamento(@RequestBody Pagamento pagamento) throws Exception {
         Optional<Pagamento> existingPagamento = pagamentoService.findPagamentoById(pagamento.getIdPagamento());

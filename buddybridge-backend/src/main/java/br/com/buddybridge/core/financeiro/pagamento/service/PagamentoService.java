@@ -59,4 +59,10 @@ public class PagamentoService {
                 .map(Pagamento::getValorPagamento)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
+    public List<Pagamento> getAllPagamentosByMovimentoId(Long movimentacaoId) {
+        List<Pagamento> pagamentos = pagamentoRepository.findByMovimentacao_IdMovimentacao(movimentacaoId);
+        return pagamentos;
+    }
+
 }
