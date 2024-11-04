@@ -4,53 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="Commit - ajustes merge">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/adocao/controller/AdoptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/adocao/controller/AdoptionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/adocao/entity/AdoptionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/adocao/entity/AdoptionModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/adocao/repository/AdoptionProfileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/adocao/repository/AdoptionProfileRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/adocao/service/AdoptionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/adocao/service/AdoptionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/historico/controller/MedicalHistoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/historico/controller/MedicalHistoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/historico/repository/MedicalHistoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/historico/repository/MedicalHistoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/historico/service/MedicalHistoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/historico/service/MedicalHistoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/security/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/java/br/com/buddybridge/core/usuario/controller/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/resources/acessos/acessoAnimais.txt" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/resources/acessos/acessoAnimais.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/resources/acessos/acessoFinanceiro.txt" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/resources/acessos/acessoFinanceiro.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-backend/src/main/resources/acessos/acessoMenu.txt" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-backend/src/main/resources/acessos/acessoMenu.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-grid/adoption-grid.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-grid/adoption-grid.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-grid/adoption-grid.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-grid/adoption-grid.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-header/adoption.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-header/adoption.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-header/adoption.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-header/adoption.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-private/adoption-list/adoption-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-private/adoption-list/adoption-list.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-private/adoption-list/adoption-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-private/adoption-list/adoption-list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-private/adoption-update/adoption-update.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-private/adoption-update/adoption-update.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-private/adoption-update/adoption-update.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-private/adoption-update/adoption-update.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-private/adoption/adoption-management.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-private/adoption/adoption-management.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-private/adoption/adoption-management.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-private/adoption/adoption-management.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-submission-form/adoption-submission-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-submission-form/adoption-submission-form.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-submission-form/adoption-submission-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/adoption/components/adoption-submission-form/adoption-submission-form.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/open/home/home.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/adoption-profile/component/adoption-form/adoption-profile-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/adoption-profile/component/adoption-form/adoption-profile-form.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/adoption-profile/component/adoption-list/adoption-profile-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/adoption-profile/component/adoption-list/adoption-profile-list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/adoption-profile/component/adoption/adoption-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/adoption-profile/component/adoption/adoption-profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/adoption-profile/component/adoption/adoption-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/adoption-profile/component/adoption/adoption-profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/adoption-profile/shared/adoption.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/adoption-profile/shared/adoption.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/animal/animal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/animal/animal.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/animal/animal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/animal/animal.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/list-animal/list-animal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/list-animal/list-animal.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/list-animal/list-animal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/animal/component/list-animal/list-animal.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/financeiro/movimento/component/movimento-list/movimento-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/financeiro/movimento/component/movimento-list/movimento-list.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/historico-medico/components/form-historico-medico/form-historico-medico.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/historico-medico/components/form-historico-medico/form-historico-medico.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/historico-medico/components/form-historico-medico/form-historico-medico.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/historico-medico/components/form-historico-medico/form-historico-medico.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/historico-medico/components/historico-medico/historico-medico.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/historico-medico/components/historico-medico/historico-medico.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/historico-medico/components/historico-medico/historico-medico.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/historico-medico/components/historico-medico/historico-medico.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/historico-medico/service/historico-medico.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/base/historico-medico/service/historico-medico.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/dashboard/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/dashboard/dashboard.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/buddybridge-frontend/src/app/restrict/dashboard/dashboard.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="50b3276d-c301-4e7b-aff8-d985792fbd45" name="Changes" comment="Commit - ajustes finais - buddy bridge - módulo de animais" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="ajustes-financeiro" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -108,21 +62,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/limag/IdeaProjects/buddybridge/buddybridge-backend/src/main/java/br/com/buddybridge/core/financeiro&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/limag/IdeaProjects/buddybridge/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "ajustes-finais-animais",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Users/limag/IdeaProjects/buddybridge/buddybridge-backend/src/main/java/br/com/buddybridge/core/financeiro",
+    "onboarding.tips.debug.path": "C:/Users/limag/IdeaProjects/buddybridge/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="br.com.buddybridge.core.security.component" />
@@ -525,7 +479,23 @@
       <option name="project" value="LOCAL" />
       <updated>1730658863943</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Commit - ajustes finais - buddy bridge - módulo de animais">
+      <option name="closed" value="true" />
+      <created>1730738343047</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1730738343047</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Commit - ajustes finais - buddy bridge - módulo de animais">
+      <option name="closed" value="true" />
+      <created>1730738679518</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1730738679519</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -552,7 +522,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Commit buddybridge-ajustes-projeto" />
     <MESSAGE value="commit branch buddybridge-back-login-cadastro" />
     <MESSAGE value="merge buddyBridgeFront into master" />
     <MESSAGE value="Commit buddyBridge-implementacao-jwt" />
@@ -577,7 +546,8 @@
     <MESSAGE value="merge relatório animais into master" />
     <MESSAGE value="Commit - ajustes financeiros" />
     <MESSAGE value="Commit - ajustes merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit - ajustes merge" />
+    <MESSAGE value="Commit - ajustes finais - buddy bridge - módulo de animais" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit - ajustes finais - buddy bridge - módulo de animais" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
