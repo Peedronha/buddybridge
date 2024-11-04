@@ -30,10 +30,10 @@
           <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'idade', 'contains')" [value]="$any(dt1.filters['idade'])?.value" placeholder="Idade" class="w-full">
         </th>
         <th>
-          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'tipo_animal', 'contains')" [value]="$any(dt1.filters['tipo_animal'])?.value" placeholder="Tipo" class="w-full">
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'tipo_animal.name', 'contains')" [value]="$any(dt1.filters['tipo_animal.name'])?.value" placeholder="Tipo" class="w-full">
         </th>
         <th>
-          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'raca_animal', 'contains')" [value]="$any(dt1.filters['raca_animal'])?.value" placeholder="Raça" class="w-full">
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'raca_animal.name', 'contains')" [value]="$any(dt1.filters['raca_animal.name'])?.value" placeholder="Raça" class="w-full">
         </th>
         <th>
           <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'data_resgate', 'contains')" [value]="$any(dt1.filters['data_resgate'])?.value" placeholder="Data de resgate" class="w-full">
