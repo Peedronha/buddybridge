@@ -105,7 +105,8 @@ export class AdoptionService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.get<any>(this.apiUrl+'/'+param,{headers: reqHeader})  }
+    return this.http.get<any>(this.apiUrl+'/'+param,{headers: reqHeader})
+  }
 
   getAdoptionsProfiles() {
     var reqHeader = new HttpHeaders({
@@ -120,7 +121,8 @@ export class AdoptionService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.getAuthorizationToken()
     });
-    return this.http.get<any>(this.apiUrl+'/profiles/'+param,{headers: reqHeader})  }
+    return this.http.get<any>(this.apiUrl+'/profiles/'+param,{headers: reqHeader})
+  }
 
   updateAdoptionProfile(adoption: AdoptionProfileModel) {
     var reqHeader = new HttpHeaders({
@@ -139,11 +141,8 @@ export class AdoptionService {
   }
 
   getAnimalsByProfileStatus() {
-    var reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.getAuthorizationToken()
-    });
-    return this.http.get<any>(this.apiUrl+'/profiles/PENDING',{headers: reqHeader})  }
+    return this.http.get<any>('http://localhost:8080/auth/profiles/PENDING');
+  }
 
   deleteAdoptionProfile(idUser: any) {
     var reqHeader = new HttpHeaders({
@@ -167,4 +166,14 @@ export class AdoptionService {
         }
       ))
   }
+
+  findProfilesByUsuarioAdocaoId(usuarioId: number): Observable<any[]> {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    // Chamando o endpoint do backend para buscar os processos de adoção pelo ID do usuário
+    return this.http.get<any[]>(this.apiUrl+'/by-usuario/'+usuarioId, { headers: reqHeader });
+  }
+
 }

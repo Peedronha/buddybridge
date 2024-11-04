@@ -9,18 +9,48 @@
         <a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia os dados do seu painel!</a>
       </li>
     </ul>
+
+    <!-- Seção de processos de adoção em andamento -->
     <div class="bg-blue-400 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap">
       <div class="font-bold">Meus processos de adoção em andamento!</div>
-
-
     </div>
+    <div class="p-3">
+      <h4 class="text-900 mb-3">Processos de Adoção em Andamento:</h4>
+      <ul class="list-none m-0 p-0">
+          <li *ngFor="let adocao of adocoesEmAndamento" class="mb-3 p-3 border-round bg-gray-100">
+              <div>
+                  <strong>Nome do Adotante:</strong> {{ adocao.nome_adotante || 'Não disponível' }}
+              </div>
+              <div>
+                  <strong>Nome do Animal:</strong> {{ adocao.nome_animal || 'Não disponível' }}
+              </div>
+              <div>
+                  <strong>Status da Adoção:</strong> {{ adocao.status_adocao || 'Não disponível' }}
+              </div>
+              <div>
+                  <strong>Idade do Animal:</strong> {{ adocao.idade }}
+              </div>
+              <div>
+                  <strong>Necessidades Médicas:</strong> {{ adocao.medical_necessities }}
+              </div>
+
+          </li>
+      </ul>
+    </div>
+
+
+
+
+    <!-- Seção com informações da ONG -->
     <br/>
     <div class="bg-blue-400 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap">
-      <div class="font-bold mr-8">Os número da ong!</div>
+      <div class="font-bold mr-8">Os números da ONG!</div>
       <div class="align-items-center hidden lg:flex">
           <span class="line-height-3">Ajude na adoção, apadrinhamento ou doando.</span>
       </div>
     </div>
+
+    <!-- Cards de estatísticas de adoção -->
     <br/>
     <div class="grid">
       <div class="col-12 lg:col-6 xl:col-4">
@@ -63,9 +93,13 @@
         </div>
     </div>
   </div>
+
+  <!-- Mensagem de incentivo -->
   <div class="bg-bluegray-900 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap">
     <div class="font-bold">Se você pode mudar o destino de um animal de rua, por que não fazer isso?!</div>
   </div>
+
+  <!-- Logo -->
   <br/>
   <div class="text-center">
     <a class="layout-topbar-logo" routerLink="restrict/home">

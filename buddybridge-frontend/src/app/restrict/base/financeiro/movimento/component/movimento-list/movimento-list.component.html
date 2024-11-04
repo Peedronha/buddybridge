@@ -11,7 +11,6 @@
 
   <p-table #dt1 [value]="movimentacoes" selectionMode="single" [(selection)]="_specificEntity" dataKey="idMovimentacao" [tableStyle]="{'min-width': '50rem'}"
            [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session-movimentacao">
-
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="idMovimentacao" style="width:10%">Cod. <p-sortIcon field="idMovimentacao"></p-sortIcon></th>

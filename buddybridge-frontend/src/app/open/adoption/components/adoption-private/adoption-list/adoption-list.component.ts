@@ -1,30 +1,11 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ButtonModule} from "primeng/button";
-import {DialogModule} from "primeng/dialog";
-import {InputTextModule} from "primeng/inputtext";
-import {RippleModule} from "primeng/ripple";
-import {MessageService, SharedModule} from "primeng/api";
-import {TableModule} from "primeng/table";
-import {AdoptionProfileModel} from "../../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
-import {FormBuilder, Validators} from "@angular/forms";
 import {AdoptionService} from "../../../../../restrict/base/adoption-profile/shared/adoption.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AnimalCard} from "../../../../../restrict/base/adoption-profile/model/AnimalCard";
 import {AnimalService} from "../../../../../restrict/base/animal/service/animal.service";
 import {AdoptionFormModel} from "../../../models/AdoptionFormModel";
-import {AdoptionSubmissionFormComponent} from "../../adoption-submission-form/adoption-submission-form.component";
 
 @Component({
   selector: 'app-adoption-list',
-  standalone: true,
-    imports: [
-        ButtonModule,
-        DialogModule,
-        InputTextModule,
-        RippleModule,
-        SharedModule,
-        TableModule
-    ],
   templateUrl: './adoption-list.component.html',
   styleUrl: './adoption-list.component.scss'
 })
@@ -45,6 +26,19 @@ export class AdoptionListComponent {
     { label: 'Macho', value: 'Male' },
   ];
 
+  statusOptions = [
+    { label: 'Pendente', value: 'PENDING' },
+    { label: 'Em analise', value: 'ANALYSING' },
+    { label: 'Aprovada', value: 'APPROVED' },
+    { label: 'Rejeitada', value: 'REJECTED' },
+    { label: 'Finalizada', value: 'COMPLETED' }
+  ];
+
+  getStatusLabel(statusValue: string): string {
+    const status = this.statusOptions.find(option => option.value === statusValue);
+    return status ? status.label : statusValue;
+  }
+
 
   constructor(private animalService: AnimalService,
               private adoptionService: AdoptionService,
@@ -54,6 +48,7 @@ export class AdoptionListComponent {
 
   ngOnInit() {
     this.adoptionService.getAdoptions().subscribe((data: AdoptionFormModel[]) => {
+      console.log("cade?" + data)
       this.adoptions = data;
     });
   }

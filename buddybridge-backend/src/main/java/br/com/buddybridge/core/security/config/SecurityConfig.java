@@ -39,6 +39,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET,  "/auth/**").permitAll()
                                 .requestMatchers(HttpMethod.GET,  "/ongcontrol/**").permitAll()
                                 .requestMatchers(HttpMethod.POST,  "/colaborador/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,  "/auth/profiles/PENDING").permitAll()
                                 .requestMatchers(
                                         "/v3/api-docs/**",
                                         "/configuration/ui",

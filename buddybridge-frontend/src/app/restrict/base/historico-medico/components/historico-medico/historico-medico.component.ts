@@ -54,7 +54,7 @@ export class HistoricoMedicoComponent {
   ngOnInit(): void {
     this.accountService.validarSessao();
     //Fazendo a solicitação de acessos - inicio
-    this.grupoacessoserviceService.getAcessosParaTela('Cadastro de Registros Médicos').subscribe((acessos: AcessoDTO[]) => {
+    this.grupoacessoserviceService.getAcessosParaTela('Cadastro de Histórico médico').subscribe((acessos: AcessoDTO[]) => {
       this.acessos = acessos;
       console.log(acessos)
     });
@@ -89,7 +89,7 @@ export class HistoricoMedicoComponent {
   }
 
   onAdd() {
-    if (this.hasAccess('Cadastrar Registro')) {
+    if (this.hasAccess('Cadastrar Histórico médico')) {
       this.router.navigate(['addRegistro'], { relativeTo: this.route });
     } else {
       this.showAccessDeniedModal();
@@ -97,7 +97,7 @@ export class HistoricoMedicoComponent {
   }
 
   onEdit(idUser: any) {
-    if (this.hasAccess('Alterar Registro Médico')) {
+    if (this.hasAccess('Alterar Histórico médico')) {
       this.router.navigate(['editRegistro', idUser], { relativeTo: this.route });
     } else {
       this.showAccessDeniedModal();
@@ -105,7 +105,7 @@ export class HistoricoMedicoComponent {
   }
 
   onRemove(idUser: any) {
-    if (this.hasAccess('Excluir registro médico')) {
+    if (this.hasAccess('Excluir Histórico médico')) {
       this.historicoMedicoService.deleteMedicalReport(idUser).subscribe(() =>{
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro excluido com sucesso' });
         window.location.reload();

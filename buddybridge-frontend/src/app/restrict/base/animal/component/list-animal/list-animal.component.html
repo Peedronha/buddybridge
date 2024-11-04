@@ -4,19 +4,20 @@
         Selecione um item na grid abaixo para poder alterá-lo ou excluí-lo.
     </span>
     <button pButton pRipple label="Novo" (click)='onAdd()' class="p-button p-button" icon="pi pi-plus"></button>
-    <button pButton pRipple label="Alterar" (click)='onEdit(_specificEntity?.idMovimentacao)' class="p-button p-button" icon="pi pi-pencil" [disabled]='!_specificEntity?.idMovimentacao'></button>
-    <button pButton pRipple label="Excluir" (click)='showDeleteDialog(_specificEntity)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;" [disabled]='!_specificEntity?.idMovimentacao'></button>
+    <button pButton pRipple label="Alterar" (click)='onEdit(_specificEntity?.id_animal)' class="p-button p-button" icon="pi pi-pencil" [disabled]='!_specificEntity?.id_animal'></button>
+    <button pButton pRipple label="Histórico médico" icon="pi pi-file" (click)="onHistoricoMedico(_specificEntity)" [disabled]="!_specificEntity?.id_animal"></button>
+    <button pButton pRipple label="Excluir" (click)='showDeleteDialog(_specificEntity)' class="p-button-danger mr-2" icon="pi pi-trash" style="margin: 2px 0;" [disabled]='!_specificEntity?.id_animal'></button>
   </div>
   <p-table #dt1 [value]="animals" selectionMode="single" [(selection)]="_specificEntity" dataKey="id_animal" [tableStyle]="{'min-width': '50rem'}"
-           [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session-cadastro-animais">
+           [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session-animais098">
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="id_animal" style="width:10%">Cod. <p-sortIcon field="id_animal"></p-sortIcon></th>
-        <th pSortableColumn="nome_animal" style="width:20%">Nome <p-sortIcon field="nome_animal"></p-sortIcon></th>
-        <th pSortableColumn="cpf_voluntario" style="width:20%">Idade <p-sortIcon field="idade"></p-sortIcon></th>
-        <th pSortableColumn="tipo_animal" style="width:20%">Tipo <p-sortIcon field="tipo_animal"></p-sortIcon></th>
-        <th pSortableColumn="raca_animal" style="width:20%">Raça <p-sortIcon field="raca_animal"></p-sortIcon></th>
-        <th pSortableColumn="cargo_voluntario" style="width:20%">Data de resgate <p-sortIcon field="data_resgate"></p-sortIcon></th>
+        <th pSortableColumn="nome_animal" style="width:30%">Nome <p-sortIcon field="nome_animal"></p-sortIcon></th>
+        <th pSortableColumn="idade" style="width:20%">Idade <p-sortIcon field="idade"></p-sortIcon></th>
+        <th pSortableColumn="tipo_animal" style="width:10%">Tipo <p-sortIcon field="tipo_animal"></p-sortIcon></th>
+        <th pSortableColumn="raca_animal" style="width:10%">Raça <p-sortIcon field="raca_animal"></p-sortIcon></th>
+        <th pSortableColumn="data_resgate" style="width:10%">Resgate <p-sortIcon field="data_resgate"></p-sortIcon></th>
       </tr>
       <tr>
         <th>
@@ -40,7 +41,7 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-animal>
-      <tr [pSelectableRow]="animals">
+      <tr [pSelectableRow]="animal">
         <td>
           <span class="p-column-title">Cod.</span>
           {{animal.id_animal}}
@@ -81,5 +82,40 @@
         <button pButton label="Cancelar" icon="pi pi-times" (click)="onCancelDelete()"></button>
         <button pButton severity="danger" label="Confirmar" icon="pi pi-check" (click)="confirmDelete()"></button>
     </ng-template>
+  </p-dialog>
+
+  <p-dialog header="Confirmar Exclusão" [(visible)]="displayDeleteDialogHistorico" modal="modal" [closable]="false"
+            [dismissableMask]="true" [baseZIndex]="10000"
+            [draggable]="false" [resizable]="false">
+    <p class="m-0">Tem certeza de que deseja excluir este registro?</p>
+    <ng-template pTemplate="footer">
+      <button pButton label="Cancelar" icon="pi pi-times" (click)="onCancelDeleteHistorico()"></button>
+      <button pButton severity="danger" label="Confirmar" icon="pi pi-check" (click)="confirmDeleteHistorico()"></button>
+    </ng-template>
+  </p-dialog>
+
+  <!-- Diálogo de Histórico Médico -->
+  <p-dialog header="Histórico Médico" [(visible)]="displayHistoricoDialog" [modal]="true" [style]="{ width: '600px' }">
+    <ng-container *ngIf="medicalHistory && medicalHistory.length > 0; else noHistoryMessage">
+      <ul class="p-list">
+        <li *ngFor="let history of medicalHistory" class="p-list-item" style="display: flex; justify-content: space-between; align-items: center;">
+          <span>Procedimento: {{ history.type }} em {{ history.date | date: 'dd/MM/yyyy' }} - {{ history.description }}</span>
+          <span>
+            <button pButton pRipple icon="pi pi-pencil" label="Alterar" class="p-button-sm p-button-success ml-2"
+            style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" (click)="onEditHistorico(history)"></button>
+            <button pButton pRipple icon="pi pi-pencil" label="Excluir" class="p-button-sm p-button-danger ml-2"
+            style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" (click)='showDeleteDialogHistorico(history)'></button>
+          </span>
+          <hr/>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-template #noHistoryMessage>
+      <p>Não há histórico médico para este animal.</p>
+    </ng-template>
+    <!-- Botão para adicionar novo histórico médico -->
+    <div class="text-center mt-3">
+      <button pButton pRipple label="Novo Histórico Médico" icon="pi pi-plus" (click)="onAddHistorico()"></button>
+    </div>
   </p-dialog>
 </div>

@@ -12,15 +12,6 @@ import {AdoptionProfileModel} from "../../model/AdoptionProfileModel";
 
 @Component({
   selector: 'app-adoption-profile-list',
-  standalone: true,
-  imports: [
-    ButtonModule,
-    DialogModule,
-    InputTextModule,
-    RippleModule,
-    SharedModule,
-    TableModule
-  ],
   templateUrl: './adoption-profile-list.component.html',
   styleUrl: './adoption-profile-list.component.scss'
 })

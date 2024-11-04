@@ -14,53 +14,51 @@
         <div class="font-medium text-3xl text-900">Ficha de Adotante</div><br/><br/>
       </div>
       <div class="mt-3 lg:mt-0">
-        <button pButton pRipple label="Voltar" class="p-button mr-2" icon="pi pi-chevron-left" routerLink="/adocao"></button>
+        <button pButton pRipple label="Voltar" class="p-button mr-2" icon="pi pi-chevron-left" routerLink="/restrict/manage-adoption"></button>
       </div>
     </div>
-    <div>
-      <div class="field">
-        <h4>Dados do Adotante</h4>
-        <p class="adoption-details"><strong>Nome Adotante:</strong> {{adoption.nome_adotante}}</p>
-        <p class="adoption-details"><strong>Email:</strong> {{adoption.email}}</p>
-        <p class="adoption-details"><strong>Telefone:</strong> {{adoption.telefone}}</p>
-        <p class="adoption-details"><strong>Logradouro:</strong> {{adoption.endereco}}</p>
-        <p class="adoption-details"><strong>Número:</strong> {{adoption.numero}}</p>
-        <p class="adoption-details"><strong>Bairro:</strong> {{adoption.Bairro}}</p>
-        <p class="adoption-details"><strong>Cidade:</strong> {{adoption.Cidade}}</p>
-        <p class="adoption-details"><strong>Estado:</strong> {{adoption.Estado}}</p>
+    <div class="p-4 shadow-2 border-round w-12 lg:w-12">
+      <div class="p-fluid p-formgrid grid">
+        <!-- nome_adotante -->
+        <div class="field col-6 md:col-6">
+          <h4>Dados do Adotante</h4>
+          <p class="adoption-details"><strong>Nome Adotante:</strong> {{adoption.nome_adotante}}</p>
+          <p class="adoption-details"><strong>Email:</strong> {{adoption.email}}</p>
+          <p class="adoption-details"><strong>Telefone:</strong> {{adoption.telefone}}</p>
+          <p class="adoption-details"><strong>Logradouro:</strong> {{adoption.endereco}}, nº {{adoption.numero}}</p>
+          <p class="adoption-details"><strong>Bairro:</strong> {{adoption.Bairro}}</p>
+          <p class="adoption-details"><strong>Cidade:</strong> {{adoption.Cidade}}, {{adoption.Estado}}</p>
+        </div>
+        <div class="field col-6 md:col-6">
+          <h4>Questionário</h4>
+          <p class="adoption-details"><strong>Existem crianças ou pessoas com alergias na casa? </strong>{{booleanToPortuguese(adoption.alergias)}}</p>
+          <p class="adoption-details"><strong>Você já teve animais de estimação antes? </strong> {{booleanToPortuguese(adoption.animaisAntes)}}</p>
+          <p class="adoption-details"><strong>Quantas horas por dia você costuma passar fora de casa? </strong>  {{adoption.horasFora}}</p>
+          <p class="adoption-details"><strong>Você tem um quintal ou área externa segura para o animal brincar? </strong>  {{booleanToPortuguese(adoption.quintalSeguro)}}</p>
+          <p class="adoption-details"><strong>Está disposto a fornecer cuidados médicos? </strong>  {{booleanToPortuguese(adoption.cuidadosMedicos)}}</p>
+          <p class="adoption-details"><strong>Por que você quer adotar este animal em particular? </strong>  {{adoption.motivoAdocao}}</p>
+        </div>
       </div>
-
-      <div class="field">
-        <br>
-        <h4>Questionário</h4>
-        <p class="adoption-details"><strong>Existem crianças ou pessoas com alergias na casa? </strong><br>{{booleanToPortuguese(adoption.alergias)}}</p>
-        <p class="adoption-details"><strong>Você já teve animais de estimação antes? </strong><br> {{booleanToPortuguese(adoption.animaisAntes)}}</p>
-        <p class="adoption-details"><strong>Quantas horas por dia você costuma passar fora de casa? </strong><br>  {{adoption.horasFora}}</p>
-        <p class="adoption-details"><strong>Você tem um quintal ou área externa segura para o animal brincar? </strong><br>  {{booleanToPortuguese(adoption.quintalSeguro)}}</p>
-        <p class="adoption-details"><strong>Está disposto a fornecer cuidados médicos? </strong><br>  {{booleanToPortuguese(adoption.cuidadosMedicos)}}</p>
-        <p class="adoption-details"><strong>Por que você quer adotar este animal em particular? </strong><br>  {{adoption.motivoAdocao}}</p>
-      </div>
-      <div class="field">
-        <br>
-        <h4>Considerações Finais</h4>
-          <label for="status_adocao">Status *</label>
-          <br>
+      <hr/>
+      <h4>Considerações Finais</h4>
+      <div class="p-fluid p-formgrid grid">
+        <div class="field col-3 md:col-3">
+          <label for="status_adocao">Status: *</label>
           <p-dropdown [options]="statusOptions" [(ngModel)]="selectStatus"  optionLabel="label" formControlName="status_adocao" class="w-full" name="status_adocao"
                       placeholder="Selecione o status"></p-dropdown>
           <small *ngIf="adoptionForm.get('status_adocao')?.invalid && (adoptionForm.get('status_adocao')?.dirty || adoptionForm.get('status_adocao')?.touched)" class="block p-error">
             <div *ngIf="adoptionForm.get('status_adocao')?.errors?.['required']">Selecionar o status de adoção é uma informação obrigatória.</div>
           </small>
-          </div>
-
-          <div class="field">
-          <label for="observacoes">Observações</label>
+        </div>
+        <div class="field col-9 md:col-9">
+          <label for="observacoes">Observações: *</label>
           <input id="observacoes" formControlName="observacoes" pInputTextarea class="w-full" type="text" />
           <small *ngIf="adoptionForm.get('observacoes')?.invalid && (adoptionForm.get('observacoes')?.dirty || adoptionForm.get('observacoes')?.touched)" class="block p-error">
             <div *ngIf="adoptionForm.get('observacoes')?.errors?.['required']">Relatar as suas observações é uma informação obrigatória.</div>
           </small>
           </div>
+        </div>
+        <button pButton label="ENVIAR" stylepInputText class="w-full" type="submit"></button>
     </div>
-
-    <button pButton label="ENVIAR" stylepInputText class="w-full" type="submit"></button>
   </form>
 </div>

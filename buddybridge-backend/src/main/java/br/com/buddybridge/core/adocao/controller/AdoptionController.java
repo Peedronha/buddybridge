@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -106,16 +107,15 @@ public class AdoptionController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllAdoptions()  {
-        try {
-            List<GetAdoptionDTO> model = adoptionService.findAllAdoptions();
-            return ResponseEntity.ok(model);
-        } catch (Exception e) {
-            return buildErrorResponse("An error occurred: " + e.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<List<GetAdoptionDTO>> getAllAdoptions()  {
+        List<GetAdoptionDTO> model = adoptionService.findAllAdoptions();
+        if(!model.isEmpty()) {
+            return new ResponseEntity<>(model, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(model, HttpStatus.NOT_FOUND);
         }
     }
 
-    // Endpoint to update an adoption request
     @PutMapping("/change/{id}")
     public ResponseEntity<?> updateAdoptionIntention(@RequestBody AdoptionSubmissionDTO adoptionDTO, @PathVariable String id) {
         try {
@@ -141,4 +141,15 @@ public class AdoptionController {
     private ResponseEntity<String> buildErrorResponse(String message, HttpStatus status) {
         return ResponseEntity.status(status).body(message);
     }
+
+    @GetMapping("/by-usuario/{id}")
+    public ResponseEntity<List<ProfileDTO>> findProfilesByUsuarioAdocaoId(@PathVariable Long id) {
+        List<AdoptionProfileModel> profiles = adoptionService.findProfilesByUsuarioAdocaoId(id);
+        List<ProfileDTO> profileDTOs = profiles.stream()
+                .map(ProfileDTO::new)  // Converte cada entidade para ProfileDTO
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(profileDTOs);  // Retorna a lista de ProfileDTOs com status 200 (OK)
+    }
+
+
 }

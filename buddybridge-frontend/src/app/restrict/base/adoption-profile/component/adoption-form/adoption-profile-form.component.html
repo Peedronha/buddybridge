@@ -1,23 +1,17 @@
 <div class="card">
   <form [formGroup]="adoptionForm" (ngSubmit)="submitDetails()">
     <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
-      <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BASE</a></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY ANIMAIS</a></li>
       <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Cadastros Gerais</a></li>
-      <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Animais</a></li>
+      <li><a class="text-500 no-underline line-height-3 cursor-pointer">Perfis de adoção</a></li>
       <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
       @if (id_perfil_adocao?.value == null || id_perfil_adocao?.value == 'NaN') {
         <li><span class="text-900 line-height-3">Alterar</span></li>
-        <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você altera os perfis do adoção do
-          sistema!</a></li>
       } @else {
         <li><span class="text-900 line-height-3">Novo</span></li>
-        <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra os perfis do adoção do
-          sistema!</a></li>
       }
+      <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia os perfis de adoção!</a></li>
     </ul>
     <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
       <div>
@@ -28,38 +22,21 @@
         }
       </div>
       <div class="mt-3 lg:mt-0">
-        <button pButton pRipple label="Voltar" class="p-button mr-2" icon="pi pi-chevron-left"
-                routerLink="/perfil-adocao"></button>
+        <button pButton pRipple label="Voltar" class="p-button mr-2" icon="pi pi-chevron-left" routerLink="/perfil-adocao"></button>
       </div>
     </div>
     <p-messages></p-messages>
-    <div>
-      <div class="field">
-        <label for="id_animal">Animal *</label>
-        <p-dropdown [options]="animals" [(ngModel)]="selectAnimal" optionLabel="nome_animal" formControlName="id_animal"
-                    class="w-full" name="id_animal"
-                    placeholder="Selecione o animal"></p-dropdown>
+    <div class="p-fluid p-formgrid grid">
+      <div class="field col-9 md:col-9">
+        <label for="classificacao">Animal: *</label>
+        <p-dropdown [options]="animals" [(ngModel)]="selectAnimal" optionLabel="nome_animal" formControlName="id_animal" name="id_animal" placeholder="Selecione uma animal"></p-dropdown>
         <small
           *ngIf="adoptionForm.get('id_animal')?.invalid && (adoptionForm.get('id_animal')?.dirty || adoptionForm.get('id_animal')?.touched)"
           class="block p-error">
           <div *ngIf="adoptionForm.get('id_animal')?.errors?.['required']">O animal é uma informação obrigatória.</div>
         </small>
       </div>
-      <!--      <div class="field">-->
-      <!--        <label for="medical_necessities">Necessidades médicas</label>-->
-      <!--        <textarea rows="5" pInputTextarea formControlName="medical_necessities" class="w-full" name="medical_necessities"-->
-      <!--                  placeholder="Digite a descrição"></textarea>-->
-      <!--      </div>-->
-      <!--      <div class="field">-->
-      <!--        <label for="status_adocao">Status *</label>-->
-      <!--        <p-dropdown [options]="statusOptions" [(ngModel)]="selectStatus" optionLabel="label" formControlName="status_adocao" class="w-full" name="status"-->
-      <!--                    [showClear]="true"-->
-      <!--                    placeholder="Selecione o status"></p-dropdown>-->
-      <!--        <small *ngIf="adoptionForm.get('status_adocao')?.invalid && (adoptionForm.get('status_adocao')?.dirty || adoptionForm.get('status_adocao')?.touched)" class="block p-error">-->
-      <!--          <div *ngIf="adoptionForm.get('status_adocao')?.errors?.['required']">O status da adoção é uma informação obrigatória.</div>-->
-      <!--        </small>-->
-      <!--      </div>-->
-      <div class="field">
+      <div class="field col-3 md:col-3">
         <label for="priority">Prioridade *</label>
         <input type="number" pInputText formControlName="priority" class="w-full" name="priority"
                placeholder="Digite a prioridade" min="1" max="10"/>
@@ -72,31 +49,22 @@
           <div *ngIf="adoptionForm.get('priority')?.errors?.['max']">A prioridade deve ser no máximo 10.</div>
         </small>
       </div>
-      <div class="field">
+    </div>
+    <div class="p-fluid p-formgrid grid">
+      <div class="field col-12 md:col-12">
         <label for="medical_necessities">Necessidades Médicas</label>
         <textarea rows="5" pInputTextarea formControlName="medical_necessities" class="w-full"
                   name="medical_necessities"
                   placeholder="Descreva as necessidades médicas do animal"></textarea>
       </div>
-      <!--      <div class="field">-->
-      <!--        <label for="image">Imagem do Animal</label>-->
-      <!--&lt;!&ndash;        <input type="file" pInputText formControlName="image" class="w-full" name="image" accept="image/*"/>&ndash;&gt;-->
-      <!--        <button id="file-chooser" class="file-button" type="button" (click)="fileInput.click()">Choose a file</button>-->
-      <!--        <input #fileInput style="display: none"  (change)="onFileInput($event)" type="file" accept="image/jpeg,image/png,image/webp,image/bmp">-->
-      <!--      </div>-->
-      <!--    </div>-->
-
-      <div class="field">
-        <label for="image">Imagem do Animal</label>
-
+    </div>
+    <div class="p-fluid p-formgrid grid">
+      <div class="field col-12 md:col-12">
+        <label for="image">Imagem do Animal:</label><br/>
         <!-- Button to trigger file input -->
-        <button id="file-chooser" class="file-button" type="button" (click)="fileInput.click()">Escolher Arquivo
-        </button>
-
+        <button id="file-chooser" class="file-button" type="button" (click)="fileInput.click()">Clique para selecionar um Arquivo</button>
         <!-- Hidden file input field -->
-        <input #fileInput style="display: none" (change)="onFileInput($event)" type="file"
-               accept="image/jpeg,image/png,image/webp,image/bmp">
-
+        <input #fileInput style="display: none" (change)="onFileInput($event)" type="file" accept="image/jpeg,image/png,image/webp,image/bmp">
         <!-- Image preview -->
         <div *ngIf="imagePreview" class="image-preview">
           <img [src]="imagePreview" alt="Preview da Imagem do Animal" style="max-width: 200px; margin-top: 10px;"/>

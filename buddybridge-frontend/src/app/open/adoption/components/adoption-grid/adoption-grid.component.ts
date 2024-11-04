@@ -11,19 +11,10 @@ import { AnimalCard } from "../../../../restrict/base/adoption-profile/model/Ani
 import { AdoptionSubmissionFormComponent } from "../adoption-submission-form/adoption-submission-form.component";
 import { CardModule } from "primeng/card";
 import {ImageUploadService} from "../../../../restrict/base/adoption-profile/shared/image-upload.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-adoption-grid',
-  standalone: true,
-  imports: [
-    TagModule,
-    ButtonModule,
-    NgClass,
-    NgForOf,
-    AdoptionSubmissionFormComponent,
-    CardModule,
-    DataViewModule
-  ],
   templateUrl: './adoption-grid.component.html',
   styleUrls: ['./adoption-grid.component.scss'] // fixed typo (styleUrls instead of styleUrl)
 })
@@ -47,7 +38,7 @@ export class AdoptionGridComponent {
     { label: 'Macho', value: 'Male' },
   ];
 
-  constructor(private animalService: AnimalService, private adoptionService: AdoptionService, private imageService: ImageUploadService) {}
+  constructor(private animalService: AnimalService, private adoptionService: AdoptionService, private imageService: ImageUploadService, private route: Router) {}
 
   ngOnInit() {
     this.adoptionService.getAnimalsByProfileStatus().subscribe((data: AnimalCard[]) => {
@@ -92,7 +83,11 @@ export class AdoptionGridComponent {
   }
 
   onAdd(idAnimal: number | undefined) {
-    this.add.emit(idAnimal);
+    if(localStorage.getItem('token') != null && localStorage.getItem('token') != ''){
+      this.add.emit(idAnimal);
+    } else {
+      this.route.navigateByUrl('/register');
+    }
   }
 
   getGenderLabel(genderValue: string | undefined): string {

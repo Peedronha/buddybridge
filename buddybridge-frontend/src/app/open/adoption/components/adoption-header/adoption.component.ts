@@ -13,11 +13,6 @@ import {AdoptionFormModel} from "../../models/AdoptionFormModel";
 
 @Component({
   selector: 'app-adoption',
-  standalone: true,
-  imports: [
-    AdoptionGridComponent,
-    AdoptionProfileListComponent,
-  ],
   templateUrl: './adoption.component.html',
   styleUrl: './adoption.component.scss'
 })

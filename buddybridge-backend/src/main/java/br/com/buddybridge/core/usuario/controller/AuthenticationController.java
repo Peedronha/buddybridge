@@ -1,5 +1,7 @@
 package br.com.buddybridge.core.usuario.controller;
 
+import br.com.buddybridge.core.adocao.model.get.GetAdoptionDTO;
+import br.com.buddybridge.core.adocao.service.AdoptionService;
 import br.com.buddybridge.core.controleacesso.entity.Acesso;
 import br.com.buddybridge.core.controleacesso.service.GrupoAcessoService;
 import br.com.buddybridge.core.ong.entity.Ong;
@@ -29,6 +31,7 @@ public class AuthenticationController {
 
     private final AuthService authService;
     private final UsuarioService userService;
+    private final AdoptionService adoptionService;
 
     @PostMapping("/salvar")
     public ResponseEntity<?> salvar(@RequestBody Usuario usuario) throws ExampleExeption, SystemException {
@@ -57,5 +60,14 @@ public class AuthenticationController {
         return ResponseEntity.ok(Boolean.TRUE);
     }
 
+    @GetMapping("/profiles/PENDING")
+    public ResponseEntity<?> getProfilesByStatusPending() {
+        try {
+            List<GetAdoptionDTO> model = adoptionService.AnimalsByAdoptionPendingStatus();
+            return ResponseEntity.ok(model);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
 
 }

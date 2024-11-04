@@ -12,7 +12,8 @@
       <div class="font-medium text-3xl text-900">Animais</div><br/><br/><br/>
     </div>
   </div>
-  <app-list-animal [animals]="animals" (add)="onAdd()" (edit)="onEdit($event)" (remove)="onRemove($event)">
+  <app-list-animal [animals]="animals" (add)="onAdd()" (edit)="onEdit($event)" (remove)="onRemove($event)"
+                                       (addHistoricoMedico)="onAddHistorico($event)" (editHistoricoMedico)="onEditHistorico($event)" (removeHistoricoMedico)="onDeleteHistorico($event)">
   </app-list-animal>
 </div>
 <p-dialog header="Solicitar Acesso" [(visible)]="displayModal" [modal]="true" [style]="{width: '400px'}">

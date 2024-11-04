@@ -64,6 +64,15 @@ public class MedicalHistoryController {
         }
     }
 
+    @GetMapping("/animal/{id}")
+    public ResponseEntity<List<MedicalProfileDTO>> getAllMedicalProfilesByAnimalId(@PathVariable Long id) {
+        List<MedicalProfileDTO> models = medicalHistoryService.getAllMedicalProfilesByAnimalId(id);
+        if (models.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(models);
+    }
+
     // Endpoint to delete an adoption profile
     @Transactional
     @DeleteMapping("/medical-profiles/{id}")
@@ -79,5 +88,8 @@ public class MedicalHistoryController {
     private ResponseEntity<String> buildErrorResponse(String message, HttpStatus status) {
         return ResponseEntity.status(status).body(message);
     }
+
+
+
 }
 

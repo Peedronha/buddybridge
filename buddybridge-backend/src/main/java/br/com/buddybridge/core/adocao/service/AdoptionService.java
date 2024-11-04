@@ -14,6 +14,8 @@ import br.com.buddybridge.core.animais.animal.repository.AnimalRepository;
 import br.com.buddybridge.core.imageuploader.entity.Image;
 import br.com.buddybridge.core.imageuploader.service.ImageService;
 import br.com.buddybridge.core.imageuploader.service.implementation.ImageServiceImpl;
+import br.com.buddybridge.core.usuario.entity.Usuario;
+import br.com.buddybridge.core.usuario.service.UsuarioService;
 import jakarta.transaction.SystemException;
 import lombok.AllArgsConstructor;
 import lombok.Generated;
@@ -31,7 +33,7 @@ public class AdoptionService {
     private final AdoptionRepository adoptionRepository;
     private final AdopterRepository adopterRepository;
     private final AnimalRepository animalRepository;
-
+    private final UsuarioService usuarioService;
     private  final ImageService  imageService;
 
 
@@ -97,7 +99,12 @@ public AdoptionProfileModel saveAdoptionProfileRequest(ProfileDTO adoptionDTO) t
             try {
                 Optional<AdoptionModel> model = this.adoptionRepository.findById(adoptionDTO.getIdAdocao());
                 if (model.isPresent()) {
-                    this.adoptionRepository.save(populateAdoption(adoptionDTO, model.get()));
+                    AdoptionModel adocao = populateAdoption(adoptionDTO, model.get());
+                    Usuario user = usuarioService.getCurrentUser();
+                    if(user != null) {
+                        adocao.setUsuarioAdocao(user);
+                    }
+                    this.adoptionRepository.save(adocao);
                 } else {
                     throw new SystemException("AdoptionModel with ID " + adoptionDTO.getIdAdocao() + " not found.");
                 }
@@ -122,7 +129,7 @@ public AdoptionProfileModel saveAdoptionProfileRequest(ProfileDTO adoptionDTO) t
 
         model.setAdopter(this.adopterRepository.save(adopterModel));
 
-        //model.setStatus_adocao(AdoptionStatus.ANALYSING);
+        model.setStatus_adocao(AdoptionStatus.ANALYSING);
 
         model.setData_submissao(LocalDateTime.now());
         return model;
@@ -179,19 +186,15 @@ public AdoptionProfileModel saveAdoptionProfileRequest(ProfileDTO adoptionDTO) t
         }
     }
 
-
-
-    public List<GetAdoptionDTO> findAllAdoptions() throws SystemException {
-        try {
-            List<GetAdoptionDTO> dtos = new ArrayList<>();
-            for (AdoptionModel model: adoptionRepository.findAll()){
+    public List<GetAdoptionDTO> findAllAdoptions() {
+        List<GetAdoptionDTO> dtos = new ArrayList<>();
+        for (AdoptionModel model: adoptionRepository.findAll()){
+            //System.out.println("model existe "+ model.getId_adocao());
+            if(model.getAdopter() != null) {
                 dtos.add(new GetAdoptionDTO(model));
-            };
-            return dtos;
-
-        } catch (Exception e) {
-            throw new SystemException(String.valueOf(e));
-        }
+            }
+        };
+        return dtos;
     }
 
     public GetAdoptionDetails findAdoptionById(Long id) throws Exception {
@@ -217,4 +220,9 @@ public AdoptionProfileModel saveAdoptionProfileRequest(ProfileDTO adoptionDTO) t
         }
         return true;
     }
+
+    public List<AdoptionProfileModel> findProfilesByUsuarioAdocaoId(Long usuarioId) {
+        return adoptionProfileRepository.findByUsuarioAdocaoId(usuarioId);
+    }
+
 }

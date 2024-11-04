@@ -54,6 +54,7 @@ export class AdoptionUpdateComponent {
 
   statusOptions = [
     { label: 'Pendente', value: 'PENDING' },
+    { label: 'Em analise', value: 'ANALYSING' },
     { label: 'Aprovada', value: 'APPROVED' },
     { label: 'Rejeitada', value: 'REJECTED' },
     { label: 'Finalizada', value: 'COMPLETED' }
@@ -147,7 +148,7 @@ export class AdoptionUpdateComponent {
         response => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção registrada!' });
           this.adoptionForm.reset();
-          this.route.navigateByUrl('/perfil-adocao');
+          this.route.navigateByUrl('/restrict/manage-adoption');
         },
         error => {
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao registrar a adoção.' });

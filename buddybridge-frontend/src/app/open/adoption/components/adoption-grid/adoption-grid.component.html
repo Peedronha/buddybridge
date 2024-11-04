@@ -1,76 +1,32 @@
 <p-dataView [value]="animals" [layout]="'grid'">
-  <!-- Header for layout options -->
-  <ng-template pTemplate="header">
-    <div class="flex justify-content-end">
-    </div>
-  </ng-template>
-
-  <!-- List Layout Template -->
-  <ng-template pTemplate="list" let-animal>
-    <div class="p-grid p-dir-col p-md-dir-row">
-      <div class="p-col-12 p-md-4" *ngFor="let animal of animals; let first = first">
-        <p-card header="{{animal.nome_animal}}">
-          <img [src]="loadImage(animal.image)" alt="Image" style="width:15%; height:auto;"/>
-          <p><strong>Idade:</strong> {{ animal.nome_animal || 'Unknown' }}</p>
-          <p><strong>Peso:</strong> {{ animal.peso_animal }} kg</p>
-          <p><strong>Comprimento:</strong> {{ animal.comprimento_animal }} cm</p>
-          @if (animal.genero_animal == 'Macho') {
-            <p class="animal-details"><strong>Gênero:</strong><i class="pi pi-mars"></i> {{ animal.genero_animal }}</p>
-          } @else {
-            <p class="animal-details"><strong>Gênero:</strong><i class="pi pi-venus"></i> {{ animal.genero_animal }}</p>
-          }
-          <p><strong>Localização:</strong> {{ animal.localizacao_animal }}</p>
-          <ng-template pTemplate="footer">
-            <button class="adopt-button" (click)="onAdd(animal.id_perfil_adocao)">
-              <i class="pi pi-heart"></i> Quero adotar!
-            </button>
-          </ng-template>
-        </p-card>
-      </div>
-    </div>
-  </ng-template>
-
   <ng-template let-animal pTemplate="grid">
-    <div class="grid grid-nogutter p-3 gap-4">
-      <div class="col-12 sm:col-6 md:col-4 xl:col-3 p-2" *ngFor="let animal of animals">
-        <div class="p-4 border-1 surface-border surface-card border-round flex flex-column">
-          <div class="surface-50 flex justify-content-center border-round p-3">
-            <img [src]="loadImage(animal.image)" alt="{{ animal.nome_animal || 'Unknown' }}" style="max-width: 300px; height: 300px;"/>
-          </div>
-          <div class="pt-4">
-            <div class="flex flex-row justify-content-between align-items-start gap-2">
-              <div>
-                <span class="font-medium text-secondary text-sm">{{ animal.tipo_animal }}</span>
-                <div class="text-lg font-medium text-900 mt-1">{{ animal.raca_animal }}</div>
-              </div>
-              <div class="surface-100 p-1" style="border-radius: 30px">
-                <div class="surface-0 flex align-items-center gap-2 justify-content-center py-1 px-2"
-                     style="border-radius: 30px; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06)">
-                  <span class="text-900 font-medium text-sm">{{ animal.priority }}</span>
-                  <i class="pi pi-star-fill text-yellow-500"></i>
+    <div class="grid grid-nogutter p-3 gap-3">
+      <div *ngFor="let animal of animals">
+        <div class="border-1 surface-border border-round m-2 p-3">
+            <div class="mb-3">
+                <div class="relative mx-auto">
+                  <img [src]="loadImage(animal.image)" alt="{{ animal.nome_animal || 'Unknown' }}" style="max-width: 300px; height: 300px;"/>
                 </div>
-              </div>
             </div>
-            <div class="flex flex-column gap-4 mt-4">
-              <span class="text-2xl font-semibold">{{ animal.nome_animal }}</span>
-              <p><strong>Idade:</strong> {{ animal.idade || 'Desconhecida' }}</p>
-              <p><strong>Peso:</strong> {{ animal.peso_animal || 'Desconhecido' }} kg</p>
-              <p><strong>Comprimento:</strong> {{ animal.comprimento_animal || 'Desconhecido' }} cm</p>
-              <p class="animal-details">
+            <div class="mb-3 font-medium" style="font-size: 12px;">
+              {{ animal.idade || 'Desconhecida' }}, {{ animal.peso_animal || '' }} kg, {{ animal.comprimento_animal || 'Desconhecido' }} cm
+            </div>
+            <div class="mb-3 font-semibold">
+              <div class="text-3xl text-primary font-bold mb-3">{{ animal.nome_animal }}</div>
+              <div class="text-1xl text-secondary font-bold">Localização: {{ animal.localizacao_animal || 'Desconhecida' }}</div>
+            </div>
+            <div class="flex justify-content-between align-items-center">
+              <div class="mt-0 font-semibold text-xl">
                 @if (animal.genero_animal == 'Macho') {
-                  <p class="animal-details"><strong>Gênero:</strong> {{ getGenderLabel(animal.genero_animal) }} <i class="pi pi-mars"></i>
-                  </p>
+                  <i class="pi pi-mars"></i> Macho
                 } @else {
-                  <p class="animal-details"><strong>Gênero:</strong> {{ getGenderLabel(animal.genero_animal) }} <i class="pi pi-venus"></i>
-                  </p>
+                  <i class="pi pi-venus"></i> Femea
                 }
-              </p>
-              <p><strong>Localização:</strong> {{ animal.localizacao_animal || 'Desconhecida' }}</p>
-              <div class="flex justify-content-center mt-4">
-                <p-button icon="pi pi-heart" label="Quero adotar!" (click)="onAdd(animal.id_perfil_adocao)" class="white-space-nowrap"/>
               </div>
+              <span>
+                <p-button icon="pi pi-heart" label="Quero adotar!" (click)="onAdd(animal.id_perfil_adocao)" class="white-space-nowrap"/>
+              </span>
             </div>
-          </div>
         </div>
       </div>
     </div>

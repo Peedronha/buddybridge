@@ -10,3 +10,7 @@ Buddy Animais;Cadastro de Raça;DELETE;Excluir Raça;
 Buddy Animais;Cadastro de perfil de adoção;POST;Cadastrar perfil de adoção;
 Buddy Animais;Cadastro de perfil de adoção;PUT;Alterar perfil de adoção;
 Buddy Animais;Cadastro de perfil de adoção;DELETE;Excluir perfil de adoção;
+Buddy Animais;Cadastro de Animais;POST;Cadastrar Histórico médico;
+Buddy Animais;Cadastro de Animais;PUT;Alterar Histórico médico;
+Buddy Animais;Cadastro de Animais;DELETE;Excluir Histórico médico;
+

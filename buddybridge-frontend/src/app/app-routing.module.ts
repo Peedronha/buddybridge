@@ -140,7 +140,8 @@ const routes: Routes = [
       { path: 'pagamento/editpagamento/:id', title: 'BuddyBridge - Editar Pagamento', component: PagamentoFormComponent, resolve: { pagamento: PagamentoResolver } },
 
       { path: 'dashfinanceiro', title: 'BuddyBridge - Financeiro', component: DashfinanceiroComponent },
-      { path: 'dashadocao', title: 'BuddyBridge - Adoções', component: DashAdocaoComponent }
+      { path: 'dashadocao', title: 'BuddyBridge - Adoções', component: DashAdocaoComponent },
+
 
     ],
     canActivate: [AuthGuard]

@@ -2,24 +2,19 @@
   <form [formGroup]="registerForm" (ngSubmit)="submitDetails()">
     <div class="surface-section py-2 md-3">
       <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY BASE</a></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">BUDDY ANIMAIS</a></li>
         <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Cadastros Gerais</a></li>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Histórico médico</a></li>
         <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Animais</a></li>
-        <li class="px-2"><i class="pi pi-angle-right text-500 line-height-3"></i></li>
-        <script>
-        </script>
         @if (medicalReportId?.value != null && medicalReportId?.value == 'NaN')  {
           <li><span class="text-900 line-height-3">Novo</span></li>
           <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você cadastra os registros médico no
-            sistema!</a></li>
+          <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia os registros médico do pet!</a></li>
         }@else
         {
         <li><span class="text-900 line-height-3">Alterar </span></li>
         <li class="px-2"><i class="pi pi-info-circle text-500 line-height-3"></i></li>
-        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você altera os registros médicos no sistema!</a>
+        <li><a class="text-500 no-underline line-height-3 cursor-pointer">Aqui você gerencia os registros médicos do pet!</a>
         </li>
         }
       </ul>
@@ -27,14 +22,13 @@
         <div>
           @if (this.medicalReportId?.value != null && this.medicalReportId?.value == 'NaN') {
           <div class="font-medium text-3xl text-900">Novo Registro</div><br/><br/>
-          } @else
-            {
+          } @else{
             <div class="font-medium text-3xl text-900">Alterar Registro</div><br/><br/>
-            }
+          }
         </div>
         <div class="mt-3 lg:mt-0">
           <button pButton pRipple label="Voltar" class="p-button mr-2" icon="pi pi-chevron-left"
-                  routerLink="/report"></button>
+                  routerLink="/animal"></button>
         </div>
       </div>
       <small class="block p-error">
@@ -44,6 +38,17 @@
     <p-messages></p-messages>
     <div>
       <div class="p-fluid p-formgrid grid">
+        <div class="field col-6 md:col-6">
+          <label for="animalId">Animal *</label>
+          <p-dropdown [options]="animals" [(ngModel)]="selectAnimal" optionLabel="nome_animal"
+                      formControlName="animalId" class="w-full" name="animalId"
+                      placeholder="Selecione o animal"></p-dropdown>
+          <small
+            *ngIf="registerForm.get('animalId')?.invalid && (registerForm.get('animalId')?.dirty || registerForm.get('animalId')?.touched)"
+            class="block p-error">
+            <div *ngIf="registerForm.get('animalId')?.errors?.['required']">O animal é uma informação obrigatória.</div>
+          </small>
+        </div>
         <div class="field col-6 md:col-6">
           <label for="doctor">Nome do Veterinário <i class="p-error">*</i></label>
           <input type="text" pInputText formControlName="doctor" name="doctor"
@@ -56,7 +61,9 @@
             </div>
           </small>
         </div>
-        <div class="field col-3 md:col-3">
+      </div>
+      <div class="p-fluid p-formgrid grid">
+        <div class="field col-4 md:col-4">
           <label for="type">Tipo de procedimento <i class="p-error">*</i></label>
           <input pInputText inputId="type" formControlName="type" name="type"
                  placeholder="Digite o tipo de procedimento" maxlength="6"/>
@@ -68,20 +75,7 @@
             </div>
           </small>
         </div>
-        <div class="field col-3 md:col-3">
-          <label for="animalId">Animal *</label>
-          <p-dropdown [options]="animals" [(ngModel)]="selectAnimal" optionLabel="nome_animal"
-                      formControlName="animalId" class="w-full" name="animalId"
-                      placeholder="Selecione o animal"></p-dropdown>
-          <small
-            *ngIf="registerForm.get('animalId')?.invalid && (registerForm.get('animalId')?.dirty || registerForm.get('animalId')?.touched)"
-            class="block p-error">
-            <div *ngIf="registerForm.get('animalId')?.errors?.['required']">O animal é uma informação obrigatória.</div>
-          </small>
-        </div>
-      </div>
-      <div class="p-fluid p-formgrid grid">
-        <div class="field col-3 md:col-3">
+        <div class="field col-4 md:col-4">
           <label for="date">Data do procedimento<i class="p-error">*</i></label>
           <input type="date" pInputText formControlName="date" class="w-full" name="date"
                  placeholder="Selecione a data do procedimento" [attr.max]="maxDate"/>
@@ -91,7 +85,7 @@
             <div *ngIf="registerForm.get('date')?.errors?.['required']">A data é uma informação obrigatória.</div>
           </small>
         </div>
-        <div class="field col-3 md:col-3">
+        <div class="field col-4 md:col-4">
           <label for="returnDate">Data de retorno <i class="p-error">*</i></label>
           <input type="date" pInputText formControlName="returnDate" class="w-full" name="returnDate"
                  placeholder="Selecione a data de retorno" [attr.min]="maxDate"/>
@@ -100,7 +94,9 @@
             class="block p-error">
           </small>
         </div>
-        <div class="field col-3 md:col-3">
+      </div>
+      <div class="p-fluid p-formgrid grid">
+        <div class="field col-12 md:col-12">
           <label for="description">Descrição <i class="p-error">*</i></label>
           <textarea inputId="description" rows="5" cols="30" pInputTextarea name="description"
                     formControlName="description"

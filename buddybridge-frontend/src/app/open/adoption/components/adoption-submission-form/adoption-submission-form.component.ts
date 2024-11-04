@@ -1,40 +1,18 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {AnimalModel} from "../../../../restrict/base/animal/model/animal.model";
 import {AdoptionService} from "../../../../restrict/base/adoption-profile/shared/adoption.service";
 import {MessageService} from "primeng/api";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {AnimalService} from "../../../../restrict/base/animal/service/animal.service";
 import {AdoptionProfileModel} from "../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
-import {ButtonModule} from "primeng/button";
-import {DropdownModule} from "primeng/dropdown";
-import {InputTextModule} from "primeng/inputtext";
-import {InputTextareaModule} from "primeng/inputtextarea";
-import {MessagesModule} from "primeng/messages";
-import {NgIf} from "@angular/common";
-import {RippleModule} from "primeng/ripple";
 import {AccountService} from "../../../account/shared/account.service";
 import {AdoptionFormModel} from "../../models/AdoptionFormModel";
 import {AccountRestrictService} from "../../../../restrict/base/account/shared/account-restrict.service";
 import {User} from "../../../account/model/user.model";
-import {RadioButtonModule} from "primeng/radiobutton";
 import {CurrentDate} from "../../models/CurrentDate";
 
 @Component({
   selector: 'app-adoption-submission-form',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    ButtonModule,
-    DropdownModule,
-    InputTextModule,
-    InputTextareaModule,
-    MessagesModule,
-    NgIf,
-    RippleModule,
-    RouterLink,
-    RadioButtonModule
-  ],
   templateUrl: './adoption-submission-form.component.html',
   styleUrl: './adoption-submission-form.component.scss'
 })
@@ -106,7 +84,7 @@ export class AdoptionSubmissionFormComponent {
       this.adoptionForm.setValue({
         nome_adotante: data.nome,
         email: data.login,
-        telefone: data.telefone+'',
+        telefone: '',
         id_perfil_adocao: adoption.id_perfil_adocao+'',
         id_adocao: adoption.id_adocao+'',
         id_animal:adoption.id_animal+'',
@@ -131,6 +109,7 @@ export class AdoptionSubmissionFormComponent {
   }
 
   submitDetails(): void {
+    //alert("entreii");
     if (this.adoptionForm.valid) {
       const formModel = this.adoptionForm.value as AdoptionFormModel;
       //alert(JSON.stringify(formModel))
@@ -138,7 +117,7 @@ export class AdoptionSubmissionFormComponent {
           response => {
             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adoção registrada!' });
             this.adoptionForm.reset();
-            this.route.navigateByUrl('/adocao');
+            this.route.navigateByUrl('/dashboard');
           },
           error => {
             this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao registrar a adoção.' });

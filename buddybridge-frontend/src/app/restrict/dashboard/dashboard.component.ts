@@ -1,181 +1,47 @@
-import { animalResolver } from './../base/animal/guard/animal.resolver';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { Subscription, debounceTime } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { LayoutService } from '../layout/service/app.layout.service';
-import { Adocao } from './model/adocao';
 import { AnimalService } from '../base/animal/service/animal.service';
-import { AnimalModel } from '../base/animal/model/animal.model';
+import { AdoptionService } from '../base/adoption-profile/shared/adoption.service';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
-  items!: MenuItem[];
-  adocao!: AnimalModel[];
+export class DashboardComponent implements OnInit {
+  adocoesEmAndamento: any[] = [];
+  completedAdoptions = 0;
+  inProgressAdoptions = 0;
+  pendingAdoptions = 0;
+  ineligibleAnimals = 0;
 
-  chartData: any;
-  chartOptions: any;
-
-  barData: any;
-  barOptions: any;
-
-  pieDataRace: any;
-  pieDataAdoption: any;
-  pieOptions: any;
-  subscription!: Subscription;
-
-   // Quantidade de processos de adoção (inicializado com valores fictícios)
-   completedAdoptions = 0;
-   inProgressAdoptions = 0;
-   pendingAdoptions = 0;
-   ineligibleAnimals = 0;
-
-
-  constructor(public layoutService: LayoutService, public animalService: AnimalService) {
-      this.subscription = this.layoutService.configUpdate$
-      .pipe(debounceTime(25))
-      .subscribe((config) => {
-          this.initChart();
-      });
-  }
+  constructor(
+    private layoutService: LayoutService,
+    private animalService: AnimalService,
+    private adoptionService: AdoptionService
+  ) {}
 
   ngOnInit() {
-
-      this.loadAdoptionStatusChart();
-      this.loadRaceChart();
-
-      this.initChart();
-      // Carregar animais com adoção pendente
-      this.animalService.getPendingAdoptions().subscribe((data: AnimalModel[]) => {
-        this.adocao = data;
-      });
-      // Carregar quantidade de processos de adoção
-      this.animalService.getAdoptionStats().subscribe((stats) => {
-        this.completedAdoptions = stats.completedAdoptions;
-        this.inProgressAdoptions = stats.inProgressAdoptions;
-        this.pendingAdoptions = stats.pendingAdoptions;
-        this.ineligibleAnimals = stats.noAdoptionProfile;
-      });
-      //Carrega grafico de linhas
-      this.carregarEstatisticasResgateAdocao();
-
-  }
-
-  loadAdoptionStatusChart() {
-    this.animalService.getAdoptionStatusChart().subscribe((data) => {
-      this.pieDataAdoption = {
-        labels: Object.keys(data),
-        datasets: [
-          {
-            data: Object.values(data),
-            backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726', '#FF7043'],
-          },
-        ],
-      };
+    this.animalService.getAdoptionStats().subscribe((stats) => {
+      this.completedAdoptions = stats.completedAdoptions;
+      this.inProgressAdoptions = stats.inProgressAdoptions;
+      this.pendingAdoptions = stats.pendingAdoptions;
+      this.ineligibleAnimals = stats.noAdoptionProfile;
     });
-  }
 
-  loadRaceChart() {
-    this.animalService.getRaceChart().subscribe((data) => {
-      this.pieDataRace = {
-        labels: Object.keys(data),
-        datasets: [
-          {
-            data: Object.values(data),
-            backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726', '#FF7043'],
-          },
-        ],
-      };
-    });
-  }
-
-   // Novo método para carregar receitas e despesas anual para o gráfico
-   carregarEstatisticasResgateAdocao() {
-    this.animalService.getRescueAndAdoptionStats().subscribe(
-      (dados) => {
-        // Labels para os meses do ano
-        const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-
-        // Criação de arrays para receitas e despesas
-        const resgates = new Array(12).fill(0); // Inicializando com 0 para os 12 meses
-        const adocoes = new Array(12).fill(0);
-
-        // Mapeando os dados do backend, assumindo que o backend está retornando o mês no formato numérico (1 para Janeiro, 2 para Fevereiro, etc.)
-        dados.forEach((d: any) => {
-          const mesIndex = d.mes - 1; // Subtrair 1 para ajustar o índice do array (Janeiro = 0)
-          resgates[mesIndex] = d.totalResgatados || 0;
-          adocoes[mesIndex] = d.totalAdotados || 0;
+    const usuarioId = parseInt(localStorage.getItem('idUser') || '0');
+    this.adoptionService.findProfilesByUsuarioAdocaoId(usuarioId).subscribe((data) => {
+      // Armazena os IDs de adoção e busca os detalhes para cada adoção
+      data.forEach(adocao => {
+        this.adoptionService.getAdoptionsById(adocao.id_adocao).subscribe(details => {
+          this.adocoesEmAndamento.push({
+            ...adocao,
+            nome_adotante: details.nome_adotante,
+            nome_animal: details.nome_animal,
+            status_adocao: details.status_adocao
+          });
         });
-
-        // Configurando os dados para o gráfico de barras
-        this.barData = {
-          labels: meses,
-          datasets: [
-            {
-              label: 'Resgates',
-              backgroundColor: '#42A5F5',
-              data: resgates
-            },
-            {
-              label: 'Adoções',
-              backgroundColor: '#FFA726',
-              data: adocoes
-            }
-          ]
-        };
-
-        // Configurando os dados para o gráfico de linhas
-        this.chartData = {
-          labels: meses,
-          datasets: [
-            {
-              label: 'Resgates',
-              borderColor: '#42A5F5',
-              fill: false,
-              data: resgates
-            },
-            {
-              label: 'Adoções',
-              borderColor: '#FFA726',
-              fill: false,
-              data: adocoes
-            }
-          ]
-        };
-      },
-      (error) => {
-        console.error('Erro ao carregar dados de receitas e despesas', error);
-      }
-    );
+      });
+    });
   }
-
-
-  initChart() {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-
-
-    this.pieOptions = {
-        plugins: {
-            legend: {
-                labels: {
-                    usePointStyle: true,
-                    color: textColor
-                }
-            }
-        }
-    };
-
-
-  }
-
-  ngOnDestroy() {
-      if (this.subscription) {
-          this.subscription.unsubscribe();
-      }
-  }
-
-
 }

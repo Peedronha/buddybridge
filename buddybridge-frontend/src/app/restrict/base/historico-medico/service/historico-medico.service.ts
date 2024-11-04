@@ -68,4 +68,14 @@ export class HistoricoMedicoService {
         }
       ))
   }
+
+  // Novo método para buscar o histórico médico pelo ID do animal
+  getMedicalReportByAnimalId(animalId: number): Observable<HistoricoMedico[]> {
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.getAuthorizationToken()
+    });
+    return this.http.get<HistoricoMedico[]>(`${this.apiUrl}/animal/${animalId}`, { headers: reqHeader });
+  }
+
 }

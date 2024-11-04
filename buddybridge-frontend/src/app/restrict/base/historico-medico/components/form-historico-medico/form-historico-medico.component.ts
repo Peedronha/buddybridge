@@ -67,11 +67,23 @@ export class FormHistoricoMedicoComponent {
 
   ngOnInit(): void {
     this.accountService.validarSessao();
+
+    // Obtendo o medicalReport e animalId do resolver e dos query params
+    const animalIdParam = this.router.snapshot.queryParamMap.get('animalId');
     const medicalReport: HistoricoMedico = this.router.snapshot.data['medicalReport']
 
     this.animalService.getAnimals().subscribe(animals => {
       this.animals = animals;
     });
+
+     // Se um animalId foi passado como query param, pré-seleciona o animal no formulário
+     if (animalIdParam) {
+      const animalId : number = parseInt(animalIdParam, 10);
+      this.registerForm.patchValue({ animalId: animalId.toString() });
+      this.animalService.getAnimalsById(animalId).subscribe(animal => {
+        this.selectAnimal = animal;
+      });
+    }
 
     this.registerForm.setValue({
       medicalReportId: medicalReport.medicalReportId + '',
@@ -82,7 +94,18 @@ export class FormHistoricoMedicoComponent {
       date: medicalReport.date + '',
       returnDate: medicalReport.returnDate + '',
     });
+
+
+    if (medicalReport.animalId != null) {
+      this.animalService.getAnimalsById(medicalReport.animalId).subscribe(animal => {
+        this.selectAnimal = animal;
+      });
+    }
+
+
+
   }
+
   formatDate(dateString: string): string {
     const parts = dateString.split('/');
     const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
@@ -103,13 +126,15 @@ export class FormHistoricoMedicoComponent {
     medicalReport.returnDate = this.registerForm.get('returnDate')?.value + '';
     medicalReport.type = this.registerForm.get('type')?.value + '';
 
-    if (medicalReport.medicalReportId != null) {
+
+
+    if (medicalReport.medicalReportId != null && medicalReport.medicalReportId+ '' != 'NaN') {
 
       this.historicoMedicoService.updateMedical(medicalReport).subscribe(
         response => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro Médico atualizado!' });
           this.registerForm.reset();
-          this.route.navigateByUrl('/report');
+          this.route.navigateByUrl('/animal');
         },
         error => {
           this.messageService.add({
@@ -125,7 +150,7 @@ export class FormHistoricoMedicoComponent {
         response => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro Médico registrado!' });
           this.registerForm.reset();
-          this.route.navigateByUrl('/report');
+          this.route.navigateByUrl('/animal');
         },
         error => {
           this.messageService.add({

@@ -2,6 +2,7 @@ package br.com.buddybridge.core.adocao.entity;
 
 import br.com.buddybridge.core.adocao.model.AdoptionSubmissionDTO;
 import br.com.buddybridge.core.animais.animal.entity.AnimalModel;
+import br.com.buddybridge.core.usuario.entity.Usuario;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,6 +42,10 @@ public class AdoptionModel {
 
     @Column(name = "observacoes")
     private String observacoes;
+
+    @ManyToOne
+    @JoinColumn(name="usuario_id", referencedColumnName="id")
+    private Usuario usuarioAdocao;
 
     public AdoptionModel(AdoptionStatus status_adocao) {
         this.status_adocao = status_adocao;

@@ -1,7 +1,7 @@
 import { MovimentoListComponent } from './restrict/base/financeiro/movimento/component/movimento-list/movimento-list.component';
 import { MessagesModule } from 'primeng/messages';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { LocationStrategy, NgClass, NgForOf, NgIf, PathLocationStrategy } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
 import { StyleClassModule } from 'primeng/styleclass';
@@ -83,6 +83,15 @@ import { DashAdocaoComponent } from './restrict/base/dash-adocao/dash-adocao.com
 import {
   ClassificacaoComponent
 } from "./restrict/base/financeiro/classificacao/component/classificacao/classificacao.component";
+import { AdoptionProfileComponent } from './restrict/base/adoption-profile/component/adoption/adoption-profile.component';
+import { AdoptionProfileListComponent } from './restrict/base/adoption-profile/component/adoption-list/adoption-profile-list.component';
+import { AdoptionManagementComponent } from './open/adoption/components/adoption-private/adoption/adoption-management.component';
+import { AdoptionListComponent } from './open/adoption/components/adoption-private/adoption-list/adoption-list.component';
+import { TagModule } from 'primeng/tag';
+import { DataViewModule } from 'primeng/dataview';
+import { AdoptionSubmissionFormComponent } from './open/adoption/components/adoption-submission-form/adoption-submission-form.component';
+import { RouterLink } from '@angular/router';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 
 @NgModule({
@@ -135,6 +144,13 @@ import {
       PagamentoListComponent,
       DashfinanceiroComponent,
       DashAdocaoComponent,
+      AdoptionProfileComponent,
+      AdoptionProfileListComponent,
+      AdoptionManagementComponent,
+      AdoptionListComponent,
+      AdoptionComponent,
+      AdoptionGridComponent,
+      AdoptionSubmissionFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -168,9 +184,17 @@ import {
     InputNumberModule,
     DropdownModule,
     MenuModule,
-    AdoptionGridComponent,
-    AdoptionComponent,
-    HistoricoMedicoComponent,
+    TagModule,
+    ButtonModule,
+    NgClass,
+    NgForOf,
+    DataViewModule,
+    NgIf,
+    RouterLink,
+    RadioButtonModule
+
+
+
 
   ],
   providers: [

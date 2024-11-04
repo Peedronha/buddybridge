@@ -1,23 +1,12 @@
 import { Component } from '@angular/core';
-import {AdoptionProfileModel} from "../../../../../restrict/base/adoption-profile/model/AdoptionProfileModel";
 import {AdoptionService} from "../../../../../restrict/base/adoption-profile/shared/adoption.service";
 import {AccountService} from "../../../../account/shared/account.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MessageService} from "primeng/api";
-import {AdoptionRequest} from "../../../../../restrict/base/adoption-profile/model/AdoptionRequest";
 import {AdoptionFormModel} from "../../../models/AdoptionFormModel";
-import {
-  AdoptionProfileListComponent
-} from "../../../../../restrict/base/adoption-profile/component/adoption-list/adoption-profile-list.component";
-import {AdoptionListComponent} from "../adoption-list/adoption-list.component";
 
 @Component({
   selector: 'app-adoption-management',
-  standalone: true,
-  imports: [
-    AdoptionProfileListComponent,
-    AdoptionListComponent
-  ],
   templateUrl: './adoption-management.component.html',
   styleUrl: './adoption-management.component.scss'
 })
@@ -41,7 +30,6 @@ export class AdoptionManagementComponent {
       this.adoptions! = data;
     });
   }
-
 
   onEdit(idAdocao: any) {
     this.router.navigate(['editsubmission', idAdocao], { relativeTo: this.route });

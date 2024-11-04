@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MessageService} from "primeng/api";
 import { AcessoDTO } from "../../../grupo_acesso/model/acessoDTO";
 import { GrupoacessoserviceService } from "../../../grupo_acesso/service/grupoacessoservice.service";
+import { HistoricoMedicoService } from "../../../historico-medico/service/historico-medico.service";
 
 @Component({
   selector: 'app-animal',
@@ -23,6 +24,7 @@ export class AnimalComponent {
 
   constructor(
     private grupoacessoserviceService: GrupoacessoserviceService, //Fazendo a solicitação de acessos
+    private historicoMedicoService: HistoricoMedicoService,
     private animalService: AnimalService,
     private accountService: AccountService,
     private router: Router,
@@ -96,6 +98,34 @@ export class AnimalComponent {
       this.showAccessDeniedModal();
     }
   }
+
+  onAddHistorico(idAnimal: number) {
+    if (this.hasAccess('Cadastrar Histórico médico')) {
+      this.router.navigate(['/report/addRegistro'], { queryParams: { animalId: idAnimal } });
+    } else {
+      this.showAccessDeniedModal();
+    }
+  }
+  onEditHistorico(id: number) {
+    if (this.hasAccess('Alterar Histórico médico')) {
+      this.router.navigate(['/report/editRegistro/'+id]);
+    } else {
+      this.showAccessDeniedModal();
+    }
+
+  }
+  onDeleteHistorico(id: number) {
+    if (this.hasAccess('Excluir Histórico médico')) {
+      this.historicoMedicoService.deleteMedicalReport(id).subscribe(() =>{
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro excluido com sucesso' });
+        window.location.reload();
+        this.router.navigateByUrl('/animal')
+      })
+    } else {
+      this.showAccessDeniedModal();
+    }
+  }
+
 
   // Método para verificar o acesso
   private hasAccess(descricaoAcesso: string): boolean {

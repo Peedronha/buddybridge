@@ -7,7 +7,7 @@ Buddy Menu;BUDDY BASE;Cadastro Gerais;Solicitações de Acesso;pi-lock-open;/sol
 Buddy Menu;BUDDY BASE;GET;Configurações;pi-cog;/menu;
 Buddy Menu;BUDDY BASE;Configurações;Dados da Ong;pi-bookmark;/ong;
 Buddy Menu;BUDDY ANIMAIS;GET;Painel de Adoções;pi-desktop;/dashadocao;
-Buddy Menu;BUDDY ANIMAIS;GET;Animais;pi-heart;/animal;
+Buddy Menu;BUDDY ANIMAIS;GET;Cadastro de Animais;pi-heart;/animal;
 Buddy Menu;BUDDY ANIMAIS;GET;Perfis de Adoção;pi-id-card;/perfil-adocao;
 Buddy Menu;BUDDY ANIMAIS;GET;Gerenciar Adoções;pi-asterisk;restrict/manage-adoption;
 Buddy Menu;BUDDY ANIMAIS;GET;Configurações;pi-cog;/menu;
@@ -19,4 +19,3 @@ Buddy Menu;BUDDY FINANCEIRO;GET;Fluxo de Caixa;pi-ticket;/pagamento;
 Buddy Menu;BUDDY FINANCEIRO;GET;Configurações;pi-cog;/menu;
 Buddy Menu;BUDDY FINANCEIRO;Configurações;Classificações;pi-list;/classificacao;
 Buddy Menu;BUDDY FINANCEIRO;Configurações;Contas de caixa;pi-wallet;/contacaixa;
-

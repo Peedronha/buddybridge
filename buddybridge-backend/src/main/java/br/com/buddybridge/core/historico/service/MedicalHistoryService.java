@@ -6,8 +6,10 @@ import br.com.buddybridge.core.historico.model.MedicalHistoryModel;
 import br.com.buddybridge.core.historico.model.dto.MedicalProfileDTO;
 import br.com.buddybridge.core.historico.repository.MedicalHistoryRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +70,22 @@ public class MedicalHistoryService {
         return null;
     }
 
+    public List<MedicalProfileDTO> getAllMedicalProfilesByAnimalId(Long id){
+
+        List<MedicalHistoryModel> list = medicalHistoryRepository.findMedicalHistoriesByAnimalId(id);
+
+        if (!CollectionUtils.isEmpty(list)) {
+            List<MedicalProfileDTO> medicalProfileDTOS = new ArrayList<>();
+            for (MedicalHistoryModel medicalHistoryModel : list) {
+                MedicalProfileDTO medicalProfileDTO = medicalProfileDTOPopulator(medicalHistoryModel);
+                medicalProfileDTOS.add(medicalProfileDTO);
+            }
+            return medicalProfileDTOS;
+        }
+
+        return null;
+    }
+
     private static MedicalProfileDTO medicalProfileDTOPopulator(MedicalHistoryModel medicalHistoryModel) {
         MedicalProfileDTO medicalProfileDTO = new MedicalProfileDTO();
 
@@ -98,5 +116,6 @@ public class MedicalHistoryService {
             throw new RuntimeException("Erro ao deletar o histórico médico", e);
         }
     }
+
 
 }
